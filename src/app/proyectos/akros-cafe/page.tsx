@@ -16,7 +16,7 @@ const facts = [
   { label: "Cliente", value: "AKROS Café" },
   { label: "Rubro", value: "Cafetería" },
   { label: "Tipo", value: "Programa de escritorio para Windows" },
-  { label: "Mi rol", value: "Programador (frontend)" },
+  { label: "Mi rol", value: "Programador: frontend y parte del backend" },
 ];
 
 const features = [
@@ -95,9 +95,9 @@ export default function AkrosCase() {
           <section className="mt-14">
             <h2 className="text-2xl font-extrabold">Mi rol</h2>
             <p className="mt-3 max-w-3xl text-ink/70">
-              Mi rol fue de programador en el frontend: programé todas las pantallas que usa el personal del local, la navegación y la experiencia
-              al tomar pedidos. El backend lo desarrolló un compañero, y trabajamos juntos en definir cómo se comunican las dos
-              partes.
+              Fui programador del proyecto, a cargo del frontend y de parte del backend. Programé todas las pantallas que usa el
+              personal del local, la navegación y la experiencia al tomar pedidos. José estuvo a cargo del backend, y trabajamos
+              juntos en cómo se comunican las dos partes.
             </p>
           </section>
 
