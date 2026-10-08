@@ -3,7 +3,6 @@ import { site } from "@/content/site";
 export function Footer() {
   const social = [
     { href: site.instagram, label: "Instagram" },
-    { href: site.linkedin, label: "LinkedIn" },
     { href: site.github, label: "GitHub" },
   ];
   return (

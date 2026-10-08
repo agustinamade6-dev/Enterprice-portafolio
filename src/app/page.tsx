@@ -149,14 +149,21 @@ export default function Home() {
         {/* Sobre mí */}
         <section id="sobre-mi" className="bg-white px-4 py-20 sm:px-6">
           <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[2fr_3fr]">
-            {/* TODO: reemplazar por una foto real en /public/foto.jpg */}
-            <div className="mx-auto grid aspect-square w-full max-w-xs place-items-center rounded-[2rem] bg-gradient-to-br from-brand to-amber-400 text-7xl font-extrabold text-white">
-              {site.owner.charAt(0)}
+            <div className="relative mx-auto w-full max-w-xs">
+              <div className="absolute -inset-3 -z-0 rotate-3 rounded-[2.25rem] bg-gradient-to-br from-brand to-amber-400" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={site.photo}
+                alt={`Foto de ${site.owner}`}
+                width={542}
+                height={629}
+                className="relative aspect-square w-full rounded-[2rem] object-cover object-top shadow-xl"
+              />
             </div>
             <div>
               <SectionTitle eyebrow="Sobre mí" title={`Hola, soy ${site.owner}`} align="left" />
               <p className="mt-6 text-lg text-ink/70">
-                Soy desarrolladora web y me especializo en la parte visual: que tu página o sistema se vea bien y sea fácil de usar
+                Desarrollo páginas web y sistemas, y me especializo en la parte visual: que tu página o sistema se vea bien y sea fácil de usar
                 desde el primer día. Trabajé en el sistema de punto de venta de AKROS Café, que hoy se usa todos los días en el
                 mostrador.
               </p>

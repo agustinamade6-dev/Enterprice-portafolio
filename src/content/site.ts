@@ -8,11 +8,11 @@ export const site = {
     "Páginas web y sistemas a medida para restaurantes, comercios y profesionales.",
   description:
     "Diseño y desarrollo páginas web y programas que ayudan a tu negocio a vender más y atender mejor.",
-  // TODO: reemplazar por los datos reales antes de publicar.
-  whatsapp: "5490000000000", // formato internacional, sin + ni espacios
-  email: "hola@enterprice.com.ar",
-  instagram: "https://instagram.com/",
-  linkedin: "https://linkedin.com/",
+  // WhatsApp en formato internacional, sin + ni espacios (en Argentina va 549 + característica + número).
+  whatsapp: "5493815100710",
+  email: "agustinamade6@gmail.com",
+  instagram: "https://www.instagram.com/lean__amade/",
+  photo: "/foto-perfil.png",
   github: "https://github.com/agustinamade6-dev",
 };
 
