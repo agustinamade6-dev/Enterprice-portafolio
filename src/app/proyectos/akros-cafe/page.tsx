@@ -28,7 +28,7 @@ const team = [
   },
   {
     name: "José Augusto Matias",
-    role: "Encargado del backend",
+    role: "Backend, pruebas y auditoría",
     photo: "/equipo/jose-matias.jpg",
     href: "https://www.instagram.com/josematias._/",
   },
@@ -119,7 +119,7 @@ export default function AkrosCase() {
               >
                 José Augusto Matias
               </a>{" "}
-              estuvo a cargo del backend, y trabajamos
+              estuvo a cargo del backend, hizo las pruebas y lo auditó, y trabajamos
               juntos en cómo se comunican las dos partes.
             </p>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
