@@ -15,6 +15,7 @@ const facts = [
   { label: "Cliente", value: "Pierina Glow" },
   { label: "Rubro", value: "Indumentaria femenina" },
   { label: "Tipo", value: "Programa de escritorio para Windows" },
+  { label: "Mi rol", value: "Desarrollo completo" },
   { label: "Tecnología", value: "Python" },
 ];
 
@@ -60,7 +61,7 @@ export default function PierinaCase() {
             />
           </div>
 
-          <dl className="mt-10 grid gap-4 sm:grid-cols-4">
+          <dl className="mt-10 grid gap-4 sm:grid-cols-3 lg:grid-cols-5">
             {facts.map((f) => (
               <div key={f.label} className="rounded-2xl border border-black/5 bg-white p-4">
                 <dt className="text-xs font-semibold uppercase tracking-wide text-ink/50">{f.label}</dt>
@@ -96,6 +97,14 @@ export default function PierinaCase() {
                 </li>
               ))}
             </ul>
+          </section>
+
+          <section className="mt-14">
+            <h2 className="text-2xl font-extrabold">Mi rol</h2>
+            <p className="mt-3 max-w-3xl text-ink/70">
+              Hice el sistema completo de punta a punta: el diseño de las pantallas con los colores de la marca y toda la
+              programación, desde el inventario hasta los reportes y las copias de seguridad.
+            </p>
           </section>
 
           <section className="mt-14">
