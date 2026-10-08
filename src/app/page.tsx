@@ -8,7 +8,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { faqs, process, projects, services, site, whatsappLink } from "@/content/site";
 
-const stack = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Electron", "Prisma", "SQLite", "Figma"];
+const stack = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Electron", "Prisma", "SQLite", "Python", "Figma"];
 
 export default function Home() {
   const [featured, ...others] = projects;
@@ -63,7 +63,7 @@ export default function Home() {
             <SectionTitle
               eyebrow="Proyectos"
               title="Trabajos y prototipos"
-              text="Un sistema real en uso y conceptos pensados para cada tipo de negocio."
+              text="Sistemas reales en uso y conceptos pensados para cada tipo de negocio."
             />
             <div className="mt-12 space-y-6">
               <ProjectCard project={featured} large />
@@ -164,8 +164,8 @@ export default function Home() {
               <SectionTitle eyebrow="Sobre mí" title={`Hola, soy ${site.owner}`} align="left" />
               <p className="mt-6 text-lg text-ink/70">
                 Desarrollo páginas web y sistemas, y me especializo en la parte visual: que tu página o sistema se vea bien y sea fácil de usar
-                desde el primer día. Trabajé en el sistema de punto de venta de AKROS Café, que hoy se usa todos los días en el
-                mostrador.
+                desde el primer día. Trabajé en el sistema de punto de venta de AKROS Café y en sistemas de gestión para una casa de pastas y una tienda
+                de ropa, que hoy se usan todos los días.
               </p>
               <p className="mt-4 text-lg text-ink/70">
                 Me gusta entender cómo funciona cada negocio antes de diseñar, para construir algo que de verdad te ahorre tiempo.

@@ -30,6 +30,7 @@ export type Project = {
   tags: string[];
   href?: string;
   accent: string; // color de la tarjeta
+  modules?: string[]; // módulos que se muestran en la ilustración de los sistemas de gestión
 };
 
 export const projects: Project[] = [
@@ -44,6 +45,31 @@ export const projects: Project[] = [
     tags: ["Next.js", "Electron", "Prisma", "SQLite"],
     href: "/proyectos/akros-cafe/",
     accent: "from-amber-500 to-orange-600",
+  },
+  // TODO: sumar el nombre de cada negocio y capturas reales cuando estén.
+  {
+    slug: "casa-de-pastas",
+    title: "Sistema de gestión para casa de pastas",
+    sector: "Casa de pastas",
+    kind: "real",
+    summary:
+      "Ventas, stock, insumos, proveedores y gastos de una fábrica de pastas en un solo programa.",
+    result: "Control de lo que se produce, se compra y se vende.",
+    tags: ["Python", "Gestión", "Stock"],
+    accent: "from-yellow-400 to-orange-500",
+    modules: ["Ventas", "Stock", "Insumos", "Proveedores", "Gastos"],
+  },
+  {
+    slug: "casa-de-ropa",
+    title: "Sistema de gestión para casa de ropa",
+    sector: "Indumentaria femenina",
+    kind: "real",
+    summary:
+      "Ventas, stock por talle, clientes, proveedores y gastos de una tienda de ropa femenina.",
+    result: "Saber qué talles quedan y quién compra qué.",
+    tags: ["Python", "Gestión", "Clientes"],
+    accent: "from-fuchsia-500 to-pink-600",
+    modules: ["Ventas", "Stock y talles", "Clientes", "Proveedores", "Gastos"],
   },
   {
     slug: "menu-digital",
@@ -87,7 +113,7 @@ export const projects: Project[] = [
       "Control de inventario, alertas de faltantes y reportes de ventas en gráficos simples.",
     result: "Saber qué se vende y qué reponer de un vistazo.",
     tags: ["Sistema", "Reportes", "Inventario"],
-    accent: "from-violet-500 to-fuchsia-600",
+    accent: "from-slate-600 to-slate-900",
   },
 ];
 

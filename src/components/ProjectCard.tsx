@@ -13,6 +13,8 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
       >
         {project.slug === "akros-cafe" ? (
           <PosMockup className="w-full max-w-md" />
+        ) : project.modules ? (
+          <GestionScreen title={project.sector} modules={project.modules} />
         ) : (
           <ConceptScreen title={project.title} />
         )}
@@ -68,6 +70,44 @@ function ConceptScreen({ title }: { title: string }) {
         <div className="h-2 w-3/5 rounded bg-neutral-200" />
       </div>
       <div className="mt-3 h-5 rounded-md bg-ink" />
+    </div>
+  );
+}
+
+// Ilustración de un sistema de gestión de escritorio con sus módulos.
+function GestionScreen({ title, modules }: { title: string; modules: string[] }) {
+  return (
+    <div
+      className="w-full max-w-xs overflow-hidden rounded-xl border border-white/80 bg-white text-[9px] shadow-xl shadow-black/20"
+      role="img"
+      aria-label={`Pantalla del sistema de gestión: ${modules.join(", ")}`}
+    >
+      <div className="flex items-center gap-1 border-b border-black/5 bg-neutral-100 px-2 py-1.5">
+        <span className="h-2 w-2 rounded-full bg-red-400" />
+        <span className="h-2 w-2 rounded-full bg-amber-400" />
+        <span className="h-2 w-2 rounded-full bg-green-400" />
+        <span className="ml-2 font-semibold text-neutral-500">{title}</span>
+      </div>
+      <div className="flex">
+        <ul className="w-24 shrink-0 space-y-0.5 bg-ink p-1.5 text-paper/70">
+          {modules.map((m, i) => (
+            <li key={m} className={`truncate rounded px-1.5 py-1 ${i === 1 ? "bg-white/15 font-bold text-white" : ""}`}>
+              {m}
+            </li>
+          ))}
+        </ul>
+        <div className="flex-1 p-2">
+          <div className="mb-1.5 font-bold text-ink">{modules[1]}</div>
+          {[80, 55, 30, 70].map((w, i) => (
+            <div key={i} className="flex items-center gap-1.5 border-b border-black/5 py-1">
+              <span className="h-1.5 flex-1 rounded bg-neutral-200" />
+              <span className="h-1.5 w-6 overflow-hidden rounded bg-neutral-100">
+                <span className={`block h-full rounded ${w < 40 ? "bg-red-400" : "bg-green-400"}`} style={{ width: `${w}%` }} />
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
