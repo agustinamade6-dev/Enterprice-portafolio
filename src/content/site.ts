@@ -30,6 +30,7 @@ export type Project = {
   tags: string[];
   href?: string;
   accent: string; // color de la tarjeta
+  image?: string; // captura real del proyecto
   modules?: string[]; // módulos que se muestran en la ilustración de los sistemas de gestión
 };
 
@@ -46,7 +47,7 @@ export const projects: Project[] = [
     href: "/proyectos/akros-cafe/",
     accent: "from-amber-500 to-orange-600",
   },
-  // TODO: sumar el nombre de cada negocio y capturas reales cuando estén.
+  // TODO: sumar el nombre y capturas reales de la casa de pastas cuando estén.
   {
     slug: "casa-de-pastas",
     title: "Sistema de gestión para casa de pastas",
@@ -60,16 +61,17 @@ export const projects: Project[] = [
     modules: ["Ventas", "Stock", "Insumos", "Proveedores", "Gastos"],
   },
   {
-    slug: "casa-de-ropa",
-    title: "Sistema de gestión para casa de ropa",
+    slug: "pierina-glow",
+    title: "Pierina Glow",
     sector: "Indumentaria femenina",
     kind: "real",
     summary:
-      "Ventas, stock por talle, clientes, proveedores y gastos de una tienda de ropa femenina.",
-    result: "Saber qué talles quedan y quién compra qué.",
-    tags: ["Python", "Gestión", "Clientes"],
-    accent: "from-fuchsia-500 to-pink-600",
-    modules: ["Ventas", "Stock y talles", "Clientes", "Proveedores", "Gastos"],
+      "Sistema de gestión para una tienda de ropa: inventario por talle y color, ventas, clientes, proveedores y reportes.",
+    result: "Saber qué se vende, qué talles quedan y cuánto se gana.",
+    tags: ["Python", "Escritorio", "Gestión"],
+    href: "/proyectos/pierina-glow/",
+    accent: "from-[#eab3a6] to-[#c96f5d]",
+    image: "/pierina/inicio.png",
   },
   {
     slug: "menu-digital",

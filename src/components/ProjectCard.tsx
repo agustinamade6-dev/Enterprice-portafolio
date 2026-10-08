@@ -13,6 +13,13 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
       >
         {project.slug === "akros-cafe" ? (
           <PosMockup className="w-full max-w-md" />
+        ) : project.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={project.image}
+            alt={`Captura del sistema de ${project.title}`}
+            className={`w-full rounded-lg shadow-xl shadow-black/25 ${large ? "max-w-md" : "max-w-sm"}`}
+          />
         ) : project.modules ? (
           <GestionScreen title={project.sector} modules={project.modules} />
         ) : (
