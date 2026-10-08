@@ -96,7 +96,15 @@ export default function AkrosCase() {
             <h2 className="text-2xl font-extrabold">Mi rol</h2>
             <p className="mt-3 max-w-3xl text-ink/70">
               Fui programador del proyecto, a cargo del frontend y de parte del backend. Programé todas las pantallas que usa el
-              personal del local, la navegación y la experiencia al tomar pedidos. José estuvo a cargo del backend, y trabajamos
+              personal del local, la navegación y la experiencia al tomar pedidos. <a
+                href="https://www.instagram.com/josematias._/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-ink underline decoration-brand underline-offset-2 hover:text-brand"
+              >
+                José Augusto Matias
+              </a>{" "}
+              estuvo a cargo del backend, y trabajamos
               juntos en cómo se comunican las dos partes.
             </p>
           </section>
