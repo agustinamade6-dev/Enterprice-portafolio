@@ -24,7 +24,7 @@ export type Project = {
   slug: string;
   title: string;
   sector: string;
-  kind: "real" | "concepto";
+  kind: "real" | "desarrollo" | "concepto";
   summary: string;
   result: string;
   tags: string[];
@@ -72,6 +72,18 @@ export const projects: Project[] = [
     href: "/proyectos/pierina-glow/",
     accent: "from-[#eab3a6] to-[#c96f5d]",
     image: "/pierina/inicio.png",
+  },
+  // TODO: confirmar si se puede nombrar al cliente y quién hizo cada parte.
+  {
+    slug: "chatbot-crm",
+    title: "Chatbot con IA y CRM omnicanal",
+    sector: "Servicios técnicos",
+    kind: "desarrollo",
+    summary:
+      "Asistente con inteligencia artificial que atiende a los clientes por Telegram, entiende audios e imágenes, toma los datos del pedido y pasa la charla a una persona cuando hace falta.",
+    result: "Atención las 24 horas sin perder ningún contacto.",
+    tags: ["Python", "FastAPI", "IA (Gemini)", "React", "Telegram"],
+    accent: "from-cyan-500 to-blue-700",
   },
   {
     slug: "menu-digital",
@@ -203,5 +215,21 @@ export const faqs = [
   {
     q: "¿Trabajas solo con negocios de mi ciudad?",
     a: "No, trabajo a distancia con negocios de todo el país. Las reuniones son por videollamada o WhatsApp.",
+  },
+];
+
+// Personas con las que trabajo en algunos proyectos.
+export const team = [
+  {
+    name: "José Augusto Matias",
+    role: "Backend, pruebas y auditoría",
+    photo: "/equipo/jose-matias.jpg",
+    href: "https://www.instagram.com/josematias._/",
+  },
+  {
+    name: "Nicolás Raúl Bazán",
+    role: "Colaborador",
+    photo: undefined as string | undefined, // TODO: foto
+    href: undefined as string | undefined, // TODO: Instagram
   },
 ];

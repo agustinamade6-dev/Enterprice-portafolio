@@ -6,12 +6,14 @@ import { ArrowIcon, CheckIcon, WhatsAppIcon } from "@/components/icons";
 import { PosMockup } from "@/components/PosMockup";
 import { ProjectCard } from "@/components/ProjectCard";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { faqs, process, projects, services, site, whatsappLink } from "@/content/site";
+import { faqs, process, projects, services, site, team, whatsappLink } from "@/content/site";
 
 const stack = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Electron", "Prisma", "SQLite", "Python", "Figma"];
 
 export default function Home() {
-  const [featured, ...others] = projects;
+  const [featured, ...realOthers] = projects.filter((p) => p.kind === "real");
+  const inProgress = projects.filter((p) => p.kind === "desarrollo");
+  const concepts = projects.filter((p) => p.kind === "concepto");
 
   return (
     <>
@@ -68,7 +70,15 @@ export default function Home() {
             <div className="mt-12 space-y-6">
               <ProjectCard project={featured} large />
               <div className="grid gap-6 sm:grid-cols-2">
-                {others.map((p) => (
+                {realOthers.map((p) => (
+                  <ProjectCard key={p.slug} project={p} />
+                ))}
+              </div>
+              {inProgress.map((p) => (
+                <ProjectCard key={p.slug} project={p} large />
+              ))}
+              <div className="grid gap-6 sm:grid-cols-2">
+                {concepts.map((p) => (
                   <ProjectCard key={p.slug} project={p} />
                 ))}
               </div>
@@ -177,6 +187,44 @@ export default function Home() {
                   </span>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Equipo */}
+        <section id="equipo" className="px-4 py-20 sm:px-6">
+          <div className="mx-auto max-w-4xl">
+            <SectionTitle
+              eyebrow="Equipo"
+              title="Con quién trabajo"
+              text="En los proyectos más grandes sumo a colegas de confianza."
+            />
+            <div className="mt-10 grid gap-4 sm:grid-cols-2">
+              {team.map((m) => {
+                const card = (
+                  <div className="flex h-full items-center gap-4 rounded-2xl border border-black/5 bg-white p-5 transition hover:shadow-md">
+                    {m.photo ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={m.photo} alt={`Foto de ${m.name}`} className="h-16 w-16 shrink-0 rounded-full object-cover object-top" />
+                    ) : (
+                      <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand to-amber-400 text-xl font-extrabold text-white">
+                        {m.name.charAt(0)}{m.name.split(" ").at(-1)?.charAt(0)}
+                      </span>
+                    )}
+                    <div>
+                      <p className="font-bold">{m.name}</p>
+                      <p className="text-sm text-ink/60">{m.role}</p>
+                    </div>
+                  </div>
+                );
+                return m.href ? (
+                  <a key={m.name} href={m.href} target="_blank" rel="noopener noreferrer">
+                    {card}
+                  </a>
+                ) : (
+                  <div key={m.name}>{card}</div>
+                );
+              })}
             </div>
           </div>
         </section>

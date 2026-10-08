@@ -20,6 +20,8 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
             alt={`Captura del sistema de ${project.title}`}
             className={`w-full rounded-lg shadow-xl shadow-black/25 ${large ? "max-w-md" : "max-w-sm"}`}
           />
+        ) : project.slug === "chatbot-crm" ? (
+          <ChatScreen />
         ) : project.modules ? (
           <GestionScreen title={project.sector} modules={project.modules} />
         ) : (
@@ -31,6 +33,8 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
           <span className="rounded-full bg-black/5 px-2.5 py-1">{project.sector}</span>
           {project.kind === "real" ? (
             <span className="rounded-full bg-green-100 px-2.5 py-1 text-green-800">Proyecto real</span>
+          ) : project.kind === "desarrollo" ? (
+            <span className="rounded-full bg-sky-100 px-2.5 py-1 text-sky-800">En desarrollo</span>
           ) : (
             <span className="rounded-full bg-amber-100 px-2.5 py-1 text-amber-800">Concepto</span>
           )}
@@ -114,6 +118,40 @@ function GestionScreen({ title, modules }: { title: string; modules: string[] })
             </div>
           ))}
         </div>
+      </div>
+    </div>
+  );
+}
+
+// Ilustración de una conversación con el asistente.
+function ChatScreen() {
+  const msgs = [
+    { from: "bot", text: "¡Hola! ¿En qué servicio estás interesado?" },
+    { from: "user", text: "Aire acondicionado, no enfría 🥵" },
+    { from: "bot", text: "Entiendo. ¿En qué zona te encontrás?" },
+    { from: "user", text: "🎤 Audio 0:08" },
+    { from: "bot", text: "¡Listo! Un técnico te escribe en breve." },
+  ];
+  return (
+    <div
+      className="w-full max-w-xs overflow-hidden rounded-2xl border border-white/80 bg-white text-[10px] shadow-xl shadow-black/20"
+      role="img"
+      aria-label="Conversación de ejemplo con el asistente de IA"
+    >
+      <div className="flex items-center gap-2 bg-ink px-3 py-2 text-white">
+        <span className="grid h-6 w-6 place-items-center rounded-full bg-cyan-500 font-bold">IA</span>
+        <span className="font-semibold">Asistente · en línea</span>
+      </div>
+      <div className="space-y-1.5 bg-sky-50 p-2.5">
+        {msgs.map((m, i) => (
+          <div key={i} className={`flex ${m.from === "user" ? "justify-end" : ""}`}>
+            <span
+              className={`max-w-[80%] rounded-xl px-2 py-1 ${m.from === "user" ? "rounded-br-sm bg-cyan-600 text-white" : "rounded-bl-sm bg-white text-ink shadow-sm"}`}
+            >
+              {m.text}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
