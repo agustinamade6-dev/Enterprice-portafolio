@@ -193,13 +193,13 @@ export default function Home() {
 
         {/* Equipo */}
         <section id="equipo" className="px-4 py-20 sm:px-6">
-          <div className="mx-auto max-w-4xl">
+          <div className="mx-auto max-w-5xl">
             <SectionTitle
               eyebrow="Equipo"
-              title="Con quién trabajo"
-              text="En los proyectos más grandes sumo a colegas de confianza."
+              title="Compañeros"
+              text="Detrás de cada proyecto hay un equipo. Cada uno aporta lo suyo para que el resultado sea el mejor."
             />
-            <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {team.map((m) => {
                 const card = (
                   <div className="flex h-full items-center gap-4 rounded-2xl border border-black/5 bg-white p-5 transition hover:shadow-md">

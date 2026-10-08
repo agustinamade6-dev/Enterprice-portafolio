@@ -218,8 +218,14 @@ export const faqs = [
   },
 ];
 
-// Personas con las que trabajo en algunos proyectos.
+// Compañeros del equipo.
 export const team = [
+  {
+    name: site.owner,
+    role: "Frontend, backend y diseño",
+    photo: site.photo as string | undefined,
+    href: site.instagram as string | undefined,
+  },
   {
     name: "José Augusto Matias",
     role: "Backend, pruebas y auditoría",
