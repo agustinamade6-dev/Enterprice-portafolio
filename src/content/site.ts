@@ -222,19 +222,19 @@ export const faqs = [
 export const team = [
   {
     name: site.owner,
-    role: "Frontend, backend y diseño",
+    role: "Programador: frontend, backend y diseño",
     photo: site.photo as string | undefined,
     href: site.instagram as string | undefined,
   },
   {
     name: "José Augusto Matias",
-    role: "Backend, pruebas y auditoría",
+    role: "Programador: backend, pruebas y auditoría",
     photo: "/equipo/jose-matias.jpg",
     href: "https://www.instagram.com/josematias._/",
   },
   {
     name: "Nicolás Raúl Bazán",
-    role: "Colaborador",
+    role: "Programador: frontend y backend",
     photo: undefined as string | undefined, // TODO: foto
     href: undefined as string | undefined, // TODO: Instagram
   },
