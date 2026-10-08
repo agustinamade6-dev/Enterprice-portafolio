@@ -1,0 +1,179 @@
+// Todo el texto del sitio vive aquí: para cambiar precios, datos de contacto o
+// proyectos no hace falta tocar los componentes.
+
+export const site = {
+  name: "Enterprice",
+  owner: "Agustin",
+  tagline:
+    "Páginas web y sistemas a medida para restaurantes, comercios y profesionales.",
+  description:
+    "Diseño y desarrollo páginas web y programas que ayudan a tu negocio a vender más y atender mejor.",
+  // TODO: reemplazar por los datos reales antes de publicar.
+  whatsapp: "5490000000000", // formato internacional, sin + ni espacios
+  email: "hola@enterprice.com.ar",
+  instagram: "https://instagram.com/",
+  linkedin: "https://linkedin.com/",
+  github: "https://github.com/agustinamade6-dev",
+};
+
+export function whatsappLink(message: string) {
+  return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
+}
+
+export type Project = {
+  slug: string;
+  title: string;
+  sector: string;
+  kind: "real" | "concepto";
+  summary: string;
+  result: string;
+  tags: string[];
+  href?: string;
+  accent: string; // color de la tarjeta
+};
+
+export const projects: Project[] = [
+  {
+    slug: "akros-cafe",
+    title: "AKROS Café",
+    sector: "Cafetería",
+    kind: "real",
+    summary:
+      "Sistema de punto de venta para escritorio: pedidos por mesa, cobro y cierre de caja.",
+    result: "En uso todos los días en el local.",
+    tags: ["Next.js", "Electron", "Prisma", "SQLite"],
+    href: "/proyectos/akros-cafe/",
+    accent: "from-amber-500 to-orange-600",
+  },
+  {
+    slug: "menu-digital",
+    title: "Menú digital con QR",
+    sector: "Restaurantes",
+    kind: "concepto",
+    summary:
+      "El cliente escanea el QR, arma su pedido y lo envía por WhatsApp. Sin apps ni comisiones.",
+    result: "Menos tiempo de espera y menú siempre actualizado.",
+    tags: ["Web", "Celular", "WhatsApp"],
+    accent: "from-rose-500 to-red-600",
+  },
+  {
+    slug: "tienda-online",
+    title: "Tienda online",
+    sector: "Comercios",
+    kind: "concepto",
+    summary:
+      "Catálogo con fotos, carrito y pedido directo. Ideal para ropa, almacén o regalería.",
+    result: "Vender las 24 horas sin pagar comisiones a plataformas.",
+    tags: ["Web", "Catálogo", "Carrito"],
+    accent: "from-emerald-500 to-teal-600",
+  },
+  {
+    slug: "turnos",
+    title: "Turnos online",
+    sector: "Profesionales",
+    kind: "concepto",
+    summary:
+      "Agenda web para consultorios, peluquerías y centros de estética, con recordatorios.",
+    result: "Menos llamadas y menos turnos perdidos.",
+    tags: ["Web", "Agenda", "Recordatorios"],
+    accent: "from-sky-500 to-indigo-600",
+  },
+  {
+    slug: "panel-stock",
+    title: "Panel de stock y ventas",
+    sector: "Comercios",
+    kind: "concepto",
+    summary:
+      "Control de inventario, alertas de faltantes y reportes de ventas en gráficos simples.",
+    result: "Saber qué se vende y qué reponer de un vistazo.",
+    tags: ["Sistema", "Reportes", "Inventario"],
+    accent: "from-violet-500 to-fuchsia-600",
+  },
+];
+
+export type Service = {
+  name: string;
+  forWho: string;
+  price: string;
+  timeline: string;
+  features: string[];
+  featured?: boolean;
+};
+
+export const services: Service[] = [
+  {
+    name: "Presencia online",
+    forWho: "Profesionales y negocios que todavía no tienen web",
+    price: "$400.000",
+    timeline: "1 a 2 semanas",
+    features: [
+      "Página de una sección, adaptada a celular",
+      "Botón de WhatsApp y mapa de Google",
+      "Textos y diseño a tu medida",
+      "Publicación en internet incluida",
+    ],
+  },
+  {
+    name: "Negocio online",
+    forWho: "Restaurantes y comercios que quieren vender por internet",
+    price: "$400.000",
+    timeline: "3 a 4 semanas",
+    features: [
+      "Web de varias páginas",
+      "Menú o catálogo que puedes editar",
+      "Pedidos directos por WhatsApp",
+      "Optimizada para aparecer en Google",
+    ],
+    featured: true,
+  },
+  {
+    name: "Sistema a medida",
+    forWho: "Negocios con procesos propios",
+    price: "$350.000",
+    timeline: "Según el alcance",
+    features: [
+      "Punto de venta, turnos, stock o panel de gestión",
+      "Versión web o programa de escritorio",
+      "Pensado para usar rápido en el mostrador",
+      "Capacitación al equipo",
+    ],
+  },
+];
+
+export const process = [
+  {
+    title: "Charlamos",
+    text: "Me cuentas cómo funciona tu negocio y qué necesitas. Sin compromiso.",
+  },
+  {
+    title: "Propuesta",
+    text: "Te envío qué incluye, el precio final y los plazos, por escrito.",
+  },
+  {
+    title: "Diseño y desarrollo",
+    text: "Ves avances cada semana y pedimos ajustes sobre la marcha.",
+  },
+  {
+    title: "Entrega y soporte",
+    text: "Lo publicamos, te enseño a usarlo y quedo disponible para cambios.",
+  },
+];
+
+export const faqs = [
+  {
+    q: "¿Cómo se paga?",
+    a: "50% al empezar y 50% al entregar. Puedes pagar por transferencia o Mercado Pago.",
+  },
+  {
+    q: "¿El precio incluye el dominio?",
+    a: "El dominio (.com o .com.ar) se paga aparte una vez por año y queda a tu nombre. Te ayudo a registrarlo.",
+  },
+  {
+    q: "¿Puedo cambiar cosas después?",
+    a: "Sí. Los textos, precios y fotos más comunes los puedes editar tú. Para cambios mayores hay un plan mensual de mantenimiento.",
+  },
+  {
+    q: "¿Trabajas solo con negocios de mi ciudad?",
+    a: "No, trabajo a distancia con negocios de todo el país. Las reuniones son por videollamada o WhatsApp.",
+  },
+];
