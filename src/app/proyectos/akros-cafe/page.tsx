@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { ArrowIcon, CheckIcon } from "@/components/icons";
 import { PosMockup } from "@/components/PosMockup";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { whatsappLink } from "@/content/site";
+import { site, whatsappLink } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "AKROS Café, sistema de punto de venta",
@@ -17,6 +17,21 @@ const facts = [
   { label: "Rubro", value: "Cafetería" },
   { label: "Tipo", value: "Programa de escritorio para Windows" },
   { label: "Mi rol", value: "Programador: frontend y parte del backend" },
+];
+
+const team = [
+  {
+    name: site.owner,
+    role: "Programador: frontend y parte del backend",
+    photo: site.photo,
+    href: site.instagram,
+  },
+  {
+    name: "José Augusto Matias",
+    role: "Encargado del backend",
+    photo: "/equipo/jose-matias.jpg",
+    href: "https://www.instagram.com/josematias._/",
+  },
 ];
 
 const features = [
@@ -107,6 +122,24 @@ export default function AkrosCase() {
               estuvo a cargo del backend, y trabajamos
               juntos en cómo se comunican las dos partes.
             </p>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {team.map((m) => (
+                <a
+                  key={m.name}
+                  href={m.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 rounded-2xl border border-black/5 bg-white p-4 transition hover:shadow-md"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={m.photo} alt={`Foto de ${m.name}`} className="h-16 w-16 shrink-0 rounded-full object-cover object-top" />
+                  <div>
+                    <p className="font-bold">{m.name}</p>
+                    <p className="text-sm text-ink/60">{m.role}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
           </section>
 
           <section className="mt-14">
