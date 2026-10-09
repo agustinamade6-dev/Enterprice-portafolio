@@ -83,88 +83,32 @@ section[id],
   }
 }
 
-/* Aparición al hacer scroll (ScrollReveal): entra desde abajo al bajar y desde arriba al subir */
+/* Movimiento con el scroll (ScrollMotion): cada bloque entra desde abajo y, al llegar arriba,
+   se aleja y se desvanece. Va al ritmo del scroll, así que al subir se deshace solo. */
 .reveal-on [data-reveal] {
-  opacity: 0;
-  transform: translateY(36px);
-  transition:
-    opacity 0.7s cubic-bezier(0.22, 0.8, 0.3, 1),
-    transform 0.7s cubic-bezier(0.22, 0.8, 0.3, 1);
-  transition-delay: var(--reveal-delay, 0ms);
+  --enter: 0;
+  --exit: 0;
+  opacity: calc(var(--enter) * (1 - var(--exit)));
+  transform: translateY(calc((1 - var(--enter)) * 48px - var(--exit) * 40px)) scale(calc(1 - var(--exit) * 0.08));
+  transform-origin: 50% 100%;
+  will-change: opacity, transform;
 }
 
-.reveal-on [data-reveal][data-reveal-from="top"] {
-  transform: translateY(-36px);
+/* En el inicio, al bajar el texto sube y la imagen baja y gira un poco mientras se desvanecen */
+.reveal-on [data-hero-text] {
+  translate: 0 calc(var(--exit) * -6vh);
 }
 
-.reveal-on [data-reveal].is-visible {
-  opacity: 1;
-  transform: none;
+.reveal-on [data-hero-art] {
+  translate: 0 calc(var(--exit) * 12vh);
+  rotate: calc(var(--exit) * -5deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal-on [data-reveal],
-  .reveal-on [data-reveal][data-reveal-from="top"] {
+  .reveal-on [data-reveal] {
+    opacity: 1;
     transform: none;
-  }
-}
-
-/* Escenas (ScrollScenes): cada sección queda fija cuando termina y la siguiente sube por encima
-   como una carta; la de atrás se achica y oscurece. Funciona igual al subir y al bajar. */
-[data-scene] {
-  position: relative;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  [data-scene] {
-    position: sticky;
-    top: var(--scene-top, 0px);
-  }
-
-  [data-scene] ~ [data-scene] {
-    border-radius: 1.75rem 1.75rem 0 0;
-    box-shadow: 0 -24px 60px -24px rgb(0 0 0 / 0.22);
-  }
-
-  [data-scene] > * {
-    transform: translateY(calc(var(--cover, 0) * -3vh)) scale(calc(1 - var(--cover, 0) * 0.07));
-    transform-origin: 50% 0;
-  }
-
-  [data-scene]::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: #0d0d12;
-    opacity: calc(var(--cover, 0) * 0.55);
-    pointer-events: none;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  /* Inicio como portada: al bajar se aleja, se funde a oscuro y texto e imagen se separan */
-  [data-scene="hero"] > * {
-    transform: translateY(calc(var(--cover, 0) * 8vh)) scale(calc(1 - var(--cover, 0) * 0.2));
-    transform-origin: 50% 40%;
-  }
-
-  [data-scene="hero"]::after {
-    opacity: calc(var(--cover, 0) * 0.85);
-  }
-
-  [data-hero-text] {
-    translate: 0 calc(var(--cover, 0) * -6vh);
-  }
-
-  [data-hero-art] {
-    translate: 0 calc(var(--cover, 0) * 10vh);
-    rotate: calc(var(--cover, 0) * -4deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
-  [data-scene] ~ [data-scene] {
-    border-radius: 2.5rem 2.5rem 0 0;
+    translate: none;
+    rotate: none;
   }
 }
