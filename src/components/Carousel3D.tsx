@@ -14,11 +14,11 @@ const Card = memo(function Card({ project }: { project: Project }) {
 
 // Silueta de las tarjetas del fondo: el color del proyecto y unas barras, sin texto ni imágenes.
 // Se ve que hay más trabajos atrás y cuesta casi nada dibujarla.
-const Ghost = memo(function Ghost({ accent }: { accent: string }) {
+const Ghost = memo(function Ghost({ accent, narrow }: { accent: string; narrow: boolean }) {
   return (
-    <div className="flex h-full w-full overflow-hidden rounded-[16px] bg-white">
-      <div className={`w-1/2 bg-gradient-to-br ${accent}`} />
-      <div className="flex w-1/2 flex-col gap-4 p-8">
+    <div className={`flex h-full w-full overflow-hidden rounded-[16px] bg-white ${narrow ? "flex-col" : ""}`}>
+      <div className={`bg-gradient-to-br ${accent} ${narrow ? "h-44" : "w-1/2"}`} />
+      <div className={`flex flex-col gap-4 ${narrow ? "p-5" : "w-1/2 p-8"}`}>
         <div className="h-5 w-1/3 rounded-full bg-black/10" />
         <div className="h-8 w-3/4 rounded-lg bg-black/15" />
         <div className="h-3 w-full rounded-full bg-black/10" />
@@ -37,6 +37,19 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
   const dragCurrentX = useRef<number | null>(null);
   const rotator = useRef<HTMLDivElement>(null);
   const dragFrame = useRef(0);
+  const scene = useRef<HTMLDivElement>(null);
+  // Ancho disponible: en celular la tarjeta se achica para entrar en la pantalla
+  const [space, setSpace] = useState(0);
+
+  useEffect(() => {
+    const el = scene.current;
+    if (!el) return;
+    const measure = () => setSpace(el.clientWidth);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   const next = () => setCurrentIndex((prev) => prev + 1);
   const prev = () => setCurrentIndex((prev) => prev - 1);
@@ -93,8 +106,10 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
   };
 
   // 3D Cylinder Math
-  const cardWidth = 680; // 680px for monumental look
-  const cardHeight = 420; // 420px
+  // En pantallas angostas la tarjeta pasa a vertical (imagen arriba, texto abajo) y ocupa casi todo el ancho
+  const narrow = space > 0 && space < 768;
+  const cardWidth = narrow ? Math.min(400, space - 40) : 680;
+  const cardHeight = narrow ? 470 : 420;
   const theta = total > 0 ? 360 / total : 0;
   // Calculate radius so cards form a perfect polygon, add some padding (offset)
   // Offset de 40 para mantener coherencia en un cilindro más grande
@@ -109,16 +124,18 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
   const activeIndex = ((currentIndex % total) + total) % total;
 
   return (
-    <div className="relative w-full overflow-visible select-none py-24">
+    <div className="relative w-full overflow-visible select-none py-6 md:py-24">
       {/* 1. Contenedor de la escena (Perspective) - Full Width */}
       <div
-        className="relative mx-auto flex h-[500px] w-full items-center justify-center touch-none"
+        ref={scene}
+        className="relative mx-auto flex w-full items-center justify-center touch-pan-y"
         // contain: el navegador no recalcula el resto de la página cuando el carrusel cambia
-        style={{ perspective: "1200px", contain: "layout" }}
+        style={{ height: cardHeight + 80, perspective: "1200px", contain: "layout" }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerUp}
+        onPointerCancel={onPointerUp}
       >
         {/* 2. Contenedor del cilindro (Rotator) */}
         {/* Agregamos rotateX(-3deg) para envolver visualmente al usuario y translateZ(-radius) */}
@@ -173,7 +190,7 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
                   className="relative h-full w-full rounded-[16px] overflow-hidden bg-white"
                   style={{ boxShadow: ghost ? "none" : "0 18px 40px -16px rgba(0,0,0,0.3)" }}
                 >
-                  {ghost ? <Ghost accent={p.accent} /> : <Card project={p} />}
+                  {ghost ? <Ghost accent={p.accent} narrow={narrow} /> : <Card project={p} />}
                   <div
                     className="pointer-events-none absolute inset-0 bg-black"
                     style={{ opacity: shade, transition: `opacity 0.8s ${EASE}` }}
@@ -186,7 +203,7 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
       </div>
 
       {/* Controles de Navegación */}
-      <div className="mt-16 mx-auto flex w-max items-center gap-1 rounded-2xl border border-black/10 bg-black/5 p-1.5 backdrop-blur-md">
+      <div className="mt-6 md:mt-16 mx-auto flex w-max items-center gap-1 rounded-2xl border border-black/10 bg-black/5 p-1.5 backdrop-blur-md">
         <button
           type="button"
           onClick={prev}
