@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { BudgetBuilder } from "@/components/BudgetBuilder";
 import { ArrowIcon, CheckIcon, WhatsAppIcon } from "@/components/icons";
 import { PosMockup } from "@/components/PosMockup";
-import { ProjectDeck } from "@/components/ProjectDeck";
+import { Carousel3D } from "@/components/Carousel3D";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { contentRepo } from "@/lib/content";
 
@@ -74,16 +74,17 @@ export default async function Home() {
         </section>
 
         {/* Proyectos */}
-        <section id="proyectos" className="px-4 py-20 sm:px-6">
-          <div className="mx-auto max-w-6xl">
+        <section id="proyectos" className="py-20 overflow-x-clip">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionTitle
               eyebrow="Proyectos"
               title="Trabajos y prototipos"
               text="Sistemas reales en uso, lo que cada uno del equipo va construyendo y conceptos pensados para cada tipo de negocio."
             />
-            <div className="mt-12">
-              <ProjectDeck projects={deck as any} />
-            </div>
+          </div>
+          {/* Sacamos el carrusel del max-w-6xl para que use el ancho completo de la ventana sin cortarse */}
+          <div className="mt-12 w-full">
+            <Carousel3D projects={deck as any} />
           </div>
         </section>
 
