@@ -259,7 +259,7 @@ export const team: Member[] = [
     skills: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Electron", "Python", "Diseño de interfaces"],
     story: {
       intro:
-        "Estudio Ingeniería en Sistemas en la UTN, en Tucumán. Empecé a programar en el colegio, y mis primeros trabajos fueron programas de gestión: no eran proyectos enormes, pero fueron mis primeros pasos como programador.",
+        "Estudio Ingeniería en Sistemas en la Universidad Tecnológica Nacional, Facultad Regional Tucumán. Empecé a programar en el colegio, y mis primeros trabajos fueron programas de gestión: no eran proyectos enormes, pero fueron mis primeros pasos como programador.",
       chapters: [
         {
           label: "En el colegio",
@@ -268,13 +268,13 @@ export const team: Member[] = [
         },
         {
           label: "En la facultad",
-          title: "Ingeniería en Sistemas en la UTN",
+          title: "Ingeniería en Sistemas",
           text: "Con la carrera fui aprendiendo a programar. Por curiosidad, y por querer ayudar a mi mamá a gestionar su emprendimiento de ropa, también aprendí por mi cuenta con inteligencia artificial: le preguntaba cómo programar y hacía mini cursos que armaba para mí.",
         },
         {
           label: "2025 · Mi primer trabajo",
-          title: "Pierina Glow, una tienda de ropa femenina",
-          text: "Mi primer sistema de gestión, hecho solo y de punta a punta: inventario por talle y color, ventas, clientes, proveedores, reportes y copias de seguridad.",
+          title: "Pierina Glow, el emprendimiento de mi mamá",
+          text: "Lo que empezó como una forma de ayudar a mi mamá terminó siendo mi primer sistema de gestión, hecho solo y de punta a punta para su tienda de ropa femenina: inventario por talle y color, ventas, clientes, proveedores, reportes y copias de seguridad.",
           href: "/proyectos/pierina-glow/",
         },
         {
@@ -310,8 +310,8 @@ export const team: Member[] = [
       chapters: [
         {
           label: "En la facultad",
-          title: "Ingeniería en Sistemas en la UTN",
-          text: "Estudio Ingeniería en Sistemas en la UTN, en Tucumán, junto a Agustin y Nicolás.",
+          title: "Ingeniería en Sistemas",
+          text: "Estudio Ingeniería en Sistemas en la Universidad Tecnológica Nacional, Facultad Regional Tucumán, junto a Agustin y Nicolás.",
         },
         {
           label: "Primer trabajo en equipo",
@@ -342,8 +342,8 @@ export const team: Member[] = [
       chapters: [
         {
           label: "En la facultad",
-          title: "Ingeniería en Sistemas en la UTN",
-          text: "Estudio Ingeniería en Sistemas en la UTN, en Tucumán, junto a Agustin y José.",
+          title: "Ingeniería en Sistemas",
+          text: "Estudio Ingeniería en Sistemas en la Universidad Tecnológica Nacional, Facultad Regional Tucumán, junto a Agustin y José.",
         },
         {
           label: "Hoy",

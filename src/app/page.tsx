@@ -160,7 +160,7 @@ export default function Home() {
             <SectionTitle
               eyebrow="Nosotros"
               title={`Somos ${site.name}`}
-              text="Somos tres estudiantes de Ingeniería en Sistemas de la UTN, en Tucumán, que empezamos de cero y vamos por el cien. Cada uno aporta lo suyo, y juntos convertimos las ideas de cada negocio en sistemas y páginas que funcionan."
+              text="Somos tres estudiantes de Ingeniería en Sistemas de la Universidad Tecnológica Nacional, Facultad Regional Tucumán, que empezamos de cero y vamos por el cien. Cada uno aporta lo suyo, y juntos convertimos las ideas de cada negocio en sistemas y páginas que funcionan."
             />
             <div className="mt-12 grid gap-6 md:grid-cols-3">
               {team.map((m) => (
