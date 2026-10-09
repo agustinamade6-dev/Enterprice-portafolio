@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main data-stage>
         {/* Inicio */}
         <section className="relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
           <div className="pointer-events-none absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-full bg-brand/15 blur-3xl" />
@@ -231,35 +231,37 @@ export default function Home() {
 
         {/* Contacto */}
         <div id="contacto" className="scroll-anchor" />
-        <section className="bg-ink px-4 py-20 text-paper sm:px-6">
-          <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
-            <div data-reveal>
-              <p className="text-sm font-bold uppercase tracking-widest text-brand">Contacto</p>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">¿Hablamos de tu proyecto?</h2>
-              <p className="mt-4 text-lg text-paper/70">
-                Cuéntanos qué necesitas y te respondemos en el día con una propuesta. La primera charla no tiene costo.
-              </p>
-              <div className="mt-8 space-y-3 text-paper/80">
-                <a
-                  href={whatsappLink("Hola, quiero consultar por un proyecto.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 hover:text-paper"
-                >
-                  <WhatsAppIcon className="h-5 w-5 text-[#25d366]" /> WhatsApp
-                </a>
-                <a href={`mailto:${site.email}`} className="block hover:text-paper">
-                  {site.email}
-                </a>
+        <div>
+          <section className="bg-ink px-4 py-20 text-paper sm:px-6">
+            <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
+              <div data-reveal>
+                <p className="text-sm font-bold uppercase tracking-widest text-brand">Contacto</p>
+                <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">¿Hablamos de tu proyecto?</h2>
+                <p className="mt-4 text-lg text-paper/70">
+                  Cuéntanos qué necesitas y te respondemos en el día con una propuesta. La primera charla no tiene costo.
+                </p>
+                <div className="mt-8 space-y-3 text-paper/80">
+                  <a
+                    href={whatsappLink("Hola, quiero consultar por un proyecto.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 hover:text-paper"
+                  >
+                    <WhatsAppIcon className="h-5 w-5 text-[#25d366]" /> WhatsApp
+                  </a>
+                  <a href={`mailto:${site.email}`} className="block hover:text-paper">
+                    {site.email}
+                  </a>
+                </div>
+              </div>
+              <div data-reveal style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
+                <ContactForm />
               </div>
             </div>
-            <div data-reveal style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
-              <ContactForm />
-            </div>
-          </div>
-        </section>
+          </section>
+          <Footer />
+        </div>
       </main>
-      <Footer />
       <WhatsAppButton />
     </>
   );

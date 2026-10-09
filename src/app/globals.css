@@ -96,12 +96,26 @@ section[id],
 
 /* En el inicio, al bajar el texto sube y la imagen baja y gira un poco mientras se desvanecen */
 .reveal-on [data-hero-text] {
-  translate: 0 calc(var(--exit) * -6vh);
+  translate: 0 calc((var(--exit) + var(--leave, 0)) * -8vh);
 }
 
 .reveal-on [data-hero-art] {
-  translate: 0 calc(var(--exit) * 12vh);
-  rotate: calc(var(--exit) * -5deg);
+  translate: 0 calc((var(--exit) + var(--leave, 0)) * 14vh);
+  rotate: calc((var(--exit) + var(--leave, 0)) * -6deg);
+}
+
+/* Escenario fijo (ScrollStage): las secciones se apilan en el mismo lugar y cambian sin desplazarse */
+.stage-on [data-stage] {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.stage-on [data-stage] > :not(.scroll-anchor) {
+  position: absolute;
+  inset: 0 0 auto;
+  transform-origin: 50% 35vh;
+  will-change: transform, opacity;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -52,11 +52,13 @@ export function ScrollMotion() {
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    window.addEventListener("stage", onScroll);
     tick();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      window.removeEventListener("stage", onScroll);
       cancelAnimationFrame(frame);
     };
   }, [pathname]);

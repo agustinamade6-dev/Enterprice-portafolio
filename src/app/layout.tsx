@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { ScrollMotion } from "@/components/ScrollMotion";
+import { ScrollStage } from "@/components/ScrollStage";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="min-h-screen font-sans">
         {children}
+        <ScrollStage />
         <ScrollMotion />
       </body>
     </html>
