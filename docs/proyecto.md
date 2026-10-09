@@ -2,7 +2,9 @@
 
 ## Qué es
 
-**Enterprice** (con c, a propósito: Enterprise es una empresa de alquiler de autos) es el portafolio de un grupo de estudiantes de Ingeniería en Sistemas de la Universidad Tecnológica Nacional, Facultad Regional Tucumán. Sirve para mostrar lo que hacemos y conseguir más clientes: páginas web y sistemas a medida para restaurantes, comercios y profesionales.
+**ZainSoft** (antes Enterprice; Agustin cambió el nombre el 2026-10-09) es el portafolio de un grupo de estudiantes de Ingeniería en Sistemas de la Universidad Tecnológica Nacional, Facultad Regional Tucumán. Sirve para mostrar lo que hacemos y conseguir más clientes: páginas web y sistemas a medida para restaurantes, comercios y profesionales.
+
+**Por qué ZainSoft:** "Zain" significa bueno o lindo y "Soft" es software: "software bueno y lindo". Bueno por el backend sólido y que funciona; lindo por el frontend estético y fácil de usar. Está explicado en la sección Nosotros del sitio. El repositorio sigue llamándose `Enterprice-portafolio`.
 
 ## El equipo
 

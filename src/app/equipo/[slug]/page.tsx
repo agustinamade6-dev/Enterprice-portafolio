@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!m) return {};
   return {
     title: `La historia de ${m.name}`,
-    description: `${m.fullName}, ${m.role.toLowerCase()} en Enterprice. Cómo empezó y en qué está hoy.`,
+    description: `${m.fullName}, ${m.role.toLowerCase()} en ZainSoft. Cómo empezó y en qué está hoy.`,
   };
 }
 
@@ -145,7 +145,7 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
               <p className="mt-2 text-paper/70">Cuéntanos qué necesitas y lo vemos entre todos.</p>
             </div>
             <a
-              href={makeWhatsappLink(site.whatsapp, "Hola, leí sobre el equipo de Enterprice y quiero consultar por un proyecto.")}
+              href={makeWhatsappLink(site.whatsapp, "Hola, leí sobre el equipo de ZainSoft y quiero consultar por un proyecto.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3.5 font-bold text-white transition hover:bg-brand-dark"
@@ -156,7 +156,7 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
         </article>
       </main>
       <Footer name={site.name} instagram={site.instagram} github={site.github} />
-      <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el portafolio de Enterprice y quiero consultar por un proyecto.")} />
+      <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el portafolio de ZainSoft y quiero consultar por un proyecto.")} />
     </>
   );
 }

@@ -1,10 +1,10 @@
-# Base de conocimiento de Enterprice
+# Base de conocimiento de ZainSoft
 
 Todo lo que hace falta saber para seguir trabajando en el portafolio, sin tener que preguntar de nuevo.
 
 | Documento | Qué cuenta |
 | --- | --- |
-| [proyecto.md](proyecto.md) | Qué es Enterprice, el equipo, las decisiones tomadas y lo que falta |
+| [proyecto.md](proyecto.md) | Qué es ZainSoft, el equipo, las decisiones tomadas y lo que falta |
 | [estructura.md](estructura.md) | Cómo está hecho el sitio, dónde está cada cosa y cómo sumar proyectos o integrantes |
 | [efectos.md](efectos.md) | Las animaciones: el escenario de scroll, el equipo y el carrusel |
 | [flujo-de-trabajo.md](flujo-de-trabajo.md) | Ramas, cómo correrlo, cómo subir cambios y cómo publicarlo |

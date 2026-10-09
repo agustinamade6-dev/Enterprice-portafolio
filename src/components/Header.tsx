@@ -18,7 +18,7 @@ export function Header({ siteName }: { siteName: string }) {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 font-extrabold tracking-tight">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-ink text-sm text-paper">
-            {siteName ? siteName.charAt(0) : "E"}
+            {siteName ? siteName.charAt(0) : "Z"}
           </span>
           {siteName}
         </Link>

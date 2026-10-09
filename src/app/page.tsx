@@ -176,7 +176,7 @@ export default async function Home() {
             <SectionTitle
               eyebrow="Nosotros"
               title={`Somos ${site.name}`}
-              text="Somos cuatro estudiantes de Ingeniería en Sistemas de la Universidad Tecnológica Nacional, Facultad Regional Tucumán, que empezamos de cero y vamos por el cien. Cada uno aporta lo suyo, y juntos convertimos las ideas de cada negocio en sistemas y páginas que funcionan."
+              text="Somos cuatro estudiantes de Ingeniería en Sistemas de la Universidad Tecnológica Nacional, Facultad Regional Tucumán, que empezamos de cero y vamos por el cien. Nuestro nombre lo dice: Zain significa bueno y lindo, y Soft, software. Hacemos software bueno, con un backend sólido que funciona, y lindo, con un diseño cuidado y fácil de usar. Cada uno aporta lo suyo, y juntos convertimos las ideas de cada negocio en sistemas y páginas que funcionan."
             />
             <TeamShowcase
               team={team.map(({ slug, name, fullName, role, photo, href, network, bio, skills }) => ({
@@ -242,7 +242,7 @@ export default async function Home() {
           <Footer name={site.name} instagram={site.instagram} github={site.github} />
         </div>
       </main>
-      <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el portafolio de Enterprice y quiero consultar por un proyecto.")} />
+      <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el portafolio de ZainSoft y quiero consultar por un proyecto.")} />
     </>
   );
 }

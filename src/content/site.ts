@@ -2,7 +2,7 @@
 // proyectos no hace falta tocar los componentes.
 
 export const site = {
-  name: "Enterprice",
+  name: "ZainSoft",
   owner: "Agustin",
   tagline:
     "Páginas web y sistemas a medida para restaurantes, comercios y profesionales.",
@@ -388,8 +388,8 @@ export const team: Member[] = [
         },
         {
           label: "Hoy",
-          title: "Hacer crecer Enterprice",
-          text: "Quiero que Enterprice sea una empresa de programación que ayude a emprendimientos y empresas locales a gestionarse mejor. Mientras tanto, sigo estudiando y desarrollo con Nicolás un chatbot con inteligencia artificial.",
+          title: "Hacer crecer ZainSoft",
+          text: "Quiero que ZainSoft sea una empresa de programación que ayude a emprendimientos y empresas locales a gestionarse mejor. Mientras tanto, sigo estudiando y desarrollo con Nicolás un chatbot con inteligencia artificial.",
         },
       ],
     },
@@ -445,8 +445,8 @@ export const team: Member[] = [
         },
         {
           label: "Hoy",
-          title: "Enterprice",
-          text: "Junto al resto del equipo armamos Enterprice para tomar más proyectos juntos.",
+          title: "ZainSoft",
+          text: "Junto al resto del equipo armamos ZainSoft para tomar más proyectos juntos.",
         },
       ],
       pending: "cómo empezó, cómo aprendió a programar y cuáles fueron sus primeros proyectos",
@@ -505,8 +505,8 @@ export const team: Member[] = [
         },
         {
           label: "Hoy",
-          title: "Enterprice",
-          text: "Me sumé a Enterprice para seguir haciendo sistemas y páginas junto al resto del equipo.",
+          title: "ZainSoft",
+          text: "Me sumé a ZainSoft para seguir haciendo sistemas y páginas junto al resto del equipo.",
         },
       ],
       pending: "cómo empezó, cómo aprendió a programar y cuáles fueron sus primeros proyectos",
