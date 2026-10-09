@@ -1,10 +1,8 @@
 # Efectos y animaciones
 
-## En `main`
+## Escenario de scroll (en `main` desde el 2026-10-09)
 
-**Mazo de proyectos** (`ProjectDeck.tsx` + `globals.css`): al pasar de tarjeta, la de adelante sale volando y la nueva acomoda su imagen y su texto de a poco. Hacia atrás, la última vuelve entrando por la izquierda. Se puede deslizar con el dedo.
-
-## En la rama `efectos`
+Se probó en la rama `efectos` y Agustin decidió pasarlo a la página publicada el 2026-10-09.
 
 La idea viene de un video del sitio de GTA VI que pasó Agustin: que al hacer scroll **parezca que no estás bajando**, sino que la pantalla queda quieta y el contenido cambia en el lugar.
 

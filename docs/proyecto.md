@@ -26,7 +26,7 @@ Cada integrante tiene su página de historia en `/equipo/<slug>/`: cómo empezó
 - **Clientes que se pueden nombrar:** AKROS Café (autorizado). Pierina Glow es el emprendimiento de la mamá de Agustin.
 - **Textos en español con "tú"** (no voseo): "te encuentras", "desliza".
 - **Panel de admin y carrusel 3D** de Nicolás, unidos a `main` el 2026-10-09.
-- **Efectos de scroll en una rama aparte** (`efectos`) hasta que se decida pasarlos a `main`. Ver [efectos.md](efectos.md).
+- **Efectos de scroll**: se probaron en la rama `efectos` y pasaron a `main` el 2026-10-09 (Agustin). Ver [efectos.md](efectos.md).
 
 ## Proyectos en el sitio
 

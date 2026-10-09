@@ -6,7 +6,7 @@ Todo lo que hace falta saber para seguir trabajando en el portafolio, sin tener 
 | --- | --- |
 | [proyecto.md](proyecto.md) | Qué es Enterprice, el equipo, las decisiones tomadas y lo que falta |
 | [estructura.md](estructura.md) | Cómo está hecho el sitio, dónde está cada cosa y cómo sumar proyectos o integrantes |
-| [efectos.md](efectos.md) | Las animaciones: el mazo de proyectos y el efecto de scroll de la rama `efectos` |
+| [efectos.md](efectos.md) | Las animaciones: el escenario de scroll, el equipo y el carrusel |
 | [flujo-de-trabajo.md](flujo-de-trabajo.md) | Ramas, cómo correrlo, cómo subir cambios y cómo publicarlo |
 | [lecciones-aprendidas.md](lecciones-aprendidas.md) | Errores que tuvimos en el portafolio y en el sistema de la cafetería, y la regla que dejan |
 
