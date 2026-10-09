@@ -18,8 +18,8 @@ Cosas que salieron mal (o casi) y la regla que nos dejan, para no repetirlas. Al
 | 10 | Se colaron formas con voseo ("te encontrás", "Deslizá"). | Se pasaron a "tú" ("te encuentras", "Desliza"). | Todos los textos del sitio van con "tú". |
 | 11 | Al escribir la documentación se anotaron mal las redes del equipo. | Se revisó contra `src/content/site.ts`. | Antes de documentar un dato, leerlo de su fuente. |
 | 12 | `C:\dev\portafolio` no tiene git y desde afuera no se pueden borrar archivos ahí. | Se avisa qué archivos borrar a mano. | Cuando un cambio elimina archivos, decir cuáles hay que borrar en la copia local. |
-| 13 | Una foto del equipo no era cuadrada y se deformaba en la tarjeta. | Se recortó a 600x600. | Las fotos del equipo van cuadradas, 600x600, y al sumar a alguien se regenera `public/og.png`. |
-| 14 | En la página de cada integrante, `params` se usaba sin esperar y fallaba la compilación. | `const { slug } = await params`. | En Next 16 los `params` de las páginas son una promesa. |
+| 13 | Las fotos del equipo llegaron con tamaños y proporciones distintas. | Se recortaron cuadradas a 600x600. | Las fotos del equipo van cuadradas, 600x600, y al sumar a alguien se regenera `public/og.png`. |
+| 14 | En la página de cada integrante, un `await` dentro de una función flecha no async rompió la compilación de `generateMetadata`. | `const { slug } = await params` al principio de la función. | En Next 16 los `params` son una promesa: se esperan una vez, arriba, y no dentro de funciones internas. |
 
 ## Sistema de la cafetería (AKROS Café)
 
