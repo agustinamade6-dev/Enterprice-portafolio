@@ -112,7 +112,7 @@ export default async function MemberPage({ params }: PageProps<"/equipo/[slug]">
 
           <section className="mt-16">
             <h2 className="text-xl font-extrabold">Conoce al resto del equipo</h2>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <div className="mt-4 grid gap-4 sm:grid-cols-3">
               {others.map((o) => (
                 <Link
                   key={o.slug}
@@ -132,7 +132,7 @@ export default async function MemberPage({ params }: PageProps<"/equipo/[slug]">
           <section className="mt-14 flex flex-col items-start justify-between gap-6 rounded-3xl bg-ink p-8 text-paper sm:flex-row sm:items-center">
             <div>
               <h2 className="text-2xl font-extrabold">¿Tienes un proyecto?</h2>
-              <p className="mt-2 text-paper/70">Cuéntanos qué necesitas y lo vemos entre los tres.</p>
+              <p className="mt-2 text-paper/70">Cuéntanos qué necesitas y lo vemos entre todos.</p>
             </div>
             <a
               href={whatsappLink("Hola, leí sobre el equipo de Enterprice y quiero consultar por un proyecto.")}

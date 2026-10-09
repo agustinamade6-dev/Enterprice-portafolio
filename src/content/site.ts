@@ -80,6 +80,20 @@ export const projects: Project[] = [
     accent: "from-[#eab3a6] to-[#c96f5d]",
     image: "/pierina/inicio.png",
   },
+  {
+    slug: "yuhmak",
+    title: "Yuhmak, registro de reparaciones",
+    sector: "Centro de distribución de motos",
+    kind: "real",
+    summary:
+      "Sistema web para registrar, cargar y seguir todas las motos arregladas en el taller: marca, modelo, chasis, motor y el trabajo realizado.",
+    result: "Más de 340 motos registradas y los datos sincronizados en todos los dispositivos.",
+    tags: ["HTML", "Web", "Gestión"],
+    href: "/proyectos/yuhmak/",
+    by: ["Fabrizio"],
+    accent: "from-green-600 to-emerald-900",
+    image: "/yuhmak/historial.jpg",
+  },
   // TODO: confirmar si se puede nombrar al cliente y quién hizo cada parte.
   {
     slug: "chatbot-crm",
@@ -396,7 +410,7 @@ export const team: Member[] = [
         {
           label: "En la facultad",
           title: "Ingeniería en Sistemas",
-          text: "Estudio Ingeniería en Sistemas en la Universidad Tecnológica Nacional, Facultad Regional Tucumán, junto a Agustin y Nicolás.",
+          text: "Estudio Ingeniería en Sistemas en la Universidad Tecnológica Nacional, Facultad Regional Tucumán, junto al resto del equipo.",
         },
         {
           label: "2026 · Un chatbot con .NET e IA",
@@ -432,7 +446,7 @@ export const team: Member[] = [
         {
           label: "Hoy",
           title: "Enterprice",
-          text: "Junto a Agustin y Nicolás armamos Enterprice para tomar más proyectos como equipo.",
+          text: "Junto al resto del equipo armamos Enterprice para tomar más proyectos juntos.",
         },
       ],
       pending: "cómo empezó, cómo aprendió a programar y cuáles fueron sus primeros proyectos",
@@ -454,12 +468,45 @@ export const team: Member[] = [
         {
           label: "En la facultad",
           title: "Ingeniería en Sistemas",
-          text: "Estudio Ingeniería en Sistemas en la Universidad Tecnológica Nacional, Facultad Regional Tucumán, junto a Agustin y José.",
+          text: "Estudio Ingeniería en Sistemas en la Universidad Tecnológica Nacional, Facultad Regional Tucumán, junto al resto del equipo.",
         },
         {
           label: "Hoy",
           title: "Un chatbot con IA, junto a Agustin",
           text: "Estamos desarrollando un asistente con inteligencia artificial que atiende clientes por Telegram, entiende audios e imágenes y pasa la charla a una persona cuando hace falta.",
+        },
+      ],
+      pending: "cómo empezó, cómo aprendió a programar y cuáles fueron sus primeros proyectos",
+    },
+  },
+  {
+    slug: "fabrizio",
+    name: "Fabrizio",
+    fullName: "Fabrizio Nicolás Andrada",
+    role: "Programador: frontend, backend, diseño y desarrollo web",
+    photo: "/equipo/fabrizio-andrada.jpg",
+    href: "https://www.linkedin.com/in/fabrizio-andrada-0b70532a1",
+    network: "LinkedIn",
+    bio: "Trabajo de manera integral en el frontend y el backend, cuidando además el diseño y la experiencia de usuario. Desarrollé el sistema de gestión de reparaciones de Yuhmak.",
+    skills: ["Frontend", "Backend", "HTML", "Diseño web", "Experiencia de usuario"],
+    story: {
+      intro: "Trabajo de manera integral: desarrollo el frontend y el backend, y me aseguro de que todo tenga un buen diseño y sea fácil de usar.",
+      chapters: [
+        {
+          label: "En la facultad",
+          title: "Ingeniería en Sistemas",
+          text: "Estudio Ingeniería en Sistemas en la Universidad Tecnológica Nacional, Facultad Regional Tucumán, junto al resto del equipo.",
+        },
+        {
+          label: "Sistema de gestión",
+          title: "Yuhmak, registro de reparaciones",
+          text: "Desarrollé un sistema de gestión integral para Yuhmak, un centro de distribución de motos, que registra, carga y administra el seguimiento de todas las motos arregladas en el taller.",
+          href: "/proyectos/yuhmak/",
+        },
+        {
+          label: "Hoy",
+          title: "Enterprice",
+          text: "Me sumé a Enterprice para seguir haciendo sistemas y páginas junto al resto del equipo.",
         },
       ],
       pending: "cómo empezó, cómo aprendió a programar y cuáles fueron sus primeros proyectos",
