@@ -170,54 +170,84 @@ export const projects: Project[] = [
   },
 ];
 
-export type Service = {
+// Armador de presupuesto: no mostramos precios fijos. El cliente elige qué necesita
+// y nos llega por WhatsApp para cotizarlo a medida.
+export type BudgetType = {
+  id: string;
   name: string;
   forWho: string;
-  price: string;
-  timeline: string;
-  features: string[];
-  featured?: boolean;
+  options: string[]; // lo que puede incluir; el cliente marca lo que quiere
 };
 
-export const services: Service[] = [
+export const budgetTypes: BudgetType[] = [
   {
-    name: "Presencia online",
-    forWho: "Profesionales y negocios que todavía no tienen web",
-    price: "$400.000",
-    timeline: "1 a 2 semanas",
-    features: [
-      "Página de una sección, adaptada a celular",
-      "Botón de WhatsApp y mapa de Google",
-      "Textos y diseño a tu medida",
-      "Publicación en internet incluida",
+    id: "web",
+    name: "Página web",
+    forWho: "Para que te encuentren en internet y te escriban",
+    options: [
+      "Una sola sección",
+      "Varias páginas",
+      "Botón de WhatsApp",
+      "Mapa de Google",
+      "Galería de fotos",
+      "Formulario de contacto",
+      "Que aparezca en Google",
+      "Dominio propio (.com o .com.ar)",
     ],
   },
   {
-    name: "Negocio online",
-    forWho: "Restaurantes y comercios que quieren vender por internet",
-    price: "$400.000",
-    timeline: "3 a 4 semanas",
-    features: [
-      "Web de varias páginas",
-      "Menú o catálogo que puedes editar",
-      "Pedidos directos por WhatsApp",
-      "Optimizada para aparecer en Google",
+    id: "venta",
+    name: "Menú o tienda online",
+    forWho: "Para vender o tomar pedidos por internet",
+    options: [
+      "Menú digital con QR",
+      "Catálogo de productos",
+      "Carrito de compras",
+      "Pedidos por WhatsApp",
+      "Poder editar precios y productos",
+      "Pagos con Mercado Pago",
+      "Envíos o retiro en el local",
     ],
-    featured: true,
   },
   {
+    id: "sistema",
     name: "Sistema a medida",
-    forWho: "Negocios con procesos propios",
-    price: "$350.000",
-    timeline: "Según el alcance",
-    features: [
-      "Punto de venta, turnos, stock o panel de gestión",
-      "Versión web o programa de escritorio",
-      "Pensado para usar rápido en el mostrador",
-      "Capacitación al equipo",
+    forWho: "Para ordenar la gestión de tu negocio",
+    options: [
+      "Punto de venta y caja",
+      "Stock e inventario",
+      "Proveedores",
+      "Clientes",
+      "Gastos",
+      "Turnos o reservas",
+      "Reportes y estadísticas",
+      "Programa de escritorio",
+      "Versión web",
+      "Varios usuarios con permisos",
+    ],
+  },
+  {
+    id: "chatbot",
+    name: "Chatbot con IA",
+    forWho: "Para atender a tus clientes las 24 horas",
+    options: [
+      "WhatsApp",
+      "Telegram",
+      "Instagram",
+      "Responder preguntas frecuentes",
+      "Tomar pedidos o reservas",
+      "Entender audios e imágenes",
+      "Pasar la charla a una persona",
+      "Guardar los contactos",
     ],
   },
 ];
+
+export const budgetExtras = ["Capacitación para usarlo", "Mantenimiento mensual", "Diseño de logo o marca"];
+
+export const budgetSectors = ["Restaurante o cafetería", "Comercio", "Profesional", "Emprendimiento", "Empresa", "Otro"];
+
+export const budgetTimes = ["Lo antes posible", "En el próximo mes", "Sin apuro"];
 
 export const process = [
   {

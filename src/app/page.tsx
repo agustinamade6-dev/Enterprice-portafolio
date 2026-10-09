@@ -2,11 +2,12 @@ import Link from "next/link";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { ArrowIcon, CheckIcon, WhatsAppIcon } from "@/components/icons";
+import { BudgetBuilder } from "@/components/BudgetBuilder";
+import { ArrowIcon, WhatsAppIcon } from "@/components/icons";
 import { PosMockup } from "@/components/PosMockup";
 import { ProjectDeck } from "@/components/ProjectDeck";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { faqs, process, projects, services, site, team, whatsappLink } from "@/content/site";
+import { faqs, process, projects, site, team, whatsappLink } from "@/content/site";
 
 export default function Home() {
   // Orden del mazo: primero lo real, después lo que está en desarrollo, los trabajos de la facultad y al final los conceptos
@@ -75,46 +76,11 @@ export default function Home() {
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Servicios"
-              title="Elige lo que necesita tu negocio"
-              text="Precios claros desde el primer día. Te enviamos la propuesta final por escrito antes de empezar."
+              title="Arma tu presupuesto"
+              text="Cada negocio es distinto, por eso no tenemos precios fijos. Elige lo que necesitas y te pasamos un presupuesto a medida, por escrito y antes de empezar."
             />
-            <div className="mt-12 grid gap-6 lg:grid-cols-3">
-              {services.map((s) => (
-                <div
-                  key={s.name}
-                  className={`relative flex flex-col rounded-3xl border p-8 ${s.featured ? "border-ink bg-ink text-paper" : "border-black/10 bg-paper"}`}
-                >
-                  {s.featured && (
-                    <span className="absolute -top-3 left-8 rounded-full bg-brand px-3 py-1 text-xs font-bold text-white">
-                      Más elegido
-                    </span>
-                  )}
-                  <h3 className="text-xl font-extrabold">{s.name}</h3>
-                  <p className={`mt-1 text-sm ${s.featured ? "text-paper/70" : "text-ink/60"}`}>{s.forWho}</p>
-                  <p className="mt-6">
-                    <span className={`text-sm ${s.featured ? "text-paper/70" : "text-ink/60"}`}>desde </span>
-                    <span className="text-4xl font-extrabold tracking-tight">{s.price}</span>
-                    <span className={`text-sm ${s.featured ? "text-paper/70" : "text-ink/60"}`}> ARS</span>
-                  </p>
-                  <p className={`mt-1 text-sm ${s.featured ? "text-paper/70" : "text-ink/60"}`}>Plazo: {s.timeline}</p>
-                  <ul className="mt-6 space-y-3">
-                    {s.features.map((f) => (
-                      <li key={f} className="flex gap-2.5 text-sm">
-                        <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    href={whatsappLink(`Hola, me interesa el servicio "${s.name}".`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`mt-8 rounded-full px-6 py-3 text-center font-bold transition ${s.featured ? "bg-brand text-white hover:bg-brand-dark" : "bg-ink text-paper hover:bg-brand"}`}
-                  >
-                    Pedir presupuesto
-                  </a>
-                </div>
-              ))}
+            <div className="mt-12">
+              <BudgetBuilder />
             </div>
             <p className="mt-8 text-center text-sm text-ink/60">
               ¿Ya tienes una web? También ofrecemos un plan mensual de mantenimiento con cambios, copias de seguridad y soporte.

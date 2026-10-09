@@ -31,7 +31,7 @@ export function Header() {
             </Link>
           ))}
           <Link
-            href="/#contacto"
+            href="/#servicios"
             className="rounded-full bg-ink px-4 py-2 text-paper transition hover:bg-brand"
           >
             Pedir presupuesto
@@ -61,7 +61,7 @@ export function Header() {
 
       {open && (
         <nav className="border-t border-black/5 bg-paper px-4 py-4 md:hidden">
-          {[...links, { href: "/#contacto", label: "Pedir presupuesto" }].map((l) => (
+          {[...links, { href: "/#servicios", label: "Pedir presupuesto" }].map((l) => (
             <Link
               key={l.href}
               href={l.href}
