@@ -25,6 +25,7 @@ Cada integrante tiene su página de historia en `/equipo/<slug>/`: cómo empezó
 - **Cómo trabajamos:** sprints, prototipos que se entregan de a poco y el cliente va sumando funciones y definiendo el diseño de cada apartado a través de ellos. Además asesoramos e implementamos herramientas nuevas que vamos creando.
 - **Clientes que se pueden nombrar:** AKROS Café (autorizado). Pierina Glow es el emprendimiento de la mamá de Agustin.
 - **Textos en español con "tú"** (no voseo): "te encuentras", "desliza".
+- **Panel de admin y carrusel 3D** de Nicolás, unidos a `main` el 2026-10-09.
 - **Efectos de scroll en una rama aparte** (`efectos`) hasta que se decida pasarlos a `main`. Ver [efectos.md](efectos.md).
 
 ## Proyectos en el sitio
@@ -41,6 +42,8 @@ Cada integrante tiene su página de historia en `/equipo/<slug>/`: cómo empezó
 | Menú digital con QR, Tienda online, Turnos online, Panel de stock y ventas | Concepto | | Ideas para cada tipo de negocio; el menú tiene demo navegable |
 
 ## Pendiente de respuesta
+
+- Cambiar el usuario y la clave de ejemplo del panel de admin (están en el código, que es público) y definir `SESSION_SECRET`.
 
 - Si Yuhmak autoriza aparecer con nombre y capturas.
 - Confirmar que todos los perfiles enlacen a LinkedIn (lo cambió José).

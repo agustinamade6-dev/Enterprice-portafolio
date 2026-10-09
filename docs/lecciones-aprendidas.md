@@ -20,6 +20,7 @@ Cosas que salieron mal (o casi) y la regla que nos dejan, para no repetirlas. Al
 | 12 | `C:\dev\portafolio` no tiene git y desde afuera no se pueden borrar archivos ahí. | Se avisa qué archivos borrar a mano. | Cuando un cambio elimina archivos, decir cuáles hay que borrar en la copia local. |
 | 13 | Las fotos del equipo llegaron con tamaños y proporciones distintas. | Se recortaron cuadradas a 600x600. | Las fotos del equipo van cuadradas, 600x600, y al sumar a alguien se regenera `public/og.png`. |
 | 14 | En la página de cada integrante, un `await` dentro de una función flecha no async rompió la compilación de `generateMetadata`. | `const { slug } = await params` al principio de la función. | En Next 16 los `params` son una promesa: se esperan una vez, arriba, y no dentro de funciones internas. |
+| 15 | Al sumar el panel de admin, el build estático dejó de funcionar: la API y la protección de rutas necesitan servidor. | `npm run build:export` aparta el panel y la API mientras genera `out/`. | Antes de sumar algo con servidor a un sitio estático, decidir dónde va a correr y probar el build de publicación. |
 
 ## Sistema de la cafetería (AKROS Café)
 
