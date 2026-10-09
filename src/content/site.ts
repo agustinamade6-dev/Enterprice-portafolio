@@ -255,7 +255,8 @@ export const team: Member[] = [
     fullName: "Leandro Agustin Amade",
     role: "Programador: frontend, backend y diseño",
     photo: site.photo,
-    href: site.instagram,
+    href: "https://www.linkedin.com/in/leandro-agustin-amade-a33a0239a/",
+    network: "LinkedIn",
     bio: "Me gusta que cada sistema se vea bien y sea fácil de usar desde el primer día. Trabajé en el punto de venta de AKROS Café e hice el sistema de gestión de Pierina Glow de punta a punta.",
     skills: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Electron", "Python", "Diseño de interfaces"],
     story: {
@@ -361,7 +362,8 @@ export const team: Member[] = [
     fullName: "Nicolás Raúl Bazán",
     role: "Programador: frontend y backend",
     photo: undefined, // TODO: foto
-    href: "https://www.instagram.com/nico.bazan__/",
+    href: "https://www.linkedin.com/in/nicolas-baz%C3%A1n-9315653b3/",
+    network: "LinkedIn",
     bio: "Trabajo tanto en el frontend como en el backend, de la pantalla que ve el cliente hasta el servidor. Hoy estamos desarrollando juntos un chatbot con inteligencia artificial.",
     skills: ["Frontend", "Backend", "Inteligencia artificial", "Chatbots"],
     story: {
