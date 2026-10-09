@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { RibbonSides } from "@/components/RibbonSides";
 import { ScrollMotion } from "@/components/ScrollMotion";
 import { ScrollStage } from "@/components/ScrollStage";
 import { contentRepo } from "@/lib/content";
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <ScrollStage />
         <ScrollMotion />
+        <RibbonSides />
       </body>
     </html>
   );
