@@ -314,10 +314,35 @@ export const team: Member[] = [
           text: "Estudio Ingeniería en Sistemas en la Universidad Tecnológica Nacional, Facultad Regional Tucumán, junto a Agustin y Nicolás.",
         },
         {
+          label: "2026 · Un chatbot con .NET e IA",
+          title: "Automatización de pedidos mayoristas",
+          text: "Hice un chatbot de Telegram en C# y .NET 8 que reemplaza la gestión manual de pedidos mayoristas. Usa Google Gemini para distinguir si quien escribe es cliente o proveedor, valida los datos antes de tomar el pedido, calcula subtotales y totales por kilo, atiende en español, inglés y portugués, y vuelca todo en Google Sheets en tiempo real. Antes de confirmar, avisa al equipo para que apruebe o rechace cada pedido. Lo publiqué en LinkedIn para pedir feedback.",
+        },
+        {
+          label: "2026 · Investigación Operativa",
+          title: "Optimizar apiarios para producir más miel",
+          text: "En la facultad, con un equipo de seis, hicimos un trabajo de Investigación Operativa sobre cómo distribuir apiarios y colmenas para aumentar la producción de miel. Usamos programación lineal y modelos de pronóstico para reducir las pérdidas por traslados y aprovechar mejor el espacio. Lo trabajamos con una finca real, La Dulce, y el trabajo quedó aprobado.",
+        },
+        {
           label: "Primer trabajo en equipo",
           title: "AKROS Café, junto a Agustin",
           text: "Estuve a cargo del backend del punto de venta, hice las pruebas y lo audité.",
           href: "/proyectos/akros-cafe/",
+        },
+        {
+          label: "Backend de AKROS Café",
+          title: "Un backend que no falla con la plata",
+          text: "El sistema nació como el POS de un restaurante (Next.js, Prisma y SQLite) y me tocó dejar el backend sólido. Los cobros pasaron a ser atómicos e idempotentes, para que no haya ventas duplicadas aunque dos personas cobren a la vez. Los precios y totales los calcula el servidor y no la pantalla. El dinero se guarda en centavos enteros, con migración automática de la base al arrancar. Sumé sesión firmada, PIN con hash y límite de intentos, permisos por rol en toda la API, protección CSRF, validación de toda la entrada, estados de pedido con transiciones explícitas, y recetas con descuento de stock al cobrar y reintegro al anular.",
+        },
+        {
+          label: "Auditoría de AKROS Café",
+          title: "Investigar para auditar",
+          text: "Antes de tocar el código investigué cómo se audita un backend: arquitectura, reglas de negocio, concurrencia, seguridad y bases de datos. Con eso revisé el sistema y documenté 39 hallazgos, desde una sesión que se podía forjar hasta una mesa que quedaba libre antes del cobro. Cada cambio quedó en su propio documento, con el problema, el impacto y la prueba que lo cubre. Varios errores los encontraron las propias pruebas: una carrera de cobros simultáneos contra SQLite real, una prueba que fallaba a veces en el CI, y violaciones de accesibilidad detectadas con axe. Lo que fui aprendiendo lo ordené en una base de conocimiento de lecciones y reglas para los proyectos que vienen.",
+        },
+        {
+          label: "Pruebas de AKROS Café",
+          title: "Probar contra el motor real",
+          text: "Armé la batería de pruebas: más de 700 tests, pruebas de concurrencia y de migraciones contra SQLite real, pruebas de propiedades para el dinero, pruebas de punta a punta con Playwright en escritorio y móvil, accesibilidad con axe, cobertura del 95 % y pruebas de mutación para comprobar que los tests de verdad detectan errores. Todo corre en el CI en cada cambio.",
         },
         {
           label: "Hoy",
