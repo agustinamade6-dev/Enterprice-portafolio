@@ -25,7 +25,11 @@ export function ScrollScenes() {
         const next = scenes[i + 1];
         if (!next) return 0;
         const top = next.getBoundingClientRect().top;
-        return Math.min(1, Math.max(0, 1 - top / vh));
+        // Si la siguiente ya asoma al cargar (el inicio es más bajo que la pantalla),
+        // se cuenta desde ahí para que todo arranque sin oscurecer.
+        const marker = next.previousElementSibling as HTMLElement | null;
+        const start = Math.min(vh, marker?.classList.contains("scroll-anchor") ? marker.offsetTop : vh);
+        return Math.min(1, Math.max(0, 1 - top / start));
       });
       scenes.forEach((el, i) => el.style.setProperty("--cover", covers[i].toFixed(3)));
     };

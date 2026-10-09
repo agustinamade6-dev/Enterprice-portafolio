@@ -18,10 +18,10 @@ export default function Home() {
       <Header />
       <main>
         {/* Inicio */}
-        <section data-scene className="overflow-hidden bg-paper px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
+        <section data-scene="hero" className="overflow-hidden bg-paper px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
           <div className="pointer-events-none absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-full bg-brand/15 blur-3xl" />
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
-            <div data-reveal>
+            <div data-reveal data-hero-text>
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-sm font-medium">
                 <span className="h-2 w-2 rounded-full bg-green-500" />
                 Disponible para nuevos proyectos
@@ -47,7 +47,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="relative hidden lg:block" data-reveal style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
+            <div className="relative hidden lg:block" data-reveal data-hero-art style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
               <PosMockup className="mx-auto max-w-lg rotate-1" />
               <div className="absolute -bottom-6 left-2 rounded-2xl bg-white px-4 py-3 shadow-xl shadow-black/10 sm:left-0">
                 <p className="text-xs text-ink/60">Proyecto real</p>

@@ -142,6 +142,27 @@ section[id],
   }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  /* Inicio como portada: al bajar se aleja, se funde a oscuro y texto e imagen se separan */
+  [data-scene="hero"] > * {
+    transform: translateY(calc(var(--cover, 0) * 8vh)) scale(calc(1 - var(--cover, 0) * 0.2));
+    transform-origin: 50% 40%;
+  }
+
+  [data-scene="hero"]::after {
+    opacity: calc(var(--cover, 0) * 0.85);
+  }
+
+  [data-hero-text] {
+    translate: 0 calc(var(--cover, 0) * -6vh);
+  }
+
+  [data-hero-art] {
+    translate: 0 calc(var(--cover, 0) * 10vh);
+    rotate: calc(var(--cover, 0) * -4deg);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
   [data-scene] ~ [data-scene] {
     border-radius: 2.5rem 2.5rem 0 0;
