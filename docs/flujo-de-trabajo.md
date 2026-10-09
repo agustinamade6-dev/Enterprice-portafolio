@@ -7,6 +7,8 @@
 | `main` | El sitio que se publica. Todo lo que llega acá sale en la web |
 | `efectos` | Los efectos de scroll en prueba. Se pasan a `main` con un merge cuando estén aprobados |
 
+**Ojo al pasar `efectos` a `main`:** en `main` los efectos se sacaron con un commit que los deshace ("Pasar las animaciones de scroll a la rama efectos"). Por eso un merge directo da conflictos en `globals.css`, `layout.tsx` y `page.tsx`. Al resolverlos hay que quedarse con la versión de `efectos`. Y no hay que mergear `main` dentro de `efectos`, porque borraría los efectos: para traer cambios de `main` se usa `git cherry-pick`.
+
 El repositorio es https://github.com/agustinamade6-dev/Enterprice-portafolio. José también sube cambios directo, así que antes de empezar siempre hay que traer lo último (`git pull`).
 
 ## Correrlo en la compu
