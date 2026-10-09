@@ -18,10 +18,10 @@ export default function Home() {
       <Header />
       <main>
         {/* Inicio */}
-        <section data-scene className="overflow-hidden bg-paper px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
+        <section className="relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
           <div className="pointer-events-none absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-full bg-brand/15 blur-3xl" />
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
-            <div data-reveal>
+            <div>
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-sm font-medium">
                 <span className="h-2 w-2 rounded-full bg-green-500" />
                 Disponible para nuevos proyectos
@@ -47,7 +47,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="relative hidden lg:block" data-reveal style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
+            <div className="relative hidden lg:block">
               <PosMockup className="mx-auto max-w-lg rotate-1" />
               <div className="absolute -bottom-6 left-2 rounded-2xl bg-white px-4 py-3 shadow-xl shadow-black/10 sm:left-0">
                 <p className="text-xs text-ink/60">Proyecto real</p>
@@ -58,41 +58,38 @@ export default function Home() {
         </section>
 
         {/* Proyectos */}
-        <div id="proyectos" className="scroll-anchor" />
-        <section data-scene className="bg-paper px-4 py-20 sm:px-6">
+        <section id="proyectos" className="px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Proyectos"
               title="Trabajos y prototipos"
               text="Sistemas reales en uso, lo que cada uno del equipo va construyendo y conceptos pensados para cada tipo de negocio."
             />
-            <div className="mt-12" data-reveal>
+            <div className="mt-12">
               <ProjectDeck projects={deck} />
             </div>
           </div>
         </section>
 
         {/* Servicios */}
-        <div id="servicios" className="scroll-anchor" />
-        <section data-scene className="bg-white px-4 py-20 sm:px-6">
+        <section id="servicios" className="bg-white px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Servicios"
               title="Arma tu presupuesto"
               text="Cada negocio es distinto, por eso no tenemos precios fijos. Elige lo que necesitas y te pasamos un presupuesto a medida, por escrito y antes de empezar."
             />
-            <div className="mt-12" data-reveal>
+            <div className="mt-12">
               <BudgetBuilder />
             </div>
-            <p className="mt-8 text-center text-sm text-ink/60" data-reveal>
+            <p className="mt-8 text-center text-sm text-ink/60">
               ¿Ya tienes una web? También ofrecemos un plan mensual de mantenimiento con cambios, copias de seguridad y soporte.
             </p>
           </div>
         </section>
 
         {/* Proceso */}
-        <div id="proceso" className="scroll-anchor" />
-        <section data-scene className="bg-paper px-4 py-20 sm:px-6">
+        <section id="proceso" className="px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Cómo trabajamos"
@@ -103,8 +100,6 @@ export default function Home() {
               {process.map((step, i) => (
                 <li
                   key={step.title}
-                  data-reveal
-                  style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}
                   className={`flex flex-col rounded-3xl border p-6 ${i === 2 ? "border-ink bg-ink text-paper md:row-span-2" : "border-black/5 bg-white"}`}
                 >
                   <span
@@ -145,8 +140,7 @@ export default function Home() {
         </section>
 
         {/* Nosotros */}
-        <div id="nosotros" className="scroll-anchor" />
-        <section data-scene className="bg-white px-4 py-20 sm:px-6">
+        <section id="nosotros" className="bg-white px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Nosotros"
@@ -154,12 +148,8 @@ export default function Home() {
               text="Somos cuatro estudiantes de Ingeniería en Sistemas de la Universidad Tecnológica Nacional, Facultad Regional Tucumán, que empezamos de cero y vamos por el cien. Cada uno aporta lo suyo, y juntos convertimos las ideas de cada negocio en sistemas y páginas que funcionan."
             />
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {team.map((m, i) => (
-                <article
-                  key={m.name}
-                  data-reveal
-                  style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}
-                  className="flex flex-col rounded-3xl border border-black/5 bg-paper p-6 text-center">
+              {team.map((m) => (
+                <article key={m.name} className="flex flex-col rounded-3xl border border-black/5 bg-paper p-6 text-center">
                   <div className="relative mx-auto h-36 w-36">
                     <div className="absolute -inset-1.5 rotate-6 rounded-[2rem] bg-gradient-to-br from-brand to-amber-400" />
                     {m.photo ? (
@@ -207,17 +197,12 @@ export default function Home() {
         </section>
 
         {/* Preguntas frecuentes */}
-        <div id="preguntas" className="scroll-anchor" />
-        <section data-scene className="bg-paper px-4 py-20 sm:px-6">
+        <section id="preguntas" className="px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-3xl">
             <SectionTitle eyebrow="Preguntas frecuentes" title="Lo que suelen preguntarnos" />
             <div className="mt-10 space-y-3">
-              {faqs.map((f, i) => (
-                <details
-                  key={f.q}
-                  data-reveal
-                  style={{ "--reveal-delay": `${i * 60}ms` } as React.CSSProperties}
-                  className="group rounded-2xl border border-black/5 bg-white p-5 open:shadow-sm">
+              {faqs.map((f) => (
+                <details key={f.q} className="group rounded-2xl border border-black/5 bg-white p-5 open:shadow-sm">
                   <summary className="flex cursor-pointer list-none items-center justify-between font-bold">
                     {f.q}
                     <span className="text-2xl leading-none text-brand transition group-open:rotate-45">+</span>
@@ -230,10 +215,9 @@ export default function Home() {
         </section>
 
         {/* Contacto */}
-        <div id="contacto" className="scroll-anchor" />
-        <section data-scene className="bg-ink px-4 py-20 text-paper sm:px-6">
+        <section id="contacto" className="bg-ink px-4 py-20 text-paper sm:px-6">
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
-            <div data-reveal>
+            <div>
               <p className="text-sm font-bold uppercase tracking-widest text-brand">Contacto</p>
               <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">¿Hablamos de tu proyecto?</h2>
               <p className="mt-4 text-lg text-paper/70">
@@ -253,9 +237,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div data-reveal style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
-              <ContactForm />
-            </div>
+            <ContactForm />
           </div>
         </section>
       </main>
@@ -277,7 +259,7 @@ function SectionTitle({
   align?: "center" | "left";
 }) {
   return (
-    <div className={align === "center" ? "mx-auto max-w-2xl text-center" : ""} data-reveal>
+    <div className={align === "center" ? "mx-auto max-w-2xl text-center" : ""}>
       <p className="text-sm font-bold uppercase tracking-widest text-brand">{eyebrow}</p>
       <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{title}</h2>
       {text && <p className="mt-4 text-lg text-ink/70">{text}</p>}

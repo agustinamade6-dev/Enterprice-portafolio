@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import { ScrollReveal } from "@/components/ScrollReveal";
-import { ScrollScenes } from "@/components/ScrollScenes";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -30,17 +28,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    // suppressHydrationWarning: el script de abajo agrega una clase al <html> antes de que cargue React
-    <html lang="es" className={`${jakarta.variable} antialiased`} suppressHydrationWarning>
-      <head>
-        {/* Oculta lo animable antes del primer pintado para que no parpadee al cargar */}
-        <script dangerouslySetInnerHTML={{ __html: 'document.documentElement.classList.add("reveal-on")' }} />
-      </head>
-      <body className="min-h-screen font-sans">
-        {children}
-        <ScrollReveal />
-        <ScrollScenes />
-      </body>
+    <html lang="es" className={`${jakarta.variable} antialiased`}>
+      <body className="min-h-screen font-sans">{children}</body>
     </html>
   );
 }
