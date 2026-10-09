@@ -96,11 +96,11 @@ export default function Home() {
               title="Paso a paso, y siempre con tu opinión"
               text="No desaparecemos hasta la entrega: vas viendo prototipos, los pruebas y decides cómo sigue."
             />
-            <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <ol className="mt-12 grid gap-6 md:grid-cols-3">
               {process.map((step, i) => (
                 <li
                   key={step.title}
-                  className={`flex flex-col rounded-3xl border p-6 ${i === 2 ? "border-ink bg-ink text-paper lg:row-span-2" : "border-black/5 bg-white"}`}
+                  className={`flex flex-col rounded-3xl border p-6 ${i === 2 ? "border-ink bg-ink text-paper md:row-span-2" : "border-black/5 bg-white"}`}
                 >
                   <span
                     className={`grid h-10 w-10 place-items-center rounded-full font-extrabold ${i === 2 ? "bg-brand text-white" : "bg-brand/10 text-brand"}`}
