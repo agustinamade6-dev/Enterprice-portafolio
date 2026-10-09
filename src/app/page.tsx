@@ -86,7 +86,7 @@ export default async function Home() {
           </div>
           {/* Sacamos el carrusel del max-w-6xl para que use el ancho completo de la ventana sin cortarse */}
           {/* Sin data-reveal: animar la opacidad de un padre aplana el 3D y obliga a redibujar el cilindro entero */}
-          <div className="mt-12 w-full">
+          <div className="mt-6 w-full">
             <Carousel3D projects={deck as any} />
           </div>
         </section>
