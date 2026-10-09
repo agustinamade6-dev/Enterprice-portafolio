@@ -21,6 +21,8 @@ La idea viene de un video del sitio de GTA VI que pasó Agustin: que al hacer sc
 
 **`TeamShowcase.tsx` (Nosotros, 2026-10-09).** Inspirado en un video de referencia de QCLAY que pasó Agustin (segundos 13 a 18). Muestra un integrante a la vez: la foto se achica hasta ser una franja mientras la del siguiente crece a su lado y queda del otro costado, y el texto entra palabra por palabra (de borroso a nítido). La sección tiene `data-hold={integrantes - 1}`: ScrollStage la deja quieta durante 60 % de pantalla por cambio con mouse (85 % con el dedo) y le pasa el avance en `--hold`. Si la sección es más alta que la pantalla, primero se recorre y después se queda quieta. Los puntos de abajo llevan al integrante elegido. Sin escenario (reducir movimiento) los puntos animan el cambio.
 
+**Cómo trabajamos (2026-10-09).** Como en la presentación del equipo, la pantalla se queda quieta y las cinco tarjetas aparecen una por una a medida que se baja (subiendo, con un leve desenfoque que se aclara). La sección tiene `data-hold={2}` y `data-hold-fit`: solo se queda quieta si casi entra en la pantalla (sobra como mucho un 25 %); en celular, donde las tarjetas van una debajo de otra, se recorre normal. Cada tarjeta tiene `data-step` con `--i` (orden) y `--n` (total), y el CSS calcula su aparición con `--hold`.
+
 **Accesibilidad:** con "reducir movimiento" activado en el sistema, todo queda como una página normal.
 
 ### Qué se puede ajustar

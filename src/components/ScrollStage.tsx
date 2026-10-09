@@ -42,7 +42,13 @@ export function ScrollStage() {
       over = scenes.map((el) => Math.max(0, el.offsetHeight - vh));
       // data-hold: la sección se queda quieta mientras el scroll avanza su animación interna
       // (por ejemplo, el equipo pasando de un integrante al otro)
-      hold = scenes.map((el) => Number(el.dataset.hold ?? 0) * vh * (mouse ? 0.6 : 0.85));
+      hold = scenes.map((el, i) => {
+        // data-hold-fit: solo se queda quieta si la sección casi entra en la pantalla (en celular, donde
+        // las tarjetas van una debajo de otra, se recorre normal)
+        if (el.dataset.holdFit !== undefined && over[i] > vh * 0.25) return 0;
+        return Number(el.dataset.hold ?? 0) * vh * (mouse ? 0.6 : 0.85);
+      });
+      scenes.forEach((el, i) => el.toggleAttribute("data-holding", hold[i] > 0));
       inner = scenes.map((_, i) => over[i] + hold[i]);
       starts = [];
       let y = 0;
@@ -148,7 +154,10 @@ export function ScrollStage() {
       cancelAnimationFrame(frame);
       root.classList.remove("stage-on");
       document.body.style.height = "";
-      for (const el of scenes) el.removeAttribute("style");
+      for (const el of scenes) {
+        el.removeAttribute("style");
+        el.removeAttribute("data-holding");
+      }
     };
   }, [pathname]);
 

@@ -122,6 +122,16 @@ section[id],
   will-change: transform, opacity;
 }
 
+/* Escena que se queda quieta mientras sus tarjetas aparecen una por una (Cómo trabajamos).
+   ScrollStage pone --hold de 0 a 1; cada tarjeta tiene --i (su orden) y --n (cuántas son). */
+.stage-on [data-holding] [data-step] {
+  --p: clamp(0, calc(var(--hold, 1) * var(--n) * 1.25 - var(--i)), 1);
+  opacity: var(--p);
+  transform: translateY(calc((1 - var(--p)) * 60px)) scale(calc(0.92 + var(--p) * 0.08));
+  filter: blur(calc((1 - var(--p)) * 8px));
+  transform-origin: 50% 100%;
+}
+
 /* La última escena (Contacto + pie): el contacto ocupa el espacio libre y el pie queda pegado abajo */
 .stage-on [data-stage] > .scene-end {
   grid-template-rows: 1fr auto;
