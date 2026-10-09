@@ -94,9 +94,10 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
   return (
     <div className="relative w-full overflow-visible select-none py-24">
       {/* 1. Contenedor de la escena (Perspective) - Full Width */}
-      <div 
+      <div
         className="relative mx-auto flex h-[500px] w-full items-center justify-center touch-none"
-        style={{ perspective: "1200px" }}
+        // contain: el navegador no recalcula el resto de la página cuando el carrusel cambia
+        style={{ perspective: "1200px", contain: "layout" }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
@@ -131,6 +132,8 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
             // Oscurecer con una capa encima es mucho más liviano que filter: blur/brightness,
             // que obliga a redibujar cada tarjeta grande en cada cuadro de la animación
             const shade = isFront ? 0 : isBack ? 0.4 : 0.2;
+            // Solo se dibujan la del frente y dos a cada lado: el resto queda de canto o de espaldas
+            const hidden = dist > 100;
 
             return (
               <div
@@ -145,6 +148,7 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
                   opacity,
                   transition: `opacity 0.8s ${EASE}, transform 0.8s ${EASE}`,
                   pointerEvents: isFront ? "auto" : "none",
+                  visibility: hidden ? "hidden" : "visible",
                   zIndex: isFront ? 50 : (isBack ? 0 : 10),
                 }}
               >
