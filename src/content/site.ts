@@ -244,7 +244,7 @@ export const team = [
     fullName: "Nicolás Raúl Bazán",
     role: "Programador: frontend y backend",
     photo: undefined as string | undefined, // TODO: foto
-    href: undefined as string | undefined, // TODO: Instagram
+    href: "https://www.instagram.com/nico.bazan__/" as string | undefined,
     bio: "Trabajo tanto en el frontend como en el backend, de la pantalla que ve el cliente hasta el servidor. Hoy estamos desarrollando juntos un chatbot con inteligencia artificial.",
     skills: ["Frontend", "Backend", "Inteligencia artificial", "Chatbots"],
   },
