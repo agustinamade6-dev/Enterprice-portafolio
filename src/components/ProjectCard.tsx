@@ -3,15 +3,16 @@ import type { Project } from "@/content/site";
 import { ArrowIcon } from "./icons";
 import { PosMockup } from "./PosMockup";
 
-export function ProjectCard({ project, large = false }: { project: Project; large?: boolean }) {
-  const body = (
-    <article
-      className={`group flex h-full flex-col overflow-hidden rounded-3xl border border-black/5 bg-white transition hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 ${large ? "md:flex-row" : ""}`}
-    >
-      <div
-        className={`relative flex items-center justify-center bg-gradient-to-br ${project.accent} p-6 ${large ? "md:w-3/5" : "aspect-[16/10]"}`}
-      >
-        {project.slug === "akros-cafe" ? (
+export function ProjectCard({
+  project,
+  large = false,
+  compact = false,
+}: {
+  project: Project;
+  large?: boolean;
+  compact?: boolean; // versión más baja para el mazo de la portada
+}) {
+  const art = project.slug === "akros-cafe" ? (
           <PosMockup className="w-full max-w-md" />
         ) : project.image ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -26,9 +27,23 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
           <GestionScreen title={project.sector} modules={project.modules} />
         ) : (
           <ConceptScreen title={project.title} />
+        );
+
+  const body = (
+    <article
+      className={`group flex h-full flex-col overflow-hidden rounded-3xl border border-black/5 bg-white transition hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 ${large ? "md:flex-row" : ""}`}
+    >
+      <div
+        className={`relative flex items-center justify-center bg-gradient-to-br ${project.accent} ${compact ? "h-44 overflow-hidden md:h-auto md:w-1/2 md:overflow-visible md:p-5" : `p-6 ${large ? "md:w-3/5" : "aspect-[16/10]"}`}`}
+      >
+        {compact ? (
+          // En el celular la ilustración se reduce para que la carta no ocupe toda la pantalla
+          <div className="flex w-[160%] shrink-0 scale-[.625] justify-center md:w-full md:scale-100">{art}</div>
+        ) : (
+          art
         )}
       </div>
-      <div className={`flex flex-1 flex-col p-6 ${large ? "md:justify-center md:p-10" : ""}`}>
+      <div className={`flex flex-1 flex-col ${compact ? "p-5 md:justify-center md:p-7" : "p-6"} ${compact ? "" : large ? "md:justify-center md:p-10" : ""}`}>
         <div className="mb-3 flex items-center gap-2 text-xs font-semibold">
           <span className="rounded-full bg-black/5 px-2.5 py-1">{project.sector}</span>
           {project.kind === "real" ? (
@@ -39,10 +54,10 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
             <span className="rounded-full bg-amber-100 px-2.5 py-1 text-amber-800">Concepto</span>
           )}
         </div>
-        <h3 className={`font-extrabold tracking-tight ${large ? "text-3xl" : "text-xl"}`}>{project.title}</h3>
-        <p className="mt-2 text-ink/70">{project.summary}</p>
+        <h3 className={`font-extrabold tracking-tight ${compact ? "text-xl md:text-2xl" : large ? "text-3xl" : "text-xl"}`}>{project.title}</h3>
+        <p className={`mt-2 text-ink/70 ${compact ? "text-sm md:text-base" : ""}`}>{project.summary}</p>
         <p className="mt-3 text-sm font-semibold text-brand-dark">{project.result}</p>
-        <div className="mt-auto flex flex-wrap gap-1.5 pt-5">
+        <div className={`mt-auto flex flex-wrap gap-1.5 ${compact ? "pt-3" : "pt-5"}`}>
           {project.tags.map((t) => (
             <span key={t} className="rounded-md border border-black/10 px-2 py-0.5 text-xs text-ink/60">
               {t}
@@ -50,7 +65,7 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
           ))}
         </div>
         {project.href && (
-          <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold">
+          <span className={`${compact ? "mt-3" : "mt-5"} inline-flex items-center gap-1.5 text-sm font-bold`}>
             {project.kind === "concepto" ? "Probar la demo" : "Ver caso completo"}
             <ArrowIcon className="h-4 w-4 transition group-hover:translate-x-1" />
           </span>

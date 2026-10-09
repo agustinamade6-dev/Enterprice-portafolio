@@ -4,21 +4,20 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ArrowIcon, CheckIcon, WhatsAppIcon } from "@/components/icons";
 import { PosMockup } from "@/components/PosMockup";
-import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectDeck } from "@/components/ProjectDeck";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { faqs, process, projects, services, site, team, whatsappLink } from "@/content/site";
 
 export default function Home() {
-  const [featured, ...realOthers] = projects.filter((p) => p.kind === "real");
-  const inProgress = projects.filter((p) => p.kind === "desarrollo");
-  const concepts = projects.filter((p) => p.kind === "concepto");
+  // Orden del mazo: primero lo real, después lo que está en desarrollo y al final los conceptos
+  const deck = ["real", "desarrollo", "concepto"].flatMap((k) => projects.filter((p) => p.kind === k));
 
   return (
     <>
       <Header />
       <main>
         {/* Inicio */}
-        <section className="relative overflow-hidden px-4 pb-20 pt-32 sm:px-6 md:pt-40">
+        <section className="relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
           <div className="pointer-events-none absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-full bg-brand/15 blur-3xl" />
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
             <div>
@@ -47,7 +46,7 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative hidden lg:block">
               <PosMockup className="mx-auto max-w-lg rotate-1" />
               <div className="absolute -bottom-6 left-2 rounded-2xl bg-white px-4 py-3 shadow-xl shadow-black/10 sm:left-0">
                 <p className="text-xs text-ink/60">Proyecto real</p>
@@ -65,21 +64,8 @@ export default function Home() {
               title="Trabajos y prototipos"
               text="Sistemas reales en uso y conceptos pensados para cada tipo de negocio."
             />
-            <div className="mt-12 space-y-6">
-              <ProjectCard project={featured} large />
-              <div className="grid gap-6 sm:grid-cols-2">
-                {realOthers.map((p) => (
-                  <ProjectCard key={p.slug} project={p} />
-                ))}
-              </div>
-              {inProgress.map((p) => (
-                <ProjectCard key={p.slug} project={p} large />
-              ))}
-              <div className="grid gap-6 sm:grid-cols-2">
-                {concepts.map((p) => (
-                  <ProjectCard key={p.slug} project={p} />
-                ))}
-              </div>
+            <div className="mt-12">
+              <ProjectDeck projects={deck} />
             </div>
           </div>
         </section>
