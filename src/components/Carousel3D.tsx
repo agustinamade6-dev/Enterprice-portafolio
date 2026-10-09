@@ -12,6 +12,23 @@ const Card = memo(function Card({ project }: { project: Project }) {
   return <ProjectCard project={project} large compact />;
 });
 
+// Silueta de las tarjetas del fondo: el color del proyecto y unas barras, sin texto ni imágenes.
+// Se ve que hay más trabajos atrás y cuesta casi nada dibujarla.
+const Ghost = memo(function Ghost({ accent }: { accent: string }) {
+  return (
+    <div className="flex h-full w-full overflow-hidden rounded-[16px] bg-white">
+      <div className={`w-1/2 bg-gradient-to-br ${accent}`} />
+      <div className="flex w-1/2 flex-col gap-4 p-8">
+        <div className="h-5 w-1/3 rounded-full bg-black/10" />
+        <div className="h-8 w-3/4 rounded-lg bg-black/15" />
+        <div className="h-3 w-full rounded-full bg-black/10" />
+        <div className="h-3 w-5/6 rounded-full bg-black/10" />
+        <div className="h-3 w-2/3 rounded-full bg-black/10" />
+      </div>
+    </div>
+  );
+});
+
 export function Carousel3D({ projects }: { projects: Project[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const total = projects.length;
@@ -132,8 +149,8 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
             // Oscurecer con una capa encima es mucho más liviano que filter: blur/brightness,
             // que obliga a redibujar cada tarjeta grande en cada cuadro de la animación
             const shade = isFront ? 0 : isBack ? 0.4 : 0.2;
-            // Solo se dibujan la del frente y dos a cada lado: el resto queda de canto o de espaldas
-            const hidden = dist > 100;
+            // La del frente y dos a cada lado se dibujan completas; las del fondo, como silueta
+            const ghost = dist > 100;
 
             return (
               <div
@@ -143,21 +160,20 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
                   height: `${cardHeight}px`,
                   width: `${cardWidth}px`,
                   transform: `translate(-50%, -50%) rotateY(${cardAngle}deg) translateZ(${radius}px) scale(${scale})`,
-                  // Las de atrás no se dibujan: así no se ve el texto invertido y hay menos para pintar
-                  backfaceVisibility: "hidden",
-                  opacity,
+                  // Las completas no se dibujan de espaldas (no se ve el texto invertido); las siluetas sí
+                  backfaceVisibility: ghost ? "visible" : "hidden",
+                  opacity: ghost ? 0.35 : opacity,
                   transition: `opacity 0.8s ${EASE}, transform 0.8s ${EASE}`,
                   pointerEvents: isFront ? "auto" : "none",
-                  visibility: hidden ? "hidden" : "visible",
                   zIndex: isFront ? 50 : (isBack ? 0 : 10),
                 }}
               >
                 {/* Fondo sólido opaco obligatorio */}
                 <div
                   className="relative h-full w-full rounded-[16px] overflow-hidden bg-white"
-                  style={{ boxShadow: "0 18px 40px -16px rgba(0,0,0,0.3)" }}
+                  style={{ boxShadow: ghost ? "none" : "0 18px 40px -16px rgba(0,0,0,0.3)" }}
                 >
-                  <Card project={p} />
+                  {ghost ? <Ghost accent={p.accent} /> : <Card project={p} />}
                   <div
                     className="pointer-events-none absolute inset-0 bg-black"
                     style={{ opacity: shade, transition: `opacity 0.8s ${EASE}` }}
