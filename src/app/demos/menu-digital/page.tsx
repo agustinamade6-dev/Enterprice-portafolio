@@ -83,7 +83,7 @@ export default async function MenuDigitalDemo() {
         </div>
       </main>
       <Footer name={site.name} instagram={site.instagram} github={site.github} />
-      <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el portafolio de Enterprice y quiero consultar por un proyecto.")} />
+      <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el portafolio de ZainSoft y quiero consultar por un proyecto.")} />
     </>
   );
 }

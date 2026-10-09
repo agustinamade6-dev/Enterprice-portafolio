@@ -69,7 +69,7 @@ export default function AdminLayout({
         }`}
       >
         <div className="flex h-16 items-center justify-between px-6 border-b border-white/10">
-          <span className="text-lg font-extrabold tracking-tight text-brand">Enterprice Admin</span>
+          <span className="text-lg font-extrabold tracking-tight text-brand">ZainSoft Admin</span>
           <button className="lg:hidden" onClick={() => setSidebarOpen(false)}>
             <X className="h-5 w-5 text-paper/70 hover:text-paper" />
           </button>
