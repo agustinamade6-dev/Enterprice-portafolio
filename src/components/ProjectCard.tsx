@@ -40,12 +40,14 @@ export function ProjectCard({
       >
         {compact ? (
           // En el celular la ilustración se reduce para que la carta no ocupe toda la pantalla
-          <div className="flex w-[160%] shrink-0 scale-[.625] justify-center md:w-full md:scale-100">{art}</div>
+          <div className="flex w-[160%] shrink-0 scale-[.625] justify-center md:w-full md:scale-100">
+            <div className="deck-art flex w-full justify-center">{art}</div>
+          </div>
         ) : (
           art
         )}
       </div>
-      <div className={`flex flex-1 flex-col ${compact ? "p-5 md:justify-center md:p-7" : "p-6"} ${compact ? "" : large ? "md:justify-center md:p-10" : ""}`}>
+      <div className={`flex flex-1 flex-col ${compact ? "deck-text p-5 md:justify-center md:p-7" : "p-6"} ${compact ? "" : large ? "md:justify-center md:p-10" : ""}`}>
         <div className="mb-3 flex items-center gap-2 text-xs font-semibold">
           <span className="rounded-full bg-black/5 px-2.5 py-1">{project.sector}</span>
           {project.kind === "real" ? (

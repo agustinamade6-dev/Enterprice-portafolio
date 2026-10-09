@@ -9,9 +9,13 @@ const SWIPE_PX = 50;
 const MAX_SLOT = 3; // cartas visibles detrás de la del frente
 
 // Posición de cada carta según su profundidad en el mazo (0 = frente).
-function slotStyle(depth: number, leaving: boolean): React.CSSProperties {
+function slotStyle(depth: number, leaving: boolean, entering: boolean): React.CSSProperties {
   if (leaving) {
     return { transform: "translateX(55%) rotate(7deg)", opacity: 0, zIndex: 100 };
+  }
+  if (entering) {
+    // Al ir hacia atrás, la última carta sale por la izquierda antes de volver al frente
+    return { transform: "translateX(-55%) rotate(-7deg)", opacity: 0, zIndex: 100 };
   }
   const slot = Math.min(depth, MAX_SLOT);
   const tilt = slot === 0 ? 0 : slot % 2 ? -1.4 : 1.2;
@@ -26,6 +30,7 @@ function slotStyle(depth: number, leaving: boolean): React.CSSProperties {
 export function ProjectDeck({ projects }: { projects: Project[] }) {
   const [order, setOrder] = useState(() => projects.map((_, i) => i));
   const [leaving, setLeaving] = useState<number | null>(null);
+  const [entering, setEntering] = useState<number | null>(null);
   const drag = useRef<number | null>(null);
   const swiped = useRef(false);
   const total = projects.length;
@@ -33,8 +38,10 @@ export function ProjectDeck({ projects }: { projects: Project[] }) {
 
   const reduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  const busy = leaving !== null || entering !== null;
+
   function next() {
-    if (leaving !== null || total < 2) return;
+    if (busy || total < 2) return;
     if (reduceMotion()) {
       setOrder((o) => [...o.slice(1), o[0]]);
       return;
@@ -47,8 +54,16 @@ export function ProjectDeck({ projects }: { projects: Project[] }) {
   }
 
   function prev() {
-    if (leaving !== null || total < 2) return;
-    setOrder((o) => [o[o.length - 1], ...o.slice(0, -1)]);
+    if (busy || total < 2) return;
+    if (reduceMotion()) {
+      setOrder((o) => [o[o.length - 1], ...o.slice(0, -1)]);
+      return;
+    }
+    setEntering(order[order.length - 1]);
+    window.setTimeout(() => {
+      setOrder((o) => [o[o.length - 1], ...o.slice(0, -1)]);
+      setEntering(null);
+    }, FLY_MS / 2);
   }
 
   function onKeyDown(e: React.KeyboardEvent) {
@@ -102,14 +117,14 @@ export function ProjectDeck({ projects }: { projects: Project[] }) {
         <div className="grid" aria-live="polite">
           {projects.map((p, i) => {
             const depth = order.indexOf(i);
-            const isFront = depth === 0 && leaving !== i;
+            const isFront = depth === 0 && leaving !== i && entering !== i;
             return (
               <div
                 key={p.slug}
                 inert={!isFront}
                 aria-hidden={!isFront}
-                className="col-start-1 row-start-1 origin-bottom transition-[transform,opacity,filter] duration-[380ms] ease-[cubic-bezier(.22,.8,.3,1)] motion-reduce:transition-none"
-                style={slotStyle(depth, leaving === i)}
+                className={`col-start-1 row-start-1 origin-bottom transition-[transform,opacity,filter] duration-[380ms] ease-[cubic-bezier(.22,.8,.3,1)] motion-reduce:transition-none ${isFront ? "deck-front" : ""}`}
+                style={slotStyle(depth, leaving === i, entering === i)}
               >
                 <ProjectCard project={p} large compact />
               </div>
@@ -127,7 +142,7 @@ export function ProjectDeck({ projects }: { projects: Project[] }) {
         >
           ←
         </button>
-        <p className="text-center text-sm text-ink/70">
+        <p key={front} className="deck-caption text-center text-sm text-ink/70">
           <span className="font-bold text-ink">
             {front + 1} de {total}
           </span>

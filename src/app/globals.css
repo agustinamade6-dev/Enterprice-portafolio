@@ -21,3 +21,63 @@ body {
 section[id] {
   scroll-margin-top: 5rem;
 }
+
+/* Mazo de proyectos: cuando una carta pasa al frente, su contenido entra de a poco */
+@keyframes deck-art-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.92) rotate(-2deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes deck-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes deck-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.deck-front .deck-art {
+  animation: deck-art-in 0.6s cubic-bezier(0.22, 0.8, 0.3, 1) 0.12s both;
+}
+
+.deck-front .deck-text > * {
+  animation: deck-text-in 0.45s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+.deck-front .deck-text > :nth-child(1) { animation-delay: 0.15s; }
+.deck-front .deck-text > :nth-child(2) { animation-delay: 0.21s; }
+.deck-front .deck-text > :nth-child(3) { animation-delay: 0.27s; }
+.deck-front .deck-text > :nth-child(4) { animation-delay: 0.33s; }
+.deck-front .deck-text > :nth-child(5) { animation-delay: 0.39s; }
+.deck-front .deck-text > :nth-child(n + 6) { animation-delay: 0.45s; }
+
+.deck-caption {
+  animation: deck-text-in 0.35s ease-out both;
+}
+
+/* Con movimiento reducido solo hay fundido, sin desplazamientos */
+@media (prefers-reduced-motion: reduce) {
+  .deck-front .deck-art,
+  .deck-front .deck-text > *,
+  .deck-caption {
+    animation-name: deck-fade-in;
+  }
+}
