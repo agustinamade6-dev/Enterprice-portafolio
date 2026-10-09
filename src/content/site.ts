@@ -221,19 +221,74 @@ export const faqs = [
   },
 ];
 
-// Integrantes del equipo. Cada uno tiene su propio apartado en "Nosotros".
-export const team = [
+// Integrantes del equipo. Cada uno tiene su propio apartado en "Nosotros" y su página
+// con su historia en /equipo/<slug>/.
+export type Chapter = {
+  label: string; // etapa: "Primer trabajo", "Hoy", etc.
+  title: string;
+  text: string;
+  href?: string; // página del proyecto, si tiene
+};
+
+export type Member = {
+  slug: string;
+  name: string; // como nos dicen
+  fullName: string;
+  role: string;
+  photo?: string;
+  href?: string;
+  bio: string;
+  skills: string[];
+  story: {
+    intro: string;
+    chapters: Chapter[];
+    pending?: string; // qué falta que cuente esta persona, en tercera persona
+  };
+};
+
+// TODO: que cada integrante revise y ajuste su presentación y su historia.
+export const team: Member[] = [
   {
+    slug: "agustin",
     name: site.owner,
     fullName: "Leandro Agustin Amade",
     role: "Programador: frontend, backend y diseño",
-    photo: site.photo as string | undefined,
-    href: site.instagram as string | undefined,
-    // TODO: que cada integrante revise y ajuste su presentación.
+    photo: site.photo,
+    href: site.instagram,
     bio: "Me gusta que cada sistema se vea bien y sea fácil de usar desde el primer día. Trabajé en el punto de venta de AKROS Café e hice el sistema de gestión de Pierina Glow de punta a punta.",
     skills: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Electron", "Python", "Diseño de interfaces"],
+    story: {
+      intro:
+        "Empecé solo, haciendo programas de gestión en Python. No eran proyectos enormes, pero fueron mis primeros trabajos como programador y los primeros que usó un negocio de verdad.",
+      chapters: [
+        {
+          label: "Mi primer trabajo",
+          title: "Pierina Glow, una tienda de ropa femenina",
+          text: "Mi primer sistema de gestión, hecho solo y de punta a punta: inventario por talle y color, ventas, clientes, proveedores, reportes y copias de seguridad.",
+          href: "/proyectos/pierina-glow/",
+        },
+        {
+          label: "Segundo trabajo",
+          title: "Una casa de pastas",
+          text: "Otro sistema en Python, esta vez para una fábrica de pastas: ventas, stock, insumos, proveedores y gastos en un solo programa.",
+        },
+        {
+          label: "Primer trabajo en equipo",
+          title: "AKROS Café, junto a José",
+          text: "El primer proyecto que hicimos de a dos. Me encargué del frontend y de parte del backend de un punto de venta para Windows hecho con Next.js y Electron.",
+          href: "/proyectos/akros-cafe/",
+        },
+        {
+          label: "Hoy",
+          title: "Un chatbot con IA y Enterprice",
+          text: "Estoy desarrollando con Nicolás un chatbot con inteligencia artificial, y entre los tres armamos Enterprice para seguir creciendo como equipo.",
+        },
+      ],
+      pending: "cómo aprendió a programar y por qué empezó",
+    },
   },
   {
+    slug: "jose",
     name: "José",
     fullName: "José Augusto Matias",
     role: "Programador: backend, pruebas y auditoría",
@@ -241,14 +296,43 @@ export const team = [
     href: "https://www.instagram.com/josematias._/",
     bio: "Me ocupo de que todo funcione por detrás: la lógica, los datos y que no falle cuando el negocio más lo necesita. En AKROS Café estuve a cargo del backend, las pruebas y la auditoría.",
     skills: ["Backend", "Bases de datos", "Pruebas", "Auditoría de código"],
+    story: {
+      intro: "Me ocupo de la parte que no se ve: que los datos estén bien guardados y que el sistema no falle.",
+      chapters: [
+        {
+          label: "Primer trabajo en equipo",
+          title: "AKROS Café, junto a Agustin",
+          text: "Estuve a cargo del backend del punto de venta, hice las pruebas y lo audité.",
+          href: "/proyectos/akros-cafe/",
+        },
+        {
+          label: "Hoy",
+          title: "Enterprice",
+          text: "Junto a Agustin y Nicolás armamos Enterprice para tomar más proyectos como equipo.",
+        },
+      ],
+      pending: "cómo empezó, cómo aprendió a programar y cuáles fueron sus primeros proyectos",
+    },
   },
   {
+    slug: "nicolas",
     name: "Nicolás",
     fullName: "Nicolás Raúl Bazán",
     role: "Programador: frontend y backend",
-    photo: undefined as string | undefined, // TODO: foto
-    href: "https://www.instagram.com/nico.bazan__/" as string | undefined,
+    photo: undefined, // TODO: foto
+    href: "https://www.instagram.com/nico.bazan__/",
     bio: "Trabajo tanto en el frontend como en el backend, de la pantalla que ve el cliente hasta el servidor. Hoy estamos desarrollando juntos un chatbot con inteligencia artificial.",
     skills: ["Frontend", "Backend", "Inteligencia artificial", "Chatbots"],
+    story: {
+      intro: "Me gusta trabajar en las dos puntas: lo que ve el cliente y lo que pasa en el servidor.",
+      chapters: [
+        {
+          label: "Hoy",
+          title: "Un chatbot con IA, junto a Agustin",
+          text: "Estamos desarrollando un asistente con inteligencia artificial que atiende clientes por Telegram, entiende audios e imágenes y pasa la charla a una persona cuando hace falta.",
+        },
+      ],
+      pending: "cómo empezó, cómo aprendió a programar y cuáles fueron sus primeros proyectos",
+    },
   },
 ];

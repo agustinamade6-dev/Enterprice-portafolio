@@ -192,16 +192,19 @@ export default function Home() {
                       </span>
                     ))}
                   </div>
-                  {m.href && (
-                    <a
-                      href={m.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-auto pt-6 text-sm font-bold hover:text-brand"
+                  <div className="mt-auto flex flex-wrap items-center justify-center gap-x-5 gap-y-2 pt-6 text-sm font-bold">
+                    <Link
+                      href={`/equipo/${m.slug}/`}
+                      className="rounded-full bg-ink px-4 py-2 text-paper transition hover:bg-brand"
                     >
-                      Ver Instagram →
-                    </a>
-                  )}
+                      Leer su historia
+                    </Link>
+                    {m.href && (
+                      <a href={m.href} target="_blank" rel="noopener noreferrer" className="hover:text-brand">
+                        Ver Instagram →
+                      </a>
+                    )}
+                  </div>
                 </article>
               ))}
             </div>
@@ -211,7 +214,7 @@ export default function Home() {
         {/* Preguntas frecuentes */}
         <section id="preguntas" className="px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-3xl">
-            <SectionTitle eyebrow="Preguntas frecuentes" title="Lo que suelen preguntarme" />
+            <SectionTitle eyebrow="Preguntas frecuentes" title="Lo que suelen preguntarnos" />
             <div className="mt-10 space-y-3">
               {faqs.map((f) => (
                 <details key={f.q} className="group rounded-2xl border border-black/5 bg-white p-5 open:shadow-sm">
