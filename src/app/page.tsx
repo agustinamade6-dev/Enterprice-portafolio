@@ -117,7 +117,7 @@ export default async function Home() {
 
         {/* Proceso */}
         <div id="proceso" className="scroll-anchor" />
-        <section data-hold={2} data-hold-fit className="bg-paper px-4 py-20 sm:px-6">
+        <section data-hold={4} data-hold-fit className="bg-paper px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Cómo trabajamos"
