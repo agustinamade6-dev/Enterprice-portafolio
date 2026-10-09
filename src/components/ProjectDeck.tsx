@@ -132,7 +132,7 @@ export function ProjectDeck({ projects }: { projects: Project[] }) {
             {front + 1} de {total}
           </span>
           <span className="block">{projects[front].title}</span>
-          <span className="mt-0.5 block text-xs text-ink/50 md:hidden">Deslizá para ver más</span>
+          <span className="mt-0.5 block text-xs text-ink/50 md:hidden">Desliza para ver más</span>
         </p>
         <button
           type="button"
