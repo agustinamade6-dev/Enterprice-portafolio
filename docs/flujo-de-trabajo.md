@@ -22,6 +22,8 @@ npm run build          # build con servidor (sitio + panel de admin + API)
 npm run lint           # revisa el código
 ```
 
+**Entrar al panel de admin (cada uno en su compu):** el usuario no está en el código, porque el repositorio es público. Se corre `npm run crear-admin`, que pide correo y contraseña (mínimo 12 caracteres) e imprime cuatro líneas (`ADMIN_EMAIL`, `ADMIN_PASSWORD_HASH_B64`, `ADMIN_NAME`, `SESSION_SECRET`). Esas líneas van en un archivo `.env.local` en la raíz del proyecto, que git ignora; después se reinicia `npm run dev`. Sin ese archivo nadie puede entrar. El usuario de ejemplo `admin@enterprice.com` ya no existe.
+
 `C:\dev\portafolio` es una copia sin git que se va actualizando con cada cambio; mientras se prueban los efectos tiene la versión de la rama `efectos`. Para subir cambios a GitHub hay que hacerlo desde un clon con git.
 
 ## Antes de subir un cambio

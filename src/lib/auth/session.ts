@@ -1,10 +1,14 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
-const secretKey = process.env.SESSION_SECRET || "fallback-secret-for-dev-only-do-not-use-in-prod";
+// Sin clave propia no hay sesiones: una clave por defecto escrita en el código (público) permitiría
+// a cualquiera fabricarse una sesión de admin. Debe tener al menos 32 caracteres.
+const secretKey = process.env.SESSION_SECRET ?? "";
+const hasSecret = secretKey.length >= 32;
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function createSession(userId: string, role: string) {
+  if (!hasSecret) throw new Error("Falta SESSION_SECRET (mínimo 32 caracteres) en .env.local");
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
   const session = await encrypt({ userId, role, expiresAt });
 
@@ -45,6 +49,7 @@ export async function encrypt(payload: SessionPayload) {
 }
 
 export async function decrypt(session: string | undefined = "") {
+  if (!hasSecret) return null;
   try {
     const { payload } = await jwtVerify(session, encodedKey, {
       algorithms: ["HS256"],

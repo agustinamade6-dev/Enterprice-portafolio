@@ -65,7 +65,7 @@ function LoginContent() {
                 autoComplete="email"
                 required
                 className="block w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder-white/40 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand sm:text-sm"
-                placeholder="admin@enterprice.com"
+                placeholder="tu@correo.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />

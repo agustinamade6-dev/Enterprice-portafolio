@@ -43,7 +43,6 @@ Cada integrante tiene su página de historia en `/equipo/<slug>/`: cómo empezó
 
 ## Pendiente de respuesta
 
-- Cambiar el usuario y la clave de ejemplo del panel de admin (están en el código, que es público) y definir `SESSION_SECRET`.
 
 - Si Yuhmak autoriza aparecer con nombre y capturas.
 - Confirmar que todos los perfiles enlacen a LinkedIn (lo cambió José).

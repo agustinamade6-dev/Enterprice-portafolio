@@ -15,7 +15,7 @@ src/
   content/site.ts        ← textos y datos del sitio (valores de base)
   content/data/*.json    ← lo que se guarda desde el panel de admin; si existe, manda sobre site.ts
   lib/content/           ← repositorio de contenido: lee los JSON del panel o, si no hay, site.ts
-  lib/auth/              ← usuarios y sesión del panel de admin
+  lib/auth/              ← usuario (desde .env.local) y sesión del panel de admin
   middleware.ts          ← protege /admin y la API con sesión
   app/
     page.tsx             ← página de inicio (todas las secciones)
