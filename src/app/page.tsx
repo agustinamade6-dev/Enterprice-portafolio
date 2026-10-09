@@ -18,7 +18,7 @@ export default function Home() {
       <Header />
       <main>
         {/* Inicio */}
-        <section className="relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
+        <section data-scene className="overflow-hidden bg-paper px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
           <div className="pointer-events-none absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-full bg-brand/15 blur-3xl" />
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
             <div data-reveal>
@@ -58,7 +58,8 @@ export default function Home() {
         </section>
 
         {/* Proyectos */}
-        <section id="proyectos" className="px-4 py-20 sm:px-6">
+        <div id="proyectos" className="scroll-anchor" />
+        <section data-scene className="bg-paper px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Proyectos"
@@ -72,7 +73,8 @@ export default function Home() {
         </section>
 
         {/* Servicios */}
-        <section id="servicios" className="bg-white px-4 py-20 sm:px-6">
+        <div id="servicios" className="scroll-anchor" />
+        <section data-scene className="bg-white px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Servicios"
@@ -89,7 +91,8 @@ export default function Home() {
         </section>
 
         {/* Proceso */}
-        <section id="proceso" className="px-4 py-20 sm:px-6">
+        <div id="proceso" className="scroll-anchor" />
+        <section data-scene className="bg-paper px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Cómo trabajamos"
@@ -142,7 +145,8 @@ export default function Home() {
         </section>
 
         {/* Nosotros */}
-        <section id="nosotros" className="bg-white px-4 py-20 sm:px-6">
+        <div id="nosotros" className="scroll-anchor" />
+        <section data-scene className="bg-white px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Nosotros"
@@ -203,7 +207,8 @@ export default function Home() {
         </section>
 
         {/* Preguntas frecuentes */}
-        <section id="preguntas" className="px-4 py-20 sm:px-6">
+        <div id="preguntas" className="scroll-anchor" />
+        <section data-scene className="bg-paper px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-3xl">
             <SectionTitle eyebrow="Preguntas frecuentes" title="Lo que suelen preguntarnos" />
             <div className="mt-10 space-y-3">
@@ -225,7 +230,8 @@ export default function Home() {
         </section>
 
         {/* Contacto */}
-        <section id="contacto" className="bg-ink px-4 py-20 text-paper sm:px-6">
+        <div id="contacto" className="scroll-anchor" />
+        <section data-scene className="bg-ink px-4 py-20 text-paper sm:px-6">
           <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
             <div data-reveal>
               <p className="text-sm font-bold uppercase tracking-widest text-brand">Contacto</p>
