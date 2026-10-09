@@ -201,7 +201,7 @@ export default function Home() {
                     </Link>
                     {m.href && (
                       <a href={m.href} target="_blank" rel="noopener noreferrer" className="hover:text-brand">
-                        Ver Instagram →
+                        Ver {m.network ?? "Instagram"} →
                       </a>
                     )}
                   </div>

@@ -106,7 +106,7 @@ export default async function MemberPage({ params }: PageProps<"/equipo/[slug]">
               rel="noopener noreferrer"
               className="mt-6 inline-block text-sm font-bold hover:text-brand"
             >
-              Seguir a {m.name} en Instagram →
+              Seguir a {m.name} en {m.network ?? "Instagram"} →
             </a>
           )}
 

@@ -237,6 +237,7 @@ export type Member = {
   role: string;
   photo?: string;
   href?: string;
+  network?: "Instagram" | "LinkedIn"; // red del enlace; por defecto Instagram
   bio: string;
   skills: string[];
   story: {
@@ -302,7 +303,8 @@ export const team: Member[] = [
     fullName: "José Augusto Matias",
     role: "Programador: backend, pruebas y auditoría",
     photo: "/equipo/jose-matias.jpg",
-    href: "https://www.instagram.com/josematias._/",
+    href: "https://www.linkedin.com/in/jose-matias-64194520b/",
+    network: "LinkedIn",
     bio: "Me ocupo de que todo funcione por detrás: la lógica, los datos y que no falle cuando el negocio más lo necesita. En AKROS Café estuve a cargo del backend, las pruebas y la auditoría.",
     skills: ["Backend", "Bases de datos", "Pruebas", "Auditoría de código"],
     story: {

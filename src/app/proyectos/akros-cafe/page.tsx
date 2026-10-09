@@ -32,7 +32,7 @@ const team = [
     fullName: "José Augusto Matias",
     role: "Backend, pruebas y auditoría",
     photo: "/equipo/jose-matias.jpg",
-    href: "https://www.instagram.com/josematias._/",
+    href: "https://www.linkedin.com/in/jose-matias-64194520b/",
   },
 ];
 
@@ -114,7 +114,7 @@ export default function AkrosCase() {
             <p className="mt-3 max-w-3xl text-ink/70">
               Agustin fue programador del proyecto, a cargo del frontend y de parte del backend: programó todas las pantallas que
               usa el personal del local, la navegación y la experiencia al tomar pedidos. <a
-                href="https://www.instagram.com/josematias._/"
+                href="https://www.linkedin.com/in/jose-matias-64194520b/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-ink underline decoration-brand underline-offset-2 hover:text-brand"
