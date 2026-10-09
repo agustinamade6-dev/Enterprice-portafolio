@@ -4,7 +4,11 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ArrowIcon, CheckIcon } from "@/components/icons";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { whatsappLink } from "@/content/site";
+import { contentRepo } from "@/lib/content";
+
+function makeWhatsappLink(phone: string, text: string) {
+  return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+}
 
 export const metadata: Metadata = {
   title: "Pierina Glow, sistema de gestión",
@@ -35,10 +39,12 @@ const screens = [
   { src: "/pierina/historial.png", title: "Historial", text: "Todas las ventas con fecha, cliente, total y forma de pago." },
 ];
 
-export default function PierinaCase() {
+export default async function PierinaCase() {
+  const site = await contentRepo.getSiteData();
+
   return (
     <>
-      <Header />
+      <Header siteName={site.name} />
       <main className="px-4 pb-20 pt-28 sm:px-6 md:pt-36">
         <article className="mx-auto max-w-5xl">
           <Link href="/#proyectos" className="text-sm font-semibold text-ink/60 hover:text-ink">
@@ -134,7 +140,7 @@ export default function PierinaCase() {
               <p className="mt-2 text-paper/70">Cuéntanos cómo trabajas y te proponemos una solución a medida.</p>
             </div>
             <a
-              href={whatsappLink("Hola, vi el sistema de Pierina Glow y quiero algo parecido para mi negocio.")}
+              href={makeWhatsappLink(site.whatsapp, "Hola, vi el sistema de Pierina Glow y quiero algo parecido para mi negocio.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3.5 font-bold text-white transition hover:bg-brand-dark"
@@ -144,8 +150,8 @@ export default function PierinaCase() {
           </section>
         </article>
       </main>
-      <Footer />
-      <WhatsAppButton />
+      <Footer name={site.name} instagram={site.instagram} github={site.github} />
+      <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el sistema de Pierina Glow y quiero algo parecido para mi negocio.")} />
     </>
   );
 }

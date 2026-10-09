@@ -5,17 +5,23 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ArrowIcon } from "@/components/icons";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { team, whatsappLink, type Member } from "@/content/site";
+import { type Member } from "@/lib/content/schemas";
+import { contentRepo } from "@/lib/content";
+
+function makeWhatsappLink(phone: string, text: string) {
+  return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+}
 
 export const dynamicParams = false;
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const team = await contentRepo.getTeam();
   return team.map((m) => ({ slug: m.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/equipo/[slug]">): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const m = team.find((t) => t.slug === slug);
+  const m = await contentRepo.getMember(slug);
   if (!m) return {};
   return {
     title: `La historia de ${m.name}`,
@@ -35,15 +41,19 @@ function Avatar({ m, size }: { m: Member; size: string }) {
   );
 }
 
-export default async function MemberPage({ params }: PageProps<"/equipo/[slug]">) {
+export default async function MemberPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const m = team.find((t) => t.slug === slug);
+  
+  const site = await contentRepo.getSiteData();
+  const m = await contentRepo.getMember(slug);
   if (!m) notFound();
+  
+  const team = await contentRepo.getTeam();
   const others = team.filter((t) => t.slug !== m.slug);
 
   return (
     <>
-      <Header />
+      <Header siteName={site.name} />
       <main className="px-4 pb-20 pt-28 sm:px-6 md:pt-36">
         <article className="mx-auto max-w-3xl">
           <Link href="/#nosotros" className="text-sm font-semibold text-ink/60 hover:text-ink">
@@ -135,7 +145,7 @@ export default async function MemberPage({ params }: PageProps<"/equipo/[slug]">
               <p className="mt-2 text-paper/70">Cuéntanos qué necesitas y lo vemos entre los tres.</p>
             </div>
             <a
-              href={whatsappLink("Hola, leí sobre el equipo de Enterprice y quiero consultar por un proyecto.")}
+              href={makeWhatsappLink(site.whatsapp, "Hola, leí sobre el equipo de Enterprice y quiero consultar por un proyecto.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3.5 font-bold text-white transition hover:bg-brand-dark"
@@ -145,8 +155,8 @@ export default async function MemberPage({ params }: PageProps<"/equipo/[slug]">
           </section>
         </article>
       </main>
-      <Footer />
-      <WhatsAppButton />
+      <Footer name={site.name} instagram={site.instagram} github={site.github} />
+      <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el portafolio de Enterprice y quiero consultar por un proyecto.")} />
     </>
   );
 }

@@ -2,11 +2,14 @@ import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ArrowIcon } from "@/components/icons";
+import { contentRepo } from "@/lib/content";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const site = await contentRepo.getSiteData();
+
   return (
     <>
-      <Header />
+      <Header siteName={site.name} />
       <main className="grid min-h-[calc(100vh-5rem)] place-items-center px-4 pb-20 pt-32 text-center sm:px-6">
         <div>
           <p className="text-sm font-bold uppercase tracking-widest text-brand">Error 404</p>
@@ -23,7 +26,7 @@ export default function NotFound() {
           </Link>
         </div>
       </main>
-      <Footer />
+      <Footer name={site.name} instagram={site.instagram} github={site.github} />
     </>
   );
 }
