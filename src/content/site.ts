@@ -457,7 +457,7 @@ export const team: Member[] = [
     name: "Nicolás",
     fullName: "Nicolás Raúl Bazán",
     role: "Programador: frontend y backend",
-    photo: undefined, // TODO: foto
+    photo: "/equipo/nicolas-bazan.jpg",
     href: "https://www.linkedin.com/in/nicolas-baz%C3%A1n-9315653b3/",
     network: "LinkedIn",
     bio: "Trabajo tanto en el frontend como en el backend, de la pantalla que ve el cliente hasta el servidor. Hoy estamos desarrollando juntos un chatbot con inteligencia artificial.",
