@@ -84,7 +84,8 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
           width = W;
         }
         const visible = width > 0.5;
-        el.style.visibility = visible ? "visible" : "hidden";
+        // "inherit" y no "visible": si la sección entera está oculta (otra escena en pantalla), esto también
+        el.style.visibility = visible ? "inherit" : "hidden";
         if (!visible) return;
         // La foto mantiene su tamaño y se recorta: se ve una franja de la imagen, no la imagen aplastada
         const x = left + width / 2 - W / 2;
@@ -101,8 +102,10 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       texts.forEach((el, k) => {
         // El texto que se va termina de desaparecer antes de que entre el siguiente: no se pisan
         const v = k === i ? clamp(1 - 2 * e) : k === i + 1 ? clamp(2 * e - 1) : total === 1 ? 1 : 0;
-        el.style.visibility = v > 0.001 ? "visible" : "hidden";
-        el.style.pointerEvents = v > 0.5 ? "auto" : "none";
+        // Nunca "visible"/"auto": le ganarían a la sección oculta y sus enlaces quedarían clickeables
+        // encima de otras secciones (pasó con "Siguiente" del carrusel, que abría LinkedIn)
+        el.style.visibility = v > 0.001 ? "inherit" : "hidden";
+        el.style.pointerEvents = v > 0.5 ? "" : "none";
         // Lado del texto: el opuesto a la foto de ese integrante
         const photoLeft = k % 2 === 0;
         if (wide) {
