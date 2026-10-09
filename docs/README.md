@@ -8,5 +8,6 @@ Todo lo que hace falta saber para seguir trabajando en el portafolio, sin tener 
 | [estructura.md](estructura.md) | Cómo está hecho el sitio, dónde está cada cosa y cómo sumar proyectos o integrantes |
 | [efectos.md](efectos.md) | Las animaciones: el mazo de proyectos y el efecto de scroll de la rama `efectos` |
 | [flujo-de-trabajo.md](flujo-de-trabajo.md) | Ramas, cómo correrlo, cómo subir cambios y cómo publicarlo |
+| [lecciones-aprendidas.md](lecciones-aprendidas.md) | Errores que tuvimos en el portafolio y en el sistema de la cafetería, y la regla que dejan |
 
-Regla para mantenerla viva: cada vez que se decide algo nuevo o se suma una función, se actualiza el documento que corresponde en el mismo commit.
+Regla para mantenerla viva: cada vez que se decide algo nuevo o se suma una función, se actualiza el documento que corresponde en el mismo commit. Si hubo que corregir algo a mano, se suma una fila a las lecciones aprendidas.
