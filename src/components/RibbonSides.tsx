@@ -16,7 +16,7 @@ function ribbonPath(width: number, height: number, phase: number) {
     const loop = 0.5 + 0.5 * Math.sin(t * 0.17 + phase);
     const r = k * (0.55 + 0.95 * loop * loop);
     const x = cx + Math.min(r, width * 0.42) * Math.cos(t + phase);
-    const y = -k * 2 + k * t - r * Math.sin(t + phase);
+    const y = k * t - r * Math.sin(t + phase);
     d += `${i ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)}`;
   }
   return d;
@@ -47,7 +47,7 @@ export function RibbonSides() {
       const width = vw < 768 ? 18 : Math.round(Math.max(44, Math.min(130, free - 12)));
       const stroke = vw < 768 ? 3 : Math.max(5, Math.round(width / 11));
       const height = vh * 4;
-      travel = height - vh * 1.4;
+      travel = height - vh;
       sides.forEach((side, n) => {
         const svg = side.querySelector("svg")!;
         side.style.width = `${width}px`;
@@ -83,13 +83,13 @@ export function RibbonSides() {
 
     const apply = (p: number) => {
       sides.forEach((side, n) => {
-        // El de la derecha va un poco desfasado para que no se vean como espejo
-        const y = -(p * travel) - (n ? travel * 0.04 : 0);
+        const y = -(p * travel);
         side.firstElementChild!.setAttribute("style", `transform: translate3d(0, ${y.toFixed(1)}px, 0)`);
-        // Se va formando: llega hasta un poco más abajo de la mitad de la pantalla y crece al bajar
+        // El lienzo empieza y termina con la página: arriba de todo no hay nada dibujado, y al llegar
+        // al final está completo. La punta va de arriba (inicio) a abajo de la pantalla (final).
         const ys = reach[n];
         if (!ys) return;
-        const tip = vh * 0.72 - y;
+        const tip = p * vh - y;
         let lo = 0;
         let hi = SAMPLES;
         while (lo < hi) {
@@ -139,7 +139,7 @@ export function RibbonSides() {
             <svg fill="none" strokeLinecap="round" strokeLinejoin="round">
               <defs>
                 <linearGradient id={`liston-${n}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1">
-                  {/* Colores de la marca: naranja Enterprice, ámbar y coral */}
+                  {/* Colores de la marca: naranja de la marca, ámbar y coral */}
                   <stop offset="0" stopColor="#f05a28" />
                   <stop offset="0.3" stopColor="#fbbf24" />
                   <stop offset="0.6" stopColor="#fb7185" />
