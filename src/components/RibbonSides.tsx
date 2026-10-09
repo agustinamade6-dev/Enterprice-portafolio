@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-// Listón verde a cada costado que acompaña todo el recorrido: baja con el scroll, ondula y de a ratos
+// Listón a cada costado que acompaña todo el recorrido: baja con el scroll, ondula y de a ratos
 // hace un rulo. Es un solo trazo SVG por lado que se desplaza con transform (no se redibuja al bajar).
 // La curva es una trocoide: cuando el radio supera al paso, la línea se cruza y forma la vuelta.
 function ribbonPath(width: number, height: number, phase: number) {
@@ -31,12 +31,17 @@ export function RibbonSides() {
     const sides = Array.from(box.querySelectorAll<HTMLElement>("[data-side]"));
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let travel = 0;
+    let vh = window.innerHeight;
+    // Por lado: largo total del trazo y, cada tantos píxeles de largo, hasta qué altura llega
+    const lengths: number[] = [];
+    const reach: Float32Array[] = [];
+    const SAMPLES = 600;
     let current = 0;
     let frame = 0;
 
     const build = () => {
       const vw = window.innerWidth;
-      const vh = window.innerHeight;
+      vh = window.innerHeight;
       // En compu ocupa el margen libre al costado del contenido; en celular es una cinta finita en el borde
       const free = (vw - 1152) / 2;
       const width = vw < 768 ? 18 : Math.round(Math.max(44, Math.min(130, free - 12)));
@@ -56,6 +61,18 @@ export function RibbonSides() {
         });
         const grad = svg.querySelector("linearGradient")!;
         grad.setAttribute("y2", String(height));
+        // Se mide una sola vez: después, dibujar más o menos es solo cambiar un número
+        const path = svg.querySelector("path")!;
+        const L = path.getTotalLength();
+        const ys = new Float32Array(SAMPLES + 1);
+        let top = -Infinity;
+        for (let i = 0; i <= SAMPLES; i++) {
+          top = Math.max(top, path.getPointAtLength((L * i) / SAMPLES).y);
+          ys[i] = top;
+        }
+        lengths[n] = L;
+        reach[n] = ys;
+        svg.querySelectorAll("path").forEach((p) => p.setAttribute("stroke-dasharray", `${L} ${L}`));
       });
     };
 
@@ -69,6 +86,19 @@ export function RibbonSides() {
         // El de la derecha va un poco desfasado para que no se vean como espejo
         const y = -(p * travel) - (n ? travel * 0.04 : 0);
         side.firstElementChild!.setAttribute("style", `transform: translate3d(0, ${y.toFixed(1)}px, 0)`);
+        // Se va formando: llega hasta un poco más abajo de la mitad de la pantalla y crece al bajar
+        const ys = reach[n];
+        if (!ys) return;
+        const tip = vh * 0.72 - y;
+        let lo = 0;
+        let hi = SAMPLES;
+        while (lo < hi) {
+          const mid = (lo + hi) >> 1;
+          if (ys[mid] < tip) lo = mid + 1;
+          else hi = mid;
+        }
+        const offset = lengths[n] * (1 - lo / SAMPLES);
+        side.querySelectorAll("path").forEach((el) => el.setAttribute("stroke-dashoffset", offset.toFixed(1)));
       });
     };
 
@@ -109,10 +139,11 @@ export function RibbonSides() {
             <svg fill="none" strokeLinecap="round" strokeLinejoin="round">
               <defs>
                 <linearGradient id={`liston-${n}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stopColor="#10b981" />
-                  <stop offset="0.35" stopColor="#22c55e" />
-                  <stop offset="0.65" stopColor="#14b8a6" />
-                  <stop offset="1" stopColor="#84cc16" />
+                  {/* Colores de la marca: naranja Enterprice, ámbar y coral */}
+                  <stop offset="0" stopColor="#f05a28" />
+                  <stop offset="0.3" stopColor="#fbbf24" />
+                  <stop offset="0.6" stopColor="#fb7185" />
+                  <stop offset="1" stopColor="#c8431a" />
                 </linearGradient>
               </defs>
               <path stroke={`url(#liston-${n})`} opacity="0.85" />
