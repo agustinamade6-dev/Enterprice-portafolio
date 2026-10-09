@@ -1,10 +1,16 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import React, { useState, useRef, useEffect, memo } from "react";
 import type { Project } from "@/lib/content/schemas";
 import { ProjectCard } from "./ProjectCard";
 
 const SWIPE_THRESHOLD = 40;
+const EASE = "cubic-bezier(0.25, 1, 0.5, 1)";
+
+// La tarjeta no cambia al girar el cilindro: memorizada, React no la vuelve a dibujar en cada cambio
+const Card = memo(function Card({ project }: { project: Project }) {
+  return <ProjectCard project={project} large compact />;
+});
 
 export function Carousel3D({ projects }: { projects: Project[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,7 +18,8 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
 
   const dragStartX = useRef<number | null>(null);
   const dragCurrentX = useRef<number | null>(null);
-  const [dragOffset, setDragOffset] = useState(0);
+  const rotator = useRef<HTMLDivElement>(null);
+  const dragFrame = useRef(0);
 
   const next = () => setCurrentIndex((prev) => prev + 1);
   const prev = () => setCurrentIndex((prev) => prev - 1);
@@ -27,6 +34,16 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [total]);
 
+  // Mientras se arrastra, el giro se aplica directo al cilindro (un cambio por cuadro, sin redibujar con React)
+  const applyDrag = () => {
+    dragFrame.current = 0;
+    const el = rotator.current;
+    if (!el || dragStartX.current === null || dragCurrentX.current === null) return;
+    const angle = currentIndex * -theta + ((dragCurrentX.current - dragStartX.current) / window.innerWidth) * 120;
+    el.style.transition = "none";
+    el.style.transform = `translateZ(-${radius}px) rotateX(-3deg) rotateY(${angle}deg)`;
+  };
+
   const onPointerDown = (e: React.PointerEvent) => {
     dragStartX.current = e.clientX;
     dragCurrentX.current = e.clientX;
@@ -35,7 +52,7 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
   const onPointerMove = (e: React.PointerEvent) => {
     if (dragStartX.current === null) return;
     dragCurrentX.current = e.clientX;
-    setDragOffset(e.clientX - dragStartX.current);
+    if (!dragFrame.current) dragFrame.current = requestAnimationFrame(applyDrag);
   };
 
   const onPointerUp = () => {
@@ -49,7 +66,13 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
     }
     dragStartX.current = null;
     dragCurrentX.current = null;
-    setDragOffset(0);
+    cancelAnimationFrame(dragFrame.current);
+    dragFrame.current = 0;
+    // Devuelve el control a React, que anima hasta la tarjeta elegida
+    if (rotator.current) {
+      rotator.current.style.transition = `transform 0.8s ${EASE}`;
+      rotator.current.style.transform = `translateZ(-${radius}px) rotateX(-3deg) rotateY(${currentAngle}deg)`;
+    }
   };
 
   // 3D Cylinder Math
@@ -57,18 +80,11 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
   const cardHeight = 420; // 420px
   const theta = total > 0 ? 360 / total : 0;
   // Calculate radius so cards form a perfect polygon, add some padding (offset)
-  const radius = useMemo(() => {
-    if (total <= 1) return 0;
-    // Offset reducido a 40 para mantener coherencia en un cilindro más grande
-    return Math.round((cardWidth / 2) / Math.tan(Math.PI / total)) + 40;
-  }, [total, cardWidth]);
+  // Offset de 40 para mantener coherencia en un cilindro más grande
+  const radius = total <= 1 ? 0 : Math.round(cardWidth / 2 / Math.tan(Math.PI / total)) + 40;
 
   // Cylinder rotation
-  let currentAngle = currentIndex * -theta;
-  if (dragStartX.current !== null) {
-    // Add manual rotation based on drag distance
-    currentAngle += (dragOffset / window.innerWidth) * 120;
-  }
+  const currentAngle = currentIndex * -theta;
 
   // To prevent cards from being unclickable if they are technically "behind" but visible,
   // we manage pointerEvents in CSS.
@@ -89,13 +105,15 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
         {/* 2. Contenedor del cilindro (Rotator) */}
         {/* Agregamos rotateX(-3deg) para envolver visualmente al usuario y translateZ(-radius) */}
         <div
+          ref={rotator}
           className="absolute"
           style={{
             height: `${cardHeight}px`,
             width: `${cardWidth}px`,
             transformStyle: "preserve-3d",
             transform: `translateZ(-${radius}px) rotateX(-3deg) rotateY(${currentAngle}deg)`,
-            transition: dragStartX.current !== null ? "none" : "transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)",
+            transition: `transform 0.8s ${EASE}`,
+            willChange: "transform",
           }}
         >
           {projects.map((p, i) => {
@@ -108,10 +126,11 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
             
             // Cálculos visuales de profundidad ininterrumpida
             const isBack = dist > 90;
-            const opacity = isFront ? 1 : Math.max(0.35, 1 - (dist / 140)); 
+            const opacity = isFront ? 1 : Math.max(0.35, 1 - (dist / 140));
             const scale = isFront ? 1.05 : 0.85;
-            const blur = isFront ? 0 : (isBack ? 3 : 1.5); // Más blur atrás para tapar el texto invertido
-            const brightness = isFront ? 1 : (isBack ? 0.6 : 0.8);
+            // Oscurecer con una capa encima es mucho más liviano que filter: blur/brightness,
+            // que obliga a redibujar cada tarjeta grande en cada cuadro de la animación
+            const shade = isFront ? 0 : isBack ? 0.4 : 0.2;
 
             return (
               <div
@@ -121,23 +140,24 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
                   height: `${cardHeight}px`,
                   width: `${cardWidth}px`,
                   transform: `translate(-50%, -50%) rotateY(${cardAngle}deg) translateZ(${radius}px) scale(${scale})`,
-                  backfaceVisibility: "visible", // Hacemos visible el reverso
+                  // Las de atrás no se dibujan: así no se ve el texto invertido y hay menos para pintar
+                  backfaceVisibility: "hidden",
                   opacity,
-                  filter: `blur(${blur}px) brightness(${brightness})`,
-                  transition: "opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), filter 0.8s cubic-bezier(0.25, 1, 0.5, 1)",
-                  pointerEvents: isFront ? "auto" : "none", 
+                  transition: `opacity 0.8s ${EASE}, transform 0.8s ${EASE}`,
+                  pointerEvents: isFront ? "auto" : "none",
                   zIndex: isFront ? 50 : (isBack ? 0 : 10),
                 }}
               >
                 {/* Fondo sólido opaco obligatorio */}
-                <div 
-                  className="h-full w-full rounded-[16px] overflow-hidden bg-white"
-                  style={{
-                    boxShadow: isFront ? "0 25px 50px -12px rgba(0,0,0,0.25)" : "0 4px 10px -2px rgba(0,0,0,0.3)",
-                    transition: "box-shadow 0.8s",
-                  }}
+                <div
+                  className="relative h-full w-full rounded-[16px] overflow-hidden bg-white"
+                  style={{ boxShadow: "0 18px 40px -16px rgba(0,0,0,0.3)" }}
                 >
-                  <ProjectCard project={p} large compact />
+                  <Card project={p} />
+                  <div
+                    className="pointer-events-none absolute inset-0 bg-black"
+                    style={{ opacity: shade, transition: `opacity 0.8s ${EASE}` }}
+                  />
                 </div>
               </div>
             );
