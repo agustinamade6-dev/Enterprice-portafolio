@@ -8,8 +8,6 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { faqs, process, projects, services, site, team, whatsappLink } from "@/content/site";
 
-const stack = ["Next.js", "React", "TypeScript", "Tailwind CSS", "Electron", "Prisma", "SQLite", "Python", "Figma"];
-
 export default function Home() {
   const [featured, ...realOthers] = projects.filter((p) => p.kind === "real");
   const inProgress = projects.filter((p) => p.kind === "desarrollo");
@@ -45,7 +43,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-black/15 bg-white px-6 py-3.5 font-bold transition hover:border-ink"
                 >
-                  <WhatsAppIcon className="h-5 w-5 text-[#25d366]" /> Escribirme por WhatsApp
+                  <WhatsAppIcon className="h-5 w-5 text-[#25d366]" /> Escribirnos por WhatsApp
                 </a>
               </div>
             </div>
@@ -92,7 +90,7 @@ export default function Home() {
             <SectionTitle
               eyebrow="Servicios"
               title="Elige lo que necesita tu negocio"
-              text="Precios claros desde el primer día. Te envío la propuesta final por escrito antes de empezar."
+              text="Precios claros desde el primer día. Te enviamos la propuesta final por escrito antes de empezar."
             />
             <div className="mt-12 grid gap-6 lg:grid-cols-3">
               {services.map((s) => (
@@ -133,7 +131,7 @@ export default function Home() {
               ))}
             </div>
             <p className="mt-8 text-center text-sm text-ink/60">
-              ¿Ya tienes una web? También ofrezco un plan mensual de mantenimiento con cambios, copias de seguridad y soporte.
+              ¿Ya tienes una web? También ofrecemos un plan mensual de mantenimiento con cambios, copias de seguridad y soporte.
             </p>
           </div>
         </section>
@@ -141,7 +139,7 @@ export default function Home() {
         {/* Proceso */}
         <section id="proceso" className="px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
-            <SectionTitle eyebrow="Cómo trabajo" title="Cuatro pasos, sin sorpresas" />
+            <SectionTitle eyebrow="Cómo trabajamos" title="Cuatro pasos, sin sorpresas" />
             <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {process.map((step, i) => (
                 <li key={step.title} className="rounded-3xl border border-black/5 bg-white p-6">
@@ -156,75 +154,55 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Sobre mí */}
-        <section id="sobre-mi" className="bg-white px-4 py-20 sm:px-6">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[2fr_3fr]">
-            <div className="relative mx-auto w-full max-w-xs">
-              <div className="absolute -inset-3 -z-0 rotate-3 rounded-[2.25rem] bg-gradient-to-br from-brand to-amber-400" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={site.photo}
-                alt={`Foto de ${site.owner}`}
-                width={542}
-                height={629}
-                className="relative aspect-square w-full rounded-[2rem] object-cover object-top shadow-xl"
-              />
-            </div>
-            <div>
-              <SectionTitle eyebrow="Sobre mí" title={`Hola, soy ${site.owner}`} align="left" />
-              <p className="mt-6 text-lg text-ink/70">
-                Desarrollo páginas web y sistemas, y me especializo en la parte visual: que tu página o sistema se vea bien y sea fácil de usar
-                desde el primer día. Trabajé en el sistema de punto de venta de AKROS Café y en sistemas de gestión para una casa de pastas y una tienda
-                de ropa, que hoy se usan todos los días.
-              </p>
-              <p className="mt-4 text-lg text-ink/70">
-                Me gusta entender cómo funciona cada negocio antes de diseñar, para construir algo que de verdad te ahorre tiempo.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-2">
-                {stack.map((t) => (
-                  <span key={t} className="rounded-full border border-black/10 bg-paper px-3 py-1 text-sm font-medium">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Equipo */}
-        <section id="equipo" className="px-4 py-20 sm:px-6">
-          <div className="mx-auto max-w-5xl">
+        {/* Nosotros */}
+        <section id="nosotros" className="bg-white px-4 py-20 sm:px-6">
+          <div className="mx-auto max-w-6xl">
             <SectionTitle
-              eyebrow="Equipo"
-              title="Compañeros"
-              text="Detrás de cada proyecto hay un equipo. Cada uno aporta lo suyo para que el resultado sea el mejor."
+              eyebrow="Nosotros"
+              title={`Somos ${site.name}`}
+              text="Un grupo de programadores que empezó de cero y va por el cien. Cada uno aporta lo suyo, y juntos convertimos las ideas de cada negocio en sistemas y páginas que funcionan."
             />
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {team.map((m) => {
-                const card = (
-                  <div className="flex h-full items-center gap-4 rounded-2xl border border-black/5 bg-white p-5 transition hover:shadow-md">
+            <div className="mt-12 grid gap-6 md:grid-cols-3">
+              {team.map((m) => (
+                <article key={m.name} className="flex flex-col rounded-3xl border border-black/5 bg-paper p-6 text-center">
+                  <div className="relative mx-auto h-36 w-36">
+                    <div className="absolute -inset-1.5 rotate-6 rounded-[2rem] bg-gradient-to-br from-brand to-amber-400" />
                     {m.photo ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={m.photo} alt={`Foto de ${m.name}`} className="h-16 w-16 shrink-0 rounded-full object-cover object-top" />
+                      <img
+                        src={m.photo}
+                        alt={`Foto de ${m.name}`}
+                        className="relative h-36 w-36 rounded-[1.75rem] object-cover object-top"
+                      />
                     ) : (
-                      <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand to-amber-400 text-xl font-extrabold text-white">
-                        {m.name.charAt(0)}{m.name.split(" ").at(-1)?.charAt(0)}
+                      <span className="relative grid h-36 w-36 place-items-center rounded-[1.75rem] bg-ink text-4xl font-extrabold text-paper">
+                        {m.name.charAt(0)}
+                        {m.name.split(" ").at(-1)?.charAt(0)}
                       </span>
                     )}
-                    <div>
-                      <p className="font-bold">{m.name}</p>
-                      <p className="text-sm text-ink/60">{m.role}</p>
-                    </div>
                   </div>
-                );
-                return m.href ? (
-                  <a key={m.name} href={m.href} target="_blank" rel="noopener noreferrer">
-                    {card}
-                  </a>
-                ) : (
-                  <div key={m.name}>{card}</div>
-                );
-              })}
+                  <h3 className="mt-6 text-xl font-extrabold">{m.name}</h3>
+                  <p className="mt-1 text-sm font-semibold text-brand-dark">{m.role}</p>
+                  <p className="mt-4 text-ink/70">{m.bio}</p>
+                  <div className="mt-5 flex flex-wrap justify-center gap-1.5">
+                    {m.skills.map((t) => (
+                      <span key={t} className="rounded-full border border-black/10 bg-white px-2.5 py-0.5 text-xs font-medium">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  {m.href && (
+                    <a
+                      href={m.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-auto pt-6 text-sm font-bold hover:text-brand"
+                    >
+                      Ver Instagram →
+                    </a>
+                  )}
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -254,7 +232,7 @@ export default function Home() {
               <p className="text-sm font-bold uppercase tracking-widest text-brand">Contacto</p>
               <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">¿Hablamos de tu proyecto?</h2>
               <p className="mt-4 text-lg text-paper/70">
-                Cuéntame qué necesitas y te respondo en el día con una propuesta. La primera charla no tiene costo.
+                Cuéntanos qué necesitas y te respondemos en el día con una propuesta. La primera charla no tiene costo.
               </p>
               <div className="mt-8 space-y-3 text-paper/80">
                 <a

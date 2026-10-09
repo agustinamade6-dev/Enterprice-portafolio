@@ -7,7 +7,7 @@ export const site = {
   tagline:
     "Páginas web y sistemas a medida para restaurantes, comercios y profesionales.",
   description:
-    "Diseño y desarrollo páginas web y programas que ayudan a tu negocio a vender más y atender mejor.",
+    "Somos un equipo de programadores que diseña y desarrolla páginas web y programas para que tu negocio venda más y atienda mejor.",
   // WhatsApp en formato internacional, sin + ni espacios (en Argentina va 549 + característica + número).
   whatsapp: "5493815100710",
   email: "agustinamade6@gmail.com",
@@ -183,11 +183,11 @@ export const services: Service[] = [
 export const process = [
   {
     title: "Charlamos",
-    text: "Me cuentas cómo funciona tu negocio y qué necesitas. Sin compromiso.",
+    text: "Nos cuentas cómo funciona tu negocio y qué necesitas. Sin compromiso.",
   },
   {
     title: "Propuesta",
-    text: "Te envío qué incluye, el precio final y los plazos, por escrito.",
+    text: "Te enviamos qué incluye, el precio final y los plazos, por escrito.",
   },
   {
     title: "Diseño y desarrollo",
@@ -195,7 +195,7 @@ export const process = [
   },
   {
     title: "Entrega y soporte",
-    text: "Lo publicamos, te enseño a usarlo y quedo disponible para cambios.",
+    text: "Lo publicamos, te enseñamos a usarlo y quedamos disponibles para cambios.",
   },
 ];
 
@@ -206,36 +206,43 @@ export const faqs = [
   },
   {
     q: "¿El precio incluye el dominio?",
-    a: "El dominio (.com o .com.ar) se paga aparte una vez por año y queda a tu nombre. Te ayudo a registrarlo.",
+    a: "El dominio (.com o .com.ar) se paga aparte una vez por año y queda a tu nombre. Te ayudamos a registrarlo.",
   },
   {
     q: "¿Puedo cambiar cosas después?",
     a: "Sí. Los textos, precios y fotos más comunes los puedes editar tú. Para cambios mayores hay un plan mensual de mantenimiento.",
   },
   {
-    q: "¿Trabajas solo con negocios de mi ciudad?",
-    a: "No, trabajo a distancia con negocios de todo el país. Las reuniones son por videollamada o WhatsApp.",
+    q: "¿Trabajan solo con negocios de mi ciudad?",
+    a: "No, trabajamos a distancia con negocios de todo el país. Las reuniones son por videollamada o WhatsApp.",
   },
 ];
 
-// Compañeros del equipo.
+// Integrantes del equipo. Cada uno tiene su propio apartado en "Nosotros".
 export const team = [
   {
     name: site.owner,
     role: "Programador: frontend, backend y diseño",
     photo: site.photo as string | undefined,
     href: site.instagram as string | undefined,
+    // TODO: que cada integrante revise y ajuste su presentación.
+    bio: "Me gusta que cada sistema se vea bien y sea fácil de usar desde el primer día. Trabajé en el punto de venta de AKROS Café e hice el sistema de gestión de Pierina Glow de punta a punta.",
+    skills: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Electron", "Python", "Diseño de interfaces"],
   },
   {
     name: "José Augusto Matias",
     role: "Programador: backend, pruebas y auditoría",
     photo: "/equipo/jose-matias.jpg",
     href: "https://www.instagram.com/josematias._/",
+    bio: "Me ocupo de que todo funcione por detrás: la lógica, los datos y que no falle cuando el negocio más lo necesita. En AKROS Café estuve a cargo del backend, las pruebas y la auditoría.",
+    skills: ["Backend", "Bases de datos", "Pruebas", "Auditoría de código"],
   },
   {
     name: "Nicolás Raúl Bazán",
     role: "Programador: frontend y backend",
     photo: undefined as string | undefined, // TODO: foto
     href: undefined as string | undefined, // TODO: Instagram
+    bio: "Trabajo tanto en el frontend como en el backend, de la pantalla que ve el cliente hasta el servidor. Hoy estamos desarrollando juntos un chatbot con inteligencia artificial.",
+    skills: ["Frontend", "Backend", "Inteligencia artificial", "Chatbots"],
   },
 ];

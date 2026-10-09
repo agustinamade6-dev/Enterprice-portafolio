@@ -7,8 +7,8 @@ import { site } from "@/content/site";
 const links = [
   { href: "/#proyectos", label: "Proyectos" },
   { href: "/#servicios", label: "Servicios" },
-  { href: "/#proceso", label: "Cómo trabajo" },
-  { href: "/#sobre-mi", label: "Sobre mí" },
+  { href: "/#proceso", label: "Cómo trabajamos" },
+  { href: "/#nosotros", label: "Nosotros" },
 ];
 
 export function Header() {

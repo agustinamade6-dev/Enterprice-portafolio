@@ -15,7 +15,7 @@ const facts = [
   { label: "Cliente", value: "Pierina Glow" },
   { label: "Rubro", value: "Indumentaria femenina" },
   { label: "Tipo", value: "Programa de escritorio para Windows" },
-  { label: "Mi rol", value: "Desarrollo completo" },
+  { label: "Equipo", value: "Agustin" },
   { label: "Tecnología", value: "Python" },
 ];
 
@@ -100,9 +100,9 @@ export default function PierinaCase() {
           </section>
 
           <section className="mt-14">
-            <h2 className="text-2xl font-extrabold">Mi rol</h2>
+            <h2 className="text-2xl font-extrabold">Quién lo hizo</h2>
             <p className="mt-3 max-w-3xl text-ink/70">
-              Hice el sistema completo de punta a punta: el diseño de las pantallas con los colores de la marca y toda la
+              Agustin hizo el sistema completo de punta a punta: el diseño de las pantallas con los colores de la marca y toda la
               programación, desde el inventario hasta los reportes y las copias de seguridad.
             </p>
           </section>
@@ -131,7 +131,7 @@ export default function PierinaCase() {
           <section className="mt-14 flex flex-col items-start justify-between gap-6 rounded-3xl bg-ink p-8 text-paper sm:flex-row sm:items-center sm:p-10">
             <div>
               <h2 className="text-2xl font-extrabold">¿Quieres algo así para tu negocio?</h2>
-              <p className="mt-2 text-paper/70">Cuéntame cómo trabajas y te propongo una solución a medida.</p>
+              <p className="mt-2 text-paper/70">Cuéntanos cómo trabajas y te proponemos una solución a medida.</p>
             </div>
             <a
               href={whatsappLink("Hola, vi el sistema de Pierina Glow y quiero algo parecido para mi negocio.")}
@@ -139,7 +139,7 @@ export default function PierinaCase() {
               rel="noopener noreferrer"
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3.5 font-bold text-white transition hover:bg-brand-dark"
             >
-              Escríbeme <ArrowIcon className="h-4 w-4" />
+              Escríbenos <ArrowIcon className="h-4 w-4" />
             </a>
           </section>
         </article>

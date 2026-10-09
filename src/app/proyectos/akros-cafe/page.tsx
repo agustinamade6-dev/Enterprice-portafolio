@@ -16,7 +16,7 @@ const facts = [
   { label: "Cliente", value: "AKROS Café" },
   { label: "Rubro", value: "Cafetería" },
   { label: "Tipo", value: "Programa de escritorio para Windows" },
-  { label: "Mi rol", value: "Programador: frontend y parte del backend" },
+  { label: "Equipo", value: "Agustin y José Augusto Matias" },
 ];
 
 const team = [
@@ -108,10 +108,10 @@ export default function AkrosCase() {
           </section>
 
           <section className="mt-14">
-            <h2 className="text-2xl font-extrabold">Mi rol</h2>
+            <h2 className="text-2xl font-extrabold">Quién lo hizo</h2>
             <p className="mt-3 max-w-3xl text-ink/70">
-              Fui programador del proyecto, a cargo del frontend y de parte del backend. Programé todas las pantallas que usa el
-              personal del local, la navegación y la experiencia al tomar pedidos. <a
+              Agustin fue programador del proyecto, a cargo del frontend y de parte del backend: programó todas las pantallas que
+              usa el personal del local, la navegación y la experiencia al tomar pedidos. <a
                 href="https://www.instagram.com/josematias._/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -119,8 +119,7 @@ export default function AkrosCase() {
               >
                 José Augusto Matias
               </a>{" "}
-              estuvo a cargo del backend, hizo las pruebas y lo auditó, y trabajamos
-              juntos en cómo se comunican las dos partes.
+              estuvo a cargo del backend, hizo las pruebas y lo auditó. Juntos definieron cómo se comunican las dos partes.
             </p>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               {team.map((m) => (
@@ -157,7 +156,7 @@ export default function AkrosCase() {
           <section className="mt-14 flex flex-col items-start justify-between gap-6 rounded-3xl bg-ink p-8 text-paper sm:flex-row sm:items-center sm:p-10">
             <div>
               <h2 className="text-2xl font-extrabold">¿Quieres algo así para tu negocio?</h2>
-              <p className="mt-2 text-paper/70">Cuéntame cómo trabajas y te propongo una solución a medida.</p>
+              <p className="mt-2 text-paper/70">Cuéntanos cómo trabajas y te proponemos una solución a medida.</p>
             </div>
             <a
               href={whatsappLink("Hola, vi el sistema de AKROS Café y quiero algo parecido para mi negocio.")}
@@ -165,7 +164,7 @@ export default function AkrosCase() {
               rel="noopener noreferrer"
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3.5 font-bold text-white transition hover:bg-brand-dark"
             >
-              Escríbeme <ArrowIcon className="h-4 w-4" />
+              Escríbenos <ArrowIcon className="h-4 w-4" />
             </a>
           </section>
         </article>
