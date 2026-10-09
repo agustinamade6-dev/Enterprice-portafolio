@@ -253,20 +253,36 @@ export const process = [
   {
     title: "Charlamos",
     text: "Nos cuentas cómo funciona tu negocio y qué necesitas. Sin compromiso.",
+    details: ["Entendemos cómo trabajas hoy", "Vemos qué problema quieres resolver", "Te sugerimos por dónde empezar"],
   },
   {
-    title: "Propuesta",
-    text: "Te enviamos qué incluye, el precio final y los plazos, por escrito.",
+    title: "Propuesta a medida",
+    text: "Te enviamos por escrito qué incluye, el presupuesto según lo que pediste y los plazos.",
+    details: ["Lo dividimos en etapas cortas (sprints)", "Sabes qué vas a recibir en cada una", "Sin costos sorpresa"],
   },
   {
-    title: "Diseño y desarrollo",
-    text: "Ves avances cada semana y pedimos ajustes sobre la marcha.",
+    title: "Sprints y prototipos",
+    text: "Trabajamos en sprints cortos. Al final de cada uno te entregamos un prototipo que puedes probar.",
+    details: [
+      "Pruebas el prototipo como si ya fuera tuyo",
+      "Nos dices qué funciones sumar o cambiar",
+      "Eliges cómo quieres que se vea cada apartado",
+    ],
   },
   {
     title: "Entrega y soporte",
-    text: "Lo publicamos, te enseñamos a usarlo y quedamos disponibles para cambios.",
+    text: "Lo publicamos o lo instalamos, te enseñamos a usarlo y quedamos disponibles para cambios.",
+    details: ["Capacitación para tu equipo", "Copias de seguridad", "Ajustes cuando el negocio crece"],
+  },
+  {
+    title: "Te seguimos asesorando",
+    text: "Después de la entrega seguimos cerca: te asesoramos e implementamos las nuevas herramientas que vamos creando.",
+    details: ["Ideas para mejorar tu sistema", "Nuevas herramientas, como chatbots con IA", "Las sumamos cuando te sirvan"],
   },
 ];
+
+// Lo que pasa en cada sprint, de la etapa 3.
+export const sprintLoop = ["Construimos una parte", "Te entregamos el prototipo", "Lo pruebas y opinas", "Sumamos funciones y ajustamos el diseño"];
 
 export const faqs = [
   {

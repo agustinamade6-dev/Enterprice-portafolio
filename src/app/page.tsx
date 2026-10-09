@@ -3,11 +3,11 @@ import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { BudgetBuilder } from "@/components/BudgetBuilder";
-import { ArrowIcon, WhatsAppIcon } from "@/components/icons";
+import { ArrowIcon, CheckIcon, WhatsAppIcon } from "@/components/icons";
 import { PosMockup } from "@/components/PosMockup";
 import { ProjectDeck } from "@/components/ProjectDeck";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { faqs, process, projects, site, team, whatsappLink } from "@/content/site";
+import { faqs, process, projects, site, sprintLoop, team, whatsappLink } from "@/content/site";
 
 export default function Home() {
   // Orden del mazo: primero lo real, después lo que está en desarrollo, los trabajos de la facultad y al final los conceptos
@@ -91,15 +91,48 @@ export default function Home() {
         {/* Proceso */}
         <section id="proceso" className="px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
-            <SectionTitle eyebrow="Cómo trabajamos" title="Cuatro pasos, sin sorpresas" />
-            <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <SectionTitle
+              eyebrow="Cómo trabajamos"
+              title="Paso a paso, y siempre con tu opinión"
+              text="No desaparecemos hasta la entrega: vas viendo prototipos, los pruebas y decides cómo sigue."
+            />
+            <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {process.map((step, i) => (
-                <li key={step.title} className="rounded-3xl border border-black/5 bg-white p-6">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-brand/10 font-extrabold text-brand">
+                <li
+                  key={step.title}
+                  className={`flex flex-col rounded-3xl border p-6 ${i === 2 ? "border-ink bg-ink text-paper lg:row-span-2" : "border-black/5 bg-white"}`}
+                >
+                  <span
+                    className={`grid h-10 w-10 place-items-center rounded-full font-extrabold ${i === 2 ? "bg-brand text-white" : "bg-brand/10 text-brand"}`}
+                  >
                     {i + 1}
                   </span>
                   <h3 className="mt-4 text-lg font-bold">{step.title}</h3>
-                  <p className="mt-2 text-sm text-ink/70">{step.text}</p>
+                  <p className={`mt-2 text-sm ${i === 2 ? "text-paper/70" : "text-ink/70"}`}>{step.text}</p>
+                  <ul className="mt-4 space-y-2 text-sm">
+                    {step.details.map((d) => (
+                      <li key={d} className="flex gap-2">
+                        <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                  {i === 2 && (
+                    <div className="mt-6 rounded-2xl bg-white/5 p-4">
+                      <p className="text-xs font-bold uppercase tracking-widest text-brand">En cada sprint</p>
+                      <ol className="mt-3 space-y-2.5">
+                        {sprintLoop.map((s, j) => (
+                          <li key={s} className="flex items-center gap-3 text-sm">
+                            <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-white/20 text-xs font-bold">
+                              {j + 1}
+                            </span>
+                            {s}
+                          </li>
+                        ))}
+                      </ol>
+                      <p className="mt-3 text-xs text-paper/60">↻ Y se repite hasta que quede como lo imaginaste.</p>
+                    </div>
+                  )}
                 </li>
               ))}
             </ol>
