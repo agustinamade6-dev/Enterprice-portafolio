@@ -6,6 +6,7 @@ import { BudgetBuilder } from "@/components/BudgetBuilder";
 import { ArrowIcon, CheckIcon, WhatsAppIcon } from "@/components/icons";
 import { PosMockup } from "@/components/PosMockup";
 import { Carousel3D } from "@/components/Carousel3D";
+import { TeamShowcase } from "@/components/TeamShowcase";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { contentRepo } from "@/lib/content";
 
@@ -170,63 +171,18 @@ export default async function Home() {
 
         {/* Nosotros */}
         <div id="nosotros" className="scroll-anchor" />
-        <section className="bg-white px-4 py-20 sm:px-6">
+        <section data-hold={Math.max(0, team.length - 1)} className="bg-white px-4 pb-24 pt-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Nosotros"
               title={`Somos ${site.name}`}
               text="Somos cuatro estudiantes de Ingeniería en Sistemas de la Universidad Tecnológica Nacional, Facultad Regional Tucumán, que empezamos de cero y vamos por el cien. Cada uno aporta lo suyo, y juntos convertimos las ideas de cada negocio en sistemas y páginas que funcionan."
             />
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {team.map((m, i) => (
-                <article
-                  key={m.name}
-                  data-reveal
-                  style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}
-                  className="flex flex-col rounded-3xl border border-black/5 bg-paper p-6 text-center">
-                  <div className="relative mx-auto h-36 w-36">
-                    <div className="absolute -inset-1.5 rotate-6 rounded-[2rem] bg-gradient-to-br from-brand to-amber-400" />
-                    {m.photo ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={m.photo}
-                        alt={`Foto de ${m.fullName}`}
-                        className="relative h-36 w-36 rounded-[1.75rem] object-cover object-top"
-                      />
-                    ) : (
-                      <span className="relative grid h-36 w-36 place-items-center rounded-[1.75rem] bg-ink text-4xl font-extrabold text-paper">
-                        {m.fullName.charAt(0)}
-                        {m.fullName.split(" ").at(-1)?.charAt(0)}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="mt-6 text-2xl font-extrabold">{m.name}</h3>
-                  <p className="text-xs font-medium uppercase tracking-wider text-ink/50">{m.fullName}</p>
-                  <p className="mt-2 text-sm font-semibold text-brand-dark">{m.role}</p>
-                  <p className="mt-4 text-ink/70">{m.bio}</p>
-                  <div className="mt-5 flex flex-wrap justify-center gap-1.5">
-                    {m.skills.map((t) => (
-                      <span key={t} className="rounded-full border border-black/10 bg-white px-2.5 py-0.5 text-xs font-medium">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="mt-auto flex flex-wrap items-center justify-center gap-x-5 gap-y-2 pt-6 text-sm font-bold">
-                    <Link
-                      href={`/equipo/${m.slug}/`}
-                      className="rounded-full bg-ink px-4 py-2 text-paper transition hover:bg-brand"
-                    >
-                      Leer su historia
-                    </Link>
-                    {m.href && (
-                      <a href={m.href} target="_blank" rel="noopener noreferrer" className="hover:text-brand">
-                        Ver {m.network ?? "Instagram"} →
-                      </a>
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
+            <TeamShowcase
+              team={team.map(({ slug, name, fullName, role, photo, href, network, bio, skills }) => ({
+                slug, name, fullName, role, photo, href, network, bio, skills,
+              }))}
+            />
           </div>
         </section>
 

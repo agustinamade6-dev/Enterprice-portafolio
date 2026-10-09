@@ -30,6 +30,8 @@ export function ScrollStage() {
     let vh = window.innerHeight;
     let starts: number[] = [];
     let inner: number[] = [];
+    let over: number[] = [];
+    let hold: number[] = [];
     let gap = 0;
     let current = window.scrollY;
     let frame = 0;
@@ -37,11 +39,19 @@ export function ScrollStage() {
     const layout = () => {
       vh = window.innerHeight;
       gap = vh * (mouse ? 0.55 : 0.9); // cuánto scroll dura cada cambio de sección
-      inner = scenes.map((el) => Math.max(0, el.offsetHeight - vh));
+      over = scenes.map((el) => Math.max(0, el.offsetHeight - vh));
+      // data-hold: la sección se queda quieta mientras el scroll avanza su animación interna
+      // (por ejemplo, el equipo pasando de un integrante al otro)
+      hold = scenes.map((el) => Number(el.dataset.hold ?? 0) * vh * (mouse ? 0.6 : 0.85));
+      inner = scenes.map((_, i) => over[i] + hold[i]);
       starts = [];
       let y = 0;
-      scenes.forEach((_, i) => {
+      scenes.forEach((el, i) => {
         starts.push(y);
+        if (hold[i]) {
+          el.dataset.holdStart = String(y + over[i]);
+          el.dataset.holdPx = String(hold[i]);
+        }
         y += inner[i] + gap;
       });
       const total = starts[starts.length - 1] + inner[inner.length - 1];
@@ -53,7 +63,7 @@ export function ScrollStage() {
         const local = y - starts[i];
         const end = inner[i];
         let opacity = 1;
-        let shift = -clamp(local, 0, end);
+        let shift = -clamp(local, 0, over[i]);
         let scale = 1;
         let leave = 0;
 
@@ -69,7 +79,7 @@ export function ScrollStage() {
           leave = q;
           opacity = 1 - q;
           scale = 1 - 0.12 * q;
-          shift = -end - q * vh * 0.05;
+          shift = -over[i] - q * vh * 0.05;
         }
 
         const hidden = opacity <= 0.001;
@@ -78,6 +88,7 @@ export function ScrollStage() {
         el.style.visibility = hidden ? "hidden" : "visible";
         el.style.pointerEvents = opacity > 0.5 ? "auto" : "none";
         el.style.setProperty("--leave", leave.toFixed(3));
+        if (hold[i]) el.style.setProperty("--hold", clamp((local - over[i]) / hold[i]).toFixed(4));
       });
     };
 
@@ -125,6 +136,7 @@ export function ScrollStage() {
     if (window.location.hash) goTo(window.location.hash.slice(1));
     current = window.scrollY;
     render(current);
+    window.dispatchEvent(new Event("stage"));
 
     return () => {
       resize.disconnect();

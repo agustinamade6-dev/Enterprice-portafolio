@@ -21,6 +21,8 @@ La idea viene de un video del sitio de GTA VI que pasó Agustin: que al hacer sc
 
 **`ScrollMotion.tsx` (bloques).** Cada elemento con `data-reveal` entra desde abajo (`--enter`) y se aleja y desvanece cuando su borde pasa debajo del menú (`--exit`). Las tarjetas de una misma fila llegan una después de otra. En el inicio el texto sube y la imagen baja y gira un poco al salir (`--leave`, que pone ScrollStage).
 
+**`TeamShowcase.tsx` (Nosotros, 2026-10-09).** Inspirado en un video de referencia de QCLAY que pasó Agustin (segundos 13 a 18). Muestra un integrante a la vez: la foto se achica hasta ser una franja mientras la del siguiente crece a su lado y queda del otro costado, y el texto entra palabra por palabra (de borroso a nítido). La sección tiene `data-hold={integrantes - 1}`: ScrollStage la deja quieta durante 60 % de pantalla por cambio con mouse (85 % con el dedo) y le pasa el avance en `--hold`. Si la sección es más alta que la pantalla, primero se recorre y después se queda quieta. Los puntos de abajo llevan al integrante elegido. Sin escenario (reducir movimiento) los puntos animan el cambio.
+
 **Accesibilidad:** con "reducir movimiento" activado en el sistema, todo queda como una página normal.
 
 ### Qué se puede ajustar
