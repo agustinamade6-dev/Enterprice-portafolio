@@ -117,7 +117,7 @@ export default async function Home() {
 
         {/* Proceso */}
         <div id="proceso" className="scroll-anchor" />
-        <section className="bg-paper px-4 py-20 sm:px-6">
+        <section data-hold={2} data-hold-fit className="bg-paper px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Cómo trabajamos"
@@ -129,7 +129,8 @@ export default async function Home() {
                 <li
                   key={step.title}
                   data-reveal
-                  style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}
+                  data-step
+                  style={{ "--reveal-delay": `${i * 90}ms`, "--i": i, "--n": process.length } as React.CSSProperties}
                   className={`flex flex-col rounded-3xl border p-6 ${i === 2 ? "border-ink bg-ink text-paper md:row-span-2" : "border-black/5 bg-white"}`}
                 >
                   <span
