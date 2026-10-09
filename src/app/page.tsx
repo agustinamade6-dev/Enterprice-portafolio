@@ -9,8 +9,8 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { faqs, process, projects, services, site, team, whatsappLink } from "@/content/site";
 
 export default function Home() {
-  // Orden del mazo: primero lo real, después lo que está en desarrollo y al final los conceptos
-  const deck = ["real", "desarrollo", "concepto"].flatMap((k) => projects.filter((p) => p.kind === k));
+  // Orden del mazo: primero lo real, después lo que está en desarrollo, los trabajos de la facultad y al final los conceptos
+  const deck = ["real", "desarrollo", "facultad", "concepto"].flatMap((k) => projects.filter((p) => p.kind === k));
 
   return (
     <>
@@ -62,7 +62,7 @@ export default function Home() {
             <SectionTitle
               eyebrow="Proyectos"
               title="Trabajos y prototipos"
-              text="Sistemas reales en uso y conceptos pensados para cada tipo de negocio."
+              text="Sistemas reales en uso, lo que cada uno del equipo va construyendo y conceptos pensados para cada tipo de negocio."
             />
             <div className="mt-12">
               <ProjectDeck projects={deck} />

@@ -26,7 +26,7 @@ export type Project = {
   slug: string;
   title: string;
   sector: string;
-  kind: "real" | "desarrollo" | "concepto";
+  kind: "real" | "desarrollo" | "facultad" | "concepto";
   summary: string;
   result: string;
   tags: string[];
@@ -34,6 +34,8 @@ export type Project = {
   accent: string; // color de la tarjeta
   image?: string; // captura real del proyecto
   modules?: string[]; // módulos que se muestran en la ilustración de los sistemas de gestión
+  chat?: { from: "bot" | "user"; text: string }[]; // conversación de ejemplo para los chatbots
+  by?: string[]; // quiénes del equipo lo hicieron
 };
 
 export const projects: Project[] = [
@@ -47,6 +49,7 @@ export const projects: Project[] = [
     result: "En uso todos los días en el local.",
     tags: ["Next.js", "Electron", "Prisma", "SQLite"],
     href: "/proyectos/akros-cafe/",
+    by: ["Agustin", "José"],
     accent: "from-amber-500 to-orange-600",
   },
   // TODO: sumar el nombre y capturas reales de la casa de pastas cuando estén.
@@ -59,6 +62,7 @@ export const projects: Project[] = [
       "Ventas, stock, insumos, proveedores y gastos de una fábrica de pastas en un solo programa.",
     result: "Control de lo que se produce, se compra y se vende.",
     tags: ["Python", "Gestión", "Stock"],
+    by: ["Agustin"],
     accent: "from-yellow-400 to-orange-500",
     modules: ["Ventas", "Stock", "Insumos", "Proveedores", "Gastos"],
   },
@@ -72,6 +76,7 @@ export const projects: Project[] = [
     result: "Saber qué se vende, qué talles quedan y cuánto se gana.",
     tags: ["Python", "Escritorio", "Gestión"],
     href: "/proyectos/pierina-glow/",
+    by: ["Agustin"],
     accent: "from-[#eab3a6] to-[#c96f5d]",
     image: "/pierina/inicio.png",
   },
@@ -85,7 +90,38 @@ export const projects: Project[] = [
       "Asistente con inteligencia artificial que atiende a los clientes por Telegram, entiende audios e imágenes, toma los datos del pedido y pasa la charla a una persona cuando hace falta.",
     result: "Atención las 24 horas sin perder ningún contacto.",
     tags: ["Python", "FastAPI", "IA (Gemini)", "React", "Telegram"],
+    by: ["Agustin", "Nicolás"],
     accent: "from-cyan-500 to-blue-700",
+  },
+  {
+    slug: "chatbot-pedidos-mayoristas",
+    title: "Chatbot de pedidos mayoristas",
+    sector: "Venta mayorista",
+    kind: "desarrollo",
+    summary:
+      "Bot de Telegram con IA que toma pedidos mayoristas: distingue clientes de proveedores, valida los datos, calcula totales por kilo y lo vuelca todo en Google Sheets.",
+    result: "Pedidos ordenados y aprobados por el equipo, sin cargarlos a mano.",
+    tags: ["C#", ".NET 8", "IA (Gemini)", "Telegram", "Google Sheets"],
+    by: ["José"],
+    accent: "from-violet-500 to-indigo-700",
+    chat: [
+      { from: "user", text: "Hola, quiero hacer un pedido" },
+      { from: "bot", text: "¡Hola! ¿Qué producto y cuántos kilos?" },
+      { from: "user", text: "20 kg del producto A" },
+      { from: "bot", text: "Subtotal: 20 kg. Lo paso al equipo para aprobarlo ✅" },
+    ],
+  },
+  {
+    slug: "apiarios",
+    title: "Optimización de apiarios",
+    sector: "Producción de miel",
+    kind: "facultad",
+    summary:
+      "Trabajo de Investigación Operativa con una finca real, La Dulce: cómo distribuir apiarios y colmenas para producir más miel con programación lineal y pronósticos.",
+    result: "Menos pérdidas por traslados y mejor uso del espacio.",
+    tags: ["Programación lineal", "Pronósticos", "Investigación Operativa"],
+    by: ["José"],
+    accent: "from-amber-400 to-yellow-600",
   },
   {
     slug: "menu-digital",

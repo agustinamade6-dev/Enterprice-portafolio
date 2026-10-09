@@ -21,6 +21,8 @@ export function ProjectCard({
             alt={`Captura del sistema de ${project.title}`}
             className={`w-full rounded-lg shadow-xl shadow-black/25 ${large ? "max-w-md" : "max-w-sm"}`}
           />
+        ) : project.chat ? (
+          <ChatScreen msgs={project.chat} />
         ) : project.slug === "chatbot-crm" ? (
           <ChatScreen />
         ) : project.modules ? (
@@ -50,6 +52,8 @@ export function ProjectCard({
             <span className="rounded-full bg-green-100 px-2.5 py-1 text-green-800">Proyecto real</span>
           ) : project.kind === "desarrollo" ? (
             <span className="rounded-full bg-sky-100 px-2.5 py-1 text-sky-800">En desarrollo</span>
+          ) : project.kind === "facultad" ? (
+            <span className="rounded-full bg-violet-100 px-2.5 py-1 text-violet-800">Facultad</span>
           ) : (
             <span className="rounded-full bg-amber-100 px-2.5 py-1 text-amber-800">Concepto</span>
           )}
@@ -57,6 +61,11 @@ export function ProjectCard({
         <h3 className={`font-extrabold tracking-tight ${compact ? "text-xl md:text-2xl" : large ? "text-3xl" : "text-xl"}`}>{project.title}</h3>
         <p className={`mt-2 text-ink/70 ${compact ? "text-sm md:text-base" : ""}`}>{project.summary}</p>
         <p className="mt-3 text-sm font-semibold text-brand-dark">{project.result}</p>
+        {project.by && (
+          <p className="mt-2 text-xs font-medium text-ink/50">
+            Hecho por {project.by.length > 1 ? `${project.by.slice(0, -1).join(", ")} y ${project.by.at(-1)}` : project.by[0]}
+          </p>
+        )}
         <div className={`mt-auto flex flex-wrap gap-1.5 ${compact ? "pt-3" : "pt-5"}`}>
           {project.tags.map((t) => (
             <span key={t} className="rounded-md border border-black/10 px-2 py-0.5 text-xs text-ink/60">
@@ -139,14 +148,15 @@ function GestionScreen({ title, modules }: { title: string; modules: string[] })
 }
 
 // Ilustración de una conversación con el asistente.
-function ChatScreen() {
-  const msgs = [
-    { from: "bot", text: "¡Hola! ¿En qué servicio estás interesado?" },
-    { from: "user", text: "Aire acondicionado, no enfría 🥵" },
-    { from: "bot", text: "Entiendo. ¿En qué zona te encuentras?" },
-    { from: "user", text: "🎤 Audio 0:08" },
-    { from: "bot", text: "¡Listo! Un técnico te escribe en breve." },
-  ];
+const defaultChat: { from: "bot" | "user"; text: string }[] = [
+  { from: "bot", text: "¡Hola! ¿En qué servicio estás interesado?" },
+  { from: "user", text: "Aire acondicionado, no enfría 🥵" },
+  { from: "bot", text: "Entiendo. ¿En qué zona te encuentras?" },
+  { from: "user", text: "🎤 Audio 0:08" },
+  { from: "bot", text: "¡Listo! Un técnico te escribe en breve." },
+];
+
+function ChatScreen({ msgs = defaultChat }: { msgs?: { from: "bot" | "user"; text: string }[] }) {
   return (
     <div
       className="w-full max-w-xs overflow-hidden rounded-2xl border border-white/80 bg-white text-[10px] shadow-xl shadow-black/20"
