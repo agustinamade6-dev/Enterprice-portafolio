@@ -51,7 +51,7 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
         </div>
         {project.href && (
           <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold">
-            Ver caso completo
+            {project.kind === "concepto" ? "Probar la demo" : "Ver caso completo"}
             <ArrowIcon className="h-4 w-4 transition group-hover:translate-x-1" />
           </span>
         )}
@@ -128,7 +128,7 @@ function ChatScreen() {
   const msgs = [
     { from: "bot", text: "¡Hola! ¿En qué servicio estás interesado?" },
     { from: "user", text: "Aire acondicionado, no enfría 🥵" },
-    { from: "bot", text: "Entiendo. ¿En qué zona te encontrás?" },
+    { from: "bot", text: "Entiendo. ¿En qué zona te encuentras?" },
     { from: "user", text: "🎤 Audio 0:08" },
     { from: "bot", text: "¡Listo! Un técnico te escribe en breve." },
   ];

@@ -4,7 +4,7 @@ import { WhatsAppIcon } from "./icons";
 export function WhatsAppButton() {
   return (
     <a
-      href={whatsappLink("Hola, vi tu portafolio y quiero consultar por un proyecto.")}
+      href={whatsappLink("Hola, vi el portafolio de Enterprice y quiero consultar por un proyecto.")}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escribir por WhatsApp"

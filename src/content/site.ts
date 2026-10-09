@@ -14,6 +14,8 @@ export const site = {
   instagram: "https://www.instagram.com/lean__amade/",
   photo: "/foto-perfil.png",
   github: "https://github.com/agustinamade6-dev",
+  // TODO: cambiar por la dirección definitiva cuando el sitio esté publicado (o un dominio propio).
+  url: "https://enterprice-portafolio.pages.dev",
 };
 
 export function whatsappLink(message: string) {
@@ -94,6 +96,7 @@ export const projects: Project[] = [
       "El cliente escanea el QR, arma su pedido y lo envía por WhatsApp. Sin apps ni comisiones.",
     result: "Menos tiempo de espera y menú siempre actualizado.",
     tags: ["Web", "Celular", "WhatsApp"],
+    href: "/demos/menu-digital/",
     accent: "from-rose-500 to-red-600",
   },
   {

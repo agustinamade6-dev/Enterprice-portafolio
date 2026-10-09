@@ -9,6 +9,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
     default: `${site.name} | Páginas web y sistemas a medida`,
     template: `%s | ${site.name}`,
@@ -19,7 +20,10 @@ export const metadata: Metadata = {
     description: site.description,
     locale: "es_AR",
     type: "website",
+    siteName: site.name,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${site.name}: páginas web y sistemas a medida` }],
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
