@@ -211,8 +211,8 @@ export default async function Home() {
 
         {/* Contacto */}
         <div id="contacto" className="scroll-anchor" />
-        <div className="bg-ink">
-          <section className="bg-ink px-4 py-20 text-paper sm:px-6">
+        <div className="scene-end bg-ink">
+          <section className="grid content-center bg-ink px-4 py-20 text-paper sm:px-6">
             <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
               <div data-reveal>
                 <p className="text-sm font-bold uppercase tracking-widest text-brand">Contacto</p>
