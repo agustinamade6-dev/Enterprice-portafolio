@@ -38,7 +38,7 @@ export function ScrollStage() {
 
     const layout = () => {
       vh = window.innerHeight;
-      gap = vh * (mouse ? 0.55 : 0.9); // cuánto scroll dura cada cambio de sección
+      gap = vh * (mouse ? 0.4 : 0.7); // cuánto scroll dura cada cambio de sección
       over = scenes.map((el) => Math.max(0, el.offsetHeight - vh));
       // data-hold: la sección se queda quieta mientras el scroll avanza su animación interna
       // (por ejemplo, el equipo pasando de un integrante al otro)
@@ -69,13 +69,15 @@ export function ScrollStage() {
 
         if (local < 0) {
           // Entrando: aparece en el lugar, acercándose un poco
-          const p = ease(clamp(((local + gap) / gap - 0.45) / 0.55));
+          // Empieza a aparecer antes de que la anterior termine de irse: nunca queda la pantalla vacía
+          const p = ease(clamp(((local + gap) / gap - 0.1) / 0.7));
           opacity = p;
           scale = 1.06 - 0.06 * p;
           shift = (1 - p) * vh * 0.04;
         } else if (local > end) {
           // Saliendo: se aleja y se desvanece sin moverse de lugar
-          const q = ease(clamp((local - end) / gap / 0.5));
+          // Misma curva que la que entra, invertida: entre las dos siempre suman la pantalla completa
+          const q = ease(clamp(((local - end) / gap - 0.1) / 0.7));
           leave = q;
           opacity = 1 - q;
           scale = 1 - 0.12 * q;
