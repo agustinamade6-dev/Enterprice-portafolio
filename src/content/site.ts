@@ -259,10 +259,20 @@ export const team: Member[] = [
     skills: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Electron", "Python", "Diseño de interfaces"],
     story: {
       intro:
-        "Empecé solo, haciendo programas de gestión en Python. No eran proyectos enormes, pero fueron mis primeros trabajos como programador y los primeros que usó un negocio de verdad.",
+        "Estudio Ingeniería en Sistemas en la UTN, en Tucumán. Empecé a programar en el colegio, y mis primeros trabajos fueron programas de gestión: no eran proyectos enormes, pero fueron mis primeros pasos como programador.",
       chapters: [
         {
-          label: "Mi primer trabajo",
+          label: "En el colegio",
+          title: "Mis primeros programas, con Arduino",
+          text: "Empecé a programar en el colegio con Arduino. Ahí me di cuenta de que me gustaba y quise seguir por ese camino.",
+        },
+        {
+          label: "En la facultad",
+          title: "Ingeniería en Sistemas en la UTN",
+          text: "Con la carrera fui aprendiendo a programar. Por curiosidad, y por querer ayudar a mi mamá a gestionar su emprendimiento de ropa, también aprendí por mi cuenta con inteligencia artificial: le preguntaba cómo programar y hacía mini cursos que armaba para mí.",
+        },
+        {
+          label: "2025 · Mi primer trabajo",
           title: "Pierina Glow, una tienda de ropa femenina",
           text: "Mi primer sistema de gestión, hecho solo y de punta a punta: inventario por talle y color, ventas, clientes, proveedores, reportes y copias de seguridad.",
           href: "/proyectos/pierina-glow/",
@@ -280,11 +290,10 @@ export const team: Member[] = [
         },
         {
           label: "Hoy",
-          title: "Un chatbot con IA y Enterprice",
-          text: "Estoy desarrollando con Nicolás un chatbot con inteligencia artificial, y entre los tres armamos Enterprice para seguir creciendo como equipo.",
+          title: "Hacer crecer Enterprice",
+          text: "Quiero que Enterprice sea una empresa de programación que ayude a emprendimientos y empresas locales a gestionarse mejor. Mientras tanto, sigo estudiando y desarrollo con Nicolás un chatbot con inteligencia artificial.",
         },
       ],
-      pending: "cómo aprendió a programar y por qué empezó",
     },
   },
   {
@@ -299,6 +308,11 @@ export const team: Member[] = [
     story: {
       intro: "Me ocupo de la parte que no se ve: que los datos estén bien guardados y que el sistema no falle.",
       chapters: [
+        {
+          label: "En la facultad",
+          title: "Ingeniería en Sistemas en la UTN",
+          text: "Estudio Ingeniería en Sistemas en la UTN, en Tucumán, junto a Agustin y Nicolás.",
+        },
         {
           label: "Primer trabajo en equipo",
           title: "AKROS Café, junto a Agustin",
@@ -326,6 +340,11 @@ export const team: Member[] = [
     story: {
       intro: "Me gusta trabajar en las dos puntas: lo que ve el cliente y lo que pasa en el servidor.",
       chapters: [
+        {
+          label: "En la facultad",
+          title: "Ingeniería en Sistemas en la UTN",
+          text: "Estudio Ingeniería en Sistemas en la UTN, en Tucumán, junto a Agustin y José.",
+        },
         {
           label: "Hoy",
           title: "Un chatbot con IA, junto a Agustin",
