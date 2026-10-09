@@ -5,17 +5,33 @@ import { Header } from "@/components/Header";
 import { BudgetBuilder } from "@/components/BudgetBuilder";
 import { ArrowIcon, CheckIcon, WhatsAppIcon } from "@/components/icons";
 import { PosMockup } from "@/components/PosMockup";
-import { ProjectDeck } from "@/components/ProjectDeck";
+import { Carousel3D } from "@/components/Carousel3D";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { faqs, process, projects, site, sprintLoop, team, whatsappLink } from "@/content/site";
+import { contentRepo } from "@/lib/content";
 
-export default function Home() {
+function makeWhatsappLink(phone: string, text: string) {
+  return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+}
+
+export default async function Home() {
+  const site = await contentRepo.getSiteData();
+  const projects = await contentRepo.getProjects();
+  const team = await contentRepo.getTeam();
+  const faqs = await contentRepo.getFaqs();
+  const process = await contentRepo.getProcessSteps();
+  const sprintLoop = await contentRepo.getSprintLoop();
+  
+  const budgetTypes = await contentRepo.getBudgetTypes();
+  const budgetExtras = await contentRepo.getBudgetExtras();
+  const budgetSectors = await contentRepo.getBudgetSectors();
+  const budgetTimes = await contentRepo.getBudgetTimes();
+
   // Orden del mazo: primero lo real, después lo que está en desarrollo, los trabajos de la facultad y al final los conceptos
   const deck = ["real", "desarrollo", "facultad", "concepto"].flatMap((k) => projects.filter((p) => p.kind === k));
 
   return (
     <>
-      <Header />
+      <Header siteName={site.name} />
       <main>
         {/* Inicio */}
         <section className="relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
@@ -38,7 +54,7 @@ export default function Home() {
                   Ver proyectos <ArrowIcon className="h-4 w-4" />
                 </Link>
                 <a
-                  href={whatsappLink("Hola, quiero consultar por un proyecto.")}
+                  href={makeWhatsappLink(site.whatsapp, "Hola, quiero consultar por un proyecto.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-black/15 bg-white px-6 py-3.5 font-bold transition hover:border-ink"
@@ -58,16 +74,17 @@ export default function Home() {
         </section>
 
         {/* Proyectos */}
-        <section id="proyectos" className="px-4 py-20 sm:px-6">
-          <div className="mx-auto max-w-6xl">
+        <section id="proyectos" className="py-20 overflow-x-clip">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionTitle
               eyebrow="Proyectos"
               title="Trabajos y prototipos"
               text="Sistemas reales en uso, lo que cada uno del equipo va construyendo y conceptos pensados para cada tipo de negocio."
             />
-            <div className="mt-12">
-              <ProjectDeck projects={deck} />
-            </div>
+          </div>
+          {/* Sacamos el carrusel del max-w-6xl para que use el ancho completo de la ventana sin cortarse */}
+          <div className="mt-12 w-full">
+            <Carousel3D projects={deck as any} />
           </div>
         </section>
 
@@ -80,7 +97,13 @@ export default function Home() {
               text="Cada negocio es distinto, por eso no tenemos precios fijos. Elige lo que necesitas y te pasamos un presupuesto a medida, por escrito y antes de empezar."
             />
             <div className="mt-12">
-              <BudgetBuilder />
+              <BudgetBuilder 
+                budgetTypes={budgetTypes}
+                budgetExtras={budgetExtras}
+                budgetSectors={budgetSectors}
+                budgetTimes={budgetTimes}
+                whatsapp={site.whatsapp}
+              />
             </div>
             <p className="mt-8 text-center text-sm text-ink/60">
               ¿Ya tienes una web? También ofrecemos un plan mensual de mantenimiento con cambios, copias de seguridad y soporte.
@@ -225,7 +248,7 @@ export default function Home() {
               </p>
               <div className="mt-8 space-y-3 text-paper/80">
                 <a
-                  href={whatsappLink("Hola, quiero consultar por un proyecto.")}
+                  href={makeWhatsappLink(site.whatsapp, "Hola, quiero consultar por un proyecto.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 hover:text-paper"
@@ -237,12 +260,12 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <ContactForm />
+            <ContactForm whatsapp={site.whatsapp} />
           </div>
         </section>
       </main>
-      <Footer />
-      <WhatsAppButton />
+      <Footer name={site.name} instagram={site.instagram} github={site.github} />
+      <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el portafolio de Enterprice y quiero consultar por un proyecto.")} />
     </>
   );
 }

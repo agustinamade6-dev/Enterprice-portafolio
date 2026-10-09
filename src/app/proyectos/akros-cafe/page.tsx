@@ -5,7 +5,11 @@ import { Header } from "@/components/Header";
 import { ArrowIcon, CheckIcon } from "@/components/icons";
 import { PosMockup } from "@/components/PosMockup";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { site, whatsappLink } from "@/content/site";
+import { contentRepo } from "@/lib/content";
+
+function makeWhatsappLink(phone: string, text: string) {
+  return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+}
 
 export const metadata: Metadata = {
   title: "AKROS Café, sistema de punto de venta",
@@ -17,23 +21,6 @@ const facts = [
   { label: "Rubro", value: "Cafetería" },
   { label: "Tipo", value: "Programa de escritorio para Windows" },
   { label: "Equipo", value: "Agustin y José" },
-];
-
-const team = [
-  {
-    name: site.owner,
-    fullName: "Leandro Agustin Amade",
-    role: "Programador: frontend y parte del backend",
-    photo: site.photo,
-    href: site.instagram,
-  },
-  {
-    name: "José",
-    fullName: "José Augusto Matias",
-    role: "Backend, pruebas y auditoría",
-    photo: "/equipo/jose-matias.jpg",
-    href: "https://www.linkedin.com/in/jose-matias-64194520b/",
-  },
 ];
 
 const features = [
@@ -49,10 +36,29 @@ const stack = [
   { name: "Prisma y SQLite", why: "Guardar productos, ventas y caja en el equipo" },
 ];
 
-export default function AkrosCase() {
+export default async function AkrosCase() {
+  const site = await contentRepo.getSiteData();
+
+  const team = [
+    {
+      name: site.owner,
+      fullName: "Leandro Agustin Amade",
+      role: "Programador: frontend y parte del backend",
+      photo: site.photo,
+      href: site.instagram,
+    },
+    {
+      name: "José",
+      fullName: "José Augusto Matias",
+      role: "Backend, pruebas y auditoría",
+      photo: "/equipo/jose-matias.jpg",
+      href: "https://www.linkedin.com/in/jose-matias-64194520b/",
+    },
+  ];
+
   return (
     <>
-      <Header />
+      <Header siteName={site.name} />
       <main className="px-4 pb-20 pt-28 sm:px-6 md:pt-36">
         <article className="mx-auto max-w-5xl">
           <Link href="/#proyectos" className="text-sm font-semibold text-ink/60 hover:text-ink">
@@ -162,7 +168,7 @@ export default function AkrosCase() {
               <p className="mt-2 text-paper/70">Cuéntanos cómo trabajas y te proponemos una solución a medida.</p>
             </div>
             <a
-              href={whatsappLink("Hola, vi el sistema de AKROS Café y quiero algo parecido para mi negocio.")}
+              href={makeWhatsappLink(site.whatsapp, "Hola, vi el sistema de AKROS Café y quiero algo parecido para mi negocio.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3.5 font-bold text-white transition hover:bg-brand-dark"
@@ -172,8 +178,8 @@ export default function AkrosCase() {
           </section>
         </article>
       </main>
-      <Footer />
-      <WhatsAppButton />
+      <Footer name={site.name} instagram={site.instagram} github={site.github} />
+      <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el sistema de AKROS Café y quiero algo parecido para mi negocio.")} />
     </>
   );
 }

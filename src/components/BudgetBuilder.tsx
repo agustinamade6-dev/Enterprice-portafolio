@@ -1,11 +1,27 @@
 "use client";
 
 import { useState } from "react";
-import { budgetExtras, budgetSectors, budgetTimes, budgetTypes, whatsappLink } from "@/content/site";
 import { CheckIcon, WhatsAppIcon } from "./icons";
+import { BudgetType } from "@/lib/content/schemas";
+
+function makeWhatsappLink(phone: string, text: string) {
+  return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+}
 
 // El cliente arma su pedido y nos lo envía por WhatsApp; el precio lo pasamos a medida.
-export function BudgetBuilder() {
+export function BudgetBuilder({
+  budgetTypes,
+  budgetExtras,
+  budgetSectors,
+  budgetTimes,
+  whatsapp,
+}: {
+  budgetTypes: BudgetType[];
+  budgetExtras: string[];
+  budgetSectors: string[];
+  budgetTimes: string[];
+  whatsapp: string;
+}) {
   const [types, setTypes] = useState<string[]>([]);
   const [options, setOptions] = useState<string[]>([]);
   const [sector, setSector] = useState("");
@@ -181,7 +197,7 @@ export function BudgetBuilder() {
           No trabajamos con precios fijos: con lo que elijas te pasamos un presupuesto a medida, por escrito y sin compromiso.
         </p>
         <a
-          href={ready ? whatsappLink(message()) : undefined}
+          href={ready ? makeWhatsappLink(whatsapp, message()) : undefined}
           aria-disabled={!ready}
           target="_blank"
           rel="noopener noreferrer"

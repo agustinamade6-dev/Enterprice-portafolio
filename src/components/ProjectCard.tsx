@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Project } from "@/content/site";
+import type { Project } from "@/lib/content/schemas";
 import { ArrowIcon } from "./icons";
 import { PosMockup } from "./PosMockup";
 

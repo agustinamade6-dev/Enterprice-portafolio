@@ -1,15 +1,13 @@
-import { site } from "@/content/site";
-
-export function Footer() {
+export function Footer({ name, instagram, github }: { name: string; instagram: string; github: string }) {
   const social = [
-    { href: site.instagram, label: "Instagram" },
-    { href: site.github, label: "GitHub" },
+    { href: instagram, label: "Instagram" },
+    { href: github, label: "GitHub" },
   ];
   return (
     <footer className="bg-ink text-paper/60">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 border-t border-white/10 px-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <p>
-          © {new Date().getFullYear()} {site.name}. Hecho a mano con Next.js.
+          © {new Date().getFullYear()} {name}. Hecho a mano con Next.js.
         </p>
         <div className="flex gap-5">
           {social.map((s) => (
