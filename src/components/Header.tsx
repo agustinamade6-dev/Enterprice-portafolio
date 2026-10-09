@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { site } from "@/content/site";
 
 const links = [
   { href: "/#proyectos", label: "Proyectos" },
@@ -11,7 +10,7 @@ const links = [
   { href: "/#nosotros", label: "Nosotros" },
 ];
 
-export function Header() {
+export function Header({ siteName }: { siteName: string }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -19,9 +18,9 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 font-extrabold tracking-tight">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-ink text-sm text-paper">
-            E
+            {siteName ? siteName.charAt(0) : "E"}
           </span>
-          {site.name}
+          {siteName}
         </Link>
 
         <nav className="hidden items-center gap-8 text-sm font-medium md:flex">

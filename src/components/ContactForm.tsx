@@ -1,10 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { whatsappLink } from "@/content/site";
+
+// Helper internal
+function makeWhatsappLink(phone: string, text: string) {
+  return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+}
 
 // Sin servidor: arma el mensaje y abre WhatsApp con el texto listo para enviar.
-export function ContactForm() {
+export function ContactForm({ whatsapp }: { whatsapp: string }) {
   const [name, setName] = useState("");
   const [business, setBusiness] = useState("");
   const [need, setNeed] = useState("");
@@ -12,7 +16,7 @@ export function ContactForm() {
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const message = `Hola, soy ${name}${business ? ` de ${business}` : ""}. ${need}`;
-    window.open(whatsappLink(message), "_blank", "noopener,noreferrer");
+    window.open(makeWhatsappLink(whatsapp, message), "_blank", "noopener,noreferrer");
   }
 
   const field =

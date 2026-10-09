@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import type { Project } from "@/content/site";
+import type { Project } from "@/lib/content/schemas";
 import { ProjectCard } from "./ProjectCard";
 
 const FLY_MS = 380; // lo que tarda la carta del frente en salir del mazo

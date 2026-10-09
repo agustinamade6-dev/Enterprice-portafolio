@@ -4,8 +4,12 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ArrowIcon } from "@/components/icons";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { whatsappLink } from "@/content/site";
+import { contentRepo } from "@/lib/content";
 import { MenuDemo } from "./MenuDemo";
+
+function makeWhatsappLink(phone: string, text: string) {
+  return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+}
 
 export const metadata: Metadata = {
   title: "Demo: menú digital con QR",
@@ -18,10 +22,12 @@ const steps = [
   { title: "Lo envía por WhatsApp", text: "El pedido llega ordenado al WhatsApp del local, con la mesa y el total." },
 ];
 
-export default function MenuDigitalDemo() {
+export default async function MenuDigitalDemo() {
+  const site = await contentRepo.getSiteData();
+
   return (
     <>
-      <Header />
+      <Header siteName={site.name} />
       <main className="px-4 pb-20 pt-28 sm:px-6 md:pt-36">
         <div className="mx-auto max-w-6xl">
           <Link href="/#proyectos" className="text-sm font-semibold text-ink/60 hover:text-ink">
@@ -64,7 +70,7 @@ export default function MenuDigitalDemo() {
                   Lo armamos con tus platos, tus fotos y tus colores. Tú cambias precios cuando quieras, sin pagar comisiones.
                 </p>
                 <a
-                  href={whatsappLink("Hola, probé la demo del menú digital y quiero uno para mi local.")}
+                  href={makeWhatsappLink(site.whatsapp, "Hola, probé la demo del menú digital y quiero uno para mi local.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3.5 font-bold text-white transition hover:bg-brand-dark"
@@ -76,8 +82,8 @@ export default function MenuDigitalDemo() {
           </div>
         </div>
       </main>
-      <Footer />
-      <WhatsAppButton />
+      <Footer name={site.name} instagram={site.instagram} github={site.github} />
+      <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el portafolio de Enterprice y quiero consultar por un proyecto.")} />
     </>
   );
 }
