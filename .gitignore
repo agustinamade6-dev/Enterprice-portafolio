@@ -43,3 +43,6 @@ next-env.d.ts
 # media uploads (ignorar todo menos .gitkeep si se requiere)
 /public/uploads/*
 !/public/uploads/.gitkeep
+
+# Capturas de pruebas que quedan en la raíz: no van al repositorio
+/*.png
