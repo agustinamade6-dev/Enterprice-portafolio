@@ -171,18 +171,19 @@ export default function Home() {
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={m.photo}
-                        alt={`Foto de ${m.name}`}
+                        alt={`Foto de ${m.fullName}`}
                         className="relative h-36 w-36 rounded-[1.75rem] object-cover object-top"
                       />
                     ) : (
                       <span className="relative grid h-36 w-36 place-items-center rounded-[1.75rem] bg-ink text-4xl font-extrabold text-paper">
-                        {m.name.charAt(0)}
-                        {m.name.split(" ").at(-1)?.charAt(0)}
+                        {m.fullName.charAt(0)}
+                        {m.fullName.split(" ").at(-1)?.charAt(0)}
                       </span>
                     )}
                   </div>
-                  <h3 className="mt-6 text-xl font-extrabold">{m.name}</h3>
-                  <p className="mt-1 text-sm font-semibold text-brand-dark">{m.role}</p>
+                  <h3 className="mt-6 text-2xl font-extrabold">{m.name}</h3>
+                  <p className="text-xs font-medium uppercase tracking-wider text-ink/50">{m.fullName}</p>
+                  <p className="mt-2 text-sm font-semibold text-brand-dark">{m.role}</p>
                   <p className="mt-4 text-ink/70">{m.bio}</p>
                   <div className="mt-5 flex flex-wrap justify-center gap-1.5">
                     {m.skills.map((t) => (

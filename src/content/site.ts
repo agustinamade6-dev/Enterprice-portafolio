@@ -222,6 +222,7 @@ export const faqs = [
 export const team = [
   {
     name: site.owner,
+    fullName: "Leandro Agustin Amade",
     role: "Programador: frontend, backend y diseño",
     photo: site.photo as string | undefined,
     href: site.instagram as string | undefined,
@@ -230,7 +231,8 @@ export const team = [
     skills: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Electron", "Python", "Diseño de interfaces"],
   },
   {
-    name: "José Augusto Matias",
+    name: "José",
+    fullName: "José Augusto Matias",
     role: "Programador: backend, pruebas y auditoría",
     photo: "/equipo/jose-matias.jpg",
     href: "https://www.instagram.com/josematias._/",
@@ -238,7 +240,8 @@ export const team = [
     skills: ["Backend", "Bases de datos", "Pruebas", "Auditoría de código"],
   },
   {
-    name: "Nicolás Raúl Bazán",
+    name: "Nicolás",
+    fullName: "Nicolás Raúl Bazán",
     role: "Programador: frontend y backend",
     photo: undefined as string | undefined, // TODO: foto
     href: undefined as string | undefined, // TODO: Instagram

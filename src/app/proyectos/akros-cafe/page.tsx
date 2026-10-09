@@ -16,18 +16,20 @@ const facts = [
   { label: "Cliente", value: "AKROS Café" },
   { label: "Rubro", value: "Cafetería" },
   { label: "Tipo", value: "Programa de escritorio para Windows" },
-  { label: "Equipo", value: "Agustin y José Augusto Matias" },
+  { label: "Equipo", value: "Agustin y José" },
 ];
 
 const team = [
   {
     name: site.owner,
+    fullName: "Leandro Agustin Amade",
     role: "Programador: frontend y parte del backend",
     photo: site.photo,
     href: site.instagram,
   },
   {
-    name: "José Augusto Matias",
+    name: "José",
+    fullName: "José Augusto Matias",
     role: "Backend, pruebas y auditoría",
     photo: "/equipo/jose-matias.jpg",
     href: "https://www.instagram.com/josematias._/",
@@ -117,7 +119,7 @@ export default function AkrosCase() {
                 rel="noopener noreferrer"
                 className="font-semibold text-ink underline decoration-brand underline-offset-2 hover:text-brand"
               >
-                José Augusto Matias
+                José
               </a>{" "}
               estuvo a cargo del backend, hizo las pruebas y lo auditó. Juntos definieron cómo se comunican las dos partes.
             </p>
@@ -131,9 +133,10 @@ export default function AkrosCase() {
                   className="flex items-center gap-4 rounded-2xl border border-black/5 bg-white p-4 transition hover:shadow-md"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={m.photo} alt={`Foto de ${m.name}`} className="h-16 w-16 shrink-0 rounded-full object-cover object-top" />
+                  <img src={m.photo} alt={`Foto de ${m.fullName}`} className="h-16 w-16 shrink-0 rounded-full object-cover object-top" />
                   <div>
                     <p className="font-bold">{m.name}</p>
+                    <p className="text-xs text-ink/50">{m.fullName}</p>
                     <p className="text-sm text-ink/60">{m.role}</p>
                   </div>
                 </a>
