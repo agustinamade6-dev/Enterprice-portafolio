@@ -34,6 +34,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error("Login del panel:", error instanceof Error ? error.message : error);
     return NextResponse.json(
       { error: "Error interno del servidor" },
       { status: 500 }

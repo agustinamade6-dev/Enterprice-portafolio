@@ -6,6 +6,7 @@ import { BudgetBuilder } from "@/components/BudgetBuilder";
 import { ArrowIcon, CheckIcon, WhatsAppIcon } from "@/components/icons";
 import { PosMockup } from "@/components/PosMockup";
 import { Carousel3D } from "@/components/Carousel3D";
+import { TeamShowcase } from "@/components/TeamShowcase";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { contentRepo } from "@/lib/content";
 
@@ -32,12 +33,12 @@ export default async function Home() {
   return (
     <>
       <Header siteName={site.name} />
-      <main>
+      <main data-stage>
         {/* Inicio */}
         <section className="relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
           <div className="pointer-events-none absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-full bg-brand/15 blur-3xl" />
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
-            <div>
+            <div data-reveal data-hero-text>
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-sm font-medium">
                 <span className="h-2 w-2 rounded-full bg-green-500" />
                 Disponible para nuevos proyectos
@@ -63,7 +64,7 @@ export default async function Home() {
                 </a>
               </div>
             </div>
-            <div className="relative hidden lg:block">
+            <div className="relative hidden lg:block" data-reveal data-hero-art style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
               <PosMockup className="mx-auto max-w-lg rotate-1" />
               <div className="absolute -bottom-6 left-2 rounded-2xl bg-white px-4 py-3 shadow-xl shadow-black/10 sm:left-0">
                 <p className="text-xs text-ink/60">Proyecto real</p>
@@ -74,7 +75,8 @@ export default async function Home() {
         </section>
 
         {/* Proyectos */}
-        <section id="proyectos" className="py-20 overflow-x-clip">
+        <div id="proyectos" className="scroll-anchor" />
+        <section className="overflow-x-clip bg-paper py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionTitle
               eyebrow="Proyectos"
@@ -83,21 +85,23 @@ export default async function Home() {
             />
           </div>
           {/* Sacamos el carrusel del max-w-6xl para que use el ancho completo de la ventana sin cortarse */}
+          {/* Sin data-reveal: animar la opacidad de un padre aplana el 3D y obliga a redibujar el cilindro entero */}
           <div className="mt-12 w-full">
             <Carousel3D projects={deck as any} />
           </div>
         </section>
 
         {/* Servicios */}
-        <section id="servicios" className="bg-white px-4 py-20 sm:px-6">
+        <div id="servicios" className="scroll-anchor" />
+        <section className="bg-white px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Servicios"
               title="Arma tu presupuesto"
               text="Cada negocio es distinto, por eso no tenemos precios fijos. Elige lo que necesitas y te pasamos un presupuesto a medida, por escrito y antes de empezar."
             />
-            <div className="mt-12">
-              <BudgetBuilder 
+            <div className="mt-12" data-reveal>
+              <BudgetBuilder
                 budgetTypes={budgetTypes}
                 budgetExtras={budgetExtras}
                 budgetSectors={budgetSectors}
@@ -105,14 +109,15 @@ export default async function Home() {
                 whatsapp={site.whatsapp}
               />
             </div>
-            <p className="mt-8 text-center text-sm text-ink/60">
+            <p className="mt-8 text-center text-sm text-ink/60" data-reveal>
               ¿Ya tienes una web? También ofrecemos un plan mensual de mantenimiento con cambios, copias de seguridad y soporte.
             </p>
           </div>
         </section>
 
         {/* Proceso */}
-        <section id="proceso" className="px-4 py-20 sm:px-6">
+        <div id="proceso" className="scroll-anchor" />
+        <section className="bg-paper px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Cómo trabajamos"
@@ -123,6 +128,8 @@ export default async function Home() {
               {process.map((step, i) => (
                 <li
                   key={step.title}
+                  data-reveal
+                  style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}
                   className={`flex flex-col rounded-3xl border p-6 ${i === 2 ? "border-ink bg-ink text-paper md:row-span-2" : "border-black/5 bg-white"}`}
                 >
                   <span
@@ -163,69 +170,34 @@ export default async function Home() {
         </section>
 
         {/* Nosotros */}
-        <section id="nosotros" className="bg-white px-4 py-20 sm:px-6">
+        <div id="nosotros" className="scroll-anchor" />
+        <section data-hold={Math.max(0, team.length - 1)} className="overflow-x-clip bg-white px-4 pb-28 pt-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Nosotros"
               title={`Somos ${site.name}`}
               text="Somos cuatro estudiantes de Ingeniería en Sistemas de la Universidad Tecnológica Nacional, Facultad Regional Tucumán, que empezamos de cero y vamos por el cien. Cada uno aporta lo suyo, y juntos convertimos las ideas de cada negocio en sistemas y páginas que funcionan."
             />
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {team.map((m) => (
-                <article key={m.name} className="flex flex-col rounded-3xl border border-black/5 bg-paper p-6 text-center">
-                  <div className="relative mx-auto h-36 w-36">
-                    <div className="absolute -inset-1.5 rotate-6 rounded-[2rem] bg-gradient-to-br from-brand to-amber-400" />
-                    {m.photo ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={m.photo}
-                        alt={`Foto de ${m.fullName}`}
-                        className="relative h-36 w-36 rounded-[1.75rem] object-cover object-top"
-                      />
-                    ) : (
-                      <span className="relative grid h-36 w-36 place-items-center rounded-[1.75rem] bg-ink text-4xl font-extrabold text-paper">
-                        {m.fullName.charAt(0)}
-                        {m.fullName.split(" ").at(-1)?.charAt(0)}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="mt-6 text-2xl font-extrabold">{m.name}</h3>
-                  <p className="text-xs font-medium uppercase tracking-wider text-ink/50">{m.fullName}</p>
-                  <p className="mt-2 text-sm font-semibold text-brand-dark">{m.role}</p>
-                  <p className="mt-4 text-ink/70">{m.bio}</p>
-                  <div className="mt-5 flex flex-wrap justify-center gap-1.5">
-                    {m.skills.map((t) => (
-                      <span key={t} className="rounded-full border border-black/10 bg-white px-2.5 py-0.5 text-xs font-medium">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="mt-auto flex flex-wrap items-center justify-center gap-x-5 gap-y-2 pt-6 text-sm font-bold">
-                    <Link
-                      href={`/equipo/${m.slug}/`}
-                      className="rounded-full bg-ink px-4 py-2 text-paper transition hover:bg-brand"
-                    >
-                      Leer su historia
-                    </Link>
-                    {m.href && (
-                      <a href={m.href} target="_blank" rel="noopener noreferrer" className="hover:text-brand">
-                        Ver {m.network ?? "Instagram"} →
-                      </a>
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
+            <TeamShowcase
+              team={team.map(({ slug, name, fullName, role, photo, href, network, bio, skills }) => ({
+                slug, name, fullName, role, photo, href, network, bio, skills,
+              }))}
+            />
           </div>
         </section>
 
         {/* Preguntas frecuentes */}
-        <section id="preguntas" className="px-4 py-20 sm:px-6">
+        <div id="preguntas" className="scroll-anchor" />
+        <section className="bg-paper px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-3xl">
             <SectionTitle eyebrow="Preguntas frecuentes" title="Lo que suelen preguntarnos" />
             <div className="mt-10 space-y-3">
-              {faqs.map((f) => (
-                <details key={f.q} className="group rounded-2xl border border-black/5 bg-white p-5 open:shadow-sm">
+              {faqs.map((f, i) => (
+                <details
+                  key={f.q}
+                  data-reveal
+                  style={{ "--reveal-delay": `${i * 60}ms` } as React.CSSProperties}
+                  className="group rounded-2xl border border-black/5 bg-white p-5 open:shadow-sm">
                   <summary className="flex cursor-pointer list-none items-center justify-between font-bold">
                     {f.q}
                     <span className="text-2xl leading-none text-brand transition group-open:rotate-45">+</span>
@@ -238,33 +210,38 @@ export default async function Home() {
         </section>
 
         {/* Contacto */}
-        <section id="contacto" className="bg-ink px-4 py-20 text-paper sm:px-6">
-          <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
-            <div>
-              <p className="text-sm font-bold uppercase tracking-widest text-brand">Contacto</p>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">¿Hablamos de tu proyecto?</h2>
-              <p className="mt-4 text-lg text-paper/70">
-                Cuéntanos qué necesitas y te respondemos en el día con una propuesta. La primera charla no tiene costo.
-              </p>
-              <div className="mt-8 space-y-3 text-paper/80">
-                <a
-                  href={makeWhatsappLink(site.whatsapp, "Hola, quiero consultar por un proyecto.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 hover:text-paper"
-                >
-                  <WhatsAppIcon className="h-5 w-5 text-[#25d366]" /> WhatsApp
-                </a>
-                <a href={`mailto:${site.email}`} className="block hover:text-paper">
-                  {site.email}
-                </a>
+        <div id="contacto" className="scroll-anchor" />
+        <div className="bg-ink">
+          <section className="bg-ink px-4 py-20 text-paper sm:px-6">
+            <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
+              <div data-reveal>
+                <p className="text-sm font-bold uppercase tracking-widest text-brand">Contacto</p>
+                <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">¿Hablamos de tu proyecto?</h2>
+                <p className="mt-4 text-lg text-paper/70">
+                  Cuéntanos qué necesitas y te respondemos en el día con una propuesta. La primera charla no tiene costo.
+                </p>
+                <div className="mt-8 space-y-3 text-paper/80">
+                  <a
+                    href={makeWhatsappLink(site.whatsapp, "Hola, quiero consultar por un proyecto.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 hover:text-paper"
+                  >
+                    <WhatsAppIcon className="h-5 w-5 text-[#25d366]" /> WhatsApp
+                  </a>
+                  <a href={`mailto:${site.email}`} className="block hover:text-paper">
+                    {site.email}
+                  </a>
+                </div>
+              </div>
+              <div data-reveal style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
+                <ContactForm whatsapp={site.whatsapp} />
               </div>
             </div>
-            <ContactForm whatsapp={site.whatsapp} />
-          </div>
-        </section>
+          </section>
+          <Footer name={site.name} instagram={site.instagram} github={site.github} />
+        </div>
       </main>
-      <Footer name={site.name} instagram={site.instagram} github={site.github} />
       <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el portafolio de Enterprice y quiero consultar por un proyecto.")} />
     </>
   );
@@ -282,7 +259,7 @@ function SectionTitle({
   align?: "center" | "left";
 }) {
   return (
-    <div className={align === "center" ? "mx-auto max-w-2xl text-center" : ""}>
+    <div className={align === "center" ? "mx-auto max-w-2xl text-center" : ""} data-reveal>
       <p className="text-sm font-bold uppercase tracking-widest text-brand">{eyebrow}</p>
       <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{title}</h2>
       {text && <p className="mt-4 text-lg text-ink/70">{text}</p>}

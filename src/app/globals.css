@@ -18,7 +18,8 @@ body {
 }
 
 /* Compensa el header fijo al saltar a una sección */
-section[id] {
+section[id],
+.scroll-anchor {
   scroll-margin-top: 5rem;
 }
 
@@ -79,5 +80,57 @@ section[id] {
   .deck-front .deck-text > *,
   .deck-caption {
     animation-name: deck-fade-in;
+  }
+}
+
+/* Movimiento con el scroll (ScrollMotion): cada bloque entra desde abajo y, al llegar arriba,
+   se aleja y se desvanece. Va al ritmo del scroll, así que al subir se deshace solo. */
+.reveal-on [data-reveal] {
+  --enter: 0;
+  --exit: 0;
+  opacity: calc(var(--enter) * (1 - var(--exit)));
+  transform: translateY(calc((1 - var(--enter)) * 48px - var(--exit) * 40px)) scale(calc(1 - var(--exit) * 0.08));
+  transform-origin: 50% 100%;
+  will-change: opacity, transform;
+}
+
+/* En el inicio, al bajar el texto sube y la imagen baja y gira un poco mientras se desvanecen */
+.reveal-on [data-hero-text] {
+  translate: 0 calc((var(--exit) + var(--leave, 0)) * -8vh);
+}
+
+.reveal-on [data-hero-art] {
+  translate: 0 calc((var(--exit) + var(--leave, 0)) * 14vh);
+  rotate: calc((var(--exit) + var(--leave, 0)) * -6deg);
+}
+
+/* Escenario fijo (ScrollStage): las secciones se apilan en el mismo lugar y cambian sin desplazarse */
+.stage-on [data-stage] {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.stage-on [data-stage] > :not(.scroll-anchor) {
+  position: absolute;
+  inset: 0 0 auto;
+  /* Cada escena ocupa al menos toda la pantalla y centra su contenido, así no quedan franjas en blanco */
+  display: grid;
+  min-height: 100vh;
+  align-content: center;
+  transform-origin: 50% 35vh;
+  will-change: transform, opacity;
+}
+
+.stage-on [data-stage] > :not(.scroll-anchor) > :not(.absolute) {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on [data-reveal] {
+    opacity: 1;
+    transform: none;
+    translate: none;
+    rotate: none;
   }
 }
