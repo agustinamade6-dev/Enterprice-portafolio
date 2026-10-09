@@ -71,7 +71,7 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
     if (!el || dragStartX.current === null || dragCurrentX.current === null) return;
     const angle = currentIndex * -theta + ((dragCurrentX.current - dragStartX.current) / window.innerWidth) * 120;
     el.style.transition = "none";
-    el.style.transform = `translateZ(-${radius}px) rotateX(-3deg) rotateY(${angle}deg)`;
+    el.style.transform = `translateY(${lift}px) translateZ(-${radius}px) rotateX(-3deg) rotateY(${angle}deg)`;
   };
 
   const onPointerDown = (e: React.PointerEvent) => {
@@ -101,7 +101,7 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
     // Devuelve el control a React, que anima hasta la tarjeta elegida
     if (rotator.current) {
       rotator.current.style.transition = `transform 0.8s ${EASE}`;
-      rotator.current.style.transform = `translateZ(-${radius}px) rotateX(-3deg) rotateY(${currentAngle}deg)`;
+      rotator.current.style.transform = `translateY(${lift}px) translateZ(-${radius}px) rotateX(-3deg) rotateY(${currentAngle}deg)`;
     }
   };
 
@@ -114,6 +114,9 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
   // Calculate radius so cards form a perfect polygon, add some padding (offset)
   // Offset de 40 para mantener coherencia en un cilindro más grande
   const radius = total <= 1 ? 0 : Math.round(cardWidth / 2 / Math.tan(Math.PI / total)) + 40;
+  // La inclinación (rotateX) baja la tarjeta del frente en proporción al radio y deja un hueco arriba:
+  // se compensa subiendo el cilindro lo mismo
+  const lift = -Math.round(radius * Math.sin((3 * Math.PI) / 180));
 
   // Cylinder rotation
   const currentAngle = currentIndex * -theta;
@@ -124,13 +127,13 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
   const activeIndex = ((currentIndex % total) + total) % total;
 
   return (
-    <div className="relative w-full overflow-visible select-none py-6 md:py-24">
+    <div className="relative w-full overflow-visible select-none py-4 md:py-6">
       {/* 1. Contenedor de la escena (Perspective) - Full Width */}
       <div
         ref={scene}
         className="relative mx-auto flex w-full items-center justify-center touch-pan-y"
         // contain: el navegador no recalcula el resto de la página cuando el carrusel cambia
-        style={{ height: cardHeight + 80, perspective: "1200px", contain: "layout" }}
+        style={{ height: cardHeight + 40, perspective: "1200px", contain: "layout" }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
@@ -146,7 +149,7 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
             height: `${cardHeight}px`,
             width: `${cardWidth}px`,
             transformStyle: "preserve-3d",
-            transform: `translateZ(-${radius}px) rotateX(-3deg) rotateY(${currentAngle}deg)`,
+            transform: `translateY(${lift}px) translateZ(-${radius}px) rotateX(-3deg) rotateY(${currentAngle}deg)`,
             transition: `transform 0.8s ${EASE}`,
             willChange: "transform",
           }}
@@ -203,7 +206,7 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
       </div>
 
       {/* Controles de Navegación */}
-      <div className="mt-6 md:mt-16 mx-auto flex w-max items-center gap-1 rounded-2xl border border-black/10 bg-black/5 p-1.5 backdrop-blur-md">
+      <div className="mt-6 md:mt-8 mx-auto flex w-max items-center gap-1 rounded-2xl border border-black/10 bg-black/5 p-1.5 backdrop-blur-md">
         <button
           type="button"
           onClick={prev}
