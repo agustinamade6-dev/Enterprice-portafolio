@@ -231,7 +231,7 @@ export default function Home() {
 
         {/* Contacto */}
         <div id="contacto" className="scroll-anchor" />
-        <div>
+        <div className="bg-ink">
           <section className="bg-ink px-4 py-20 text-paper sm:px-6">
             <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
               <div data-reveal>

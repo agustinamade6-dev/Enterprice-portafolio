@@ -18,7 +18,7 @@ export function ScrollMotion() {
 
     const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]")).map((el) => ({
       el,
-      // El retraso de cada tarjeta se traduce en que empieza a entrar un poco más tarde
+      // El retraso de cada tarjeta hace que llegue un poco después que las anteriores
       delay: (parseFloat(el.style.getPropertyValue("--reveal-delay")) || 0) / 1000,
       enter: 0,
       exit: 0,
@@ -31,10 +31,10 @@ export function ScrollMotion() {
       let moving = false;
       for (const it of items) {
         const r = it.el.getBoundingClientRect();
-        const center = r.top + Math.min(r.height, vh) / 2;
-        const enter = clamp((vh - r.top) / (vh * 0.3) - it.delay * 2);
-        const exit = clamp((vh * 0.3 - center) / (vh * 0.45));
-        it.enter += (enter - it.enter) * 0.18;
+        const enter = clamp((vh * 0.98 - r.top) / (vh * 0.25));
+        // Se va recién cuando su borde de arriba pasa por debajo del menú, así los títulos quietos se ven enteros
+        const exit = clamp((vh * 0.1 - r.top) / Math.max(vh * 0.35, r.height * 0.8));
+        it.enter += (enter - it.enter) * (0.18 / (1 + it.delay * 6));
         it.exit += (exit - it.exit) * 0.18;
         if (Math.abs(enter - it.enter) > 0.001 || Math.abs(exit - it.exit) > 0.001) moving = true;
         else {

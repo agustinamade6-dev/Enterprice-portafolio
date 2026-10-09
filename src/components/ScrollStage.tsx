@@ -22,6 +22,11 @@ export function ScrollStage() {
     const root = document.documentElement;
     root.classList.add("stage-on");
 
+    // Con mouse (compu) cada giro de la ruedita avanza poco, así que el cambio es más corto y más ágil;
+    // con el dedo (celular) se mantiene más largo porque un deslizamiento recorre mucho
+    const mouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const smooth = mouse ? 0.2 : 0.12;
+
     let vh = window.innerHeight;
     let starts: number[] = [];
     let inner: number[] = [];
@@ -31,7 +36,7 @@ export function ScrollStage() {
 
     const layout = () => {
       vh = window.innerHeight;
-      gap = vh * 0.9; // cuánto scroll dura cada cambio de sección
+      gap = vh * (mouse ? 0.55 : 0.9); // cuánto scroll dura cada cambio de sección
       inner = scenes.map((el) => Math.max(0, el.offsetHeight - vh));
       starts = [];
       let y = 0;
@@ -58,7 +63,6 @@ export function ScrollStage() {
           opacity = p;
           scale = 1.06 - 0.06 * p;
           shift = (1 - p) * vh * 0.04;
-          if (local <= -gap) shift = vh * 1.1;
         } else if (local > end) {
           // Saliendo: se aleja y se desvanece sin moverse de lugar
           const q = ease(clamp((local - end) / gap / 0.5));
@@ -66,7 +70,6 @@ export function ScrollStage() {
           opacity = 1 - q;
           scale = 1 - 0.12 * q;
           shift = -end - q * vh * 0.05;
-          if (local >= end + gap) shift = -end - vh * 1.1;
         }
 
         const hidden = opacity <= 0.001;
@@ -81,7 +84,7 @@ export function ScrollStage() {
     const tick = () => {
       frame = 0;
       const target = window.scrollY;
-      current += (target - current) * 0.12;
+      current += (target - current) * smooth;
       if (Math.abs(target - current) < 0.5) current = target;
       render(current);
       // Avisa a ScrollMotion para que las tarjetas se muevan con el escenario

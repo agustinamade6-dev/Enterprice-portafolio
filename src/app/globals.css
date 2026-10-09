@@ -114,8 +114,16 @@ section[id],
 .stage-on [data-stage] > :not(.scroll-anchor) {
   position: absolute;
   inset: 0 0 auto;
+  /* Cada escena ocupa al menos toda la pantalla y centra su contenido, así no quedan franjas en blanco */
+  display: grid;
+  min-height: 100vh;
+  align-content: center;
   transform-origin: 50% 35vh;
   will-change: transform, opacity;
+}
+
+.stage-on [data-stage] > :not(.scroll-anchor) > :not(.absolute) {
+  width: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
