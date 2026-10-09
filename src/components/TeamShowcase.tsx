@@ -42,6 +42,9 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
     const texts = Array.from(box.querySelectorAll<HTMLElement>("[data-text]"));
     const dots = Array.from(box.querySelectorAll<HTMLElement>("[data-dot]"));
     const counter = box.querySelector<HTMLElement>("[data-counter]");
+    const fill = box.querySelector<HTMLElement>("[data-fill]");
+    const marquee = box.querySelector<HTMLElement>("[data-marquee]");
+    const imgs = photos.map((el) => el.querySelector<HTMLElement>("img"));
     const words = texts.map((t) => Array.from(t.querySelectorAll<HTMLElement>("[data-word]")));
     const groups = texts.map((t) => Array.from(t.querySelectorAll<HTMLElement>("[data-group]")));
 
@@ -54,8 +57,11 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       const C = box.clientWidth;
       const H = box.clientHeight;
       const wide = C >= 768;
-      const W = wide ? C * 0.42 : C * 0.74;
-      const gap = 18;
+      // Foto de retrato, más chica que el texto: el protagonista es el nombre
+      const W = wide ? Math.min(C * 0.3, 340) : Math.min(C * 0.58, 240);
+      const PH = wide ? Math.min(H * 0.9, W * 1.25) : Math.min(H * 0.4, W * 1.2);
+      const PT = wide ? (H - PH) / 2 : 0;
+      const gap = 14;
       const t = p * Math.max(0, total - 1);
       const i = Math.min(Math.floor(t), Math.max(0, total - 2));
       const e = total > 1 ? ease(clamp((t - i - 0.15) / 0.7)) : 0;
@@ -84,8 +90,12 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
         const x = left + width / 2 - W / 2;
         const cut = (W - width) / 2;
         el.style.width = `${W}px`;
-        el.style.transform = `translate3d(${x.toFixed(1)}px,0,0)`;
-        el.style.clipPath = `inset(0 ${cut.toFixed(1)}px round 2rem)`;
+        el.style.height = `${PH}px`;
+        el.style.transform = `translate3d(${x.toFixed(1)}px,${PT.toFixed(1)}px,0)`;
+        el.style.clipPath = `inset(0 ${cut.toFixed(1)}px round 1.75rem)`;
+        // Leve movimiento de la imagen dentro del marco mientras se hace scroll (paralaje)
+        const img = imgs[k];
+        if (img) img.style.transform = `translate3d(${((k === i ? -e : 1 - e) * 24).toFixed(1)}px,${((t - k) * -14).toFixed(1)}px,0) scale(1.15)`;
       });
 
       texts.forEach((el, k) => {
@@ -96,15 +106,16 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
         // Lado del texto: el opuesto a la foto de ese integrante
         const photoLeft = k % 2 === 0;
         if (wide) {
-          el.style.width = `${C - W - 56}px`;
-          el.style.left = photoLeft ? `${W + 56}px` : "0px";
+          const tw = Math.min(C - W - 72, 560);
+          el.style.width = `${tw}px`;
+          el.style.left = photoLeft ? `${W + 72}px` : `${C - W - 72 - tw}px`;
           el.style.top = "0px";
           el.style.height = `${H}px`;
         } else {
           el.style.width = `${C}px`;
           el.style.left = "0px";
-          el.style.top = `${H * 0.44}px`;
-          el.style.height = `${H * 0.56}px`;
+          el.style.top = `${PH + 16}px`;
+          el.style.height = `${H - PH - 16}px`;
         }
         const list = words[k];
         list.forEach((w, j) => {
@@ -120,6 +131,10 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
           g.style.transform = `translate3d(0,${((1 - gp) * 12).toFixed(1)}px,0)`;
         });
       });
+
+      // Lo que acompaña todo el recorrido: la barra se llena y los nombres de fondo se deslizan
+      if (fill) fill.style.transform = `scaleX(${p.toFixed(4)})`;
+      if (marquee) marquee.style.transform = `translate3d(${(-p * Math.max(0, marquee.scrollWidth - C)).toFixed(1)}px,-50%,0)`;
 
       if (current !== shown) {
         shown = current;
@@ -180,16 +195,28 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
   }, [total]);
 
   return (
-    <div ref={root} className="relative mt-10 h-[min(78vh,640px)] md:h-[min(62vh,540px)]" style={{ contain: "layout" }}>
-      {team.map((m) => (
+    <div ref={root} className="relative mt-10 h-[min(74vh,600px)] md:h-[min(60vh,500px)]" style={{ contain: "layout" }}>
+      {/* Nombres gigantes de fondo que se deslizan con el scroll */}
+      <div
+        aria-hidden
+        data-marquee
+        className="pointer-events-none absolute left-0 top-1/2 select-none whitespace-nowrap text-[28vw] font-extrabold leading-none tracking-tighter text-transparent will-change-transform md:text-[14rem]"
+        style={{ WebkitTextStroke: "1.5px rgba(17,17,17,0.07)" }}
+      >
+        {team.map((m) => m.name).join(" · ")}
+      </div>
+      {team.map((m, k) => (
         <div
           key={m.slug}
           data-photo
-          className="invisible absolute left-0 top-0 z-10 h-[42%] overflow-hidden bg-ink will-change-transform md:h-full"
+          className="invisible absolute left-0 top-0 z-10 overflow-hidden bg-ink shadow-2xl shadow-black/20 will-change-transform"
         >
+          <span className="absolute left-3 top-3 z-10 rounded-full bg-white/85 px-2.5 py-1 font-mono text-[11px] font-bold text-ink backdrop-blur">
+            {String(k + 1).padStart(2, "0")}
+          </span>
           {m.photo ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={m.photo} alt={`Foto de ${m.fullName}`} className="h-full w-full object-cover object-top" />
+            <img src={m.photo} alt={`Foto de ${m.fullName}`} className="h-full w-full object-cover object-top will-change-transform" />
           ) : (
             <span className="grid h-full w-full place-items-center text-6xl font-extrabold text-paper">
               {m.fullName.charAt(0)}
@@ -250,20 +277,28 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       })}
 
       {total > 1 && (
-        <div className="absolute -bottom-10 left-0 flex items-center gap-4">
-          <span data-counter className="font-mono text-xs font-bold tabular-nums text-ink/50">
-            01 / {String(total).padStart(2, "0")}
-          </span>
-          <div className="flex gap-1.5">
-            {team.map((m) => (
-              <button
-                key={m.slug}
-                type="button"
-                data-dot
-                aria-label={`Ver a ${m.name}`}
-                className="h-2 w-2 rounded-full bg-ink/20 transition-all aria-[current=true]:w-6 aria-[current=true]:bg-ink"
-              />
-            ))}
+        <div className="absolute -bottom-14 left-0 right-0 md:-bottom-12">
+          <div className="flex items-end justify-between gap-3">
+            <div className="flex gap-4 overflow-hidden md:gap-8">
+              {team.map((m, k) => (
+                <button
+                  key={m.slug}
+                  type="button"
+                  data-dot
+                  aria-label={`Ver a ${m.name}`}
+                  className="group flex items-baseline gap-1.5 text-sm font-bold text-ink/30 transition-colors aria-[current=true]:text-ink"
+                >
+                  <span className="font-mono text-[10px]">{String(k + 1).padStart(2, "0")}</span>
+                  <span className="hidden sm:inline">{m.name}</span>
+                </button>
+              ))}
+            </div>
+            <span data-counter className="font-mono text-xs font-bold tabular-nums text-ink/50">
+              01 / {String(total).padStart(2, "0")}
+            </span>
+          </div>
+          <div className="mt-3 h-[3px] overflow-hidden rounded-full bg-ink/10">
+            <div data-fill className="h-full origin-left rounded-full bg-gradient-to-r from-brand to-amber-400" style={{ transform: "scaleX(0)" }} />
           </div>
         </div>
       )}

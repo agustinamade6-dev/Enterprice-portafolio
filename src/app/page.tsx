@@ -171,7 +171,7 @@ export default async function Home() {
 
         {/* Nosotros */}
         <div id="nosotros" className="scroll-anchor" />
-        <section data-hold={Math.max(0, team.length - 1)} className="bg-white px-4 pb-24 pt-20 sm:px-6">
+        <section data-hold={Math.max(0, team.length - 1)} className="overflow-x-clip bg-white px-4 pb-28 pt-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Nosotros"
