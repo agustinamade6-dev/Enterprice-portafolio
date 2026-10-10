@@ -25,7 +25,9 @@ function LoginContent() {
       });
 
       if (res.ok) {
-        const callbackUrl = searchParams.get("callbackUrl") || "/admin";
+        // Solo se vuelve a páginas del propio panel: nunca a una dirección de afuera
+        const asked = searchParams.get("callbackUrl") || "";
+        const callbackUrl = /^\/admin(\/[\w\-/]*)?$/.test(asked) ? asked : "/admin";
         router.push(callbackUrl);
         router.refresh();
       } else {

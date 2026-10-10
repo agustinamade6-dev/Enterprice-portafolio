@@ -26,7 +26,7 @@ export default async function NotFound() {
           </Link>
         </div>
       </main>
-      <Footer name={site.name} instagram={site.instagram} github={site.github} />
+      <Footer />
     </>
   );
 }

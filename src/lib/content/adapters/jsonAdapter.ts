@@ -8,6 +8,7 @@ import {
   BudgetType,
   ProcessStep,
   Faq,
+  PageTexts,
 } from "../schemas";
 
 // Using process.cwd() ensures we look at the root of the project
@@ -32,10 +33,26 @@ async function readJson<T>(filename: string, fallback: T): Promise<T> {
   }
 }
 
+// Guardado seguro: antes de pisar un archivo se copia la versión anterior a data/respaldos/
+// (se guardan las últimas 20 de cada uno), y el archivo nuevo se escribe aparte y después se renombra.
+// Así, si algo se corta a mitad de camino, nunca queda un archivo roto.
+const KEEP_BACKUPS = 20;
 async function writeJson<T>(filename: string, data: T): Promise<void> {
   await ensureDataDir();
   const filePath = path.join(dataDir, filename);
-  await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
+  const backups = path.join(dataDir, "respaldos");
+  try {
+    await fs.mkdir(backups, { recursive: true });
+    const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+    await fs.copyFile(filePath, path.join(backups, `${stamp}__${filename}`));
+    const mine = (await fs.readdir(backups)).filter((f) => f.endsWith(`__${filename}`)).sort();
+    await Promise.all(mine.slice(0, -KEEP_BACKUPS).map((f) => fs.unlink(path.join(backups, f))));
+  } catch {
+    // Primera vez: todavía no hay archivo que respaldar
+  }
+  const tmp = `${filePath}.${process.pid}.tmp`;
+  await fs.writeFile(tmp, JSON.stringify(data, null, 2), "utf-8");
+  await fs.rename(tmp, filePath);
 }
 
 export class JsonAdapter implements ContentRepository {
@@ -162,4 +179,38 @@ export class JsonAdapter implements ContentRepository {
   async updateFaqs(faqs: Faq[]): Promise<void> {
     await writeJson("faqs.json", faqs);
   }
+
+  async getPageTexts(): Promise<PageTexts> {
+    const { pageTexts } = await this.getFallbacks();
+    const saved = await readJson<Partial<PageTexts>>("pageTexts.json", {});
+    // Se completa con los textos por defecto: si más adelante se agrega un texto nuevo, aparece solo
+    const merged = { ...pageTexts } as Record<string, unknown>;
+    for (const [key, value] of Object.entries(saved)) {
+      const base = merged[key];
+      merged[key] =
+        base && typeof base === "object" && !Array.isArray(base) && value && typeof value === "object" && !Array.isArray(value)
+          ? { ...base, ...value }
+          : value;
+    }
+    return merged as PageTexts;
+  }
+  async updatePageTexts(texts: PageTexts): Promise<void> {
+    await writeJson("pageTexts.json", texts);
+  }
+
+  async reorderProjects(slugs: string[]): Promise<void> {
+    await writeJson("projects.json", reorder(await this.getProjects(), slugs));
+  }
+  async reorderTeam(slugs: string[]): Promise<void> {
+    await writeJson("team.json", reorder(await this.getTeam(), slugs));
+  }
+}
+
+// Ordena según la lista de slugs; si falta alguno (o sobra), no se toca nada y se avisa
+function reorder<T extends { slug: string }>(items: T[], slugs: string[]): T[] {
+  const bySlug = new Map(items.map((i) => [i.slug, i]));
+  if (slugs.length !== items.length || new Set(slugs).size !== slugs.length || slugs.some((s) => !bySlug.has(s))) {
+    throw new Error("El orden no coincide con la lista actual");
+  }
+  return slugs.map((s) => bySlug.get(s)!);
 }

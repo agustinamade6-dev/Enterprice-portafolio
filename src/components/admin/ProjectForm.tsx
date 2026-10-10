@@ -81,7 +81,7 @@ export function ProjectForm({ project, isNew = false }: { project?: Project; isN
       if (res.ok) {
         setFormData((prev) => ({ ...prev, image: result.url }));
       } else {
-        alert("Error subiendo imagen");
+        alert((await res.json().catch(() => ({}))).error || "Error subiendo imagen");
       }
     } catch (err) {
       alert("Error subiendo imagen");
@@ -131,7 +131,7 @@ export function ProjectForm({ project, isNew = false }: { project?: Project; isN
         router.refresh();
       } else {
         const data = await res.json();
-        setError(data.error || "Error al guardar el proyecto");
+        setError(data.details?.join(" · ") || data.error || "Error al guardar el proyecto");
       }
     } catch (err) {
       setError("Error de conexión");
@@ -384,7 +384,7 @@ export function ProjectForm({ project, isNew = false }: { project?: Project; isN
                 <img src={formData.image} alt="Preview" className="w-full rounded-xl border border-white/10 object-cover" />
               )}
               
-              <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageUpload} />
+              <input type="file" ref={fileInputRef} className="hidden" accept="image/jpeg,image/png,image/webp,image/gif" onChange={handleImageUpload} />
               
               <button
                 type="button"

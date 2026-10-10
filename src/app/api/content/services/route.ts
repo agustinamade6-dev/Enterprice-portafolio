@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/auth/guard";
 import { NextResponse } from "next/server";
 import { contentRepo } from "@/lib/content";
 import { BudgetTypeSchema } from "@/lib/content/schemas";
@@ -10,7 +11,9 @@ const ServicesPayloadSchema = z.object({
   times: z.array(z.string()),
 });
 
-export async function GET() {
+export async function GET(request: Request) {
+  const denied = await requireAdmin(request);
+  if (denied) return denied;
   try {
     const [types, extras, sectors, times] = await Promise.all([
       contentRepo.getBudgetTypes(),
@@ -25,6 +28,8 @@ export async function GET() {
 }
 
 export async function PUT(request: Request) {
+  const denied = await requireAdmin(request);
+  if (denied) return denied;
   try {
     const body = await request.json();
     const validated = ServicesPayloadSchema.parse(body);
@@ -39,7 +44,7 @@ export async function PUT(request: Request) {
     return NextResponse.json({ success: true });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: "Validation failed", details: (error as any).errors }, { status: 400 });
+      return NextResponse.json({ error: "Validation failed", details: error.issues.map((i) => `${i.path.join(".")}: ${i.message}`) }, { status: 400 });
     }
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }

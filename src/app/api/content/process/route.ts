@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/auth/guard";
 import { NextResponse } from "next/server";
 import { contentRepo } from "@/lib/content";
 import { ProcessStepSchema } from "@/lib/content/schemas";
@@ -8,7 +9,9 @@ const ProcessPayloadSchema = z.object({
   sprintLoop: z.array(z.string()),
 });
 
-export async function GET() {
+export async function GET(request: Request) {
+  const denied = await requireAdmin(request);
+  if (denied) return denied;
   try {
     const [steps, sprintLoop] = await Promise.all([
       contentRepo.getProcessSteps(),
@@ -21,6 +24,8 @@ export async function GET() {
 }
 
 export async function PUT(request: Request) {
+  const denied = await requireAdmin(request);
+  if (denied) return denied;
   try {
     const body = await request.json();
     const validated = ProcessPayloadSchema.parse(body);
@@ -33,7 +38,7 @@ export async function PUT(request: Request) {
     return NextResponse.json({ success: true });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: "Validation failed", details: (error as any).errors }, { status: 400 });
+      return NextResponse.json({ error: "Validation failed", details: error.issues.map((i) => `${i.path.join(".")}: ${i.message}`) }, { status: 400 });
     }
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }

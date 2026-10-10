@@ -41,7 +41,8 @@ export default function ProcessPage() {
       if (res.ok) {
         setMessage({ type: "success", text: "Proceso guardado correctamente." });
       } else {
-        setMessage({ type: "error", text: "Error al guardar." });
+        const r = await res.json().catch(() => ({}));
+        setMessage({ type: "error", text: r.details?.join(" · ") || r.error || "Error al guardar." });
       }
     } catch (err) {
       setMessage({ type: "error", text: "Error de conexión." });

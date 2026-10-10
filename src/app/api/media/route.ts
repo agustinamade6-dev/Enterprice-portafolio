@@ -1,11 +1,14 @@
 import { NextResponse } from "next/server";
 import { mediaRepo } from "@/lib/content/media";
+import { requireAdmin } from "@/lib/auth/guard";
 
-export async function GET() {
+export async function GET(request: Request) {
+  const denied = await requireAdmin(request);
+  if (denied) return denied;
   try {
     const images = await mediaRepo.listImages();
     return NextResponse.json({ images });
-  } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch images" }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "No se pudieron leer las imágenes" }, { status: 500 });
   }
 }

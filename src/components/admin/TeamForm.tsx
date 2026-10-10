@@ -80,7 +80,7 @@ export function TeamForm({ member, isNew = false }: { member?: Member; isNew?: b
       if (res.ok) {
         setFormData((prev) => ({ ...prev, photo: result.url }));
       } else {
-        alert("Error subiendo foto");
+        alert((await res.json().catch(() => ({}))).error || "Error subiendo foto");
       }
     } catch (err) {
       alert("Error subiendo foto");
@@ -133,7 +133,7 @@ export function TeamForm({ member, isNew = false }: { member?: Member; isNew?: b
         router.refresh();
       } else {
         const data = await res.json();
-        setError(data.error || "Error al guardar");
+        setError(data.details?.join(" · ") || data.error || "Error al guardar");
       }
     } catch (err) {
       setError("Error de conexión");
@@ -381,7 +381,7 @@ export function TeamForm({ member, isNew = false }: { member?: Member; isNew?: b
                 )}
               </div>
               
-              <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageUpload} />
+              <input type="file" ref={fileInputRef} className="hidden" accept="image/jpeg,image/png,image/webp,image/gif" onChange={handleImageUpload} />
               
               <button
                 type="button"

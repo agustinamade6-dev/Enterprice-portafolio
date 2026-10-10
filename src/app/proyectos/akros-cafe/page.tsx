@@ -178,7 +178,7 @@ export default async function AkrosCase() {
           </section>
         </article>
       </main>
-      <Footer name={site.name} instagram={site.instagram} github={site.github} />
+      <Footer />
       <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el sistema de AKROS Café y quiero algo parecido para mi negocio.")} />
     </>
   );

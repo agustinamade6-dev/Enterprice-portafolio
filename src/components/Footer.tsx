@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { contentRepo } from "@/lib/content";
 
-export function Footer({ name, instagram, github }: { name: string; instagram: string; github: string }) {
+// Lee los datos del admin directamente, así todas las páginas muestran lo mismo
+export async function Footer() {
+  const { name, instagram, github } = await contentRepo.getSiteData();
+  const { footer } = await contentRepo.getPageTexts();
+  const note = footer.note;
   const social = [
     { href: instagram, label: "Instagram" },
     { href: github, label: "GitHub" },
@@ -21,7 +26,7 @@ export function Footer({ name, instagram, github }: { name: string; instagram: s
           </Link>
           <span className="hidden sm:inline text-white/20">|</span>
           <p>
-            © {new Date().getFullYear()} {name}. Hecho a mano con Next.js.
+            © {new Date().getFullYear()} {name}. {note}
           </p>
         </div>
         <div className="flex gap-5">

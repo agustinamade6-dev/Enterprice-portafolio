@@ -9,6 +9,7 @@ Todo lo que hace falta saber para seguir trabajando en el portafolio, sin tener 
 | [efectos.md](efectos.md) | Las animaciones: el escenario de scroll, el equipo y el carrusel |
 | [flujo-de-trabajo.md](flujo-de-trabajo.md) | Ramas, cómo correrlo, cómo subir cambios y cómo publicarlo |
 | [como-funciona-bit.md](como-funciona-bit.md) | Cómo está hecho Bit, la mascota: dibujo, poses y animaciones, explicado para aprender |
+| [admin.md](admin.md) | El panel de administración: cómo entrar, qué se puede cambiar y cómo está protegido |
 | [seguridad.md](seguridad.md) | Por qué la página es segura y qué hace cada encabezado de seguridad |
 | [lecciones-aprendidas.md](lecciones-aprendidas.md) | Errores que tuvimos en el portafolio y en el sistema de la cafetería, y la regla que dejan |
 

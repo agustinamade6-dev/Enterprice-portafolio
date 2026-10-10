@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Member } from "@/lib/content/schemas";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { Plus, Pencil, Trash2, ArrowLeft, ArrowRight } from "lucide-react";
 
 export default function TeamPage() {
   const [team, setTeam] = useState<Member[]>([]);
@@ -30,6 +30,24 @@ export default function TeamPage() {
     fetchTeam();
   };
 
+
+  // Sube o baja uno en la lista y guarda el orden nuevo
+  const move = async (index: number, dir: -1 | 1) => {
+    const next = [...team];
+    const [item] = next.splice(index, 1);
+    next.splice(index + dir, 0, item);
+    setTeam(next);
+    const res = await fetch("/api/content/team", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ order: next.map((x) => x.slug) }),
+    });
+    if (!res.ok) {
+      alert((await res.json().catch(() => ({}))).error || "No se pudo guardar el orden");
+      fetchTeam();
+    }
+  };
+
   if (loading) return <div className="p-8 text-center text-ink/50">Cargando...</div>;
 
   return (
@@ -45,7 +63,7 @@ export default function TeamPage() {
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {team.map((member) => (
+        {team.map((member, i) => (
           <div key={member.slug} className="flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-sm transition-shadow hover:shadow-md">
             <div className="flex-1 p-6 text-center">
               <div className="mx-auto h-24 w-24 overflow-hidden rounded-full border-2 border-brand/50 bg-black/50">
@@ -63,6 +81,14 @@ export default function TeamPage() {
               <p className="mt-2 text-sm text-paper/70 line-clamp-2">{member.role}</p>
             </div>
             <div className="flex divide-x divide-white/10 border-t border-white/10 bg-black/20">
+              <button
+                onClick={() => move(i, -1)}
+                disabled={i === 0}
+                title="Mover antes"
+                className="px-3 text-paper/50 hover:bg-white/5 hover:text-brand disabled:opacity-30"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </button>
               <Link
                 href={`/admin/team/${member.slug}`}
                 className="flex flex-1 items-center justify-center gap-2 p-3 text-sm font-medium text-brand hover:bg-white/5 hover:text-brand-dark"
@@ -74,6 +100,14 @@ export default function TeamPage() {
                 className="flex flex-1 items-center justify-center gap-2 p-3 text-sm font-medium text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors"
               >
                 <Trash2 className="h-4 w-4" /> Eliminar
+              </button>
+              <button
+                onClick={() => move(i, 1)}
+                disabled={i === team.length - 1}
+                title="Mover después"
+                className="px-3 text-paper/50 hover:bg-white/5 hover:text-brand disabled:opacity-30"
+              >
+                <ArrowRight className="h-4 w-4" />
               </button>
             </div>
           </div>

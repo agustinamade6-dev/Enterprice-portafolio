@@ -1,3 +1,5 @@
+import type { PageTexts } from "@/lib/content/schemas";
+
 // Todo el texto del sitio vive aquí: para cambiar precios, datos de contacto o
 // proyectos no hace falta tocar los componentes.
 
@@ -513,3 +515,73 @@ export const team: Member[] = [
     },
   },
 ];
+
+// Textos fijos de la página de inicio. Desde el admin se editan en "Textos de la página".
+// {nombre} se reemplaza por el nombre del sitio.
+export const pageTexts: PageTexts = {
+  hero: {
+    badge: "Disponible para nuevos proyectos",
+    titleStart: "Tu negocio,",
+    titleHighlight: "vendiendo más",
+    titleEnd: "con una web o un sistema a medida.",
+    subtitleExtra: "Diseño simple, rápido y pensado para tus clientes.",
+    buttonProjects: "Ver proyectos",
+    buttonWhatsapp: "Escribirnos por WhatsApp",
+    whatsappMessage: "Hola, quiero consultar por un proyecto.",
+    cardLabel: "Proyecto real",
+    cardTitle: "AKROS Café · punto de venta",
+  },
+  projects: {
+    eyebrow: "Proyectos",
+    title: "Trabajos y prototipos",
+    text: "Sistemas reales en uso, lo que cada uno del equipo va construyendo y conceptos pensados para cada tipo de negocio.",
+  },
+  services: {
+    eyebrow: "Servicios",
+    title: "Arma tu presupuesto",
+    text: "Cada negocio es distinto, por eso no tenemos precios fijos. Elige lo que necesitas y te pasamos un presupuesto a medida, por escrito y antes de empezar.",
+    note: "¿Ya tienes una web? También ofrecemos un plan mensual de mantenimiento con cambios, copias de seguridad y soporte.",
+  },
+  process: {
+    eyebrow: "Cómo trabajamos",
+    title: "Paso a paso, y siempre con tu opinión",
+    text: "No desaparecemos hasta la entrega: vas viendo prototipos, los pruebas y decides cómo sigue.",
+    sprintTitle: "En cada sprint",
+    sprintRepeat: "↻ Y se repite hasta que quede como lo imaginaste.",
+  },
+  team: {
+    eyebrow: "Nosotros",
+    title: "Somos {nombre}",
+    text: "Somos cuatro estudiantes de Ingeniería en Sistemas de la Universidad Tecnológica Nacional, Facultad Regional Tucumán, que empezamos de cero y vamos por el cien. Nuestro nombre lo dice: Zain significa bueno y lindo, y Soft, software. Hacemos software de calidad, con un backend sólido que funciona y un diseño cuidado y fácil de usar. Cada uno aporta lo suyo, y juntos convertimos las ideas de cada negocio en sistemas y páginas que funcionan.",
+  },
+  faqs: {
+    eyebrow: "Preguntas frecuentes",
+    title: "Lo que suelen preguntarnos",
+    text: "",
+  },
+  contact: {
+    eyebrow: "Contacto",
+    title: "¿Hablamos de tu proyecto?",
+    text: "Cuéntanos qué necesitas y te respondemos en el día con una propuesta. La primera charla no tiene costo.",
+    whatsappLabel: "WhatsApp",
+    whatsappMessage: "Hola, quiero consultar por un proyecto.",
+  },
+  footer: { note: "Hecho a mano con Next.js." },
+  seo: { titleSuffix: "Páginas web y sistemas a medida" },
+  bit: {
+    hero: { pose: "saludando", text: "¡Hola! Soy Bit 👋" },
+    projects: { pose: "programando", text: "Mira lo que hicimos 👀" },
+    services: { pose: "pensando", text: "Elige lo que necesitas y armamos tu presupuesto 💡" },
+    process: { pose: "programando", text: "Así trabajamos, paso a paso" },
+    team: { pose: "saludando", text: "Ellos me programaron 🧡" },
+    faqs: { pose: "pensando", text: "¿Dudas? Acá están las respuestas" },
+    contact: { pose: "saludando", text: "¡Escríbenos! Respondemos en el día" },
+    click: [
+      "Lo bueno por dentro, lo lindo por fuera 🧡",
+      "Mi lado negro hace que todo funcione",
+      "Mi lado naranja hace que se vea bien",
+      "¿Armamos algo juntos?",
+      "¡Eso me hizo cosquillas!",
+    ],
+  },
+};

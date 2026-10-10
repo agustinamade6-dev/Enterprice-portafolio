@@ -5,6 +5,7 @@ import {
   BudgetType,
   ProcessStep,
   Faq,
+  PageTexts,
 } from "./schemas";
 
 export interface ContentRepository {
@@ -39,4 +40,11 @@ export interface ContentRepository {
 
   getFaqs(): Promise<Faq[]>;
   updateFaqs(faqs: Faq[]): Promise<void>;
+
+  getPageTexts(): Promise<PageTexts>;
+  updatePageTexts(texts: PageTexts): Promise<void>;
+
+  // Cambia el orden guardado de proyectos o del equipo (recibe los slugs en el orden nuevo)
+  reorderProjects(slugs: string[]): Promise<void>;
+  reorderTeam(slugs: string[]): Promise<void>;
 }

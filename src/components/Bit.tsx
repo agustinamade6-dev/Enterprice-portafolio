@@ -37,7 +37,7 @@ const CLICK = [
   "¡Eso me hizo cosquillas!",
 ];
 
-export function Bit() {
+export function Bit({ clicks = CLICK }: { clicks?: string[] }) {
   const [pose, setPose] = useState<BitPose>("saludando");
   const [bubble, setBubble] = useState<string | null>(null);
   const [eye, setEye] = useState({ x: 0, y: 0 });
@@ -48,7 +48,7 @@ export function Bit() {
   const party = useRef<number>(0);
   const bubbleTimer = useRef<number>(0);
   const sectionPose = useRef<BitPose>("saludando");
-  const clicks = useRef(0);
+  const clickCount = useRef(0);
 
   const say = (text: string, ms = 4200) => {
     setBubble(text);
@@ -150,7 +150,7 @@ export function Bit() {
   }, []);
 
   const onClick = () => {
-    celebrate(CLICK[clicks.current++ % CLICK.length]);
+    celebrate(clicks[clickCount.current++ % clicks.length]);
   };
 
   const [la, ra] = ARMS[pose];

@@ -155,7 +155,7 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
           </section>
         </article>
       </main>
-      <Footer name={site.name} instagram={site.instagram} github={site.github} />
+      <Footer />
       <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el portafolio de ZainSoft y quiero consultar por un proyecto.")} />
     </>
   );

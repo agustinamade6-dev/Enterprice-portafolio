@@ -49,3 +49,6 @@ next-env.d.ts
 
 # wrangler (pruebas locales)
 .wrangler/
+
+# respaldos automáticos del admin
+src/content/data/respaldos/

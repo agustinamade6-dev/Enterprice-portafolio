@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Project } from "@/lib/content/schemas";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { Plus, Pencil, Trash2, ArrowUp, ArrowDown } from "lucide-react";
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -30,12 +30,33 @@ export default function ProjectsPage() {
     fetchProjects();
   };
 
+
+  // Sube o baja uno en la lista y guarda el orden nuevo
+  const move = async (index: number, dir: -1 | 1) => {
+    const next = [...projects];
+    const [item] = next.splice(index, 1);
+    next.splice(index + dir, 0, item);
+    setProjects(next);
+    const res = await fetch("/api/content/projects", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ order: next.map((x) => x.slug) }),
+    });
+    if (!res.ok) {
+      alert((await res.json().catch(() => ({}))).error || "No se pudo guardar el orden");
+      fetchProjects();
+    }
+  };
+
   if (loading) return <div className="p-8 text-center text-ink/50">Cargando...</div>;
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-white">Proyectos</h1>
+        <div>
+          <h1 className="text-2xl font-bold text-white">Proyectos</h1>
+          <p className="text-sm text-paper/60">En la página se muestran por tipo (reales, en desarrollo, facultad, conceptos) y dentro de cada tipo en este orden.</p>
+        </div>
         <Link
           href="/admin/projects/new"
           className="flex items-center gap-2 rounded-xl bg-brand px-4 py-2 font-bold text-white hover:bg-brand-dark"
@@ -55,7 +76,7 @@ export default function ProjectsPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-white/10 bg-transparent">
-            {projects.map((project) => (
+            {projects.map((project, i) => (
               <tr key={project.slug} className="transition-colors hover:bg-white/5">
                 <td className="whitespace-nowrap px-6 py-4">
                   <div className="font-bold text-white">{project.title}</div>
@@ -76,6 +97,12 @@ export default function ProjectsPage() {
                 </td>
                 <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-medium">
                   <div className="flex justify-end gap-3">
+                    <button onClick={() => move(i, -1)} disabled={i === 0} title="Subir" className="text-paper/50 hover:text-brand disabled:opacity-30">
+                      <ArrowUp className="h-5 w-5" />
+                    </button>
+                    <button onClick={() => move(i, 1)} disabled={i === projects.length - 1} title="Bajar" className="text-paper/50 hover:text-brand disabled:opacity-30">
+                      <ArrowDown className="h-5 w-5" />
+                    </button>
                     <Link
                       href={`/admin/projects/${project.slug}`}
                       className="text-brand hover:text-brand-dark"

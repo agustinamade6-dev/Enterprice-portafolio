@@ -12,11 +12,11 @@ const jakarta = Plus_Jakarta_Sans({
 
 export async function generateMetadata(): Promise<Metadata> {
   const site = await contentRepo.getSiteData();
-  
+  const { seo } = await contentRepo.getPageTexts();
   return {
     metadataBase: new URL(site.url),
     title: {
-      default: `${site.name} | Páginas web y sistemas a medida`,
+      default: `${site.name} | ${seo.titleSuffix}`,
       template: `%s | ${site.name}`,
     },
     description: site.description,
@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: "es_AR",
       type: "website",
       siteName: site.name,
-      images: [{ url: "/og.png", width: 1200, height: 630, alt: `${site.name}: páginas web y sistemas a medida` }],
+      images: [{ url: "/og.png", width: 1200, height: 630, alt: `${site.name}: ${seo.titleSuffix}` }],
     },
     twitter: { card: "summary_large_image" },
   };

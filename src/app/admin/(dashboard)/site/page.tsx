@@ -36,6 +36,8 @@ export default function SitePage() {
       const result = await res.json();
       if (res.ok) {
         setData((prev) => prev ? { ...prev, photo: result.url } : null);
+      } else {
+        alert(result.error || "Error subiendo imagen");
       }
     } catch (err) {
       alert("Error subiendo imagen");
@@ -57,7 +59,8 @@ export default function SitePage() {
       if (res.ok) {
         setMessage({ type: "success", text: "Datos guardados correctamente." });
       } else {
-        setMessage({ type: "error", text: "Error al guardar." });
+        const r = await res.json().catch(() => ({}));
+        setMessage({ type: "error", text: r.details?.join(" · ") || r.error || "Error al guardar." });
       }
     } catch (err) {
       setMessage({ type: "error", text: "Error de conexión." });
@@ -125,7 +128,7 @@ export default function SitePage() {
                 {data.photo && <img src={data.photo} alt="Foto" className="h-full w-full object-cover" />}
               </div>
               <div className="flex-1 space-y-2">
-                <input type="file" id="site-photo" className="hidden" accept="image/*" onChange={handleImageUpload} />
+                <input type="file" id="site-photo" className="hidden" accept="image/jpeg,image/png,image/webp,image/gif" onChange={handleImageUpload} />
                 <label htmlFor="site-photo" className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-white/10 px-4 py-2 text-sm font-bold text-paper/70 hover:bg-white/10 hover:text-white transition-colors">
                   <Upload className="h-4 w-4" /> Cambiar Imagen
                 </label>

@@ -34,7 +34,8 @@ export default function FaqsPage() {
       if (res.ok) {
         setMessage({ type: "success", text: "Preguntas frecuentes actualizadas." });
       } else {
-        setMessage({ type: "error", text: "Error al guardar." });
+        const r = await res.json().catch(() => ({}));
+        setMessage({ type: "error", text: r.details?.join(" · ") || r.error || "Error al guardar." });
       }
     } catch (err) {
       setMessage({ type: "error", text: "Error de conexión." });

@@ -6,6 +6,7 @@ La página publicada es **estática**: Cloudflare solo entrega archivos ya armad
 
 - El panel `/admin`, las rutas `/api` y el `middleware` **no se publican**: `npm run build:export` los aparta antes de armar la página. El admin solo funciona en la PC de cada uno con `npm run dev`.
 - Las credenciales del admin viven solo en `.env.local`, que está ignorado por git y nunca se sube.
+- Cómo está protegido el admin por dentro (login, fotos, sesiones, validaciones): ver [admin.md](admin.md).
 - Cloudflare da HTTPS (el candado) y protección contra ataques de tráfico masivo por defecto.
 - `npm audit --omit=dev` revisa si alguna dependencia tiene vulnerabilidades conocidas (al 2026-10-10: 0).
 

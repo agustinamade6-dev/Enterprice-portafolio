@@ -150,7 +150,7 @@ export default async function PierinaCase() {
           </section>
         </article>
       </main>
-      <Footer name={site.name} instagram={site.instagram} github={site.github} />
+      <Footer />
       <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el sistema de Pierina Glow y quiero algo parecido para mi negocio.")} />
     </>
   );

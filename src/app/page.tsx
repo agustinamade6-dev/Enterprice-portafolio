@@ -21,6 +21,9 @@ export default async function Home() {
   const faqs = await contentRepo.getFaqs();
   const process = await contentRepo.getProcessSteps();
   const sprintLoop = await contentRepo.getSprintLoop();
+  const t = await contentRepo.getPageTexts();
+  const fill = (v: string) => v.replaceAll("{nombre}", site.name);
+  const bit = (l: { pose: string; text: string }) => `${l.pose}|${l.text}`;
   
   const budgetTypes = await contentRepo.getBudgetTypes();
   const budgetExtras = await contentRepo.getBudgetExtras();
@@ -35,39 +38,39 @@ export default async function Home() {
       <Header siteName={site.name} />
       <main data-stage>
         {/* Inicio */}
-        <section data-bit="saludando|¡Hola! Soy Bit 👋" className="fondo-inicio relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
+        <section data-bit={bit(t.bit.hero)} className="fondo-inicio relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
             <div data-reveal data-hero-text>
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-sm font-medium">
                 <span className="h-2 w-2 rounded-full bg-green-500" />
-                Disponible para nuevos proyectos
+                {t.hero.badge}
               </p>
               <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-                Tu negocio, <span className="text-brand">vendiendo más</span> con una web o un sistema a medida.
+                {t.hero.titleStart} <span className="text-brand">{t.hero.titleHighlight}</span> {t.hero.titleEnd}
               </h1>
-              <p className="mt-6 max-w-xl text-lg text-ink/70">{site.tagline} Diseño simple, rápido y pensado para tus clientes.</p>
+              <p className="mt-6 max-w-xl text-lg text-ink/70">{site.tagline} {t.hero.subtitleExtra}</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="#proyectos"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 font-bold text-paper transition hover:bg-brand"
                 >
-                  Ver proyectos <ArrowIcon className="h-4 w-4" />
+                  {t.hero.buttonProjects} <ArrowIcon className="h-4 w-4" />
                 </Link>
                 <a
-                  href={makeWhatsappLink(site.whatsapp, "Hola, quiero consultar por un proyecto.")}
+                  href={makeWhatsappLink(site.whatsapp, t.hero.whatsappMessage)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-black/15 bg-white px-6 py-3.5 font-bold transition hover:border-ink"
                 >
-                  <WhatsAppIcon className="h-5 w-5 text-[#25d366]" /> Escribirnos por WhatsApp
+                  <WhatsAppIcon className="h-5 w-5 text-[#25d366]" /> {t.hero.buttonWhatsapp}
                 </a>
               </div>
             </div>
             <div className="relative hidden lg:block" data-reveal data-hero-art style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
               <PosMockup className="mx-auto max-w-lg rotate-1" />
               <div className="absolute -bottom-6 left-2 rounded-2xl bg-white px-4 py-3 shadow-xl shadow-black/10 sm:left-0">
-                <p className="text-xs text-ink/60">Proyecto real</p>
-                <p className="font-bold">AKROS Café · punto de venta</p>
+                <p className="text-xs text-ink/60">{t.hero.cardLabel}</p>
+                <p className="font-bold">{t.hero.cardTitle}</p>
               </div>
             </div>
           </div>
@@ -75,13 +78,9 @@ export default async function Home() {
 
         {/* Proyectos */}
         <div id="proyectos" className="scroll-anchor" />
-        <section data-bit="programando|Mira lo que hicimos 👀" className="fondo-proyectos overflow-x-clip py-20">
+        <section data-bit={bit(t.bit.projects)} className="fondo-proyectos overflow-x-clip py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <SectionTitle
-              eyebrow="Proyectos"
-              title="Trabajos y prototipos"
-              text="Sistemas reales en uso, lo que cada uno del equipo va construyendo y conceptos pensados para cada tipo de negocio."
-            />
+            <SectionTitle eyebrow={t.projects.eyebrow} title={fill(t.projects.title)} text={fill(t.projects.text)} />
           </div>
           {/* Sacamos el carrusel del max-w-6xl para que use el ancho completo de la ventana sin cortarse */}
           {/* Sin data-reveal: animar la opacidad de un padre aplana el 3D y obliga a redibujar el cilindro entero */}
@@ -92,13 +91,9 @@ export default async function Home() {
 
         {/* Servicios */}
         <div id="servicios" className="scroll-anchor" />
-        <section data-bit="pensando|Elige lo que necesitas y armamos tu presupuesto 💡" className="fondo-servicios px-4 py-20 sm:px-6">
+        <section data-bit={bit(t.bit.services)} className="fondo-servicios px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
-            <SectionTitle
-              eyebrow="Servicios"
-              title="Arma tu presupuesto"
-              text="Cada negocio es distinto, por eso no tenemos precios fijos. Elige lo que necesitas y te pasamos un presupuesto a medida, por escrito y antes de empezar."
-            />
+            <SectionTitle eyebrow={t.services.eyebrow} title={fill(t.services.title)} text={fill(t.services.text)} />
             <div className="mt-12" data-reveal>
               <BudgetBuilder
                 budgetTypes={budgetTypes}
@@ -108,21 +103,19 @@ export default async function Home() {
                 whatsapp={site.whatsapp}
               />
             </div>
-            <p className="mt-8 text-center text-sm text-ink/60" data-reveal>
-              ¿Ya tienes una web? También ofrecemos un plan mensual de mantenimiento con cambios, copias de seguridad y soporte.
-            </p>
+            {t.services.note && (
+              <p className="mt-8 text-center text-sm text-ink/60" data-reveal>
+                {fill(t.services.note)}
+              </p>
+            )}
           </div>
         </section>
 
         {/* Proceso */}
         <div id="proceso" className="scroll-anchor" />
-        <section data-bit="programando|Así trabajamos, paso a paso" data-hold={4} data-hold-fit className="fondo-proceso px-4 py-20 sm:px-6">
+        <section data-bit={bit(t.bit.process)} data-hold={4} data-hold-fit className="fondo-proceso px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
-            <SectionTitle
-              eyebrow="Cómo trabajamos"
-              title="Paso a paso, y siempre con tu opinión"
-              text="No desaparecemos hasta la entrega: vas viendo prototipos, los pruebas y decides cómo sigue."
-            />
+            <SectionTitle eyebrow={t.process.eyebrow} title={fill(t.process.title)} text={fill(t.process.text)} />
             <ol className="mt-12 grid gap-6 md:grid-cols-3">
               {process.map((step, i) => (
                 <li
@@ -149,7 +142,7 @@ export default async function Home() {
                   </ul>
                   {i === 2 && (
                     <div className="mt-6 rounded-2xl bg-white/5 p-4">
-                      <p className="text-xs font-bold uppercase tracking-widest text-brand">En cada sprint</p>
+                      <p className="text-xs font-bold uppercase tracking-widest text-brand">{t.process.sprintTitle}</p>
                       <ol className="mt-3 space-y-2.5">
                         {sprintLoop.map((s, j) => (
                           <li key={s} className="flex items-center gap-3 text-sm">
@@ -160,7 +153,7 @@ export default async function Home() {
                           </li>
                         ))}
                       </ol>
-                      <p className="mt-3 text-xs text-paper/60">↻ Y se repite hasta que quede como lo imaginaste.</p>
+                      <p className="mt-3 text-xs text-paper/60">{t.process.sprintRepeat}</p>
                     </div>
                   )}
                 </li>
@@ -171,14 +164,9 @@ export default async function Home() {
 
         {/* Nosotros */}
         <div id="nosotros" className="scroll-anchor" />
-        <section data-hold={Math.max(0, team.length - 1)} data-bit="saludando|Ellos me programaron 🧡" className="fondo-nosotros overflow-x-clip px-4 pb-20 pt-20 sm:px-6">
+        <section data-hold={Math.max(0, team.length - 1)} data-bit={bit(t.bit.team)} className="fondo-nosotros overflow-x-clip px-4 pb-20 pt-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
-            <SectionTitle
-              wide
-              eyebrow="Nosotros"
-              title={`Somos ${site.name}`}
-              text="Somos cuatro estudiantes de Ingeniería en Sistemas de la Universidad Tecnológica Nacional, Facultad Regional Tucumán, que empezamos de cero y vamos por el cien. Nuestro nombre lo dice: Zain significa bueno y lindo, y Soft, software. Hacemos software de calidad, con un backend sólido que funciona y un diseño cuidado y fácil de usar. Cada uno aporta lo suyo, y juntos convertimos las ideas de cada negocio en sistemas y páginas que funcionan."
-            />
+            <SectionTitle wide eyebrow={t.team.eyebrow} title={fill(t.team.title)} text={fill(t.team.text)} />
             <TeamShowcase
               team={team.map(({ slug, name, fullName, role, photo, href, network, bio, skills }) => ({
                 slug, name, fullName, role, photo, href, network, bio, skills,
@@ -189,9 +177,9 @@ export default async function Home() {
 
         {/* Preguntas frecuentes */}
         <div id="preguntas" className="scroll-anchor" />
-        <section data-bit="pensando|¿Dudas? Acá están las respuestas" className="fondo-preguntas px-4 py-20 sm:px-6">
+        <section data-bit={bit(t.bit.faqs)} className="fondo-preguntas px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-3xl">
-            <SectionTitle eyebrow="Preguntas frecuentes" title="Lo que suelen preguntarnos" />
+            <SectionTitle eyebrow={t.faqs.eyebrow} title={fill(t.faqs.title)} text={fill(t.faqs.text)} />
             <div className="mt-10 space-y-3">
               {faqs.map((f, i) => (
                 <details
@@ -212,23 +200,23 @@ export default async function Home() {
 
         {/* Contacto */}
         <div id="contacto" className="scroll-anchor" />
-        <div data-bit="saludando|¡Escríbenos! Respondemos en el día" className="scene-end fondo-contacto">
+        <div data-bit={bit(t.bit.contact)} className="scene-end fondo-contacto">
           <section className="grid content-center px-4 py-20 text-paper sm:px-6">
             <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
               <div data-reveal>
-                <p className="text-sm font-bold uppercase tracking-widest text-brand">Contacto</p>
-                <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">¿Hablamos de tu proyecto?</h2>
+                <p className="text-sm font-bold uppercase tracking-widest text-brand">{t.contact.eyebrow}</p>
+                <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{fill(t.contact.title)}</h2>
                 <p className="mt-4 text-lg text-paper/70">
-                  Cuéntanos qué necesitas y te respondemos en el día con una propuesta. La primera charla no tiene costo.
+                  {fill(t.contact.text)}
                 </p>
                 <div className="mt-8 space-y-3 text-paper/80">
                   <a
-                    href={makeWhatsappLink(site.whatsapp, "Hola, quiero consultar por un proyecto.")}
+                    href={makeWhatsappLink(site.whatsapp, t.contact.whatsappMessage)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 hover:text-paper"
                   >
-                    <WhatsAppIcon className="h-5 w-5 text-[#25d366]" /> WhatsApp
+                    <WhatsAppIcon className="h-5 w-5 text-[#25d366]" /> {t.contact.whatsappLabel}
                   </a>
                   <a href={`mailto:${site.email}`} className="block hover:text-paper">
                     {site.email}
@@ -240,10 +228,10 @@ export default async function Home() {
               </div>
             </div>
           </section>
-          <Footer name={site.name} instagram={site.instagram} github={site.github} />
+          <Footer />
         </div>
       </main>
-      <Bit />
+      <Bit clicks={t.bit.click} />
     </>
   );
 }

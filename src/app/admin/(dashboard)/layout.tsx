@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { 
   LayoutDashboard, 
   Settings, 
+  Type,
   FolderGit2, 
   Users, 
   ListTodo, 
@@ -21,6 +22,7 @@ import { useEffect, useState } from "react";
 const navigation = [
   { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { name: "Datos del Sitio", href: "/admin/site", icon: Settings },
+  { name: "Textos de la página", href: "/admin/texts", icon: Type },
   { name: "Proyectos", href: "/admin/projects", icon: FolderGit2 },
   { name: "Equipo", href: "/admin/team", icon: Users },
   { name: "Servicios", href: "/admin/services", icon: Briefcase },

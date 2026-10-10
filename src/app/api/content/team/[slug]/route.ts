@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/auth/guard";
 import { NextResponse } from "next/server";
 import { contentRepo } from "@/lib/content";
 import { MemberSchema } from "@/lib/content/schemas";
@@ -7,6 +8,8 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
+  const denied = await requireAdmin(request);
+  if (denied) return denied;
   try {
     const resolvedParams = await params;
     const body = await request.json();
@@ -26,7 +29,7 @@ export async function PUT(
     return NextResponse.json({ success: true, member: validatedData });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: "Validation failed", details: (error as any).errors }, { status: 400 });
+      return NextResponse.json({ error: "Validation failed", details: error.issues.map((i) => `${i.path.join(".")}: ${i.message}`) }, { status: 400 });
     }
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
@@ -36,6 +39,8 @@ export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
+  const denied = await requireAdmin(request);
+  if (denied) return denied;
   try {
     const resolvedParams = await params;
     await contentRepo.deleteMember(resolvedParams.slug);
