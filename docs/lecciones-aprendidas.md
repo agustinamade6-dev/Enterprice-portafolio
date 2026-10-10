@@ -27,6 +27,7 @@ Cosas que salieron mal (o casi) y la regla que nos dejan, para no repetirlas. Al
 | 19 | El panel de admin traía un usuario de ejemplo y una clave de sesión de respaldo escritos en el código público: cualquiera podía entrar o fabricarse una sesión. | El usuario y la clave salen de `.env.local` (`npm run crear-admin`); sin `SESSION_SECRET` no hay sesiones. | Nada secreto en el código: ni contraseñas, ni hashes, ni claves "solo para desarrollo". |
 | 20 | En la rama `efectos` quedaron subidas 36 capturas de prueba (`s2-*.png`, `hero-*.png`, `fl-*.png`) en la raíz del proyecto. | Se borraron y `.gitignore` ignora los `.png` sueltos en la raíz. | Guardar las capturas de prueba fuera del proyecto y revisar `git status` antes de `git add -A`. |
 | 21 | Después de correr `npm run dev`, `npm run build:export` fallaba en TypeScript: los tipos que deja dev (`.next/dev/types`) nombran las rutas del panel, que el build estático aparta. | `build-static.mjs` borra `.next/dev/types` antes de compilar. | Cuando un build aparta carpetas, limpiar también lo generado que las nombra. |
+| 22 | `crear-admin` solo imprimía las líneas para `.env.local` y había que crear el archivo a mano: el archivo no llegó a existir y el panel rechazaba el usuario. | El script ahora escribe `.env.local` solo. | Si un paso manual se puede automatizar, que lo haga el script; los pasos a mano (sobre todo crear archivos que empiezan con punto en Windows) se pierden. |
 
 ## Sistema de la cafetería (AKROS Café)
 
