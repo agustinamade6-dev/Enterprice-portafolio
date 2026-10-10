@@ -46,3 +46,6 @@ next-env.d.ts
 
 # Capturas de pruebas que quedan en la raíz: no van al repositorio
 /*.png
+
+# wrangler (pruebas locales)
+.wrangler/
