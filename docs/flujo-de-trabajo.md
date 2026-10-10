@@ -33,10 +33,12 @@ npm run lint           # revisa el código
 3. Actualizar el documento que corresponda en `docs/`.
 4. Commit con un mensaje en español que diga qué cambia ("Sumar a Fabrizio al equipo…").
 
-## Publicar (Cloudflare Pages)
+## Publicar (Cloudflare)
 
-1. Crear un proyecto en Cloudflare Pages conectado al repositorio.
-2. Comando de build `npm run build:export`, carpeta de salida `out`, variable `NODE_VERSION=22`. El panel de admin no se publica: el build estático lo deja afuera.
-3. Cada cambio en `main` se publica solo.
+Se publica como Worker con archivos estáticos (el panel nuevo de Cloudflare ofrece Workers al conectar un repositorio). La configuración está en `wrangler.jsonc`.
+
+1. En Cloudflare: Compute → Workers & Pages → Create application → importar el repositorio de GitHub.
+2. Project name `zainsoft` (tiene que ser igual al `name` de `wrangler.jsonc`), Build command `npm run build:export`, Deploy command `npx wrangler deploy`. La rama de producción es `main`.
+3. Cada cambio en `main` se publica solo. El panel de admin no se publica: el build estático lo deja afuera.
 
 Todavía no está confirmado que esté publicado. Cuando lo esté, cambiar `site.url` en `src/content/site.ts` por la dirección real.
