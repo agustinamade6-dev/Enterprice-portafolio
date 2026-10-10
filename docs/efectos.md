@@ -49,3 +49,7 @@ La idea viene de un video del sitio de GTA VI que pasó Agustin: que al hacer sc
 2. **Secciones apiladas** (cada sección se pegaba y la siguiente subía encima como una carta, oscureciendo la de atrás): descartado porque se veía "como un bloque o una diapositiva".
 3. **Movimiento fluido por bloque** sin escenario fijo: le faltaba la sensación de "no estar bajando".
 4. **Escenario fijo** (actual). En compu se sentía lento y con mucho blanco: se acortó el cambio con mouse y cada escena pasó a llenar la pantalla.
+
+## Fondos por apartado
+
+Cada apartado tiene su tono de la marca y un dibujo sutil que tiene que ver con su tema (clases `.fondo-*` en `src/app/globals.css`, dibujos en `public/fondos/`): cuadrícula de diseño en Inicio, símbolos de código en Proyectos, puntos en Servicios, camino de pasos en Cómo trabajamos, ondas en Nosotros, signos de pregunta y globos en Preguntas, y ondas de señal con puntos sobre fondo oscuro en Contacto. La capa de arriba de cada fondo es un degradé del color base que esfuma el dibujo hacia los bordes. Agustin eligió "fondos con dibujo" (2026-10-10) frente a solo tonos o alternar claro y oscuro.

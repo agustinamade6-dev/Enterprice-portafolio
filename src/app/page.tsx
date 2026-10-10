@@ -35,8 +35,7 @@ export default async function Home() {
       <Header siteName={site.name} />
       <main data-stage>
         {/* Inicio */}
-        <section className="relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
-          <div className="pointer-events-none absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-full bg-brand/15 blur-3xl" />
+        <section className="fondo-inicio relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
             <div data-reveal data-hero-text>
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-sm font-medium">
@@ -76,7 +75,7 @@ export default async function Home() {
 
         {/* Proyectos */}
         <div id="proyectos" className="scroll-anchor" />
-        <section className="overflow-x-clip bg-paper py-20">
+        <section className="fondo-proyectos overflow-x-clip py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionTitle
               eyebrow="Proyectos"
@@ -93,7 +92,7 @@ export default async function Home() {
 
         {/* Servicios */}
         <div id="servicios" className="scroll-anchor" />
-        <section className="bg-white px-4 py-20 sm:px-6">
+        <section className="fondo-servicios px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Servicios"
@@ -117,7 +116,7 @@ export default async function Home() {
 
         {/* Proceso */}
         <div id="proceso" className="scroll-anchor" />
-        <section data-hold={4} data-hold-fit className="bg-paper px-4 py-20 sm:px-6">
+        <section data-hold={4} data-hold-fit className="fondo-proceso px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Cómo trabajamos"
@@ -172,7 +171,7 @@ export default async function Home() {
 
         {/* Nosotros */}
         <div id="nosotros" className="scroll-anchor" />
-        <section data-hold={Math.max(0, team.length - 1)} className="overflow-x-clip bg-white px-4 pb-28 pt-20 sm:px-6">
+        <section data-hold={Math.max(0, team.length - 1)} className="fondo-nosotros overflow-x-clip px-4 pb-28 pt-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Nosotros"
@@ -189,7 +188,7 @@ export default async function Home() {
 
         {/* Preguntas frecuentes */}
         <div id="preguntas" className="scroll-anchor" />
-        <section className="bg-paper px-4 py-20 sm:px-6">
+        <section className="fondo-preguntas px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-3xl">
             <SectionTitle eyebrow="Preguntas frecuentes" title="Lo que suelen preguntarnos" />
             <div className="mt-10 space-y-3">
@@ -212,8 +211,8 @@ export default async function Home() {
 
         {/* Contacto */}
         <div id="contacto" className="scroll-anchor" />
-        <div className="scene-end bg-ink">
-          <section className="grid content-center bg-ink px-4 py-20 text-paper sm:px-6">
+        <div className="scene-end fondo-contacto">
+          <section className="grid content-center px-4 py-20 text-paper sm:px-6">
             <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
               <div data-reveal>
                 <p className="text-sm font-bold uppercase tracking-widest text-brand">Contacto</p>

@@ -150,3 +150,63 @@ section[id],
     rotate: none;
   }
 }
+
+/* Fondos por apartado: cada uno con su tono de la marca y un dibujo sutil que tiene que ver con su tema.
+   La capa de arriba de cada fondo es un degradé del color base que esfuma el dibujo hacia los bordes. */
+.fondo-inicio {
+  /* Plano de trabajo: cuadrícula de diseño */
+  background:
+    radial-gradient(40rem 32rem at 95% 0%, rgb(240 90 40 / 0.16), transparent 70%),
+    radial-gradient(70rem 40rem at 30% 40%, transparent 30%, #faf8f5 85%),
+    linear-gradient(rgb(15 17 21 / 0.07) 1px, transparent 1px) 0 0 / 44px 44px,
+    linear-gradient(90deg, rgb(15 17 21 / 0.07) 1px, transparent 1px) 0 0 / 44px 44px,
+    #faf8f5;
+}
+.fondo-proyectos {
+  /* Código: símbolos de programación repartidos */
+  background:
+    radial-gradient(38rem 28rem at 5% 10%, rgb(251 146 60 / 0.16), transparent 70%),
+    radial-gradient(80rem 50rem at 50% 50%, transparent 35%, #fdf1e7 90%),
+    url("/fondos/codigo.svg") 0 0 / 180px 140px,
+    #fdf1e7;
+}
+.fondo-servicios {
+  /* Puntos: piezas que se eligen y se suman */
+  background:
+    radial-gradient(36rem 28rem at 100% 0%, rgb(251 191 36 / 0.2), transparent 70%),
+    radial-gradient(70rem 44rem at 50% 50%, transparent 30%, #fff8e8 85%),
+    radial-gradient(circle, rgb(15 17 21 / 0.13) 1.3px, transparent 1.8px) 0 0 / 22px 22px,
+    #fff8e8;
+}
+.fondo-proceso {
+  /* Camino de pasos: línea punteada que une etapas */
+  background:
+    radial-gradient(38rem 30rem at 0% 0%, rgb(251 113 133 / 0.14), transparent 70%),
+    radial-gradient(80rem 46rem at 50% 50%, transparent 35%, #fdf0ee 90%),
+    url("/fondos/pasos.svg") 0 0 / 220px 160px,
+    #fdf0ee;
+}
+.fondo-nosotros {
+  /* Ondas: personas distintas que van juntas */
+  background:
+    radial-gradient(40rem 30rem at 100% 15%, rgb(240 90 40 / 0.1), transparent 70%),
+    radial-gradient(80rem 46rem at 50% 50%, transparent 35%, #f7efe5 90%),
+    url("/fondos/ondas.svg") 0 0 / 300px 120px,
+    #f7efe5;
+}
+.fondo-preguntas {
+  /* Signos de pregunta y globos de diálogo */
+  background:
+    radial-gradient(34rem 26rem at 50% 0%, rgb(251 191 36 / 0.12), transparent 70%),
+    radial-gradient(60rem 40rem at 50% 50%, transparent 25%, #f4f1ec 80%),
+    url("/fondos/preguntas.svg") 0 0 / 170px 150px,
+    #f4f1ec;
+}
+.fondo-contacto {
+  /* Señal: ondas que salen de la esquina, como un mensaje que se envía */
+  background:
+    radial-gradient(40rem 30rem at 100% 0%, rgb(240 90 40 / 0.22), transparent 70%),
+    repeating-radial-gradient(circle at 100% 0%, transparent 0 46px, rgb(255 255 255 / 0.08) 46px 47px),
+    radial-gradient(circle, rgb(255 255 255 / 0.11) 1px, transparent 1.5px) 0 0 / 26px 26px,
+    #0f1115;
+}
