@@ -69,3 +69,4 @@ Resumen de las reglas que más pesan:
 - Una sola sesión de asistente edita una carpeta a la vez. Antes de actuar sobre un mensaje viejo, revisar con `git fetch` y `git log` cómo está el repositorio de verdad.
 - Los reemplazos automáticos por script se aplicaban a medias: después de cada uno, compilar y correr las pruebas antes de seguir.
 - No mezclar un reformateo de archivo entero con un cambio funcional (pasó con `prisma format`, y acá con el formateador de `page.tsx`).
+| 22 | `crear-admin` solo imprimía las líneas para `.env.local` y había que crear el archivo a mano: el archivo no llegó a existir y el panel rechazaba el usuario. | El script ahora escribe `.env.local` solo. | Si un paso manual se puede automatizar, que lo haga el script; los pasos a mano (sobre todo crear archivos que empiezan con punto en Windows) se pierden. |
