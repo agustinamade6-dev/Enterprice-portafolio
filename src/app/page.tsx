@@ -171,9 +171,10 @@ export default async function Home() {
 
         {/* Nosotros */}
         <div id="nosotros" className="scroll-anchor" />
-        <section data-hold={Math.max(0, team.length - 1)} className="fondo-nosotros overflow-x-clip px-4 pb-28 pt-20 sm:px-6">
+        <section data-hold={Math.max(0, team.length - 1)} className="fondo-nosotros overflow-x-clip px-4 pb-20 pt-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
+              wide
               eyebrow="Nosotros"
               title={`Somos ${site.name}`}
               text="Somos cuatro estudiantes de Ingeniería en Sistemas de la Universidad Tecnológica Nacional, Facultad Regional Tucumán, que empezamos de cero y vamos por el cien. Nuestro nombre lo dice: Zain significa bueno y lindo, y Soft, software. Hacemos software bueno, con un backend sólido que funciona, y lindo, con un diseño cuidado y fácil de usar. Cada uno aporta lo suyo, y juntos convertimos las ideas de cada negocio en sistemas y páginas que funcionan."
@@ -252,17 +253,24 @@ function SectionTitle({
   title,
   text,
   align = "center",
+  wide = false,
 }: {
   eyebrow: string;
   title: string;
   text?: string;
   align?: "center" | "left";
+  wide?: boolean;
 }) {
   return (
-    <div className={align === "center" ? "mx-auto max-w-2xl text-center" : ""} data-reveal>
+    <div className={align === "center" ? `mx-auto text-center ${wide ? "max-w-4xl" : "max-w-2xl"}` : ""} data-reveal>
       <p className="text-sm font-bold uppercase tracking-widest text-brand">{eyebrow}</p>
       <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{title}</h2>
-      {text && <p className="mt-4 text-lg text-ink/70">{text}</p>}
+      {/* En pantallas bajas el texto largo (Nosotros) se achica para que el apartado entre entero */}
+      {text && (
+        <p className={`mt-4 text-lg text-ink/70 ${wide ? "[@media(max-height:820px)]:mt-3 [@media(max-height:820px)]:text-base" : ""}`}>
+          {text}
+        </p>
+      )}
     </div>
   );
 }
