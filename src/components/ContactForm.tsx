@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { bitFestejar } from "./Bit";
 
 // Helper internal
 function makeWhatsappLink(phone: string, text: string) {
@@ -17,6 +18,7 @@ export function ContactForm({ whatsapp }: { whatsapp: string }) {
     e.preventDefault();
     const message = `Hola, soy ${name}${business ? ` de ${business}` : ""}. ${need}`;
     window.open(makeWhatsappLink(whatsapp, message), "_blank", "noopener,noreferrer");
+    bitFestejar("¡Mensaje listo! Te respondemos en el día 🎉");
   }
 
   const field =

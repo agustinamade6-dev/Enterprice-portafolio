@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CheckIcon, WhatsAppIcon } from "./icons";
+import { bitFestejar } from "./Bit";
 import { BudgetType } from "@/lib/content/schemas";
 
 function makeWhatsappLink(phone: string, text: string) {
@@ -199,6 +200,7 @@ export function BudgetBuilder({
         <a
           href={ready ? makeWhatsappLink(whatsapp, message()) : undefined}
           aria-disabled={!ready}
+          onClick={() => ready && bitFestejar("¡Gracias! Ya armamos tu presupuesto 🎉")}
           target="_blank"
           rel="noopener noreferrer"
           className={`mt-5 flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-bold transition ${

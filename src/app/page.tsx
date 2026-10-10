@@ -8,6 +8,7 @@ import { PosMockup } from "@/components/PosMockup";
 import { Carousel3D } from "@/components/Carousel3D";
 import { TeamShowcase } from "@/components/TeamShowcase";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { Bit } from "@/components/Bit";
 import { contentRepo } from "@/lib/content";
 
 function makeWhatsappLink(phone: string, text: string) {
@@ -35,7 +36,7 @@ export default async function Home() {
       <Header siteName={site.name} />
       <main data-stage>
         {/* Inicio */}
-        <section className="fondo-inicio relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
+        <section data-bit="saludando|¡Hola! Soy Bit 👋" className="fondo-inicio relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
             <div data-reveal data-hero-text>
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-sm font-medium">
@@ -75,7 +76,7 @@ export default async function Home() {
 
         {/* Proyectos */}
         <div id="proyectos" className="scroll-anchor" />
-        <section className="fondo-proyectos overflow-x-clip py-20">
+        <section data-bit="programando|Mira lo que hicimos 👀" className="fondo-proyectos overflow-x-clip py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionTitle
               eyebrow="Proyectos"
@@ -92,7 +93,7 @@ export default async function Home() {
 
         {/* Servicios */}
         <div id="servicios" className="scroll-anchor" />
-        <section className="fondo-servicios px-4 py-20 sm:px-6">
+        <section data-bit="pensando|Elige lo que necesitas y armamos tu presupuesto 💡" className="fondo-servicios px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Servicios"
@@ -116,7 +117,7 @@ export default async function Home() {
 
         {/* Proceso */}
         <div id="proceso" className="scroll-anchor" />
-        <section data-hold={4} data-hold-fit className="fondo-proceso px-4 py-20 sm:px-6">
+        <section data-bit="programando|Así trabajamos, paso a paso" data-hold={4} data-hold-fit className="fondo-proceso px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow="Cómo trabajamos"
@@ -171,7 +172,7 @@ export default async function Home() {
 
         {/* Nosotros */}
         <div id="nosotros" className="scroll-anchor" />
-        <section data-hold={Math.max(0, team.length - 1)} className="fondo-nosotros overflow-x-clip px-4 pb-20 pt-20 sm:px-6">
+        <section data-hold={Math.max(0, team.length - 1)} data-bit="saludando|Ellos me programaron 🧡" className="fondo-nosotros overflow-x-clip px-4 pb-20 pt-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               wide
@@ -189,7 +190,7 @@ export default async function Home() {
 
         {/* Preguntas frecuentes */}
         <div id="preguntas" className="scroll-anchor" />
-        <section className="fondo-preguntas px-4 py-20 sm:px-6">
+        <section data-bit="pensando|¿Dudas? Acá están las respuestas" className="fondo-preguntas px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-3xl">
             <SectionTitle eyebrow="Preguntas frecuentes" title="Lo que suelen preguntarnos" />
             <div className="mt-10 space-y-3">
@@ -212,7 +213,7 @@ export default async function Home() {
 
         {/* Contacto */}
         <div id="contacto" className="scroll-anchor" />
-        <div className="scene-end fondo-contacto">
+        <div data-bit="saludando|¡Escríbenos! Respondemos en el día" className="scene-end fondo-contacto">
           <section className="grid content-center px-4 py-20 text-paper sm:px-6">
             <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
               <div data-reveal>
@@ -243,6 +244,7 @@ export default async function Home() {
           <Footer name={site.name} instagram={site.instagram} github={site.github} />
         </div>
       </main>
+      <Bit />
       <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el portafolio de ZainSoft y quiero consultar por un proyecto.")} />
     </>
   );
