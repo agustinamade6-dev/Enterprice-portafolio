@@ -1,0 +1,11 @@
+// Publicación en Cloudflare (Workers con archivos estáticos).
+// Cloudflare corre `npm run build:export` y después `npx wrangler deploy`, que sube la carpeta out/.
+// El nombre tiene que coincidir con el "Project name" que se puso en Cloudflare.
+{
+  "name": "zainsoft",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}
