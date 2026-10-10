@@ -1,6 +1,8 @@
-// Genera las líneas para .env.local con el usuario del panel de admin.
-// Uso: npm run crear-admin   (pide correo y contraseña; no guarda nada por su cuenta)
+// Crea (o reemplaza) el usuario del panel de admin y lo guarda directo en .env.local.
+// Uso: npm run crear-admin   (pide correo y contraseña; después hay que reiniciar npm run dev)
 import { randomBytes } from "node:crypto";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { createInterface } from "node:readline/promises";
 import bcrypt from "bcryptjs";
 
@@ -14,9 +16,24 @@ if (!email.includes("@")) throw new Error("Ese correo no parece válido");
 if (password.length < 12) throw new Error("La contraseña tiene que tener al menos 12 caracteres");
 
 const hash = bcrypt.hashSync(password, 12);
-console.log("\nCopia estas líneas en el archivo .env.local (en la raíz del proyecto) y reinicia npm run dev:\n");
-console.log(`ADMIN_EMAIL=${email}`);
-console.log(`ADMIN_PASSWORD_HASH_B64=${Buffer.from(hash).toString("base64")}`);
-if (name) console.log(`ADMIN_NAME=${name}`);
-console.log(`SESSION_SECRET=${randomBytes(32).toString("hex")}`);
-console.log("\nNo subas .env.local a git (ya está ignorado) ni lo compartas.");
+const values = {
+  ADMIN_EMAIL: email,
+  ADMIN_PASSWORD_HASH_B64: Buffer.from(hash).toString("base64"),
+  ADMIN_NAME: name || "Admin",
+  SESSION_SECRET: randomBytes(32).toString("hex"),
+};
+
+// Se conservan las otras variables que ya hubiera en el archivo; solo se reemplazan estas cuatro
+const file = resolve(process.cwd(), ".env.local");
+const kept = existsSync(file)
+  ? readFileSync(file, "utf8")
+      .replace(/^﻿/, "")
+      .split(/\r?\n/)
+      .filter((line) => line.trim() && !Object.keys(values).some((k) => line.trim().startsWith(`${k}=`)))
+  : [];
+const lines = [...kept, ...Object.entries(values).map(([k, v]) => `${k}=${v}`)];
+writeFileSync(file, lines.join("\n") + "\n", "utf8");
+
+console.log(`\nListo: el usuario quedó guardado en ${file}`);
+console.log("Reinicia npm run dev (Ctrl+C y de nuevo npm run dev) y entra a /admin con ese correo y contraseña.");
+console.log("No subas .env.local a git (ya está ignorado) ni lo compartas.");
