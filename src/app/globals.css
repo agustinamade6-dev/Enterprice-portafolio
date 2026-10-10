@@ -203,3 +203,30 @@ section[id],
     radial-gradient(circle, rgb(255 255 255 / 0.11) 1px, transparent 1.5px) 0 0 / 26px 26px,
     #0f1115;
 }
+
+/* Bit, la mascota: respira, parpadea, saluda y festeja */
+.bit-wrap button svg { filter: drop-shadow(2px 0 0 #faf8f5) drop-shadow(-2px 0 0 #faf8f5) drop-shadow(0 2px 0 #faf8f5) drop-shadow(0 -2px 0 #faf8f5) drop-shadow(0 8px 12px rgb(15 17 21 / .18)); }
+.bit-arm { transition: transform .5s cubic-bezier(.34, 1.56, .64, 1); }
+.bit-float { animation: bit-float 3.2s ease-in-out infinite; }
+.bit-eyes { transform-box: fill-box; transform-origin: center; animation: bit-blink 4.6s infinite; }
+.bit-spark { transform-box: fill-box; transform-origin: center; animation: bit-spark 1.8s ease-in-out infinite; }
+.bit-wave { animation: bit-wave 1.1s ease-in-out infinite; }
+.bit-jump { animation: bit-jump .7s cubic-bezier(.3, 0, .3, 1) 2; }
+.bit-pop { transform-box: fill-box; transform-origin: center bottom; animation: bit-pop .35s cubic-bezier(.34, 1.56, .64, 1); }
+.bit-idea { animation: bit-pop .35s cubic-bezier(.34, 1.56, .64, 1), bit-idea 1.6s ease-in-out .35s infinite; }
+.bit-type { animation: bit-type 1s steps(2) infinite; }
+.bit-confetti rect { transform-box: fill-box; animation: bit-confetti 1.4s ease-out forwards; }
+.bit-wrap button:hover .bit-float { animation-duration: 1.2s; }
+@keyframes bit-float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+@keyframes bit-blink { 0%, 92%, 100% { transform: scaleY(1) } 95% { transform: scaleY(.1) } }
+@keyframes bit-spark { 0%, 100% { transform: scale(1) } 50% { transform: scale(1.25) } }
+@keyframes bit-wave { 0%, 100% { transform: rotate(0) } 50% { transform: rotate(-22deg) } }
+@keyframes bit-jump { 0%, 100% { transform: translateY(0) } 40% { transform: translateY(-34px) } 70% { transform: translateY(4px) } }
+@keyframes bit-pop { from { transform: scale(0); opacity: 0 } to { transform: scale(1); opacity: 1 } }
+@keyframes bit-idea { 0%, 100% { translate: 0 0 } 50% { translate: 0 -5px } }
+@keyframes bit-type { 50% { opacity: .35 } }
+@keyframes bit-confetti { from { translate: 0 10px; opacity: 0 } 20% { opacity: 1 } to { translate: 0 60px; opacity: 0 } }
+@media (prefers-reduced-motion: reduce) {
+  .bit-float, .bit-eyes, .bit-spark, .bit-wave, .bit-jump, .bit-pop, .bit-idea, .bit-type, .bit-confetti rect { animation: none; }
+  .bit-arm { transition: none; }
+}

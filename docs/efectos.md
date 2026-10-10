@@ -53,3 +53,14 @@ La idea viene de un video del sitio de GTA VI que pasó Agustin: que al hacer sc
 ## Fondos por apartado
 
 Cada apartado tiene su tono de la marca y un dibujo sutil que tiene que ver con su tema (clases `.fondo-*` en `src/app/globals.css`, dibujos en `public/fondos/`): cuadrícula de diseño en Inicio, símbolos de código en Proyectos, puntos en Servicios, camino de pasos en Cómo trabajamos, ondas en Nosotros, signos de pregunta y globos en Preguntas, y ondas de señal con puntos sobre fondo oscuro en Contacto. La capa de arriba de cada fondo es un degradé del color base que esfuma el dibujo hacia los bordes. Sin brillos ni manchas de color: Agustin los pidió sacar (2026-10-10). Agustin eligió "fondos con dibujo" (2026-10-10) frente a solo tonos o alternar claro y oscuro.
+
+## Bit, la mascota (`src/components/Bit.tsx`)
+
+Bit vive abajo a la izquierda (el botón de WhatsApp está a la derecha). Es mitad backend (negro, recto, llave inglesa) y mitad frontend (naranja, redondeado, pincel); la chispa de la antena es la idea del cliente. Agustin pidió que no tenga la estrella en el lado naranja.
+
+- Respira (sube y baja), parpadea, la antena late y los ojos siguen al mouse.
+- Cambia de pose según la sección: cada sección de `page.tsx` tiene `data-bit="pose|frase"`. Poses: `saludando`, `principal`, `programando`, `pensando`, `festejando`. Al entrar a una sección dice la frase en un globito.
+- Al hacer clic salta, festeja y dice una frase.
+- Festeja solo cuando alguien envía el formulario de contacto o pide el presupuesto: cualquier componente puede llamar a `bitFestejar("frase")`.
+- Con "reducir movimiento" activado en el sistema, no hay animaciones (solo cambia de pose).
+- Dibujos sueltos (SVG y PNG transparentes) para redes: carpeta del proyecto `mascota/bit/`.
