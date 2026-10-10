@@ -2,6 +2,7 @@
 
 import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 function LoginContent() {
   const router = useRouter();
@@ -15,7 +16,7 @@ function LoginContent() {
     e.preventDefault();
     setError("");
     setLoading(true);
-
+    // ...
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
@@ -26,7 +27,7 @@ function LoginContent() {
       if (res.ok) {
         const callbackUrl = searchParams.get("callbackUrl") || "/admin";
         router.push(callbackUrl);
-        router.refresh(); // Refresh to update layout session state
+        router.refresh();
       } else {
         const data = await res.json();
         setError(data.error || "Error de inicio de sesión");
@@ -42,7 +43,17 @@ function LoginContent() {
     <div className="flex min-h-screen items-center justify-center bg-ink p-4 text-paper">
       <div className="w-full max-w-md space-y-8 rounded-3xl bg-white/5 p-8 shadow-2xl backdrop-blur-xl border border-white/10">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight text-white">
+          <div className="flex justify-center mb-5">
+            <Image
+              src="/logo-dark.png"
+              alt="ZainSoft"
+              width={160}
+              height={42}
+              className="h-10 w-auto object-contain"
+              priority
+            />
+          </div>
+          <h2 className="text-2xl font-extrabold tracking-tight text-white">
             Panel de Administración
           </h2>
           <p className="mt-2 text-sm text-paper/70">

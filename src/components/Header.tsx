@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const links = [
@@ -16,11 +17,15 @@ export function Header({ siteName }: { siteName: string }) {
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-black/5 bg-paper/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2 font-extrabold tracking-tight">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-ink text-sm text-paper">
-            {siteName ? siteName.charAt(0) : "Z"}
-          </span>
-          {siteName}
+        <Link href="/" className="flex items-center transition-opacity hover:opacity-90" aria-label={siteName}>
+          <Image
+            src="/logo.png"
+            alt={siteName}
+            width={130}
+            height={36}
+            className="h-8 sm:h-9 w-auto object-contain"
+            priority
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 text-sm font-medium md:flex">

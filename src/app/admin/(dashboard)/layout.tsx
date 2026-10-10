@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { 
   LayoutDashboard, 
@@ -69,7 +70,18 @@ export default function AdminLayout({
         }`}
       >
         <div className="flex h-16 items-center justify-between px-6 border-b border-white/10">
-          <span className="text-lg font-extrabold tracking-tight text-brand">ZainSoft Admin</span>
+          <Link href="/admin" className="flex items-center gap-2.5">
+            <Image
+              src="/logo-dark.png"
+              alt="ZainSoft"
+              width={110}
+              height={28}
+              className="h-7 w-auto object-contain"
+            />
+            <span className="rounded bg-brand/20 px-1.5 py-0.5 text-[10px] font-bold text-brand uppercase tracking-wider">
+              Admin
+            </span>
+          </Link>
           <button className="lg:hidden" onClick={() => setSidebarOpen(false)}>
             <X className="h-5 w-5 text-paper/70 hover:text-paper" />
           </button>
@@ -124,14 +136,25 @@ export default function AdminLayout({
 
       {/* Main Content */}
       <div className="flex flex-1 flex-col overflow-hidden">
-        <header className="flex h-16 shrink-0 items-center gap-4 border-b border-white/10 bg-ink px-4 shadow-sm sm:gap-6 sm:px-6 lg:px-8">
-          <button
-            className="text-white/70 hover:text-white lg:hidden"
-            onClick={() => setSidebarOpen(true)}
-          >
-            <Menu className="h-6 w-6" />
-          </button>
-          <div className="flex flex-1 items-center justify-end gap-x-4 self-stretch lg:gap-x-6">
+        <header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b border-white/10 bg-ink px-4 shadow-sm sm:gap-6 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-3">
+            <button
+              className="text-white/70 hover:text-white lg:hidden"
+              onClick={() => setSidebarOpen(true)}
+            >
+              <Menu className="h-6 w-6" />
+            </button>
+            <div className="lg:hidden">
+              <Image
+                src="/logo-dark.png"
+                alt="ZainSoft"
+                width={95}
+                height={24}
+                className="h-6 w-auto object-contain"
+              />
+            </div>
+          </div>
+          <div className="flex items-center justify-end gap-x-4 self-stretch lg:gap-x-6">
             {/* Header Content can go here */}
           </div>
         </header>
