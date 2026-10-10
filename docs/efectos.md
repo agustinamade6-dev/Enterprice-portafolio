@@ -11,7 +11,7 @@ La idea viene de un video del sitio de GTA VI que pasó Agustin: que al hacer sc
 **`ScrollStage.tsx` (escenario fijo).** Las secciones de la página de inicio quedan fijas una encima de la otra y el body recibe un alto artificial para que exista scroll. El scroll solo marca el avance:
 
 - Cada sección tiene un tramo propio. Si es más alta que la pantalla, durante ese tramo se recorre por dentro.
-- Entre una sección y la siguiente hay un tramo de cambio: 40 % del alto de pantalla con mouse y 70 % con el dedo. Las dos se cruzan con la misma curva: mientras la que se va se achica un 12 % y se desvanece, la nueva aparece acercándose (empieza un 6 % más grande). Entre las dos siempre suman opacidad completa, así que la pantalla nunca queda en blanco.
+- Entre una sección y la siguiente hay un tramo de cambio: 30 % del alto de pantalla con mouse y 50 % con el dedo (se acortó el 2026-10-10 para que sea más rápido). Las dos se cruzan con la misma curva: mientras la que se va se achica un 12 % y se desvanece, la nueva aparece acercándose (empieza un 6 % más grande). Entre las dos siempre suman opacidad completa, así que la pantalla nunca queda en blanco.
 - Cada escena ocupa al menos toda la pantalla y centra su contenido, para que no queden franjas en blanco.
 - El avance se suaviza: en cada cuadro recorre el 20 % de lo que falta con mouse y el 12 % con el dedo. Por eso no salta con cada giro de la ruedita.
 - Los enlaces a secciones (`#proyectos`, `/#servicios`…) se interceptan y saltan al tramo de esa sección. Por eso cada sección tiene antes un marcador `<div id="…" className="scroll-anchor" />`.
@@ -31,7 +31,7 @@ La idea viene de un video del sitio de GTA VI que pasó Agustin: que al hacer sc
 
 | Qué | Dónde |
 | --- | --- |
-| Cuánto dura cada cambio | `gap = vh * (mouse ? 0.4 : 0.7)` en `ScrollStage.tsx` |
+| Cuánto dura cada cambio | `gap = vh * (mouse ? 0.3 : 0.5)`; la suavidad es `smooth = mouse ? 0.24 : 0.18` (más alto = sigue al dedo más rápido) en `ScrollStage.tsx` |
 | Cuánto se achica la que sale | `scale = 1 - 0.12 * q` |
 | Cuánto se acerca la que entra | `scale = 1.06 - 0.06 * p` |
 | Suavidad | `smooth = mouse ? 0.2 : 0.12` (más alto, más rápido) |

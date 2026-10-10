@@ -43,6 +43,7 @@ export function Bit() {
   const [eye, setEye] = useState({ x: 0, y: 0 });
   const [jump, setJump] = useState(0);
   const [shown, setShown] = useState(false);
+  const [dark, setDark] = useState(false);
   const ref = useRef<HTMLButtonElement>(null);
   const party = useRef<number>(0);
   const bubbleTimer = useRef<number>(0);
@@ -109,8 +110,9 @@ export function Bit() {
       document.querySelectorAll<HTMLElement>("[data-bit]").forEach((el) => {
         const r = el.getBoundingClientRect();
         if (r.top > mid || r.bottom < mid) return;
+        // ScrollStage escribe la opacidad de cada escena en su style: leerla de ahí es instantáneo
         const scene = el.closest<HTMLElement>("[data-stage] > *") ?? el;
-        const op = Number(getComputedStyle(scene).opacity || 1);
+        const op = scene.style.opacity === "" ? 1 : Number(scene.style.opacity);
         if (op > bestScore) {
           bestScore = op;
           best = el;
@@ -119,6 +121,7 @@ export function Bit() {
       if (!best || best === last || bestScore < 0.5) return;
       const first = last === null;
       last = best;
+      setDark(!!(best as HTMLElement).closest(".fondo-contacto"));
       const [p, frase] = ((best as HTMLElement).dataset.bit ?? "").split("|");
       sectionPose.current = (p as BitPose) || "principal";
       if (!party.current || first) setPose(sectionPose.current);
@@ -158,6 +161,7 @@ export function Bit() {
 
   return (
     <div
+      data-dark={dark || undefined}
       className={`bit-wrap fixed bottom-3 left-3 z-40 transition-all duration-700 sm:bottom-5 sm:left-5 ${
         shown ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
       }`}
