@@ -23,6 +23,8 @@ La idea viene de un video del sitio de GTA VI que pasó Agustin: que al hacer sc
 
 **Cómo trabajamos (2026-10-09).** Como en la presentación del equipo, la pantalla se queda quieta y las cinco tarjetas aparecen una por una a medida que se baja (subiendo, con un leve desenfoque que se aclara). La sección tiene `data-hold={4}` (cada tarjeta lleva unos 4 o 5 giros de ruedita, para que se note que aparecen de a una) y `data-hold-fit`: solo se queda quieta si casi entra en la pantalla (sobra como mucho un 25 %); en celular, donde las tarjetas van una debajo de otra, se recorre normal. Cada tarjeta tiene `data-step` con `--i` (orden) y `--n` (total), y el CSS calcula su aparición con `--hold`.
 
+**`RibbonSides.tsx` (listón, 2026-10-09, en prueba en `efectos`).** Agustin pidió algo que acompañe por los costados durante toda la página y eligió un listón; después pidió que se vaya formando al bajar y con colores que combinen (naranja de la marca, ámbar y coral, en vez de verde). Se dibuja hasta un poco más abajo de la mitad de la pantalla (`stroke-dashoffset`, con el largo medido una sola vez) y crece a medida que se baja. Es una cinta SVG a cada lado (una trocoide: ondula y, donde el radio supera al paso, hace un rulo) que se desplaza hacia arriba con el avance del scroll, suavizado. Pasa por debajo del menú. En compu ocupa el margen libre al lado del contenido (entre 44 y 130 px); en celular es una cinta finita de 18 px en cada borde. No recibe clics.
+
 **Accesibilidad:** con "reducir movimiento" activado en el sistema, todo queda como una página normal.
 
 ### Qué se puede ajustar
