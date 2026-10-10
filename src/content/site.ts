@@ -301,7 +301,7 @@ export const sprintLoop = ["Construimos una parte", "Te entregamos el prototipo"
 export const faqs = [
   {
     q: "¿Cómo se paga?",
-    a: "50% al empezar y 50% al entregar. Puedes pagar por transferencia o Mercado Pago.",
+    a: "50% al empezar y 50% al entregar. Puedes pagar como te quede más cómodo: efectivo, transferencia, Mercado Pago, tarjeta Naranja y otros medios. Lo acordamos juntos antes de empezar.",
   },
   {
     q: "¿El precio incluye el dominio?",
