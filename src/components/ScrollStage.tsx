@@ -25,7 +25,7 @@ export function ScrollStage() {
     // Con mouse (compu) cada giro de la ruedita avanza poco, así que el cambio es más corto y más ágil;
     // con el dedo (celular) se mantiene más largo porque un deslizamiento recorre mucho
     const mouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const smooth = mouse ? 0.2 : 0.12;
+    const smooth = mouse ? 0.24 : 0.18;
 
     let vh = window.innerHeight;
     let starts: number[] = [];
@@ -38,7 +38,7 @@ export function ScrollStage() {
 
     const layout = () => {
       vh = window.innerHeight;
-      gap = vh * (mouse ? 0.4 : 0.7); // cuánto scroll dura cada cambio de sección
+      gap = vh * (mouse ? 0.3 : 0.5); // cuánto scroll dura cada cambio de sección
       over = scenes.map((el) => Math.max(0, el.offsetHeight - vh));
       // data-hold: la sección se queda quieta mientras el scroll avanza su animación interna
       // (por ejemplo, el equipo pasando de un integrante al otro)
@@ -63,6 +63,9 @@ export function ScrollStage() {
       const total = starts[starts.length - 1] + inner[inner.length - 1];
       document.body.style.height = `${total + vh}px`;
     };
+
+    // Escenas que quedaron ocultas en el cuadro anterior: no se vuelven a tocar hasta que reaparezcan
+    const asleep = scenes.map(() => false);
 
     const render = (y: number) => {
       scenes.forEach((el, i) => {
@@ -91,6 +94,11 @@ export function ScrollStage() {
         }
 
         const hidden = opacity <= 0.001;
+        if (hidden && asleep[i]) return;
+        asleep[i] = hidden;
+        // Solo las escenas que se ven tienen su propia capa en la placa de video: tener todas a la vez
+        // (algunas miden varias pantallas de alto) llenaba la memoria del celular y lo hacía ir lento
+        el.style.willChange = hidden ? "auto" : "transform, opacity";
         el.style.opacity = opacity.toFixed(3);
         el.style.transform = `translate3d(0, ${shift.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
         el.style.visibility = hidden ? "hidden" : "visible";
