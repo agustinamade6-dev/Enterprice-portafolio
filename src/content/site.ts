@@ -10,7 +10,7 @@ export const site = {
     "Somos un equipo de programadores que diseña y desarrolla páginas web y programas para que tu negocio venda más y atienda mejor.",
   // WhatsApp en formato internacional, sin + ni espacios (en Argentina va 549 + característica + número).
   whatsapp: "5493815100710",
-  email: "agustinamade6@gmail.com",
+  email: "zainsoftdev@gmail.com",
   instagram: "https://www.instagram.com/lean__amade/",
   photo: "/foto-perfil.png",
   github: "https://github.com/agustinamade6-dev",
