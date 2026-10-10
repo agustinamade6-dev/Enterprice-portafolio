@@ -15,7 +15,7 @@ export const site = {
   photo: "/foto-perfil.png",
   github: "https://github.com/agustinamade6-dev",
   // TODO: cambiar por la dirección definitiva cuando el sitio esté publicado (o un dominio propio).
-  url: "https://enterprice-portafolio.pages.dev",
+  url: "https://zainsoft.agustinamade6.workers.dev",
 };
 
 export function whatsappLink(message: string) {

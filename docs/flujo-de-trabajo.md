@@ -41,4 +41,4 @@ Se publica como Worker con archivos estáticos (el panel nuevo de Cloudflare ofr
 2. Project name `zainsoft` (tiene que ser igual al `name` de `wrangler.jsonc`), Build command `npm run build:export`, Deploy command `npx wrangler deploy`. La rama de producción es `main`.
 3. Cada cambio en `main` se publica solo. El panel de admin no se publica: el build estático lo deja afuera.
 
-Todavía no está confirmado que esté publicado. Cuando lo esté, cambiar `site.url` en `src/content/site.ts` por la dirección real.
+Publicado el 2026-10-10 en https://zainsoft.agustinamade6.workers.dev (cuenta de Cloudflare de Agustin). Si cambia la dirección (por ejemplo, con un dominio propio), actualizar `site.url` en `src/content/site.ts`.
