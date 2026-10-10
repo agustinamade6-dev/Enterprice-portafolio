@@ -16,13 +16,9 @@ export function Header({ siteName }: { siteName: string }) {
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-black/5 bg-paper/85 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        {/* En compu el logo va pegado al borde izquierdo de la pantalla; el menú sigue alineado con el contenido */}
-        <Link
-          href="/"
-          className="flex items-center transition-opacity hover:opacity-90 md:absolute md:left-4 md:top-1/2 md:-translate-y-1/2"
-          aria-label={siteName}
-        >
+      <div className="flex h-16 items-center justify-between px-4">
+        {/* El logo va pegado al borde izquierdo de la pantalla y el menú al derecho */}
+        <Link href="/" className="flex items-center transition-opacity hover:opacity-90" aria-label={siteName}>
           <Image
             src="/logo.png"
             alt={siteName}
@@ -33,7 +29,7 @@ export function Header({ siteName }: { siteName: string }) {
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 text-sm font-medium md:ml-auto md:flex">
+        <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
           {links.map((l) => (
             <Link key={l.href} href={l.href} className="text-ink/70 transition hover:text-ink">
               {l.label}
