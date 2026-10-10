@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 // Bit, la mascota de ZainSoft: mitad backend (lado negro, recto, llave inglesa) y mitad frontend
-// (lado naranja, redondeado, pincel). Acompaña al visitante abajo a la izquierda: respira, parpadea,
+// (lado naranja, redondeado, pincel). Acompaña al visitante abajo a la derecha: respira, parpadea,
 // sigue el mouse con los ojos, cambia de pose según la sección y festeja cuando alguien nos escribe.
 // Las secciones eligen su pose y su frase con data-bit="pose|frase".
 
@@ -162,14 +162,14 @@ export function Bit() {
   return (
     <div
       data-dark={dark || undefined}
-      className={`bit-wrap fixed bottom-3 left-3 z-40 transition-all duration-700 sm:bottom-5 sm:left-5 ${
+      className={`bit-wrap fixed bottom-3 right-3 z-40 transition-all duration-700 sm:bottom-5 sm:right-5 ${
         shown ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
       }`}
     >
       <div
         role="status"
         aria-live="polite"
-        className={`bit-bubble absolute bottom-full left-2 mb-1 w-max max-w-[220px] rounded-2xl rounded-bl-sm bg-white px-3.5 py-2 text-sm font-semibold text-ink shadow-lg shadow-black/15 ring-1 ring-black/5 transition-all duration-300 sm:max-w-[260px] ${
+        className={`bit-bubble absolute bottom-full right-2 mb-1 w-max max-w-[220px] rounded-2xl rounded-br-sm bg-white px-3.5 py-2 text-sm font-semibold text-ink shadow-lg shadow-black/15 ring-1 ring-black/5 transition-all duration-300 sm:max-w-[260px] ${
           bubble ? "translate-y-0 scale-100 opacity-100" : "pointer-events-none translate-y-2 scale-95 opacity-0"
         }`}
       >

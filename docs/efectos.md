@@ -56,7 +56,7 @@ Cada apartado tiene su tono de la marca y un dibujo sutil que tiene que ver con 
 
 ## Bit, la mascota (`src/components/Bit.tsx`)
 
-Bit vive abajo a la izquierda (el botón de WhatsApp está a la derecha). Es mitad backend (negro, recto, llave inglesa) y mitad frontend (naranja, redondeado, pincel); la chispa de la antena es la idea del cliente. Agustin pidió que no tenga la estrella en el lado naranja.
+Bit vive abajo a la derecha, en el lugar del botón flotante de WhatsApp, que Agustin pidió sacar de la página principal (en el inicio y en Contacto sigue el botón para escribir por WhatsApp; las páginas de proyectos y del equipo mantienen el botón flotante). Es mitad backend (negro, recto, llave inglesa) y mitad frontend (naranja, redondeado, pincel); la chispa de la antena es la idea del cliente. Agustin pidió que no tenga la estrella en el lado naranja.
 
 - Respira (sube y baja), parpadea, la antena late y los ojos siguen al mouse.
 - Cambia de pose según la sección: cada sección de `page.tsx` tiene `data-bit="pose|frase"`. Poses: `saludando`, `principal`, `programando`, `pensando`, `festejando`. Al entrar a una sección dice la frase en un globito.
