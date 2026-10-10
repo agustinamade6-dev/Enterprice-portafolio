@@ -7,7 +7,6 @@ import { ArrowIcon, CheckIcon, WhatsAppIcon } from "@/components/icons";
 import { PosMockup } from "@/components/PosMockup";
 import { Carousel3D } from "@/components/Carousel3D";
 import { TeamShowcase } from "@/components/TeamShowcase";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Bit } from "@/components/Bit";
 import { contentRepo } from "@/lib/content";
 
@@ -245,7 +244,6 @@ export default async function Home() {
         </div>
       </main>
       <Bit />
-      <WhatsAppButton url={makeWhatsappLink(site.whatsapp, "Hola, vi el portafolio de ZainSoft y quiero consultar por un proyecto.")} />
     </>
   );
 }
