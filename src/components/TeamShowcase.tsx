@@ -198,7 +198,7 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
   }, [total]);
 
   return (
-    <div ref={root} className="relative mt-10 h-[min(74vh,600px)] md:h-[min(60vh,500px)]" style={{ contain: "layout" }}>
+    <div ref={root} className="relative mt-8 h-[min(74vh,600px)] md:h-[min(52vh,500px)] [@media(max-height:820px)]:mt-6" style={{ contain: "layout" }}>
       {/* Nombres gigantes de fondo que se deslizan con el scroll */}
       <div
         aria-hidden
