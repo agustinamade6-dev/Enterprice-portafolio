@@ -48,7 +48,7 @@ Cada integrante tiene su página de historia en `/equipo/<slug>/`: cómo empezó
 
 - Si Yuhmak autoriza aparecer con nombre y capturas.
 - Confirmar que todos los perfiles enlacen a LinkedIn (lo cambió José).
-- La dirección definitiva del sitio (hoy se asume `enterprice-portafolio.pages.dev`).
+- Dominio propio (hoy el sitio está en `zainsoft.agustinamade6.workers.dev`, publicado el 2026-10-10).
 - Nombre y rol del cliente del chatbot con IA.
 - Datos y capturas de la casa de pastas.
 - Las historias de José, Nicolás y Fabrizio contadas por ellos.
