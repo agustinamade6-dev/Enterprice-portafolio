@@ -10,9 +10,10 @@ const aside = [
   ["src/middleware.ts", "src/middleware.ts.off"],
 ];
 
-// Los tipos que deja `npm run dev` nombran las rutas del panel; con el panel apartado rompen el chequeo
-// de TypeScript. Se borran (dev los vuelve a generar solo).
-rmSync(".next/dev/types", { recursive: true, force: true });
+// Se arranca de cero: el caché de .next a veces deja el CSS viejo en out/ (pasó con los fondos), y los
+// tipos que deja `npm run dev` nombran las rutas del panel y rompen el chequeo con el panel apartado.
+// `npm run dev` vuelve a generar todo solo (si estaba abierto, hay que reiniciarlo).
+rmSync(".next", { recursive: true, force: true });
 
 const moved = [];
 try {
