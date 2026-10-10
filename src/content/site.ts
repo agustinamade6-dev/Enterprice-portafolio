@@ -11,7 +11,7 @@ export const site = {
   // WhatsApp en formato internacional, sin + ni espacios (en Argentina va 549 + característica + número).
   whatsapp: "5493815100710",
   email: "zainsoftdev@gmail.com",
-  instagram: "https://www.instagram.com/lean__amade/",
+  instagram: "https://www.instagram.com/zainsoft_/",
   photo: "/foto-perfil.png",
   github: "https://github.com/agustinamade6-dev",
   // TODO: cambiar por la dirección definitiva cuando el sitio esté publicado (o un dominio propio).
