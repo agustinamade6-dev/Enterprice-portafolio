@@ -26,32 +26,19 @@ section[id],
 /* Mazo de proyectos: cuando una carta pasa al frente, su contenido entra de a poco */
 @keyframes deck-art-in {
   from {
-    opacity: 0;
     transform: translateY(18px) scale(0.92) rotate(-2deg);
   }
   to {
-    opacity: 1;
     transform: none;
   }
 }
 
 @keyframes deck-text-in {
   from {
-    opacity: 0;
     transform: translateY(12px);
   }
   to {
-    opacity: 1;
     transform: none;
-  }
-}
-
-@keyframes deck-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
 
@@ -74,48 +61,15 @@ section[id],
   animation: deck-text-in 0.35s ease-out both;
 }
 
-/* Con movimiento reducido solo hay fundido, sin desplazamientos */
+/* Con movimiento reducido las cartas no se desplazan */
 @media (prefers-reduced-motion: reduce) {
   .deck-front .deck-art,
   .deck-front .deck-text > *,
   .deck-caption {
-    animation-name: deck-fade-in;
+    animation: none;
   }
 }
 
-/* --enter y --exit los usa solo el propio bloque: registrarlas sin herencia evita que cada cambio
-   obligue a recalcular los estilos de todo lo que tiene adentro */
-@property --enter {
-  syntax: "<number>";
-  inherits: false;
-  initial-value: 0;
-}
-@property --exit {
-  syntax: "<number>";
-  inherits: false;
-  initial-value: 0;
-}
-
-/* Movimiento con el scroll (ScrollMotion): cada bloque entra desde abajo y, al llegar arriba,
-   se aleja y se desvanece. Va al ritmo del scroll, así que al subir se deshace solo. */
-.reveal-on [data-reveal] {
-  --enter: 0;
-  --exit: 0;
-  opacity: calc(var(--enter) * (1 - var(--exit)));
-  transform: translateY(calc((1 - var(--enter)) * 48px - var(--exit) * 40px)) scale(calc(1 - var(--exit) * 0.08));
-  transform-origin: 50% 100%;
-  will-change: opacity, transform;
-}
-
-/* En el inicio, al bajar el texto sube y la imagen baja y gira un poco mientras se desvanecen */
-.reveal-on [data-hero-text] {
-  translate: 0 calc((var(--exit) + var(--leave, 0)) * -8vh);
-}
-
-.reveal-on [data-hero-art] {
-  translate: 0 calc((var(--exit) + var(--leave, 0)) * 14vh);
-  rotate: calc((var(--exit) + var(--leave, 0)) * -6deg);
-}
 
 /* Escenario fijo (ScrollStage): las secciones se apilan en el mismo lugar y cambian sin desplazarse */
 .stage-on [data-stage] {
@@ -142,15 +96,6 @@ section[id],
 
 .stage-on [data-stage] > :not(.scroll-anchor) > :not(.absolute) {
   width: 100%;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal-on [data-reveal] {
-    opacity: 1;
-    transform: none;
-    translate: none;
-    rotate: none;
-  }
 }
 
 /* Fondos por apartado: cada uno con su tono de la marca (sin brillos de color, a pedido de Agustin) y un dibujo sutil que tiene que ver con su tema.
@@ -368,7 +313,6 @@ section[id],
     transform: scale(0.4) rotate(-14deg);
   }
   to {
-    opacity: 1;
     transform: none;
   }
 }
@@ -378,7 +322,6 @@ section[id],
     transform: translateX(var(--from));
   }
   to {
-    opacity: 1;
     transform: none;
   }
 }

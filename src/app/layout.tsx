@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import { ScrollMotion } from "@/components/ScrollMotion";
 import { ScrollStage } from "@/components/ScrollStage";
 import { contentRepo } from "@/lib/content";
 import "./globals.css";
@@ -38,12 +37,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es" className={`${jakarta.variable} antialiased`} suppressHydrationWarning>
       <head>
         {/* Oculta lo animable antes del primer pintado para que no parpadee al cargar */}
-        <script dangerouslySetInnerHTML={{ __html: 'document.documentElement.classList.add("reveal-on")' }} />
       </head>
       <body className="min-h-screen font-sans">
         {children}
         <ScrollStage />
-        <ScrollMotion />
       </body>
     </html>
   );
