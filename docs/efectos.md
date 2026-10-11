@@ -88,3 +88,7 @@ Agustin pidió probar el skill [scroll-world](https://github.com/oso95/scroll-wo
 - La curva de los cambios de sección es más suave al arrancar y al frenar (`6t⁵ − 15t⁴ + 10t³`).
 - Una barra naranja fina arriba muestra cuánto falta de la página.
 - En el inicio, un aviso "Desliza para ver más" se desvanece al empezar a bajar. No aparece en el celular ni en pantallas bajas.
+
+## Animaciones solo en la compu (2026-10-11)
+
+José sacó los fundidos y las animaciones por rendimiento. Agustin pidió volver a ponerlos, pero solo en la compu. En la compu (pantalla con mouse: `(hover: hover) and (pointer: fine)`) las secciones se funden al cambiar, los bloques entran con el scroll (ScrollMotion) y Cómo trabajamos muestra sus tarjetas de a una. En el celular las secciones cambian de golpe, los bloques están quietos y Cómo trabajamos no se queda quieta. La clase `reveal-on` solo se pone en la compu.

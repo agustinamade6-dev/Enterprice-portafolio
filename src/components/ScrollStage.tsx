@@ -59,6 +59,8 @@ export function ScrollStage() {
       hold = scenes.map((el, i) => {
         // data-hold-fit: solo se queda quieta si la sección casi entra en la pantalla (en celular, donde
         // las tarjetas van una debajo de otra, se recorre normal)
+        // En el celular Cómo trabajamos no se queda quieta: sus tarjetas se ven todas juntas
+        if (!mouse && el.dataset.holdFit !== undefined) return 0;
         if (el.dataset.holdFit !== undefined && over[i] > vh * 0.25) return 0;
         return Number(el.dataset.hold ?? 0) * vh * (mouse ? 0.6 : 0.85);
       });
@@ -114,17 +116,28 @@ export function ScrollStage() {
           // Entrando: aparece en el lugar, acercándose un poco
           // Empieza a aparecer antes de que la anterior termine de irse: nunca queda la pantalla vacía
           const p = ease(clamp(((local + gap) / gap - 0.1) / 0.7));
-          opacity = p;
-          scale = 1.06 - 0.06 * p;
-          shift = (1 - p) * vh * 0.04;
+          if (mouse) {
+            opacity = p;
+            scale = 1.06 - 0.06 * p;
+            shift = (1 - p) * vh * 0.04;
+          } else {
+            // Celular: aparece de golpe en el lugar (sin fundido, que es lo que más pesa)
+            opacity = p > 0.5 ? 1 : 0;
+          }
         } else if (local > end) {
           // Saliendo: se aleja y se desvanece sin moverse de lugar
           // Misma curva que la que entra, invertida: entre las dos siempre suman la pantalla completa
           const q = ease(clamp(((local - end) / gap - 0.1) / 0.7));
-          leave = q;
-          opacity = 1 - q;
-          scale = 1 - 0.12 * q;
-          shift = -over[i] - q * vh * 0.05;
+          if (mouse) {
+            leave = q;
+            opacity = 1 - q;
+            scale = 1 - 0.12 * q;
+            shift = -over[i] - q * vh * 0.05;
+          } else {
+            // Celular: desaparece de golpe sin moverse de lugar
+            opacity = q < 0.5 ? 1 : 0;
+            shift = -over[i];
+          }
         }
 
         const hidden = opacity <= 0.001;

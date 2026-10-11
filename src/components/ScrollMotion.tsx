@@ -13,6 +13,11 @@ export function ScrollMotion() {
 
   useEffect(() => {
     const root = document.documentElement;
+    // Solo en la compu (mouse): en el celular los bloques quedan quietos, que es lo más liviano
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      root.classList.remove("reveal-on");
+      return;
+    }
     root.classList.add("reveal-on");
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 

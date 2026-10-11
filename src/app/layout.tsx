@@ -37,8 +37,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     // suppressHydrationWarning: el script de abajo agrega una clase al <html> antes de que cargue React
     <html lang="es" className={`${jakarta.variable} antialiased`} suppressHydrationWarning>
       <head>
-        {/* Oculta lo animable antes del primer pintado para que no parpadee al cargar */}
-        <script dangerouslySetInnerHTML={{ __html: 'document.documentElement.classList.add("reveal-on")' }} />
+        {/* Oculta lo animable antes del primer pintado para que no parpadee al cargar.
+            Solo en la compu (mouse): en el celular los bloques quedan quietos, sin animación */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: 'if(matchMedia("(hover: hover) and (pointer: fine)").matches)document.documentElement.classList.add("reveal-on")',
+          }}
+        />
       </head>
       <body className="min-h-screen font-sans">
         {children}
