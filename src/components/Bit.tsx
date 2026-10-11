@@ -127,8 +127,21 @@ export function Bit({ clicks = CLICK }: { clicks?: string[] }) {
       if (!party.current || first) setPose(sectionPose.current);
       if (frase && !first) say(frase);
     };
+    // Se revisa como mucho cada 150 ms: medir las secciones en cada cuadro del scroll lo frenaba
+    let lastCheck = 0;
+    let wait = 0;
     const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(check);
+      if (frame || wait) return;
+      const due = lastCheck + 150 - performance.now();
+      const run = () => {
+        wait = 0;
+        frame = requestAnimationFrame((now) => {
+          lastCheck = now;
+          check();
+        });
+      };
+      if (due > 0) wait = window.setTimeout(run, due);
+      else run();
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
@@ -137,6 +150,7 @@ export function Bit({ clicks = CLICK }: { clicks?: string[] }) {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       window.clearTimeout(t);
+      window.clearTimeout(wait);
       cancelAnimationFrame(frame);
     };
   }, []);

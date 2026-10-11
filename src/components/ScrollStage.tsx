@@ -80,10 +80,28 @@ export function ScrollStage() {
 
     // Escenas que quedaron ocultas en el cuadro anterior: no se vuelven a tocar hasta que reaparezcan
     const asleep = scenes.map(() => false);
+    // Último valor escrito de cada estilo: solo se escribe lo que cambió. Reescribir lo mismo en cada
+    // cuadro (sobre todo las variables --leave y --hold, que heredan los hijos) obligaba al navegador
+    // a recalcular los estilos de toda la sección
+    const written = scenes.map(() => new Map<string, string>());
+    const put = (i: number, prop: string, value: string) => {
+      if (written[i].get(prop) === value) return;
+      written[i].set(prop, value);
+      scenes[i].style.setProperty(prop, value);
+    };
+    let barShown = "";
+    let hintShown = "";
 
     const render = (y: number) => {
-      bar.style.transform = `scaleX(${clamp(y / total).toFixed(4)})`;
-      hint.style.opacity = clamp(1 - y / (vh * 0.35)).toFixed(3);
+      const barNow = `scaleX(${clamp(y / total).toFixed(4)})`;
+      if (barNow !== barShown) bar.style.transform = barShown = barNow;
+      const hintNow = clamp(1 - y / (vh * 0.35)).toFixed(3);
+      if (hintNow !== hintShown) {
+        hintShown = hintNow;
+        hint.style.opacity = hintNow;
+        // Oculto del todo cuando no se ve, así su animación deja de correr
+        hint.style.visibility = hintNow === "0.000" ? "hidden" : "visible";
+      }
       scenes.forEach((el, i) => {
         const local = y - starts[i];
         const end = inner[i];
@@ -114,13 +132,13 @@ export function ScrollStage() {
         asleep[i] = hidden;
         // Solo las escenas que se ven tienen su propia capa en la placa de video: tener todas a la vez
         // (algunas miden varias pantallas de alto) llenaba la memoria del celular y lo hacía ir lento
-        el.style.willChange = hidden ? "auto" : "transform, opacity";
-        el.style.opacity = opacity.toFixed(3);
-        el.style.transform = `translate3d(0, ${shift.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
-        el.style.visibility = hidden ? "hidden" : "visible";
-        el.style.pointerEvents = opacity > 0.5 ? "auto" : "none";
-        el.style.setProperty("--leave", leave.toFixed(3));
-        if (hold[i]) el.style.setProperty("--hold", clamp((local - over[i]) / hold[i]).toFixed(4));
+        put(i, "will-change", hidden ? "auto" : "transform, opacity");
+        put(i, "opacity", opacity.toFixed(3));
+        put(i, "transform", `translate3d(0, ${shift.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`);
+        put(i, "visibility", hidden ? "hidden" : "visible");
+        put(i, "pointer-events", opacity > 0.5 ? "auto" : "none");
+        put(i, "--leave", leave.toFixed(3));
+        if (hold[i]) put(i, "--hold", clamp((local - over[i]) / hold[i]).toFixed(4));
       });
     };
 
@@ -183,6 +201,7 @@ export function ScrollStage() {
       hint.remove();
       root.classList.remove("stage-on");
       document.body.style.height = "";
+      written.forEach((w) => w.clear());
       for (const el of scenes) {
         el.removeAttribute("style");
         el.removeAttribute("data-holding");

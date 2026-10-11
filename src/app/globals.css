@@ -83,6 +83,19 @@ section[id],
   }
 }
 
+/* --enter y --exit los usa solo el propio bloque: registrarlas sin herencia evita que cada cambio
+   obligue a recalcular los estilos de todo lo que tiene adentro */
+@property --enter {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+@property --exit {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
 /* Movimiento con el scroll (ScrollMotion): cada bloque entra desde abajo y, al llegar arriba,
    se aleja y se desvanece. Va al ritmo del scroll, así que al subir se deshace solo. */
 .reveal-on [data-reveal] {
@@ -479,4 +492,11 @@ section[id],
 /* En el celular no se muestra: tapaba los botones del inicio */
 @media (max-height: 700px), (max-width: 767px) {
   .stage-hint { display: none; }
+}
+
+/* Con el escenario de scroll, el menú usa un fondo casi opaco en vez de desenfocar lo de atrás:
+   desenfocar una pantalla entera que cambia en cada cuadro es de lo más caro para la placa de video */
+.stage-on header.fixed {
+  backdrop-filter: none;
+  background-color: rgb(250 248 245 / 0.96);
 }

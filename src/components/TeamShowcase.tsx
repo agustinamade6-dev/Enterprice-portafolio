@@ -146,10 +146,15 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       }
     };
 
+    let lastHold = NaN;
     const fromStage = () => {
       if (!scene || !document.documentElement.classList.contains("stage-on")) return false;
       const v = parseFloat(scene.style.getPropertyValue("--hold"));
       if (Number.isNaN(v)) return false;
+      // Mientras la sección está oculta o el valor no cambió, no se toca nada (antes se reescribían
+      // tamaños y posiciones de todas las fotos en cada cuadro del scroll, aunque no se vieran)
+      if (scene.style.visibility === "hidden" || v === lastHold) return true;
+      lastHold = v;
       apply(v);
       return true;
     };
@@ -184,7 +189,10 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       return h;
     });
 
-    const resize = new ResizeObserver(() => apply(progress));
+    const resize = new ResizeObserver(() => {
+      lastHold = NaN;
+      apply(progress);
+    });
     resize.observe(box);
     window.addEventListener("stage", onStage);
     if (!fromStage()) apply(0);

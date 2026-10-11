@@ -18,6 +18,8 @@ export function ScrollMotion() {
 
     const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]")).map((el) => ({
       el,
+      // La escena del escenario (ScrollStage) donde vive: si está oculta, el bloque no se mide ni se toca
+      scene: el.closest<HTMLElement>("[data-stage] > *"),
       // El retraso de cada tarjeta hace que llegue un poco después que las anteriores
       delay: (parseFloat(el.style.getPropertyValue("--reveal-delay")) || 0) / 1000,
       enter: 0,
@@ -32,9 +34,12 @@ export function ScrollMotion() {
       let moving = false;
       // Primero se miden todos y después se escriben todos: mezclar medir y escribir obliga al
       // navegador a recalcular la página una vez por bloque en cada cuadro (en el celular se notaba)
-      const rects = items.map((it) => it.el.getBoundingClientRect());
+      // Los bloques de escenas ocultas se saltean: medirlos obligaba a recalcular toda la página en cada cuadro
+      const awake = items.map((it) => !it.scene || it.scene.style.visibility !== "hidden");
+      const rects = items.map((it, i) => (awake[i] ? it.el.getBoundingClientRect() : null));
       items.forEach((it, i) => {
         const r = rects[i];
+        if (!r) return;
         const enter = clamp((vh * 0.98 - r.top) / (vh * 0.25));
         // Se va recién cuando su borde de arriba pasa por debajo del menú, así los títulos quietos se ven enteros
         const exit = clamp((vh * 0.1 - r.top) / Math.max(vh * 0.35, r.height * 0.8));
@@ -47,6 +52,7 @@ export function ScrollMotion() {
         }
       });
       items.forEach((it, i) => {
+        if (!awake[i]) return;
         const e = it.enter.toFixed(3);
         const x = it.exit.toFixed(3);
         if (shown[i][0] !== e) it.el.style.setProperty("--enter", e);
