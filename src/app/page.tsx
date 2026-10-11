@@ -42,7 +42,7 @@ export default async function Home() {
         {/* Inicio */}
         <section data-bit={bit(t.bit.hero)} className="fondo-inicio relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
-            <div>
+            <div data-reveal data-hero-text>
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-sm font-medium">
                 <span className="h-2 w-2 rounded-full bg-green-500" />
                 {t.hero.badge}
@@ -68,7 +68,7 @@ export default async function Home() {
                 </a>
               </div>
             </div>
-            <div className="relative hidden lg:block">
+            <div className="relative hidden lg:block" data-reveal data-hero-art style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
               <PosMockup className="mx-auto max-w-lg rotate-1" />
               <div className="absolute -bottom-6 left-2 rounded-2xl bg-white px-4 py-3 shadow-xl shadow-black/10 sm:left-0">
                 <p className="text-xs text-ink/60">{t.hero.cardLabel}</p>
@@ -85,7 +85,7 @@ export default async function Home() {
             <SectionTitle eyebrow={t.projects.eyebrow} title={fill(t.projects.title)} text={fill(t.projects.text)} />
           </div>
           {/* Sacamos el carrusel del max-w-6xl para que use el ancho completo de la ventana sin cortarse */}
-          {/* Sin: animar la opacidad de un padre aplana el 3D y obliga a redibujar el cilindro entero */}
+          {/* Sin data-reveal: animar la opacidad de un padre aplana el 3D y obliga a redibujar el cilindro entero */}
           <div className="mt-6 w-full">
             <Carousel3D projects={deck as any} />
           </div>
@@ -96,7 +96,7 @@ export default async function Home() {
         <section data-bit={bit(t.bit.services)} className="fondo-servicios px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle eyebrow={t.services.eyebrow} title={fill(t.services.title)} text={fill(t.services.text)} />
-            <div className="mt-12">
+            <div className="mt-12" data-reveal>
               <BudgetBuilder
                 budgetTypes={budgetTypes}
                 budgetExtras={budgetExtras}
@@ -106,7 +106,7 @@ export default async function Home() {
               />
             </div>
             {t.services.note && (
-              <p className="mt-8 text-center text-sm text-ink/60">
+              <p className="mt-8 text-center text-sm text-ink/60" data-reveal>
                 {fill(t.services.note)}
               </p>
             )}
@@ -180,9 +180,11 @@ export default async function Home() {
           <div className="mx-auto max-w-3xl">
             <SectionTitle eyebrow={t.faqs.eyebrow} title={fill(t.faqs.title)} text={fill(t.faqs.text)} />
             <div className="mt-10 space-y-3">
-              {faqs.map((f) => (
+              {faqs.map((f, i) => (
                 <details
                   key={f.q}
+                  data-reveal
+                  style={{ "--reveal-delay": `${i * 60}ms` } as React.CSSProperties}
                   className="group rounded-2xl border border-black/5 bg-white p-5 open:shadow-sm">
                   <summary className="flex cursor-pointer list-none items-center justify-between font-bold">
                     {f.q}
@@ -200,7 +202,7 @@ export default async function Home() {
         <div data-bit={bit(t.bit.contact)} className="scene-end fondo-contacto">
           <section className="grid content-center px-4 py-20 text-paper sm:px-6">
             <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
-              <div>
+              <div data-reveal>
                 <p className="text-sm font-bold uppercase tracking-widest text-brand">{t.contact.eyebrow}</p>
                 <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{fill(t.contact.title)}</h2>
                 <p className="mt-4 text-lg text-paper/70">
@@ -220,7 +222,7 @@ export default async function Home() {
                   </a>
                 </div>
               </div>
-              <div>
+              <div data-reveal style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
                 <ContactForm whatsapp={site.whatsapp} />
               </div>
             </div>
@@ -247,7 +249,7 @@ function SectionTitle({
   wide?: boolean;
 }) {
   return (
-    <div className={align === "center" ? `mx-auto text-center ${wide ? "max-w-4xl" : "max-w-2xl"}` : ""}>
+    <div className={align === "center" ? `mx-auto text-center ${wide ? "max-w-4xl" : "max-w-2xl"}` : ""} data-reveal>
       <p className="text-sm font-bold uppercase tracking-widest text-brand">{eyebrow}</p>
       <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{title}</h2>
       {/* En pantallas bajas el texto largo (Nosotros) se achica para que el apartado entre entero */}

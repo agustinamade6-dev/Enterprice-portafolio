@@ -98,6 +98,7 @@ export function ScrollStage() {
       const hintNow = clamp(1 - y / (vh * 0.35)).toFixed(3);
       if (hintNow !== hintShown) {
         hintShown = hintNow;
+        hint.style.opacity = hintNow;
         // Oculto del todo cuando no se ve, así su animación deja de correr
         hint.style.visibility = hintNow === "0.000" ? "hidden" : "visible";
       }
@@ -106,19 +107,24 @@ export function ScrollStage() {
         const end = inner[i];
         let opacity = 1;
         let shift = -clamp(local, 0, over[i]);
-        const scale = 1;
+        let scale = 1;
+        let leave = 0;
 
         if (local < 0) {
-          // Entrando: aparece de golpe en el lugar (sin fundido, que es lo que más pesa)
+          // Entrando: aparece en el lugar, acercándose un poco
           // Empieza a aparecer antes de que la anterior termine de irse: nunca queda la pantalla vacía
           const p = ease(clamp(((local + gap) / gap - 0.1) / 0.7));
-          opacity = p > 0.5 ? 1 : 0;
+          opacity = p;
+          scale = 1.06 - 0.06 * p;
+          shift = (1 - p) * vh * 0.04;
         } else if (local > end) {
-          // Saliendo: desaparece de golpe sin moverse de lugar
+          // Saliendo: se aleja y se desvanece sin moverse de lugar
           // Misma curva que la que entra, invertida: entre las dos siempre suman la pantalla completa
           const q = ease(clamp(((local - end) / gap - 0.1) / 0.7));
-          opacity = q < 0.5 ? 1 : 0;
-          shift = -over[i];
+          leave = q;
+          opacity = 1 - q;
+          scale = 1 - 0.12 * q;
+          shift = -over[i] - q * vh * 0.05;
         }
 
         const hidden = opacity <= 0.001;
@@ -131,6 +137,7 @@ export function ScrollStage() {
         put(i, "transform", `translate3d(0, ${shift.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`);
         put(i, "visibility", hidden ? "hidden" : "visible");
         put(i, "pointer-events", opacity > 0.5 ? "auto" : "none");
+        put(i, "--leave", leave.toFixed(3));
         if (hold[i]) put(i, "--hold", clamp((local - over[i]) / hold[i]).toFixed(4));
       });
     };
@@ -143,7 +150,7 @@ export function ScrollStage() {
       current += (target - current) * (1 - Math.pow(1 - smooth, dt / 16.7));
       if (Math.abs(target - current) < 0.4) current = target;
       render(current);
-      // Avisa a quien siga el escenario (TeamShowcase)
+      // Avisa a ScrollMotion para que las tarjetas se muevan con el escenario
       window.dispatchEvent(new Event("stage"));
       if (current !== target) frame = requestAnimationFrame(tick);
       else last = 0;
