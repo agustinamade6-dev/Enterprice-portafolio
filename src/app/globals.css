@@ -423,3 +423,60 @@ section[id],
     opacity: 0;
   }
 }
+
+/* Barra de avance y aviso de "desliza" del escenario (ScrollStage.tsx) */
+.stage-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 3px;
+  background: var(--color-brand);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+.stage-hint {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  translate: -50% 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgb(15 17 21 / 0.55);
+  pointer-events: none;
+}
+.stage-hint i {
+  position: relative;
+  width: 22px;
+  height: 34px;
+  border: 2px solid rgb(15 17 21 / 0.35);
+  border-radius: 9999px;
+}
+.stage-hint i::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 4px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--color-brand);
+  translate: -50% 0;
+  animation: stage-wheel 1.7s ease-in-out infinite;
+}
+@keyframes stage-wheel {
+  0% { opacity: 0; top: 6px; }
+  40% { opacity: 1; }
+  100% { opacity: 0; top: 17px; }
+}
+/* En el celular no se muestra: tapaba los botones del inicio */
+@media (max-height: 700px), (max-width: 767px) {
+  .stage-hint { display: none; }
+}

@@ -4,7 +4,8 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 const clamp = (n: number, min = 0, max = 1) => Math.min(max, Math.max(min, n));
-const ease = (t: number) => t * t * (3 - 2 * t);
+// Curva más suave que la anterior: arranca y frena sin tirones (la misma idea que usa scroll-world)
+const ease = (t: number) => t * t * t * (t * (6 * t - 15) + 10);
 
 // Escenario fijo: la pantalla no se desplaza. El scroll solo marca el avance y cada sección
 // cambia en el lugar: la que se va se aleja y se desvanece, la siguiente aparece acercándose.
@@ -25,7 +26,18 @@ export function ScrollStage() {
     // Con mouse (compu) cada giro de la ruedita avanza poco, así que el cambio es más corto y más ágil;
     // con el dedo (celular) se mantiene más largo porque un deslizamiento recorre mucho
     const mouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const smooth = mouse ? 0.24 : 0.18;
+    // Cuánto se acerca el escenario al scroll real en cada cuadro (a 60 cuadros por segundo).
+    // Más bajo = se desliza más, como si flotara. Se corrige según los cuadros por segundo de la
+    // pantalla, así se siente igual en un monitor de 60 Hz, de 144 Hz o en un celular lento.
+    const smooth = mouse ? 0.13 : 0.16;
+
+    // Barra de avance arriba y aviso de "desliza" en el inicio (ideas de scroll-world)
+    const bar = document.createElement("div");
+    bar.className = "stage-progress";
+    const hint = document.createElement("div");
+    hint.className = "stage-hint";
+    hint.innerHTML = '<i aria-hidden="true"></i><span>Desliza para ver más</span>';
+    document.body.append(bar, hint);
 
     let vh = window.innerHeight;
     let starts: number[] = [];
@@ -35,6 +47,8 @@ export function ScrollStage() {
     let gap = 0;
     let current = window.scrollY;
     let frame = 0;
+    let last = 0;
+    let total = 1;
 
     const layout = () => {
       vh = window.innerHeight;
@@ -60,7 +74,7 @@ export function ScrollStage() {
         }
         y += inner[i] + gap;
       });
-      const total = starts[starts.length - 1] + inner[inner.length - 1];
+      total = starts[starts.length - 1] + inner[inner.length - 1];
       document.body.style.height = `${total + vh}px`;
     };
 
@@ -68,6 +82,8 @@ export function ScrollStage() {
     const asleep = scenes.map(() => false);
 
     const render = (y: number) => {
+      bar.style.transform = `scaleX(${clamp(y / total).toFixed(4)})`;
+      hint.style.opacity = clamp(1 - y / (vh * 0.35)).toFixed(3);
       scenes.forEach((el, i) => {
         const local = y - starts[i];
         const end = inner[i];
@@ -108,15 +124,18 @@ export function ScrollStage() {
       });
     };
 
-    const tick = () => {
+    const tick = (now: number) => {
       frame = 0;
+      const dt = last ? Math.min(64, now - last) : 16.7;
+      last = now;
       const target = window.scrollY;
-      current += (target - current) * smooth;
-      if (Math.abs(target - current) < 0.5) current = target;
+      current += (target - current) * (1 - Math.pow(1 - smooth, dt / 16.7));
+      if (Math.abs(target - current) < 0.4) current = target;
       render(current);
       // Avisa a ScrollMotion para que las tarjetas se muevan con el escenario
       window.dispatchEvent(new Event("stage"));
       if (current !== target) frame = requestAnimationFrame(tick);
+      else last = 0;
     };
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(tick);
@@ -160,6 +179,8 @@ export function ScrollStage() {
       window.removeEventListener("resize", onScroll);
       document.removeEventListener("click", onClick, true);
       cancelAnimationFrame(frame);
+      bar.remove();
+      hint.remove();
       root.classList.remove("stage-on");
       document.body.style.height = "";
       for (const el of scenes) {

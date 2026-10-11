@@ -78,3 +78,11 @@ Al abrir la página de inicio aparece el logo de ZainSoft sobre fondo oscuro, y 
 - Se salta con un clic o con cualquier tecla. Si el sistema tiene "reducir movimiento" activado (en Windows, los "Efectos de animación" apagados), se muestra el logo ya armado y se desvanece, sin movimiento.
 - Mientras corre, la página no se puede desplazar (clase `intro-playing`).
 - Solo está en el inicio: las páginas de proyectos y del equipo abren directo.
+
+## Scroll más suave, con ideas de scroll-world (2026-10-11)
+
+Agustin pidió probar el skill [scroll-world](https://github.com/oso95/scroll-world). Ese skill arma la página con videos generados por IA (Higgsfield y Monid, servicios pagos con cuenta propia) y el scroll adelanta el video. Eso no se usó. Lo que sí se tomó es su manera de suavizar:
+- El escenario sigue al scroll con un retraso suave, que ahora se corrige según los cuadros por segundo de la pantalla. Se siente igual en 60 Hz, en 144 Hz o en un celular lento. Con mouse se desliza más (0,13 por cuadro, antes 0,24); con el dedo, 0,16.
+- La curva de los cambios de sección es más suave al arrancar y al frenar (`6t⁵ − 15t⁴ + 10t³`).
+- Una barra naranja fina arriba muestra cuánto falta de la página.
+- En el inicio, un aviso "Desliza para ver más" se desvanece al empezar a bajar. No aparece en el celular ni en pantallas bajas.
