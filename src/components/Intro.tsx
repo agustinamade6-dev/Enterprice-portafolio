@@ -1,28 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { INTRO_KEY as KEY } from "./introScript";
 
 // Intro de la página: aparece el logo de ZainSoft, se arma y la pantalla se abre en dos.
 // Toda la animación es CSS (globals.css, "intro-*"), así que aunque el JavaScript tarde en cargar
-// se ve igual y al final desaparece sola. Este componente solo la saltea si ya se vio en esta visita,
-// deja saltarla con un clic o una tecla y la saca de la página cuando termina.
+// se ve igual y al final desaparece sola. Sale cada vez que se abre o se recarga la página.
+// No se repite al volver al inicio desde otra página del sitio sin recargar (la marca vive en memoria
+// y se borra al recargar). Se puede saltar con un clic o una tecla.
 const DURATION_MS = 2600;
 
+declare global {
+  interface Window {
+    __zsIntroVista?: boolean;
+  }
+}
+
 export function Intro() {
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(() => typeof window !== "undefined" && window.__zsIntroVista === true);
 
   useEffect(() => {
+    if (done) return;
+    window.__zsIntroVista = true;
     const root = document.documentElement;
-    if (root.classList.contains("intro-skip")) {
-      setDone(true);
-      return;
-    }
-    try {
-      sessionStorage.setItem(KEY, "1");
-    } catch {
-      // Navegación privada sin almacenamiento: la intro se vuelve a ver, no pasa nada
-    }
     root.classList.add("intro-playing");
     const finish = () => {
       root.classList.remove("intro-playing");
@@ -39,6 +38,7 @@ export function Intro() {
       window.removeEventListener("keydown", skip);
       root.classList.remove("intro-playing");
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (done) return null;

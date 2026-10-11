@@ -74,9 +74,7 @@ Al abrir la página de inicio aparece el logo de ZainSoft sobre fondo oscuro, y 
 4. El logo se agranda y desaparece, y las dos mitades del fondo se corren hacia los costados.
 
 - Archivos: `src/components/Intro.tsx` (el dibujo) y las animaciones `intro-*` en `globals.css`. Toda la animación es CSS: si el JavaScript tarda, se ve igual y desaparece sola.
-- Se ve **una vez por visita** (se guarda en `sessionStorage`). Al recargar o al volver desde la página de un proyecto, no se repite. En una pestaña nueva se ve otra vez.
+- Se ve **cada vez que se abre o se recarga** el inicio (Agustin lo pidió así el 2026-10-11; antes era una vez por visita). Al volver al inicio desde la página de un proyecto con los enlaces del sitio, sin recargar, no se repite: la marca `window.__zsIntroVista` vive en memoria y se borra al recargar.
 - Se salta con un clic o con cualquier tecla. Si el sistema tiene "reducir movimiento" activado (en Windows, los "Efectos de animación" apagados), se muestra el logo ya armado y se desvanece, sin movimiento.
-- Para verla de nuevo en la misma pestaña: abrir `localhost:3000/?intro`.
-- `src/components/introScript.ts` corre antes del primer pintado y la oculta si ya se vio, para que no parpadee. Está aparte de `Intro.tsx` porque `layout.tsx` es del servidor y no puede leer valores de un archivo `"use client"`.
 - Mientras corre, la página no se puede desplazar (clase `intro-playing`).
 - Solo está en el inicio: las páginas de proyectos y del equipo abren directo.
