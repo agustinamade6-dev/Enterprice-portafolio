@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* pc: solo en la compu (pantalla con mouse). Ej.: pc:bg-ink */
+@custom-variant pc (@media (hover: hover) and (pointer: fine));
+
 @theme inline {
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --color-ink: #0f1115;
