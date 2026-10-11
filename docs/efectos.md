@@ -86,7 +86,3 @@ Agustin pidió probar el skill [scroll-world](https://github.com/oso95/scroll-wo
 - La curva de los cambios de sección es más suave al arrancar y al frenar (`6t⁵ − 15t⁴ + 10t³`).
 - Una barra naranja fina arriba muestra cuánto falta de la página.
 - En el inicio, un aviso "Desliza para ver más" se desvanece al empezar a bajar. No aparece en el celular ni en pantallas bajas.
-
-## Carrusel de proyectos en celular (2026-10-11)
-
-En pantallas de menos de 768 px el carrusel ya no es un cilindro 3D. Se ve una tarjeta plana y solo se dibujan ella y sus dos vecinas (la última es vecina de la primera). Al tocar Anterior o Siguiente, o al deslizar con el dedo, se mueven de costado. Así se ve igual que antes, pero el celular maneja menos capas mientras hace scroll. En la compu sigue siendo el cilindro 3D. El ancho se mide en el contenedor de afuera (ver lección 28).

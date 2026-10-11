@@ -38,14 +38,11 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
   const rotator = useRef<HTMLDivElement>(null);
   const dragFrame = useRef(0);
   const scene = useRef<HTMLDivElement>(null);
-  // Se mide el contenedor de afuera: la escena del celular tiene el ancho de la tarjeta y medirla
-  // achicaría la tarjeta en un bucle sin fin
-  const wrap = useRef<HTMLDivElement>(null);
   // Ancho disponible: en celular la tarjeta se achica para entrar en la pantalla
   const [space, setSpace] = useState(0);
 
   useEffect(() => {
-    const el = wrap.current;
+    const el = scene.current;
     if (!el) return;
     const measure = () => setSpace(el.clientWidth);
     measure();
@@ -72,12 +69,6 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
     dragFrame.current = 0;
     const el = rotator.current;
     if (!el || dragStartX.current === null || dragCurrentX.current === null) return;
-    if (narrow) {
-      // Celular: la fila de tarjetas sigue al dedo
-      el.style.transition = "none";
-      el.style.transform = `translate3d(${dragCurrentX.current - dragStartX.current}px,0,0)`;
-      return;
-    }
     const angle = currentIndex * -theta + ((dragCurrentX.current - dragStartX.current) / window.innerWidth) * 120;
     el.style.transition = "none";
     el.style.transform = `translateY(${lift}px) translateZ(-${radius}px) rotateX(-3deg) rotateY(${angle}deg)`;
@@ -108,10 +99,7 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
     cancelAnimationFrame(dragFrame.current);
     dragFrame.current = 0;
     // Devuelve el control a React, que anima hasta la tarjeta elegida
-    if (rotator.current && narrow) {
-      rotator.current.style.transition = `transform 0.5s ${EASE}`;
-      rotator.current.style.transform = "translate3d(0,0,0)";
-    } else if (rotator.current) {
+    if (rotator.current) {
       rotator.current.style.transition = `transform 0.8s ${EASE}`;
       rotator.current.style.transform = `translateY(${lift}px) translateZ(-${radius}px) rotateX(-3deg) rotateY(${currentAngle}deg)`;
     }
@@ -138,57 +126,8 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
   // We determine the active absolute index via modulo
   const activeIndex = ((currentIndex % total) + total) % total;
 
-  // En el celular no se usa el cilindro 3D: se ve una sola tarjeta por vez, así que se dibujan solo
-  // la actual y sus dos vecinas, planas, y se deslizan de costado. El cilindro tenía todas las
-  // tarjetas en capas 3D con sombra, y el celular las recalculaba en cada cuadro del scroll.
-  if (narrow) {
-    const step = cardWidth + 16;
-    return (
-      <div ref={wrap} className="relative w-full select-none overflow-hidden py-4">
-        <div
-          ref={scene}
-          className="relative mx-auto touch-pan-y"
-          style={{ height: cardHeight + 24, width: cardWidth, contain: "layout paint" }}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerUp}
-          onPointerLeave={onPointerUp}
-          onPointerCancel={onPointerUp}
-        >
-          <div ref={rotator} className="absolute inset-0" style={{ transform: "translate3d(0,0,0)" }}>
-            {projects.map((p, i) => {
-              // Distancia con signo a la tarjeta actual, dando la vuelta (la última es vecina de la primera)
-              let rel = (((i - activeIndex) % total) + total) % total;
-              if (rel > total / 2) rel -= total;
-              if (Math.abs(rel) > 1) return null;
-              return (
-                <div
-                  key={p.slug}
-                  className="absolute left-0 top-0"
-                  style={{
-                    width: cardWidth,
-                    height: cardHeight,
-                    transform: `translate3d(${rel * step}px,0,0) scale(${rel === 0 ? 1 : 0.92})`,
-                    opacity: rel === 0 ? 1 : 0.5,
-                    transition: `transform 0.5s ${EASE}, opacity 0.5s ${EASE}`,
-                    pointerEvents: rel === 0 ? "auto" : "none",
-                  }}
-                >
-                  <div className="h-full w-full overflow-hidden rounded-[16px] bg-white shadow-[0_12px_30px_-16px_rgba(0,0,0,0.3)]">
-                    <Card project={p} />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <Controls prev={prev} next={next} />
-      </div>
-    );
-  }
-
   return (
-    <div ref={wrap} className="relative w-full overflow-visible select-none py-4 md:py-6">
+    <div className="relative w-full overflow-visible select-none py-4 md:py-6">
       {/* 1. Contenedor de la escena (Perspective) - Full Width */}
       <div
         ref={scene}
@@ -266,29 +205,24 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
         </div>
       </div>
 
-      <Controls prev={prev} next={next} />
+      {/* Controles de Navegación */}
+      <div className="mt-6 md:mt-8 mx-auto flex w-max items-center gap-1 rounded-2xl border border-black/10 bg-black/5 p-1.5 backdrop-blur-md">
+        <button
+          type="button"
+          onClick={prev}
+          className="rounded-xl px-5 py-2 text-sm font-bold text-ink transition hover:bg-black/5"
+        >
+          ← Anterior
+        </button>
+        <div className="h-5 w-[1px] bg-black/10" />
+        <button
+          type="button"
+          onClick={next}
+          className="rounded-xl px-5 py-2 text-sm font-bold text-ink transition hover:bg-black/5"
+        >
+          Siguiente →
+        </button>
+      </div>
     </div>
-  );
-}
-
-function Controls({ prev, next }: { prev: () => void; next: () => void }) {
-  return (
-  <div className="mt-6 md:mt-8 mx-auto flex w-max items-center gap-1 rounded-2xl border border-black/10 bg-black/5 p-1.5">
-    <button
-      type="button"
-      onClick={prev}
-      className="rounded-xl px-5 py-2 text-sm font-bold text-ink transition hover:bg-black/5"
-    >
-      ← Anterior
-    </button>
-    <div className="h-5 w-[1px] bg-black/10" />
-    <button
-      type="button"
-      onClick={next}
-      className="rounded-xl px-5 py-2 text-sm font-bold text-ink transition hover:bg-black/5"
-    >
-      Siguiente →
-    </button>
-  </div>
   );
 }
