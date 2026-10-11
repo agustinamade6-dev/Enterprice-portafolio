@@ -115,16 +115,13 @@ export default async function Home() {
 
         {/* Proceso */}
         <div id="proceso" className="scroll-anchor" />
-        <section data-bit={bit(t.bit.process)} data-hold={4} data-hold-fit className="fondo-proceso px-4 py-20 sm:px-6">
+        <section data-bit={bit(t.bit.process)} className="fondo-proceso px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle eyebrow={t.process.eyebrow} title={fill(t.process.title)} text={fill(t.process.text)} />
             <ol className="mt-12 grid gap-6 md:grid-cols-3">
               {process.map((step, i) => (
                 <li
                   key={step.title}
-                  data-reveal
-                  data-step
-                  style={{ "--reveal-delay": `${i * 90}ms`, "--i": i, "--n": process.length } as React.CSSProperties}
                   className={`flex flex-col rounded-3xl border p-6 ${i === 2 ? "md:row-span-2 " : ""}border-black/5 bg-white`}
                 >
                   <span
