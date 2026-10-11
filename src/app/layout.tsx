@@ -36,7 +36,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     // suppressHydrationWarning: el script de abajo agrega una clase al <html> antes de que cargue React
     <html lang="es" className={`${jakarta.variable} antialiased`} suppressHydrationWarning>
       <head>
-        {/* Oculta lo animable antes del primer pintado para que no parpadee al cargar */}
       </head>
       <body className="min-h-screen font-sans">
         {children}

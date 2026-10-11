@@ -313,6 +313,7 @@ section[id],
     transform: scale(0.4) rotate(-14deg);
   }
   to {
+    opacity: 1;
     transform: none;
   }
 }
@@ -322,6 +323,7 @@ section[id],
     transform: translateX(var(--from));
   }
   to {
+    opacity: 1;
     transform: none;
   }
 }
