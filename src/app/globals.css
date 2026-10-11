@@ -500,3 +500,7 @@ section[id],
   backdrop-filter: none;
   background-color: rgb(250 248 245 / 0.96);
 }
+/* Lo mismo para los demás desenfoques chicos (botones del carrusel, etiquetas del equipo) */
+.stage-on [data-stage] * {
+  backdrop-filter: none;
+}
