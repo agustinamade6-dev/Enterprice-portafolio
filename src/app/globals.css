@@ -392,3 +392,34 @@ section[id],
     pointer-events: none;
   }
 }
+/* Con "reducir movimiento" (por ejemplo, Windows con los efectos de animación apagados) la intro no se mueve:
+   el logo aparece armado y todo se desvanece. */
+@media (prefers-reduced-motion: reduce) {
+  .intro-mark,
+  .intro-z,
+  .intro-s {
+    opacity: 1;
+    animation: none;
+  }
+  .intro-word {
+    max-width: 20rem;
+    padding-left: 0.9rem;
+    clip-path: none;
+    animation: none;
+  }
+  .intro-line {
+    transform: none;
+    animation: intro-fade 0.4s ease 1.6s forwards;
+  }
+  .intro-logo {
+    animation: intro-fade 0.4s ease 1.6s forwards;
+  }
+  .intro-panel {
+    animation: intro-fade 0.6s ease 1.8s forwards;
+  }
+}
+@keyframes intro-fade {
+  to {
+    opacity: 0;
+  }
+}
