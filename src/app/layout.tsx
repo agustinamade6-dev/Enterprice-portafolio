@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import { ScrollMotion } from "@/components/ScrollMotion";
 import { ScrollStage } from "@/components/ScrollStage";
 import { contentRepo } from "@/lib/content";
+import { INTRO_SCRIPT } from "@/components/introScript";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -39,6 +40,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* Oculta lo animable antes del primer pintado para que no parpadee al cargar */}
         <script dangerouslySetInnerHTML={{ __html: 'document.documentElement.classList.add("reveal-on")' }} />
+        {/* Si la intro ya se vio en esta visita, se oculta antes de pintar (ver Intro.tsx) */}
+        <script dangerouslySetInnerHTML={{ __html: INTRO_SCRIPT }} />
       </head>
       <body className="min-h-screen font-sans">
         {children}

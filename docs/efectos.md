@@ -64,3 +64,18 @@ Bit vive abajo a la derecha, en el lugar del botón flotante de WhatsApp, que Ag
 - Festeja solo cuando alguien envía el formulario de contacto o pide el presupuesto: cualquier componente puede llamar a `bitFestejar("frase")`.
 - Con "reducir movimiento" activado en el sistema, no hay animaciones (solo cambia de pose).
 - Dibujos sueltos (SVG y PNG transparentes) para redes: carpeta del proyecto `mascota/bit/`.
+
+## Intro con el logo (2026-10-11)
+
+Al abrir la página de inicio aparece el logo de ZainSoft sobre fondo oscuro, y la pantalla se abre en dos para mostrar la página. Dura 2,6 s:
+1. Entra el cuadrado con un pequeño giro.
+2. La Z llega desde la izquierda y la S desde la derecha.
+3. Aparece "ZainSoft" y una línea naranja.
+4. El logo se agranda y desaparece, y las dos mitades del fondo se corren hacia los costados.
+
+- Archivos: `src/components/Intro.tsx` (el dibujo) y las animaciones `intro-*` en `globals.css`. Toda la animación es CSS: si el JavaScript tarda, se ve igual y desaparece sola.
+- Se ve **una vez por visita** (se guarda en `sessionStorage`). Al recargar o al volver desde la página de un proyecto, no se repite. En una pestaña nueva se ve otra vez.
+- Se salta con un clic o con cualquier tecla. Si el sistema tiene "reducir movimiento" activado, no se muestra.
+- `src/components/introScript.ts` corre antes del primer pintado y la oculta si ya se vio, para que no parpadee. Está aparte de `Intro.tsx` porque `layout.tsx` es del servidor y no puede leer valores de un archivo `"use client"`.
+- Mientras corre, la página no se puede desplazar (clase `intro-playing`).
+- Solo está en el inicio: las páginas de proyectos y del equipo abren directo.

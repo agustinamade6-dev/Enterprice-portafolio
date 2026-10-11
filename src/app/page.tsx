@@ -8,6 +8,7 @@ import { PosMockup } from "@/components/PosMockup";
 import { Carousel3D } from "@/components/Carousel3D";
 import { TeamShowcase } from "@/components/TeamShowcase";
 import { Bit } from "@/components/Bit";
+import { Intro } from "@/components/Intro";
 import { contentRepo } from "@/lib/content";
 
 function makeWhatsappLink(phone: string, text: string) {
@@ -35,6 +36,7 @@ export default async function Home() {
 
   return (
     <>
+      <Intro />
       <Header siteName={site.name} />
       <main data-stage>
         {/* Inicio */}

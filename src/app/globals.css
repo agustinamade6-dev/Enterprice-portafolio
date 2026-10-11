@@ -230,3 +230,165 @@ section[id],
   .bit-float, .bit-eyes, .bit-spark, .bit-wave, .bit-jump, .bit-pop, .bit-idea, .bit-type, .bit-confetti rect { animation: none; }
   .bit-arm { transition: none; }
 }
+
+/* Intro (Intro.tsx): el logo se arma y la pantalla se abre en dos. Dura 2,6 s y solo se ve una vez por visita. */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  animation: intro-gone 0s linear 2.6s forwards;
+}
+.intro-skip .intro {
+  display: none;
+}
+.intro-playing,
+.intro-playing body {
+  overflow: hidden;
+}
+.intro-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 52%;
+  background: var(--color-ink, #0f1115);
+  will-change: transform;
+  animation: intro-open 0.75s cubic-bezier(0.7, 0, 0.2, 1) 1.75s forwards;
+}
+.intro-panel-left {
+  left: 0;
+  --to: -100%;
+}
+.intro-panel-right {
+  right: 0;
+  --to: 100%;
+}
+.intro-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  animation: intro-logo-out 0.45s ease-in 1.6s forwards;
+}
+.intro-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 1.25rem;
+  background: #1b1e25;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.08), 0 20px 60px -10px rgb(240 90 40 / 0.45);
+  overflow: hidden;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  opacity: 0;
+  animation: intro-mark-in 0.6s cubic-bezier(0.3, 1.5, 0.5, 1) 0.05s forwards;
+}
+.intro-z,
+.intro-s {
+  display: inline-block;
+  opacity: 0;
+  animation: intro-letter 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s forwards;
+}
+.intro-z {
+  color: #faf8f5;
+  --from: -140%;
+}
+.intro-s {
+  color: var(--color-brand, #f05a28);
+  --from: 140%;
+}
+.intro-word {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 0.12em;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  clip-path: inset(0 100% 0 0);
+  animation: intro-word 0.55s cubic-bezier(0.6, 0, 0.2, 1) 0.85s forwards;
+}
+.intro-line {
+  position: absolute;
+  top: calc(50% + 3.6rem);
+  left: 50%;
+  width: 9rem;
+  height: 3px;
+  margin-left: -4.5rem;
+  border-radius: 9999px;
+  background: var(--color-brand, #f05a28);
+  transform: scaleX(0);
+  animation:
+    intro-line 0.4s ease-out 1.2s forwards,
+    intro-logo-out 0.3s ease-in 1.6s forwards;
+}
+@media (min-width: 640px) {
+  .intro-mark {
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 1.6rem;
+    font-size: 3.25rem;
+  }
+  .intro-word {
+    font-size: 3.5rem;
+  }
+  .intro-line {
+    top: calc(50% + 4.5rem);
+    width: 14rem;
+    margin-left: -7rem;
+  }
+}
+@keyframes intro-mark-in {
+  from {
+    opacity: 0;
+    transform: scale(0.4) rotate(-14deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes intro-letter {
+  from {
+    opacity: 0;
+    transform: translateX(var(--from));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes intro-word {
+  to {
+    max-width: 20rem;
+    padding-left: 0.9rem;
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes intro-line {
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes intro-logo-out {
+  to {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+@keyframes intro-open {
+  to {
+    transform: translateX(var(--to));
+  }
+}
+@keyframes intro-gone {
+  to {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
