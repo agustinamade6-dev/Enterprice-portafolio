@@ -54,6 +54,8 @@ La idea viene de un video del sitio de GTA VI que pasó Agustin: que al hacer sc
 
 Cada apartado tiene su tono de la marca y un dibujo sutil que tiene que ver con su tema (clases `.fondo-*` en `src/app/globals.css`, dibujos en `public/fondos/`): cuadrícula de diseño en Inicio, símbolos de código en Proyectos, puntos en Servicios, camino de pasos en Cómo trabajamos, ondas en Nosotros, signos de pregunta y globos en Preguntas, y ondas de señal con puntos sobre fondo oscuro en Contacto. La capa de arriba de cada fondo es un degradé del color base que esfuma el dibujo hacia los bordes. Sin brillos ni manchas de color: Agustin los pidió sacar (2026-10-10). Agustin eligió "fondos con dibujo" (2026-10-10) frente a solo tonos o alternar claro y oscuro.
 
+Cada fondo se escribe en la variable `--fondo` y se dibuja en un `::before` con capa propia (`will-change: transform`). Así el navegador lo pinta una vez y no lo vuelve a pintar cuando se mueve algo de la sección (ver lección 28).
+
 ## Bit, la mascota (`src/components/Bit.tsx`)
 
 Bit vive abajo a la derecha, en el lugar del botón flotante de WhatsApp, que Agustin pidió sacar de la página principal (en el inicio y en Contacto sigue el botón para escribir por WhatsApp; las páginas de proyectos y del equipo mantienen el botón flotante). Es mitad backend (negro, recto, llave inglesa) y mitad frontend (naranja, redondeado, pincel); la chispa de la antena es la idea del cliente. Agustin pidió que no tenga la estrella en el lado naranja.
