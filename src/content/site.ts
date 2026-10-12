@@ -9,7 +9,7 @@ export const site = {
   tagline:
     "Páginas web y sistemas a medida para restaurantes, comercios y profesionales.",
   description:
-    "Somos un equipo de programadores que diseña y desarrolla páginas web y programas para que tu negocio venda más y atienda mejor.",
+    "Somos un equipo de programadores que diseña y desarrolla páginas web y sistemas a medida para tu negocio.",
   // WhatsApp en formato internacional, sin + ni espacios (en Argentina va 549 + característica + número).
   whatsapp: "5493815100710",
   email: "zainsoftdev@gmail.com",
@@ -104,7 +104,7 @@ export const projects: Project[] = [
     kind: "desarrollo",
     summary:
       "Asistente con inteligencia artificial que atiende a los clientes por Telegram, entiende audios e imágenes, toma los datos del pedido y pasa la charla a una persona cuando hace falta.",
-    result: "Atención las 24 horas sin perder ningún contacto.",
+    result: "Pensado para responder a los clientes a cualquier hora.",
     tags: ["Python", "FastAPI", "IA (Gemini)", "React", "Telegram"],
     by: ["Agustin", "Nicolás"],
     accent: "from-cyan-500 to-blue-700",
@@ -552,7 +552,7 @@ export const pageTexts: PageTexts = {
   team: {
     eyebrow: "Nosotros",
     title: "Somos {nombre}",
-    text: "Somos cuatro estudiantes de Ingeniería en Sistemas de la Universidad Tecnológica Nacional, Facultad Regional Tucumán, que empezamos de cero y vamos por el cien. Nuestro nombre lo dice: Zain significa bueno y lindo, y Soft, software. Hacemos software de calidad, con un backend sólido que funciona y un diseño cuidado y fácil de usar. Cada uno aporta lo suyo, y juntos convertimos las ideas de cada negocio en sistemas y páginas que funcionan.",
+    text: "Somos cuatro estudiantes de Ingeniería en Sistemas de la Universidad Tecnológica Nacional, Facultad Regional Tucumán, que empezamos de cero y vamos por el cien. Nuestro nombre une Zain y Soft: software de calidad, con un backend sólido que funciona y un diseño cuidado y fácil de usar. Cada uno aporta lo suyo, y juntos convertimos las ideas de cada negocio en sistemas y páginas que funcionan.",
   },
   faqs: {
     eyebrow: "Preguntas frecuentes",

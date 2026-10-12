@@ -204,11 +204,19 @@ export function BudgetBuilder({
           target="_blank"
           rel="noopener noreferrer"
           className={`mt-5 flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-bold transition ${
-            ready ? "bg-[#25d366] text-white hover:brightness-95" : "pointer-events-none bg-white/10 text-paper/40"
+            ready ? "bg-[#15803d] text-white hover:brightness-95" : "pointer-events-none bg-white/10 text-paper/40"
           }`}
         >
           <WhatsAppIcon className="h-5 w-5" /> Pedir mi presupuesto
         </a>
+        <p className="mt-3 text-xs text-paper/70">
+          Se abre WhatsApp con tu pedido: solo nos llega si lo envías desde ahí, y lo usamos para armar tu presupuesto. Más
+          detalle en la{" "}
+          <a href="/legal/privacidad/" className="underline underline-offset-2 hover:text-paper">
+            política de privacidad
+          </a>
+          .
+        </p>
       </aside>
     </div>
   );

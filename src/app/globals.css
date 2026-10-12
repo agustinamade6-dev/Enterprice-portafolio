@@ -561,3 +561,22 @@ section[id],
 .stage-on [data-stage] * {
   backdrop-filter: none;
 }
+
+/* Contraste mínimo (WCAG AA, a pedido de Agustin 2026-10-12): el naranja de la marca (#f05a28) no llega a 4,5:1
+   en textos chicos sobre fondo claro ni con texto blanco encima. Ahí se usa un naranja apenas más oscuro.
+   Sobre fondo oscuro el naranja original sí se lee bien, así que se mantiene. */
+.text-brand {
+  color: #c2410c;
+}
+:is(.bg-ink, .fondo-contacto, footer) .text-brand {
+  color: #f05a28;
+}
+.bg-brand.text-white {
+  background-color: #c8431a;
+}
+.bg-brand.text-white:hover {
+  background-color: #a93a14;
+}
+.hover\:bg-brand:hover {
+  background-color: #c8431a;
+}

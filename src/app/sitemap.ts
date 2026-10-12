@@ -12,6 +12,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/",
     ...projects.flatMap((p) => (p.href ? [p.href] : [])),
     ...team.map((m) => `/equipo/${m.slug}/`),
+    "/legal/privacidad/",
+    "/legal/terminos/",
+    "/legal/cookies/",
+    "/arrepentimiento/",
   ];
   return pages.map((path) => ({ url: `${site.url}${path}` }));
 }

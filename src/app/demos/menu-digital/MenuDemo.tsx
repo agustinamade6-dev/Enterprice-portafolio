@@ -128,7 +128,7 @@ export function MenuDemo() {
             type="button"
             disabled={count === 0}
             onClick={() => setSent(true)}
-            className="flex w-full items-center justify-between rounded-2xl bg-[#25d366] px-4 py-3.5 font-bold text-white transition disabled:bg-neutral-300"
+            className="flex w-full items-center justify-between rounded-2xl bg-[#15803d] px-4 py-3.5 font-bold text-white transition disabled:bg-neutral-300"
           >
             <span>{count === 0 ? "Elige algo del menú" : `Enviar pedido (${count})`}</span>
             <span>{money(total)}</span>

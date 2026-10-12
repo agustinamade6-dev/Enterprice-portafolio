@@ -58,6 +58,14 @@ export function ContactForm({ whatsapp }: { whatsapp: string }) {
       >
         Enviar por WhatsApp
       </button>
+      <p className="text-xs text-paper/70">
+        Al enviar se abre WhatsApp con tu mensaje: solo nos llega si lo envías desde ahí, y lo usamos para responderte. Más
+        detalle en la{" "}
+        <a href="/legal/privacidad/" className="underline underline-offset-2 hover:text-paper">
+          política de privacidad
+        </a>
+        .
+      </p>
     </form>
   );
 }
