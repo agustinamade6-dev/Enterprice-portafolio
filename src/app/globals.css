@@ -166,6 +166,44 @@ section[id],
   }
 }
 
+/* Celular (ScrollStage pone stage-touch): en vez de seguir el scroll cuadro a cuadro como en la compu,
+   cada sección entra con una animación corta cuando aparece (data-in) y sus bloques suben de a uno.
+   Solo se animan opacity, translate y scale, que la placa de video mueve sin volver a pintar. */
+@keyframes m-scene-in {
+  from {
+    opacity: 0.2;
+    translate: 0 28px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes m-rise {
+  from {
+    opacity: 0;
+    translate: 0 22px;
+    scale: 0.97;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+.stage-touch [data-stage] > [data-in] {
+  animation: m-scene-in 0.4s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+.stage-touch [data-in] [data-reveal] {
+  animation: m-rise 0.55s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+  animation-delay: calc(var(--reveal-delay, 0ms) + 120ms);
+}
+/* Mientras corre la intro del logo, la animación del inicio espera */
+.intro-playing.stage-touch [data-in],
+.intro-playing.stage-touch [data-in] [data-reveal] {
+  animation-play-state: paused;
+}
+
 /* Fondos por apartado: cada uno con su tono de la marca (sin brillos de color, a pedido de Agustin) y un dibujo sutil que tiene que ver con su tema.
    La capa de arriba de cada fondo es un degradé del color base que esfuma el dibujo hacia los bordes. */
 .fondo-inicio {

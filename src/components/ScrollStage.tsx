@@ -26,6 +26,7 @@ export function ScrollStage() {
     // Con mouse (compu) cada giro de la ruedita avanza poco, así que el cambio es más corto y más ágil;
     // con el dedo (celular) se mantiene más largo porque un deslizamiento recorre mucho
     const mouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    root.classList.toggle("stage-touch", !mouse);
     // Cuánto se acerca el escenario al scroll real en cada cuadro (a 60 cuadros por segundo).
     // Más bajo = se desliza más, como si flotara. Se corrige según los cuadros por segundo de la
     // pantalla, así se siente igual en un monitor de 60 Hz, de 144 Hz o en un celular lento.
@@ -143,6 +144,10 @@ export function ScrollStage() {
         const hidden = opacity <= 0.001;
         if (hidden && asleep[i]) return;
         asleep[i] = hidden;
+        // Celular: cuando la escena aparece se marca con data-in y el CSS hace una animación corta de
+        // entrada (la escena y sus bloques). Corre una sola vez y la maneja la placa de video, sin
+        // escribir estilos en cada cuadro como en la compu
+        if (!mouse) el.toggleAttribute("data-in", !hidden);
         // Solo las escenas que se ven tienen su propia capa en la placa de video: tener todas a la vez
         // (algunas miden varias pantallas de alto) llenaba la memoria del celular y lo hacía ir lento
         put(i, "will-change", hidden ? "auto" : "transform, opacity");
@@ -212,12 +217,13 @@ export function ScrollStage() {
       cancelAnimationFrame(frame);
       bar.remove();
       hint.remove();
-      root.classList.remove("stage-on");
+      root.classList.remove("stage-on", "stage-touch");
       document.body.style.height = "";
       written.forEach((w) => w.clear());
       for (const el of scenes) {
         el.removeAttribute("style");
         el.removeAttribute("data-holding");
+        el.removeAttribute("data-in");
       }
     };
   }, [pathname]);

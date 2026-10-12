@@ -92,3 +92,11 @@ Agustin pidió probar el skill [scroll-world](https://github.com/oso95/scroll-wo
 ## Animaciones solo en la compu (2026-10-11)
 
 José sacó los fundidos y las animaciones por rendimiento. Agustin pidió volver a ponerlos, pero solo en la compu. En la compu (pantalla con mouse: `(hover: hover) and (pointer: fine)`) las secciones se funden al cambiar, los bloques entran con el scroll (ScrollMotion) y Cómo trabajamos muestra sus tarjetas de a una. En el celular las secciones cambian de golpe, los bloques están quietos y Cómo trabajamos no se queda quieta. La clase `reveal-on` solo se pone en la compu.
+
+## Animaciones propias del celular (2026-10-12)
+
+Agustin pidió que el celular tenga animaciones distintas a las de la compu, livianas pero que no pierdan calidad. En el celular (ScrollStage pone la clase `stage-touch` en `<html>`) no se sigue el scroll cuadro a cuadro. Cuando una sección aparece, ScrollStage le pone `data-in` y el CSS hace dos animaciones cortas:
+- **La sección** (`m-scene-in`, 0,4 s): sube 28 px y se aclara.
+- **Sus bloques** (`m-rise`, 0,55 s): cada bloque con `data-reveal` sube 22 px y aparece, de a uno, según su `--reveal-delay` (las tarjetas de Cómo trabajamos y las preguntas van escalonadas).
+
+Las dos corren una sola vez y solo animan `opacity`, `translate` y `scale`, que la placa de video mueve sin volver a pintar. Mientras corre la intro del logo, la animación del inicio espera. Medido con el celular simulado (4 veces más lento, toda la página): mismo costo que con los cortes directos, sin cuadros de más de 50 ms.
