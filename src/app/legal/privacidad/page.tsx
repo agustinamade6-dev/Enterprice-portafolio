@@ -12,7 +12,6 @@ const a = "font-semibold text-ink underline underline-offset-2 hover:text-brand"
 
 export default async function Privacidad() {
   const site = await contentRepo.getSiteData();
-  const team = await contentRepo.getTeam();
   const phone = `+${site.whatsapp.slice(0, 2)} ${site.whatsapp.slice(2, 3)} ${site.whatsapp.slice(3, 6)} ${site.whatsapp.slice(6, 9)}-${site.whatsapp.slice(9)}`;
   return (
     <LegalPage
@@ -30,8 +29,7 @@ export default async function Privacidad() {
           body: (
             <>
               <p>
-                {site.name} es un equipo de desarrollo de software de Tucumán, Argentina, formado por{" "}
-                {team.map((m) => m.fullName).join(", ").replace(/, ([^,]*)$/, " y $1")}. Somos los responsables de los datos que
+                {site.name} es un equipo de desarrollo de software de Tucumán, Argentina. Somos los responsables de los datos que
                 recibimos por esta página.
               </p>
               <p>

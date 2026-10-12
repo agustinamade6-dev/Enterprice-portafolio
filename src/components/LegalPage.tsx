@@ -10,9 +10,10 @@ export type LegalSection = { title: string; body: React.ReactNode };
 export async function LegalPage({ title, intro, sections }: { title: string; intro: React.ReactNode; sections: LegalSection[] }) {
   const site = await contentRepo.getSiteData();
   return (
-    <>
+    // Columna de toda la pantalla: en páginas cortas el pie queda pegado abajo
+    <div className="flex min-h-screen flex-col">
       <Header siteName={site.name} />
-      <main className="px-4 pb-20 pt-32 sm:px-6">
+      <main className="flex-1 px-4 pb-20 pt-32 sm:px-6">
         <article className="mx-auto max-w-3xl">
           <p className="text-sm font-bold uppercase tracking-widest text-brand">Legal</p>
           <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{title}</h1>
@@ -31,6 +32,6 @@ export async function LegalPage({ title, intro, sections }: { title: string; int
         </article>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

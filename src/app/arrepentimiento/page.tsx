@@ -18,9 +18,10 @@ export default async function Arrepentimiento() {
   const whatsapp = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
   const mail = `mailto:${site.email}?subject=${encodeURIComponent("Botón de arrepentimiento")}&body=${encodeURIComponent(text)}`;
   return (
-    <>
+    // Columna de toda la pantalla: en páginas cortas el pie queda pegado abajo
+    <div className="flex min-h-screen flex-col">
       <Header siteName={site.name} />
-      <main className="px-4 pb-20 pt-32 sm:px-6">
+      <main className="flex-1 px-4 pb-20 pt-32 sm:px-6">
         <div className="mx-auto max-w-2xl">
           <p className="text-sm font-bold uppercase tracking-widest text-brand">Legal</p>
           <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Botón de arrepentimiento</h1>
@@ -56,6 +57,6 @@ export default async function Arrepentimiento() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
