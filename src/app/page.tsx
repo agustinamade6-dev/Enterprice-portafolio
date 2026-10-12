@@ -125,16 +125,15 @@ export default async function Home() {
                   data-reveal
                   data-step
                   style={{ "--reveal-delay": `${i * 90}ms`, "--i": i, "--n": process.length } as React.CSSProperties}
-                  // El paso 3 es negro solo en la compu; en el celular es blanco como los demás
-                  className={`flex flex-col rounded-3xl border p-6 border-black/5 bg-white ${i === 2 ? "md:row-span-2 pc:border-ink pc:bg-ink pc:text-paper" : ""}`}
+                  className={`flex flex-col rounded-3xl border p-6 ${i === 2 ? "border-ink bg-ink text-paper md:row-span-2" : "border-black/5 bg-white"}`}
                 >
                   <span
-                    className={`grid h-10 w-10 place-items-center rounded-full font-extrabold bg-brand/10 text-brand ${i === 2 ? "pc:bg-brand pc:text-white" : ""}`}
+                    className={`grid h-10 w-10 place-items-center rounded-full font-extrabold ${i === 2 ? "bg-brand text-white" : "bg-brand/10 text-brand"}`}
                   >
                     {i + 1}
                   </span>
                   <h3 className="mt-4 text-lg font-bold">{step.title}</h3>
-                  <p className={`mt-2 text-sm text-ink/70 ${i === 2 ? "pc:text-paper/70" : ""}`}>{step.text}</p>
+                  <p className={`mt-2 text-sm ${i === 2 ? "text-paper/70" : "text-ink/70"}`}>{step.text}</p>
                   <ul className="mt-4 space-y-2 text-sm">
                     {step.details.map((d) => (
                       <li key={d} className="flex gap-2">
@@ -144,19 +143,19 @@ export default async function Home() {
                     ))}
                   </ul>
                   {i === 2 && (
-                    <div className="mt-6 rounded-2xl bg-brand/5 p-4 pc:bg-white/5">
+                    <div className="mt-6 rounded-2xl bg-white/5 p-4">
                       <p className="text-xs font-bold uppercase tracking-widest text-brand">{t.process.sprintTitle}</p>
                       <ol className="mt-3 space-y-2.5">
                         {sprintLoop.map((s, j) => (
                           <li key={s} className="flex items-center gap-3 text-sm">
-                            <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-ink/20 text-xs font-bold pc:border-white/20">
+                            <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-white/20 text-xs font-bold">
                               {j + 1}
                             </span>
                             {s}
                           </li>
                         ))}
                       </ol>
-                      <p className="mt-3 text-xs text-ink/60 pc:text-paper/60">{t.process.sprintRepeat}</p>
+                      <p className="mt-3 text-xs text-paper/60">{t.process.sprintRepeat}</p>
                     </div>
                   )}
                 </li>
