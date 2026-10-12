@@ -82,19 +82,19 @@ export const projects: Project[] = [
     accent: "from-[#eab3a6] to-[#c96f5d]",
     image: "/pierina/inicio.png",
   },
+  // Antes figuraba como "Yuhmak" (proyecto real), pero fue un programa de práctica que nunca se presentó a esa
+  // empresa (Agustin, 2026-10-12): queda como concepto, sin el nombre ni las capturas con su marca.
   {
-    slug: "yuhmak",
-    title: "Yuhmak, registro de reparaciones",
-    sector: "Centro de distribución de motos",
-    kind: "real",
+    slug: "registro-reparaciones",
+    title: "Registro de reparaciones para talleres",
+    sector: "Talleres de motos",
+    kind: "concepto",
     summary:
-      "Sistema web para registrar, cargar y seguir todas las motos arregladas en el taller: marca, modelo, chasis, motor y el trabajo realizado.",
-    result: "Más de 340 motos registradas y los datos sincronizados en todos los dispositivos.",
+      "Sistema web para registrar y seguir las motos arregladas en el taller: marca, modelo, chasis, motor y el trabajo realizado, con buscador e impresión.",
+    result: "Cada moto reparada, registrada y fácil de encontrar.",
     tags: ["HTML", "Web", "Gestión"],
-    href: "/proyectos/yuhmak/",
     by: ["Fabrizio"],
     accent: "from-green-600 to-emerald-900",
-    image: "/yuhmak/historial.jpg",
   },
   // TODO: confirmar si se puede nombrar al cliente y quién hizo cada parte.
   {
@@ -489,7 +489,7 @@ export const team: Member[] = [
     photo: "/equipo/fabrizio-andrada.jpg",
     href: "https://www.linkedin.com/in/fabrizio-andrada-0b70532a1",
     network: "LinkedIn",
-    bio: "Trabajo de manera integral en el frontend y el backend, cuidando además el diseño y la experiencia de usuario. Desarrollé el sistema de gestión de reparaciones de Yuhmak.",
+    bio: "Trabajo de manera integral en el frontend y el backend, cuidando además el diseño y la experiencia de usuario. Hice, como práctica, un sistema para registrar las reparaciones de un taller de motos.",
     skills: ["Frontend", "Backend", "HTML", "Diseño web", "Experiencia de usuario"],
     story: {
       intro: "Trabajo de manera integral: desarrollo el frontend y el backend, y me aseguro de que todo tenga un buen diseño y sea fácil de usar.",
@@ -501,9 +501,8 @@ export const team: Member[] = [
         },
         {
           label: "Sistema de gestión",
-          title: "Yuhmak, registro de reparaciones",
-          text: "Desarrollé un sistema de gestión integral para Yuhmak, un centro de distribución de motos, que registra, carga y administra el seguimiento de todas las motos arregladas en el taller.",
-          href: "/proyectos/yuhmak/",
+          title: "Registro de reparaciones",
+          text: "Como práctica, desarrollé un sistema de gestión para un taller de motos que registra, carga y administra el seguimiento de todas las motos arregladas.",
         },
         {
           label: "Hoy",

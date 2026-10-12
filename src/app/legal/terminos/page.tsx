@@ -103,7 +103,7 @@ export default async function Terminos() {
           body: (
             <p>
               Al entregar, publicamos o instalamos el sistema y te enseñamos a usarlo. Si aparece un error en algo que
-              entregamos, lo corregimos sin costo durante el período de garantía que figure en el presupuesto. Los cambios
+              entregamos, lo corregimos sin costo durante los 6 meses siguientes a la entrega (garantía). Los cambios
               nuevos o el soporte continuo se cubren con el plan de mantenimiento o con un presupuesto aparte.
             </p>
           ),

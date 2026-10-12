@@ -36,7 +36,7 @@ Cada integrante tiene su página de historia en `/equipo/<slug>/`: cómo empezó
 | --- | --- | --- | --- |
 | Pierina Glow | Real | Agustin | Sistema de gestión de una tienda de ropa (2025) |
 | AKROS Café | Real | Agustin y José | Punto de venta para escritorio |
-| Yuhmak | Real | Fabrizio | Seguimiento de motos reparadas en el taller. Falta confirmar que se pueda nombrar |
+| Registro de reparaciones para talleres | Concepto | Fabrizio | Seguimiento de motos reparadas. Antes figuraba como "Yuhmak", pero fue un programa de práctica: se sacaron el nombre y las capturas |
 | Chatbot con IA | En desarrollo | Agustin y Nicolás | Gemini, Telegram y panel en React. El cliente todavía no se nombra |
 | Chatbot de pedidos mayoristas | En desarrollo | José | C# / .NET |
 | Optimización de apiarios | Facultad | José | Finca La Dulce |
@@ -46,7 +46,6 @@ Cada integrante tiene su página de historia en `/equipo/<slug>/`: cómo empezó
 ## Pendiente de respuesta
 
 
-- Si Yuhmak autoriza aparecer con nombre y capturas.
 - Confirmar que todos los perfiles enlacen a LinkedIn (lo cambió José).
 - Dominio propio (hoy el sitio está en `zainsoft.sofdev.workers.dev`; el subdominio se cambió de agustinamade6 a sofdev el 2026-10-10).
 - Nombre y rol del cliente del chatbot con IA.

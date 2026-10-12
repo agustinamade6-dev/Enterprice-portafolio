@@ -20,12 +20,12 @@ Revisión hecha el 2026-10-12, a pedido de Agustin. **No es asesoramiento legal:
 
 El pie tiene los enlaces, el botón de arrepentimiento destacado y los datos del negocio (nombre, Tucumán, correo). Los textos legales están en los `page.tsx` de cada ruta (no se editan desde el admin) y la fecha en `LEGAL_UPDATED` (`src/components/LegalPage.tsx`).
 
-## Pendiente de decidir (no se inventó)
+## Decisiones (Agustin, 2026-10-12)
 
-- CUIT o datos fiscales: si se inscriben como monotributistas, agregar el CUIT al pie y a la política de privacidad.
-- Registro de la base de datos en la AAIP: si guardan datos de clientes en una base, consultar si corresponde inscribirla.
-- Período de garantía: los términos dicen "el que figure en el presupuesto"; ponerlo en cada presupuesto.
-- Yuhmak: se muestra con nombre y capturas, y todavía falta confirmar que autoriza.
+- No tienen CUIT todavía: no se muestra. Si se inscriben (por ejemplo, como monotributistas), agregarlo al pie y a la política de privacidad.
+- Garantía: 6 meses desde la entrega para corregir errores sin costo (está en los términos).
+- "Yuhmak" era un programa de práctica que nunca se presentó a esa empresa: se sacaron el nombre, la página del caso y las capturas (tenían su marca y una foto de fondo de origen desconocido). Queda como concepto: "Registro de reparaciones para talleres".
+- Pendiente: si guardan datos de clientes en una base, consultar si corresponde inscribirla en la AAIP.
 
 ## Accesibilidad
 

@@ -22,7 +22,7 @@ src/
     layout.tsx           ← estructura común, metadatos y vista previa al compartir
     globals.css          ← colores, fuente y animaciones
     equipo/[slug]/       ← página de historia de cada integrante
-    proyectos/<nombre>/  ← páginas de caso (akros-cafe, pierina-glow, yuhmak)
+    proyectos/<nombre>/  ← páginas de caso (akros-cafe, pierina-glow)
     demos/menu-digital/  ← demo navegable de un menú digital
     admin/               ← panel de admin (login, proyectos, equipo, servicios, proceso, preguntas, fotos)
     api/                 ← API del panel (contenido, fotos y sesión)
@@ -39,7 +39,7 @@ src/
     ScrollStage, ScrollMotion ← efectos de scroll (solo en la rama efectos)
 public/
   equipo/                ← fotos del equipo (cuadradas, 600x600)
-  pierina/, yuhmak/      ← capturas de proyectos
+  pierina/      ← capturas de proyectos
   og.png                 ← imagen que se ve al compartir el link (1200x630)
 ```
 
