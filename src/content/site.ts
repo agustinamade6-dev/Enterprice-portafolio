@@ -566,7 +566,7 @@ export const pageTexts: PageTexts = {
     whatsappLabel: "WhatsApp",
     whatsappMessage: "Hola, quiero consultar por un proyecto.",
   },
-  footer: { note: "Hecho a mano con Next.js." },
+  footer: { note: "" },
   seo: { titleSuffix: "Páginas web y sistemas a medida" },
   bit: {
     hero: { pose: "saludando", text: "¡Hola! Soy Bit 👋" },

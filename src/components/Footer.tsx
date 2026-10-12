@@ -26,7 +26,7 @@ export async function Footer() {
           </Link>
           <span className="hidden sm:inline text-white/20">|</span>
           <p>
-            © {new Date().getFullYear()} {name}. {note}
+            © {new Date().getFullYear()} {name}.{note ? ` ${note}` : ""}
           </p>
         </div>
         <div className="flex gap-5">
