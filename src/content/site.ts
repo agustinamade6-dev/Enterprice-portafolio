@@ -14,6 +14,7 @@ export const site = {
   whatsapp: "5493815100710",
   email: "zainsoftdev@gmail.com",
   instagram: "https://www.instagram.com/zainsoft_/",
+  facebook: "https://www.facebook.com/profile.php?id=61595416858440",
   photo: "/foto-perfil.png",
   github: "https://github.com/agustinamade6-dev",
   // TODO: cambiar por la dirección definitiva cuando el sitio esté publicado (o un dominio propio).

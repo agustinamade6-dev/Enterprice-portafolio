@@ -26,6 +26,7 @@ export const SiteDataSchema = z.object({
   whatsapp: z.string().trim().regex(/^\d{8,15}$/, { message: "Solo números, con código de país (ej: 5493815100710)" }),
   email: z.string().trim().email().max(200),
   instagram: link(),
+  facebook: link().optional(),
   photo: imagePath().optional(),
   github: link(),
   url: link(),

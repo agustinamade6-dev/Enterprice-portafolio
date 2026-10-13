@@ -160,6 +160,11 @@ export default function SitePage() {
               <label className="mb-1 block text-sm font-medium text-paper/70">Instagram (URL completa)</label>
               <input required name="instagram" value={data.instagram} onChange={handleChange} className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-2 text-white focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand" />
             </div>
+
+            <div>
+              <label className="mb-1 block text-sm font-medium text-paper/70">Facebook (URL completa)</label>
+              <input name="facebook" value={data.facebook ?? ""} onChange={handleChange} className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-2 text-white focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand" />
+            </div>
             
             <div>
               <label className="mb-1 block text-sm font-medium text-paper/70">GitHub (URL completa)</label>

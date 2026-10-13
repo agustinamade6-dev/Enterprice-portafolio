@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { contentRepo } from "@/lib/content";
+import { site } from "@/content/site";
 
 // Lee los datos del admin directamente, así todas las páginas muestran lo mismo
 export async function Footer() {
-  const { name, instagram, github, email } = await contentRepo.getSiteData();
+  const { name, instagram, facebook, github, email } = await contentRepo.getSiteData();
   const { footer } = await contentRepo.getPageTexts();
   const note = footer.note;
   const legal = [
@@ -14,6 +15,7 @@ export async function Footer() {
   ];
   const social = [
     { href: instagram, label: "Instagram" },
+    { href: facebook || site.facebook, label: "Facebook" },
     { href: github, label: "GitHub" },
   ];
   return (
