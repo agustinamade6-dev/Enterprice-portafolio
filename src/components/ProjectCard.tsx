@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/content/schemas";
 import { ArrowIcon } from "./icons";
@@ -5,92 +6,167 @@ import { PosMockup } from "./PosMockup";
 
 export function ProjectCard({
   project,
-  large = false,
-  compact = false,
 }: {
   project: Project;
   large?: boolean;
-  compact?: boolean; // versión más baja para el mazo de la portada
+  compact?: boolean;
 }) {
-  const art = project.slug === "akros-cafe" ? (
-          <PosMockup className="w-full max-w-md" />
-        ) : project.image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={project.image}
-            alt={`Captura del sistema de ${project.title}`}
-            className={`w-full rounded-lg shadow-xl shadow-black/25 ${large ? "max-w-md" : "max-w-sm"}`}
-          />
-        ) : project.chat ? (
-          <ChatScreen msgs={project.chat} />
-        ) : project.slug === "chatbot-crm" ? (
-          <ChatScreen />
-        ) : project.modules ? (
-          <GestionScreen title={project.sector} modules={project.modules} />
-        ) : (
-          <ConceptScreen title={project.title} />
-        );
+  const imageSrc = project.image || project.coverUrl;
+
+  const visual = imageSrc ? (
+    <div className="relative h-full w-full overflow-hidden bg-zinc-900">
+      <Image
+        src={imageSrc}
+        alt={`Captura del proyecto ${project.title}`}
+        fill
+        sizes="(max-width: 768px) 100vw, 750px"
+        className="object-cover object-top transition duration-700 ease-out group-hover:scale-105"
+        priority={project.slug === "lv-racing"}
+      />
+    </div>
+  ) : project.slug === "akros-cafe" ? (
+    <div className="relative flex h-full w-full items-center justify-center bg-gradient-to-br from-amber-500 to-orange-600 p-6 pb-20">
+      <div className="w-full max-w-sm transition duration-500 group-hover:scale-105">
+        <PosMockup className="w-full" />
+      </div>
+    </div>
+  ) : project.chat ? (
+    <div className={`relative flex h-full w-full items-center justify-center bg-gradient-to-br ${project.accent} p-6 pb-20`}>
+      <div className="w-full max-w-xs transition duration-500 group-hover:scale-105">
+        <ChatScreen msgs={project.chat} />
+      </div>
+    </div>
+  ) : project.slug === "chatbot-crm" ? (
+    <div className={`relative flex h-full w-full items-center justify-center bg-gradient-to-br ${project.accent} p-6 pb-20`}>
+      <div className="w-full max-w-xs transition duration-500 group-hover:scale-105">
+        <ChatScreen />
+      </div>
+    </div>
+  ) : project.modules ? (
+    <div className={`relative flex h-full w-full items-center justify-center bg-gradient-to-br ${project.accent} p-6 pb-20`}>
+      <div className="w-full max-w-xs transition duration-500 group-hover:scale-105">
+        <GestionScreen title={project.sector} modules={project.modules} />
+      </div>
+    </div>
+  ) : (
+    <div className={`relative flex h-full w-full items-center justify-center bg-gradient-to-br ${project.accent} p-6 pb-20`}>
+      <ConceptScreen title={project.title} />
+    </div>
+  );
+
+  const kindBadge =
+    project.kind === "real" ? (
+      <span className="rounded-full bg-green-100 px-2.5 py-0.5 text-[10px] font-bold text-green-800 shadow-2xs">
+        Proyecto real
+      </span>
+    ) : project.kind === "desarrollo" ? (
+      <span className="rounded-full bg-sky-100 px-2.5 py-0.5 text-[10px] font-bold text-sky-800 shadow-2xs">
+        En desarrollo
+      </span>
+    ) : project.kind === "facultad" ? (
+      <span className="rounded-full bg-violet-100 px-2.5 py-0.5 text-[10px] font-bold text-violet-800 shadow-2xs">
+        Facultad
+      </span>
+    ) : (
+      <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-[10px] font-bold text-amber-800 shadow-2xs">
+        Concepto
+      </span>
+    );
+
+  // Obtener dominio limpio para la barra del navegador
+  const displayUrl = project.href?.startsWith("http")
+    ? project.href.replace(/^https?:\/\//, "").replace(/\/.*$/, "")
+    : `${project.slug}.zainsoft.dev`;
 
   const body = (
-    <article
-      className={`group flex h-full flex-col overflow-hidden rounded-3xl border border-black/5 bg-white transition hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 ${large ? "md:flex-row" : ""}`}
-    >
-      <div
-        className={`relative flex items-center justify-center bg-gradient-to-br ${project.accent} ${compact ? "h-44 overflow-hidden md:h-auto md:w-1/2 md:overflow-visible md:p-5" : `p-6 ${large ? "md:w-3/5" : "aspect-[16/10]"}`}`}
-      >
-        {compact ? (
-          // En el celular la ilustración se reduce para que la carta no ocupe toda la pantalla
-          <div className="flex w-[160%] shrink-0 scale-[.625] justify-center md:w-full md:scale-100">
-            <div className="deck-art flex w-full justify-center">{art}</div>
-          </div>
-        ) : (
-          art
-        )}
+    <article className="group relative flex h-full w-full flex-col overflow-hidden rounded-[20px] bg-white text-ink shadow-xl transition-all duration-300">
+      {/* 1. Barra superior de ventana limpia (color claro uniforme) */}
+      <div className="z-20 flex h-9 shrink-0 items-center justify-between bg-[#f4f4f6] px-3.5 select-none">
+        {/* Controles de semáforo */}
+        <div className="flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f56]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#27c93f]" />
+        </div>
+
+        {/* Dirección de URL simulada */}
+        <div className="mx-2 flex max-w-[220px] sm:max-w-[280px] flex-1 items-center justify-center gap-1.5 truncate rounded-md bg-white px-2.5 py-0.5 text-[11px] font-mono text-zinc-600 shadow-2xs">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
+          <span className="truncate">{displayUrl}</span>
+        </div>
+
+        {/* Badge del tipo de proyecto */}
+        <div className="shrink-0">{kindBadge}</div>
       </div>
-      <div className={`flex flex-1 flex-col ${compact ? "deck-text p-5 md:justify-center md:p-7" : "p-6"} ${compact ? "" : large ? "md:justify-center md:p-10" : ""}`}>
-        <div className="mb-3 flex items-center gap-2 text-xs font-semibold">
-          <span className="rounded-full bg-black/5 px-2.5 py-1">{project.sector}</span>
-          {project.kind === "real" ? (
-            <span className="rounded-full bg-green-100 px-2.5 py-1 text-green-800">Proyecto real</span>
-          ) : project.kind === "desarrollo" ? (
-            <span className="rounded-full bg-sky-100 px-2.5 py-1 text-sky-800">En desarrollo</span>
-          ) : project.kind === "facultad" ? (
-            <span className="rounded-full bg-violet-100 px-2.5 py-1 text-violet-800">Facultad</span>
-          ) : (
-            <span className="rounded-full bg-amber-100 px-2.5 py-1 text-amber-800">Concepto</span>
-          )}
-        </div>
-        <h3 className={`font-extrabold tracking-tight ${compact ? "text-xl md:text-2xl" : large ? "text-3xl" : "text-xl"}`}>{project.title}</h3>
-        <p className={`mt-2 text-ink/70 ${compact ? "text-sm md:text-base" : ""}`}>{project.summary}</p>
-        <p className="mt-3 text-sm font-semibold text-brand-dark">{project.result}</p>
-        {project.by && (
-          <p className="mt-2 text-xs font-medium text-ink/50">
-            Hecho por {project.by.length > 1 ? `${project.by.slice(0, -1).join(", ")} y ${project.by.at(-1)}` : project.by[0]}
+
+      {/* 2. Pantalla completa del proyecto (la imagen llena el viewport de la ventana de forma continua) */}
+      <div className="relative flex-1 w-full overflow-hidden flex items-center justify-center">
+        {visual}
+
+        {/* 3. Textos y botones FLOTANTES sobre la parte inferior */}
+        <div className="z-20 absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent px-5 pb-5 pt-20 sm:px-6 sm:pb-6 text-white flex flex-col gap-1.5">
+          {/* Fila principal: Sector, Título y Botón flotante */}
+          <div className="flex items-end justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <span className="block text-[11px] font-bold uppercase tracking-wider text-brand drop-shadow-sm">
+                {project.sector}
+              </span>
+              <h3 className="truncate text-xl sm:text-2xl font-extrabold tracking-tight text-white drop-shadow-md">
+                {project.title}
+              </h3>
+            </div>
+
+            {/* Botón flotante de acción */}
+            <div className="shrink-0">
+              {project.href ? (
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-brand px-4 py-2 text-xs sm:text-sm font-bold text-white shadow-lg shadow-brand/40 transition-all duration-300 group-hover:bg-brand-dark group-hover:scale-105">
+                  {project.kind === "concepto" ? "Probar demo" : "Ver proyecto"}
+                  <ArrowIcon className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                </span>
+              ) : (
+                <span className="inline-flex items-center rounded-full border border-white/20 bg-white/15 px-3 py-1 text-xs font-semibold text-white/90 backdrop-blur-md">
+                  {project.result}
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Subtítulo / Descripción flotante */}
+          <p className="line-clamp-2 max-w-xl text-xs sm:text-sm leading-relaxed text-white/90 drop-shadow-sm">
+            {project.summary}
           </p>
-        )}
-        <div className={`mt-auto flex flex-wrap gap-1.5 ${compact ? "pt-3" : "pt-5"}`}>
-          {project.tags.map((t) => (
-            <span key={t} className="rounded-md border border-black/10 px-2 py-0.5 text-xs text-ink/60">
-              {t}
-            </span>
-          ))}
+
+          {/* Tags y Categorías flotantes */}
+          <div className="flex flex-wrap items-center gap-1.5 pt-1">
+            {project.tags.map((t) => (
+              <span
+                key={t}
+                className="rounded-full border border-white/20 bg-white/15 px-2.5 py-0.5 text-[11px] font-medium text-white shadow-2xs backdrop-blur-md"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
-        {project.href && (
-          <span className={`${compact ? "mt-3" : "mt-5"} inline-flex items-center gap-1.5 text-sm font-bold`}>
-            {project.kind === "concepto" ? "Probar la demo" : "Ver caso completo"}
-            <ArrowIcon className="h-4 w-4 transition group-hover:translate-x-1" />
-          </span>
-        )}
       </div>
     </article>
   );
 
-  return project.href ? (
-    <Link href={project.href} className="block h-full">
+  if (!project.href) return body;
+
+  return project.href.startsWith("http") ? (
+    <a
+      href={project.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block h-full cursor-pointer"
+    >
+      {body}
+    </a>
+  ) : (
+    <Link href={project.href} className="block h-full cursor-pointer">
       {body}
     </Link>
-  ) : (
-    body
   );
 }
 

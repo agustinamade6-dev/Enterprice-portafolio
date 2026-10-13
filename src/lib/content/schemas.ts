@@ -45,6 +45,7 @@ export const ProjectSchema = z.object({
   // Clases de color de Tailwind (ej: "from-amber-500 to-orange-600")
   accent: z.string().trim().max(120).regex(/^[\w\-\[\]#: .]*$/),
   image: imagePath().optional(),
+  coverUrl: imagePath().optional(),
   modules: z.array(text(120)).max(30).optional(),
   chat: z
     .array(

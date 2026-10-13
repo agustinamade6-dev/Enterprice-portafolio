@@ -12,18 +12,27 @@ const Card = memo(function Card({ project }: { project: Project }) {
   return <ProjectCard project={project} large compact />;
 });
 
-// Silueta de las tarjetas del fondo: el color del proyecto y unas barras, sin texto ni imágenes.
-// Se ve que hay más trabajos atrás y cuesta casi nada dibujarla.
-const Ghost = memo(function Ghost({ accent, narrow }: { accent: string; narrow: boolean }) {
+// Silueta de las tarjetas del fondo: simulación ligera de ventana de navegador
+const Ghost = memo(function Ghost({ accent }: { accent: string; narrow?: boolean }) {
   return (
-    <div className={`flex h-full w-full overflow-hidden rounded-[16px] bg-white ${narrow ? "flex-col" : ""}`}>
-      <div className={`bg-gradient-to-br ${accent} ${narrow ? "h-44" : "w-1/2"}`} />
-      <div className={`flex flex-col gap-4 ${narrow ? "p-5" : "w-1/2 p-8"}`}>
-        <div className="h-5 w-1/3 rounded-full bg-black/10" />
-        <div className="h-8 w-3/4 rounded-lg bg-black/15" />
-        <div className="h-3 w-full rounded-full bg-black/10" />
-        <div className="h-3 w-5/6 rounded-full bg-black/10" />
-        <div className="h-3 w-2/3 rounded-full bg-black/10" />
+    <div className="relative flex h-full w-full overflow-hidden rounded-[20px] bg-white shadow-xl">
+      <div className={`absolute inset-0 bg-gradient-to-br ${accent}`} />
+      <div className="absolute top-0 inset-x-0 z-10 flex h-9 items-center justify-between bg-white/85 px-3.5 backdrop-blur-md">
+        <div className="flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-black/15" />
+          <span className="h-2.5 w-2.5 rounded-full bg-black/15" />
+          <span className="h-2.5 w-2.5 rounded-full bg-black/15" />
+        </div>
+        <div className="h-3.5 w-24 rounded border border-black/5 bg-white shadow-2xs" />
+        <div className="h-4 w-12 rounded-full bg-black/10" />
+      </div>
+      <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 pt-16">
+        <div className="mb-1.5 h-2 w-14 rounded bg-white/40" />
+        <div className="mb-2 h-4 w-36 rounded bg-white/60" />
+        <div className="flex gap-1.5">
+          <div className="h-3.5 w-10 rounded-full bg-white/30" />
+          <div className="h-3.5 w-14 rounded-full bg-white/30" />
+        </div>
       </div>
     </div>
   );
@@ -108,8 +117,8 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
   // 3D Cylinder Math
   // En pantallas angostas la tarjeta pasa a vertical (imagen arriba, texto abajo) y ocupa casi todo el ancho
   const narrow = space > 0 && space < 768;
-  const cardWidth = narrow ? Math.min(400, space - 40) : 680;
-  const cardHeight = narrow ? 470 : 420;
+  const cardWidth = narrow ? Math.min(420, space - 30) : 700;
+  const cardHeight = narrow ? 440 : 400;
   const theta = total > 0 ? 360 / total : 0;
   // Calculate radius so cards form a perfect polygon, add some padding (offset)
   // Offset de 40 para mantener coherencia en un cilindro más grande
@@ -190,8 +199,8 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
               >
                 {/* Fondo sólido opaco obligatorio */}
                 <div
-                  className="relative h-full w-full rounded-[16px] overflow-hidden bg-white"
-                  style={{ boxShadow: ghost ? "none" : "0 18px 40px -16px rgba(0,0,0,0.3)" }}
+                  className="relative h-full w-full rounded-[20px] overflow-hidden bg-white"
+                  style={{ boxShadow: ghost ? "none" : "0 18px 40px -16px rgba(0,0,0,0.15)" }}
                 >
                   {ghost ? <Ghost accent={p.accent} narrow={narrow} /> : <Card project={p} />}
                   <div

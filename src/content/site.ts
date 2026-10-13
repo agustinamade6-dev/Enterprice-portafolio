@@ -35,12 +35,28 @@ export type Project = {
   href?: string;
   accent: string; // color de la tarjeta
   image?: string; // captura real del proyecto
+  coverUrl?: string; // alias o URL alternativa de captura
   modules?: string[]; // módulos que se muestran en la ilustración de los sistemas de gestión
   chat?: { from: "bot" | "user"; text: string }[]; // conversación de ejemplo para los chatbots
   by?: string[]; // quiénes del equipo lo hicieron
 };
 
 export const projects: Project[] = [
+  {
+    slug: "lv-racing",
+    title: "LV Racing",
+    sector: "Motos",
+    kind: "real",
+    summary:
+      "Sitio web y catálogo de motos / preparación de competición.",
+    result: "Presencia digital, catálogo online y reservas para taller de motos.",
+    tags: ["Motos", "Web", "Catálogo"],
+    image: "/images/projects/lv-racing.png",
+    coverUrl: "/images/projects/lv-racing.png",
+    href: "https://lv-racing-web.vercel.app/",
+    accent: "from-red-600 to-zinc-950",
+    by: ["Agustin"],
+  },
   {
     slug: "akros-cafe",
     title: "AKROS Café",
