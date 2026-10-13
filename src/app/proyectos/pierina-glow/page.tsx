@@ -41,6 +41,14 @@ const screens = [
 
 export default async function PierinaCase() {
   const site = await contentRepo.getSiteData();
+  const agustin = (await contentRepo.getTeam()).find((m) => m.slug === "agustin");
+  const developer = {
+    name: agustin?.name ?? site.owner,
+    fullName: agustin?.fullName ?? "Leandro Agustin Amade",
+    role: "Programador: diseño, frontend y backend",
+    photo: agustin?.photo ?? site.photo,
+    href: agustin?.href ?? site.instagram,
+  };
 
   return (
     <>
@@ -111,6 +119,26 @@ export default async function PierinaCase() {
               Agustin hizo el sistema completo de punta a punta: el diseño de las pantallas con los colores de la marca y toda la
               programación, desde el inventario hasta los reportes y las copias de seguridad.
             </p>
+            <div className="mt-6 max-w-md">
+              <a
+                href={developer.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 rounded-2xl border border-black/5 bg-white p-4 transition hover:shadow-md"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={developer.photo}
+                  alt={`Foto de ${developer.fullName}`}
+                  className="h-16 w-16 shrink-0 rounded-full object-cover object-top"
+                />
+                <div>
+                  <p className="font-bold">{developer.name}</p>
+                  <p className="text-xs text-ink/50">{developer.fullName}</p>
+                  <p className="text-sm text-ink/60">{developer.role}</p>
+                </div>
+              </a>
+            </div>
           </section>
 
           <section className="mt-14">

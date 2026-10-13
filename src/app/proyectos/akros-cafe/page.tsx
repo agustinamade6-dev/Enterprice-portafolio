@@ -45,7 +45,7 @@ export default async function AkrosCase() {
       fullName: "Leandro Agustin Amade",
       role: "Programador: frontend y parte del backend",
       photo: site.photo,
-      href: site.instagram,
+      href: "https://www.linkedin.com/in/leandro-agustin-amade-a33a0239a/",
     },
     {
       name: "José",
