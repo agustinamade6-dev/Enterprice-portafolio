@@ -74,9 +74,12 @@ export function ProjectCard({
     );
 
   // Obtener dominio limpio para la barra del navegador
-  const displayUrl = project.href?.startsWith("http")
-    ? project.href.replace(/^https?:\/\//, "").replace(/\/.*$/, "")
-    : `${project.slug}.zainsoft.dev`;
+  const displayUrl =
+    project.slug === "lv-racing"
+      ? "lv-racing-web.vercel.app"
+      : project.href?.startsWith("http")
+      ? project.href.replace(/^https?:\/\//, "").replace(/\/.*$/, "")
+      : `${project.slug}.zainsoft.dev`;
 
   const body = (
     <article className="group relative flex h-full w-full flex-col overflow-hidden rounded-[20px] bg-white text-ink shadow-xl transition-all duration-300">
