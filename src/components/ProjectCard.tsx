@@ -78,7 +78,7 @@ export function ProjectCard({
     project.slug === "lv-racing"
       ? "lv-racing-web.vercel.app"
       : project.slug === "todo-suela"
-      ? "todosuela.app"
+      ? "todo-suela.vercel.app"
       : project.href?.startsWith("http")
       ? project.href.replace(/^https?:\/\//, "").replace(/\/.*$/, "")
       : `${project.slug}.zainsoft.dev`;

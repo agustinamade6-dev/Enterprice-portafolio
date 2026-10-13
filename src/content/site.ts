@@ -68,6 +68,7 @@ export const projects: Project[] = [
     tags: ["Web App", "FastAPI", "Gestión Deportiva", "Fullstack"],
     image: "/images/projects/todo-suela.png",
     coverUrl: "/images/projects/todo-suela.png",
+    href: "/proyectos/todo-suela/",
     accent: "from-emerald-600 to-zinc-950",
     by: ["Nicolás"],
   },
