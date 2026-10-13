@@ -117,8 +117,8 @@ export function Carousel3D({ projects }: { projects: Project[] }) {
   // 3D Cylinder Math
   // En pantallas angostas la tarjeta pasa a vertical (imagen arriba, texto abajo) y ocupa casi todo el ancho
   const narrow = space > 0 && space < 768;
-  const cardWidth = narrow ? Math.min(420, space - 30) : 700;
-  const cardHeight = narrow ? 440 : 400;
+  const cardWidth = narrow ? Math.min(360, space - 24) : 700;
+  const cardHeight = narrow ? 310 : 390;
   const theta = total > 0 ? 360 / total : 0;
   // Calculate radius so cards form a perfect polygon, add some padding (offset)
   // Offset de 40 para mantener coherencia en un cilindro más grande
