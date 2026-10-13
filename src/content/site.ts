@@ -58,6 +58,20 @@ export const projects: Project[] = [
     by: ["Nicolás"],
   },
   {
+    slug: "todo-suela",
+    title: "Todo Suela",
+    sector: "Gestión deportiva",
+    kind: "real",
+    summary:
+      "Plataforma integral para la gestión de equipos de fútbol amateur. Incluye portal público para hinchas, seguimiento de fixtures, tablas de posiciones en tiempo real, estadísticas de plantel y panel de administración táctica.",
+    result: "Portal público y panel táctico en tiempo real.",
+    tags: ["Web App", "FastAPI", "Gestión Deportiva", "Fullstack"],
+    image: "/images/projects/todo-suela.png",
+    coverUrl: "/images/projects/todo-suela.png",
+    accent: "from-emerald-600 to-zinc-950",
+    by: ["Nicolás"],
+  },
+  {
     slug: "akros-cafe",
     title: "AKROS Café",
     sector: "Cafetería",
