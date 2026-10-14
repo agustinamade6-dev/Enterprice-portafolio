@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import { ScrollMotion } from "@/components/ScrollMotion";
 import { ScrollStage } from "@/components/ScrollStage";
 import { contentRepo } from "@/lib/content";
+import { site as defaultSite } from "@/content/site";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -32,7 +33,35 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const site = await contentRepo.getSiteData();
+  const facebookUrl = site.facebook || defaultSite.facebook;
+  const sameAs = [site.instagram, facebookUrl, site.github].filter(Boolean);
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: site.name,
+    url: site.url,
+    logo: `${site.url}/logo-dark.png`,
+    description: site.description,
+    email: site.email,
+    telephone: site.whatsapp ? `+${site.whatsapp}` : undefined,
+    sameAs,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Tucumán",
+      addressRegion: "Tucumán",
+      addressCountry: "AR",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: site.whatsapp ? `+${site.whatsapp}` : undefined,
+      contactType: "customer service",
+      availableLanguage: ["es"],
+    },
+  };
+
   return (
     // suppressHydrationWarning: el script de abajo agrega una clase al <html> antes de que cargue React
     <html lang="es" className={`${jakarta.variable} antialiased`} suppressHydrationWarning>
@@ -43,6 +72,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: 'if(matchMedia("(hover: hover) and (pointer: fine)").matches)document.documentElement.classList.add("reveal-on")',
           }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
       <body className="min-h-screen font-sans">
