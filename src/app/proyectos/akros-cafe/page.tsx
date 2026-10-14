@@ -123,6 +123,7 @@ export default async function AkrosCase() {
                 href="https://www.linkedin.com/in/jose-matias-64194520b/"
                 target="_blank"
                 rel="noopener noreferrer"
+                referrerPolicy="strict-origin-when-cross-origin"
                 className="font-semibold text-ink underline decoration-brand underline-offset-2 hover:text-brand"
               >
                 José
@@ -136,6 +137,7 @@ export default async function AkrosCase() {
                   href={m.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  referrerPolicy="strict-origin-when-cross-origin"
                   className="flex items-center gap-4 rounded-2xl border border-black/5 bg-white p-4 transition hover:shadow-md"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -171,6 +173,7 @@ export default async function AkrosCase() {
               href={makeWhatsappLink(site.whatsapp, "Hola, vi el sistema de AKROS Café y quiero algo parecido para mi negocio.")}
               target="_blank"
               rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3.5 font-bold text-white transition hover:bg-brand-dark"
             >
               Escríbenos <ArrowIcon className="h-4 w-4" />

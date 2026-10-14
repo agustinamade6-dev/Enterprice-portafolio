@@ -73,6 +73,7 @@ export default async function MenuDigitalDemo() {
                   href={makeWhatsappLink(site.whatsapp, "Hola, probé la demo del menú digital y quiero uno para mi local.")}
                   target="_blank"
                   rel="noopener noreferrer"
+                  referrerPolicy="no-referrer"
                   className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3.5 font-bold text-white transition hover:bg-brand-dark"
                 >
                   Pedir el mío <ArrowIcon className="h-4 w-4" />

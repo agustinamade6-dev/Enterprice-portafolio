@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ArrowIcon, CheckIcon } from "@/components/icons";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { ProjectLiveButton } from "@/components/ProjectLiveButton";
 import { contentRepo } from "@/lib/content";
 
 function makeWhatsappLink(phone: string, text: string) {
@@ -140,14 +141,10 @@ export default async function TodoSuelaCase() {
               <p className="text-sm text-zinc-400">
                 Plataforma web en producción utilizada para el seguimiento de partidos, torneos y administración táctica.
               </p>
-              <a
-                href="https://todo-suela.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white transition hover:bg-brand-dark"
-              >
-                Visitar sitio oficial ↗
-              </a>
+              <ProjectLiveButton
+                url="https://todo-suela.vercel.app/"
+                label="Visitar sitio oficial ↗"
+              />
             </div>
           </div>
 
@@ -233,6 +230,7 @@ export default async function TodoSuelaCase() {
                 href={developer.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                referrerPolicy="strict-origin-when-cross-origin"
                 className="flex items-center gap-4 rounded-2xl border border-black/5 bg-white p-4 transition hover:shadow-md"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -275,6 +273,7 @@ export default async function TodoSuelaCase() {
               href={makeWhatsappLink(site.whatsapp, whatsappMsg)}
               target="_blank"
               rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3.5 font-bold text-white transition hover:bg-brand-dark"
             >
               Escríbenos <ArrowIcon className="h-4 w-4" />

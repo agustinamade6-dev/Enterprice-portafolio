@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Project } from "@/lib/content/schemas";
+import { isSafeProjectUrl } from "@/lib/security";
 import { ArrowLeft, Save, Upload, X, Plus } from "lucide-react";
 import Link from "next/link";
 
@@ -113,6 +114,12 @@ export function ProjectForm({ project, isNew = false }: { project?: Project; isN
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (formData.href && !isSafeProjectUrl(formData.href)) {
+      setError("El enlace no es seguro o tiene un protocolo no permitido (ej. javascript:). Usa una ruta interna (/...) o una URL externa https://.");
+      return;
+    }
+
     setLoading(true);
     setError("");
 
@@ -246,9 +253,18 @@ export function ProjectForm({ project, isNew = false }: { project?: Project; isN
                 name="href"
                 value={formData.href || ""}
                 onChange={handleChange}
-                className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-2 text-white focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand"
-                placeholder="https://..."
+                className={`w-full rounded-xl border bg-black/20 px-4 py-2 text-white focus:outline-none focus:ring-1 ${
+                  formData.href && !isSafeProjectUrl(formData.href)
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-white/10 focus:border-brand focus:ring-brand"
+                }`}
+                placeholder="https://... o /proyectos/..."
               />
+              {formData.href && !isSafeProjectUrl(formData.href) && (
+                <p className="mt-1 text-xs text-red-400">
+                  El enlace debe ser una ruta interna válida (/...) o una URL externa segura (https://). Protocolos como javascript:, data: o vbscript: están prohibidos.
+                </p>
+              )}
             </div>
           </div>
 

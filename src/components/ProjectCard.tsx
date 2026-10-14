@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/content/schemas";
+import { isValidExternalUrl, isSafeInternalUrl } from "@/lib/security";
 import { ArrowIcon } from "./icons";
 import { PosMockup } from "./PosMockup";
 
@@ -83,6 +84,11 @@ export function ProjectCard({
       ? project.href.replace(/^https?:\/\//, "").replace(/\/.*$/, "")
       : `${project.slug}.zainsoft.dev`;
 
+  const isExternal = Boolean(project.href && (/^https?:\/\//i.test(project.href) || /^[a-z0-9+.-]+:/i.test(project.href)));
+  const isSafeExternal = isExternal && isValidExternalUrl(project.href);
+  const isSafeInternal = !isExternal && isSafeInternalUrl(project.href);
+  const isSafeLink = isSafeExternal || isSafeInternal;
+
   const body = (
     <article className="group relative flex h-full w-full flex-col overflow-hidden rounded-[20px] bg-white text-ink shadow-xl transition-all duration-300">
       {/* 1. Barra superior de ventana limpia (color claro uniforme) */}
@@ -123,7 +129,7 @@ export function ProjectCard({
 
             {/* Botón flotante de acción */}
             <div className="shrink-0">
-              {project.href ? (
+              {isSafeLink ? (
                 <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full bg-brand px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-bold text-white shadow-lg shadow-brand/40 transition-all duration-300 group-hover:bg-brand-dark group-hover:scale-105">
                   {project.kind === "concepto" ? "Demo" : "Ver proyecto"}
                   <ArrowIcon className="h-3 w-3 sm:h-3.5 sm:w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -157,13 +163,14 @@ export function ProjectCard({
     </article>
   );
 
-  if (!project.href) return body;
+  if (!project.href || !isSafeLink) return body;
 
-  return project.href.startsWith("http") ? (
+  return isSafeExternal ? (
     <a
       href={project.href}
       target="_blank"
       rel="noopener noreferrer"
+      referrerPolicy="strict-origin-when-cross-origin"
       className="block h-full cursor-pointer"
     >
       {body}

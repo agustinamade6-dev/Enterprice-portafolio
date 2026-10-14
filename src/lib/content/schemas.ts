@@ -1,17 +1,26 @@
 import { z } from "zod";
+import { isValidExternalUrl, isSafeInternalUrl, isSafeProjectUrl } from "@/lib/security";
 
 // Reglas comunes. Los textos tienen largo máximo y los enlaces solo pueden ser páginas propias
 // ("/..."), https, mailto o tel: así nadie puede guardar un "javascript:..." que ejecute código al hacer clic.
 const text = (max = 300) => z.string().trim().max(max);
 const longText = (max = 3000) => z.string().trim().max(max);
-const SAFE_LINK = /^(\/(?!\/)|#|https?:\/\/|mailto:|tel:)/i;
 const link = () =>
-  z.string().trim().max(500).refine((v) => v === "" || SAFE_LINK.test(v), {
-    message: "El enlace tiene que empezar con https://, / o mailto:",
+  z.string().trim().max(500).refine((v) => {
+    if (v === "") return true;
+    if (v.startsWith("mailto:") || v.startsWith("tel:") || v === "#") return true;
+    if (v.startsWith("/")) return isSafeInternalUrl(v);
+    return isValidExternalUrl(v);
+  }, {
+    message: "El enlace tiene que ser una URL segura (https://), una ruta interna (/...) o mailto/tel:",
+  });
+const projectLink = () =>
+  z.string().trim().max(500).refine((v) => v === "" || isSafeProjectUrl(v), {
+    message: "El enlace del proyecto debe ser una ruta interna válida (/...) o una URL externa segura (https://)",
   });
 const imagePath = () =>
-  z.string().trim().max(300).refine((v) => v === "" || /^\/[\w\-./%]+$/.test(v) || /^https:\/\//.test(v), {
-    message: "La imagen tiene que ser una ruta de la página (/...) o un enlace https",
+  z.string().trim().max(300).refine((v) => v === "" || /^\/[\w\-./%]+$/.test(v) || isValidExternalUrl(v), {
+    message: "La imagen tiene que ser una ruta de la página (/...) o un enlace https seguro",
   });
 const slug = () =>
   z.string().trim().min(1).max(60).regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, {
@@ -42,7 +51,7 @@ export const ProjectSchema = z.object({
   summary: longText(1000),
   result: longText(600),
   tags: z.array(text(40)).max(20),
-  href: link().optional(),
+  href: projectLink().optional(),
   // Clases de color de Tailwind (ej: "from-amber-500 to-orange-600")
   accent: z.string().trim().max(120).regex(/^[\w\-\[\]#: .]*$/),
   image: imagePath().optional(),

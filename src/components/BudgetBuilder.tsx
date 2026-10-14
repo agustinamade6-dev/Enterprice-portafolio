@@ -203,6 +203,7 @@ export function BudgetBuilder({
           onClick={() => ready && bitFestejar("¡Gracias! Ya armamos tu presupuesto 🎉")}
           target="_blank"
           rel="noopener noreferrer"
+          referrerPolicy="no-referrer"
           className={`mt-5 flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-bold transition ${
             ready ? "bg-[#15803d] text-white hover:brightness-95" : "pointer-events-none bg-white/10 text-paper/40"
           }`}

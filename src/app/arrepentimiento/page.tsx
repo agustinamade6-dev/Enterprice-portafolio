@@ -35,6 +35,7 @@ export default async function Arrepentimiento() {
               href={whatsapp}
               target="_blank"
               rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
               className="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3.5 font-bold text-white transition hover:bg-brand-dark"
             >
               Pedir la cancelación por WhatsApp
