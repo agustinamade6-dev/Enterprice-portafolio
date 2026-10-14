@@ -52,3 +52,6 @@ next-env.d.ts
 
 # respaldos automáticos del admin
 src/content/data/respaldos/
+
+# datos del admin: se quedan en cada compu (lo publicado sale de site.ts)
+/src/content/data/*.json
