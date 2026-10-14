@@ -22,7 +22,7 @@ src/
     layout.tsx           ← estructura común, metadatos y vista previa al compartir
     globals.css          ← colores, fuente y animaciones
     equipo/[slug]/       ← página de historia de cada integrante
-    proyectos/<nombre>/  ← páginas de caso (akros-cafe, pierina-glow)
+    proyectos/<nombre>/  ← páginas de caso (akros-cafe, pierina-glow, pierina-glow-tienda, lv-racing, todo-suela)
     demos/menu-digital/  ← demo navegable de un menú digital
     admin/               ← panel de admin (login, proyectos, equipo, servicios, proceso, preguntas, fotos)
     api/                 ← API del panel (contenido, fotos y sesión)
@@ -46,7 +46,7 @@ public/
 ## Secciones de la página de inicio
 
 1. **Inicio**: título, botones y la ilustración de AKROS Café.
-2. **Proyectos**: el carrusel 3D, ordenado real → en desarrollo → facultad → conceptos.
+2. **Proyectos**: el carrusel 3D, ordenado real → prototipo en funcionamiento → en desarrollo → facultad → conceptos.
 3. **Arma tu presupuesto** (`#servicios`): el armador de presupuesto.
 4. **Cómo trabajamos** (`#proceso`): 5 pasos en 3 columnas desde tablet, con el ciclo de cada sprint.
 5. **Nosotros**: un bloque por integrante con enlace a su historia y su red.
@@ -54,7 +54,7 @@ public/
 
 ## Recetas
 
-**Sumar un proyecto:** agregar un objeto en `projects` de `site.ts` con `kind` (`"real"`, `"desarrollo"`, `"facultad"` o `"concepto"`) y `by: ["Nombre"]`, que muestra "Hecho por …". Opcionales: `image` (captura en `public/`), `href` (página de caso), `modules` (para la ilustración de sistemas) o `chat` (conversación de ejemplo para chatbots). Sumarlo también como capítulo en la historia de quien lo hizo.
+**Sumar un proyecto:** agregar un objeto en `projects` de `site.ts` con `kind` (`"real"`, `"prototipo"`, `"desarrollo"`, `"facultad"` o `"concepto"`) y `by: ["Nombre"]`, que muestra "Hecho por …". `"prototipo"` se muestra como "Prototipo en funcionamiento": está publicado y se puede probar, pero todavía no está en uso comercial. Opcionales: `image` (captura en `public/`), `href` (página de caso), `liveUrl` (dirección https donde funciona en vivo; se ve en la barra de la tarjeta), `modules` (para la ilustración de sistemas) o `chat` (conversación de ejemplo para chatbots). Sumarlo también como capítulo en la historia de quien lo hizo.
 
 **Sumar un integrante:** agregar un objeto en `team` con `slug`, `name`, `fullName`, `role`, `photo`, `href`, `network`, `bio`, `skills` y `story`. La foto va en `public/equipo/` recortada cuadrada. Después actualizar el texto de "Nosotros" (cantidad de integrantes) y regenerar `public/og.png`.
 

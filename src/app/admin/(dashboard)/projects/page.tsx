@@ -88,6 +88,7 @@ export default function ProjectsPage() {
                 <td className="whitespace-nowrap px-6 py-4">
                   <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize
                     ${project.kind === 'real' ? 'bg-green-100 text-green-800' : ''}
+                    ${project.kind === 'prototipo' ? 'bg-teal-100 text-teal-800' : ''}
                     ${project.kind === 'desarrollo' ? 'bg-blue-100 text-blue-800' : ''}
                     ${project.kind === 'concepto' ? 'bg-purple-100 text-purple-800' : ''}
                     ${project.kind === 'facultad' ? 'bg-yellow-100 text-yellow-800' : ''}

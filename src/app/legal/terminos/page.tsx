@@ -29,8 +29,9 @@ export default async function Terminos() {
             <p>
               Diseñamos y desarrollamos páginas web, tiendas y menús online, sistemas a medida y chatbots, y damos
               mantenimiento y soporte. Los proyectos que se ven en esta página están marcados como &quot;Proyecto real&quot;,
-              &quot;En desarrollo&quot;, &quot;Facultad&quot; o &quot;Concepto&quot;. Los conceptos son ideas de ejemplo,
-              no trabajos hechos para un cliente.
+              &quot;Prototipo en funcionamiento&quot;, &quot;En desarrollo&quot;, &quot;Facultad&quot; o &quot;Concepto&quot;. Un
+              prototipo en funcionamiento está publicado y se puede probar, pero todavía no está en uso comercial (por
+              ejemplo, muestra productos de ejemplo). Los conceptos son ideas de ejemplo, no trabajos hechos para un cliente.
             </p>
           ),
         },

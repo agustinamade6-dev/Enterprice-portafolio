@@ -32,7 +32,7 @@ export default async function Home() {
   const budgetTimes = await contentRepo.getBudgetTimes();
 
   // Orden del mazo: primero lo real, después lo que está en desarrollo, los trabajos de la facultad y al final los conceptos
-  const deck = ["real", "desarrollo", "facultad", "concepto"].flatMap((k) => projects.filter((p) => p.kind === k));
+  const deck = ["real", "prototipo", "desarrollo", "facultad", "concepto"].flatMap((k) => projects.filter((p) => p.kind === k));
 
   return (
     <>

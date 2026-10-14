@@ -60,6 +60,12 @@ export function ProjectCard({
       <span className="rounded-full bg-green-100 px-2.5 py-0.5 text-[10px] font-bold text-green-800 shadow-2xs">
         Proyecto real
       </span>
+    ) : project.kind === "prototipo" ? (
+      <span className="rounded-full bg-teal-100 px-2.5 py-0.5 text-[10px] font-bold text-teal-800 shadow-2xs">
+        {/* En el celular la barra es angosta: ahí dice solo "Prototipo" */}
+        <span className="sm:hidden">Prototipo</span>
+        <span className="hidden sm:inline">Prototipo en funcionamiento</span>
+      </span>
     ) : project.kind === "desarrollo" ? (
       <span className="rounded-full bg-sky-100 px-2.5 py-0.5 text-[10px] font-bold text-sky-800 shadow-2xs">
         En desarrollo
@@ -76,7 +82,9 @@ export function ProjectCard({
 
   // Obtener dominio limpio para la barra del navegador
   const displayUrl =
-    project.slug === "lv-racing"
+    project.liveUrl && isValidExternalUrl(project.liveUrl)
+      ? project.liveUrl.replace(/^https?:\/\//, "").replace(/\/.*$/, "")
+      : project.slug === "lv-racing"
       ? "lv-racing-web.vercel.app"
       : project.slug === "todo-suela"
       ? "todo-suela.vercel.app"

@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Project } from "@/lib/content/schemas";
-import { isSafeProjectUrl } from "@/lib/security";
+import { isSafeProjectUrl, isValidExternalUrl } from "@/lib/security";
 import { ArrowLeft, Save, Upload, X, Plus } from "lucide-react";
 import Link from "next/link";
 
@@ -217,6 +217,7 @@ export function ProjectForm({ project, isNew = false }: { project?: Project; isN
                   className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-2 text-white focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand"
                 >
                   <option value="real">Real</option>
+                  <option value="prototipo">Prototipo en funcionamiento</option>
                   <option value="desarrollo">En Desarrollo</option>
                   <option value="facultad">Facultad</option>
                   <option value="concepto">Concepto</option>
@@ -264,6 +265,24 @@ export function ProjectForm({ project, isNew = false }: { project?: Project; isN
                 <p className="mt-1 text-xs text-red-400">
                   El enlace debe ser una ruta interna válida (/...) o una URL externa segura (https://). Protocolos como javascript:, data: o vbscript: están prohibidos.
                 </p>
+              )}
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm font-medium text-paper/70">Dirección en vivo (opcional)</label>
+              <input
+                name="liveUrl"
+                value={formData.liveUrl || ""}
+                onChange={handleChange}
+                className={`w-full rounded-xl border bg-black/20 px-4 py-2 text-white focus:outline-none focus:ring-1 ${
+                  formData.liveUrl && !isValidExternalUrl(formData.liveUrl)
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-white/10 focus:border-brand focus:ring-brand"
+                }`}
+                placeholder="https://... (se muestra en la barra de la tarjeta)"
+              />
+              {formData.liveUrl && !isValidExternalUrl(formData.liveUrl) && (
+                <p className="mt-1 text-xs text-red-400">La dirección en vivo tiene que ser un enlace https seguro.</p>
               )}
             </div>
           </div>

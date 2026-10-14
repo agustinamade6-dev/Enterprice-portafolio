@@ -29,11 +29,12 @@ export type Project = {
   slug: string;
   title: string;
   sector: string;
-  kind: "real" | "desarrollo" | "facultad" | "concepto";
+  kind: "real" | "prototipo" | "desarrollo" | "facultad" | "concepto";
   summary: string;
   result: string;
   tags: string[];
   href?: string;
+  liveUrl?: string; // dirección pública donde funciona en vivo (https)
   accent: string; // color de la tarjeta
   image?: string; // captura real del proyecto
   coverUrl?: string; // alias o URL alternativa de captura
@@ -113,6 +114,22 @@ export const projects: Project[] = [
     by: ["Agustin"],
     accent: "from-[#eab3a6] to-[#c96f5d]",
     image: "/pierina/inicio.png",
+  },
+  // La tienda online de la misma marca: publicada y funcionando, todavía con productos de ejemplo (2026-10-14)
+  {
+    slug: "pierina-glow-tienda",
+    title: "Pierina Glow · Tienda online",
+    sector: "Indumentaria femenina",
+    kind: "prototipo",
+    summary:
+      "Tienda online con catálogo por categorías, página para cada prenda, carrito con pedido por WhatsApp y un panel para que la dueña cargue prendas, fotos y textos desde el celular.",
+    result: "Publicada y funcionando: se puede recorrer y probar en vivo.",
+    tags: ["HTML", "CSS", "JavaScript", "GSAP", "Netlify"],
+    href: "/proyectos/pierina-glow-tienda/",
+    liveUrl: "https://bypierina.netlify.app/",
+    by: ["Agustin"],
+    accent: "from-[#f3e3da] to-[#c96f5d]",
+    image: "/images/projects/pierina-glow-tienda.jpg",
   },
   // Antes figuraba como "Yuhmak" (proyecto real), pero fue un programa de práctica que nunca se presentó a esa
   // empresa (Agustin, 2026-10-12): queda como concepto, sin el nombre ni las capturas con su marca.
@@ -419,6 +436,12 @@ export const team: Member[] = [
           title: "AKROS Café, junto a José",
           text: "El primer proyecto que hicimos de a dos. Me encargué del frontend y de parte del backend de un punto de venta para Windows hecho con Next.js y Electron.",
           href: "/proyectos/akros-cafe/",
+        },
+        {
+          label: "2026",
+          title: "La tienda online de Pierina Glow",
+          text: "Después del sistema de gestión, le armé a mi mamá su tienda online: catálogo por categorías, carrito con pedido por WhatsApp, cumplimiento de las leyes de defensa del consumidor y un panel con contraseña para que ella misma cargue las prendas desde el celular. Ya está publicada y funcionando.",
+          href: "/proyectos/pierina-glow-tienda/",
         },
         {
           label: "Hoy",

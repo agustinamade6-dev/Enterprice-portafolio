@@ -47,11 +47,18 @@ export const ProjectSchema = z.object({
   slug: slug(),
   title: text(120),
   sector: text(120),
-  kind: z.enum(["real", "desarrollo", "facultad", "concepto"]),
+  kind: z.enum(["real", "prototipo", "desarrollo", "facultad", "concepto"]),
   summary: longText(1000),
   result: longText(600),
   tags: z.array(text(40)).max(20),
   href: projectLink().optional(),
+  // Dirección pública donde el proyecto funciona en vivo (solo https); se muestra en la barra de la tarjeta
+  liveUrl: z
+    .string()
+    .trim()
+    .max(500)
+    .refine((v) => v === "" || isValidExternalUrl(v), { message: "La dirección en vivo tiene que ser un enlace https seguro" })
+    .optional(),
   // Clases de color de Tailwind (ej: "from-amber-500 to-orange-600")
   accent: z.string().trim().max(120).regex(/^[\w\-\[\]#: .]*$/),
   image: imagePath().optional(),
