@@ -38,7 +38,7 @@ export async function Footer() {
         </div>
         <div className="flex gap-5">
           {social.map((s) => (
-            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-paper">
+            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" referrerPolicy="strict-origin-when-cross-origin" className="hover:text-paper">
               {s.label}
             </a>
           ))}

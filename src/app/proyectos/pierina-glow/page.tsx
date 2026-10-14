@@ -124,6 +124,7 @@ export default async function PierinaCase() {
                 href={developer.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                referrerPolicy="strict-origin-when-cross-origin"
                 className="flex items-center gap-4 rounded-2xl border border-black/5 bg-white p-4 transition hover:shadow-md"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -146,7 +147,7 @@ export default async function PierinaCase() {
             <div className="mt-6 grid gap-8 sm:grid-cols-2">
               {screens.map((s) => (
                 <figure key={s.src}>
-                  <a href={s.src} target="_blank" rel="noopener noreferrer" className="block">
+                  <a href={s.src} target="_blank" rel="noopener noreferrer" referrerPolicy="strict-origin-when-cross-origin" className="block">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={s.src}
@@ -171,6 +172,7 @@ export default async function PierinaCase() {
               href={makeWhatsappLink(site.whatsapp, "Hola, vi el sistema de Pierina Glow y quiero algo parecido para mi negocio.")}
               target="_blank"
               rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3.5 font-bold text-white transition hover:bg-brand-dark"
             >
               Escríbenos <ArrowIcon className="h-4 w-4" />

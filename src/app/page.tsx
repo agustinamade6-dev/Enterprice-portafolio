@@ -62,6 +62,7 @@ export default async function Home() {
                   href={makeWhatsappLink(site.whatsapp, t.hero.whatsappMessage)}
                   target="_blank"
                   rel="noopener noreferrer"
+                  referrerPolicy="no-referrer"
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-black/15 bg-white px-6 py-3.5 font-bold transition hover:border-ink"
                 >
                   <WhatsAppIcon className="h-5 w-5 text-[#25d366]" /> {t.hero.buttonWhatsapp}
@@ -216,6 +217,7 @@ export default async function Home() {
                     href={makeWhatsappLink(site.whatsapp, t.contact.whatsappMessage)}
                     target="_blank"
                     rel="noopener noreferrer"
+                    referrerPolicy="no-referrer"
                     className="flex items-center gap-3 hover:text-paper"
                   >
                     <WhatsAppIcon className="h-5 w-5 text-[#25d366]" /> {t.contact.whatsappLabel}

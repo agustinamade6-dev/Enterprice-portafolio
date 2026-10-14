@@ -278,7 +278,7 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
                 Leer su historia
               </Link>
               {m.href && (
-                <a href={m.href} target="_blank" rel="noopener noreferrer" className="hover:text-brand">
+                <a href={m.href} target="_blank" rel="noopener noreferrer" referrerPolicy="strict-origin-when-cross-origin" className="hover:text-brand">
                   Ver {m.network ?? "Instagram"} →
                 </a>
               )}

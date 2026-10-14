@@ -114,6 +114,7 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
               href={m.href}
               target="_blank"
               rel="noopener noreferrer"
+              referrerPolicy="strict-origin-when-cross-origin"
               className="mt-6 inline-block text-sm font-bold hover:text-brand"
             >
               Seguir a {m.name} en {m.network ?? "Instagram"} →
@@ -148,6 +149,7 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
               href={makeWhatsappLink(site.whatsapp, "Hola, leí sobre el equipo de ZainSoft y quiero consultar por un proyecto.")}
               target="_blank"
               rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
               className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand px-6 py-3.5 font-bold text-white transition hover:bg-brand-dark"
             >
               Escríbenos <ArrowIcon className="h-4 w-4" />
