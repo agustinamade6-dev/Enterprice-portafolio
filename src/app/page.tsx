@@ -94,7 +94,7 @@ export default async function Home() {
 
         {/* Servicios */}
         <div id="servicios" className="scroll-anchor" />
-        <section data-bit={bit(t.bit.services)} data-theme-section="services" className="fondo-servicios stack-card relative z-[10] px-4 py-20 sm:px-6 text-paper">
+        <section data-bit={bit(t.bit.services)} data-theme-section="services" className="fondo-servicios stack-card relative z-[10] px-4 pt-28 pb-20 sm:pt-32 sm:px-6 text-paper">
           <div className="mx-auto max-w-6xl">
             <SectionTitle eyebrow={t.services.eyebrow} title={fill(t.services.title)} text={fill(t.services.text)} dark />
             <div className="mt-12" data-reveal>

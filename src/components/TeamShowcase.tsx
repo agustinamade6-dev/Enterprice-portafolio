@@ -58,8 +58,8 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       const H = box.clientHeight;
       const wide = C >= 768;
       // Foto de retrato, más chica que el texto: el protagonista es el nombre
-      const W = wide ? Math.min(C * 0.3, 340) : Math.min(C * 0.36, 136);
-      const PH = wide ? Math.min(H * 0.9, W * 1.25) : Math.min(W * 1.08, 144);
+      const W = wide ? Math.min(C * 0.3, 340) : Math.min(C * 0.44, 160);
+      const PH = wide ? Math.min(H * 0.9, W * 1.25) : Math.min(W * 1.05, 168);
       const PT = wide ? (H - PH) / 2 : 0;
       const t = p * Math.max(0, total - 1);
       const i = Math.min(Math.floor(t), Math.max(0, total - 2));
@@ -139,8 +139,8 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
         } else {
           el.style.width = `${C}px`;
           el.style.left = "0px";
-          el.style.top = `${PH + 8}px`;
-          el.style.height = `${H - PH - 8 - 36}px`;
+          el.style.top = `${PH + 10}px`;
+          el.style.height = "auto";
         }
         const list = words[k];
         list.forEach((w, j) => {
@@ -284,7 +284,7 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
   return (
     <div
       ref={root}
-      className="relative mt-0 h-[min(56vh,400px)] sm:mt-6 sm:h-[min(74vh,600px)] md:h-[min(52vh,500px)] [@media(max-height:820px)]:mt-2"
+      className="relative mt-0 h-[min(68vh,520px)] sm:mt-6 sm:h-[min(74vh,600px)] md:h-[min(52vh,500px)] [@media(max-height:820px)]:mt-2"
       style={{ contain: "layout" }}
     >
       {/* Nombres gigantes de fondo que se deslizan con el scroll */}

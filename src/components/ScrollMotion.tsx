@@ -35,19 +35,31 @@ export function ScrollMotion() {
     let themeFrame = 0;
     const updateTheme = () => {
       themeFrame = 0;
-      const mid = window.innerHeight * 0.45;
-      let activeTheme = "light";
+      const vh = window.innerHeight;
+      const topZone = vh * 0.35;
+      const bottomZone = vh * 0.65;
+      const band = bottomZone - topZone; // 30% del alto de pantalla
+
+      const currentTheme = document.body.getAttribute("data-theme") || "light";
+      let maxOverlap = 0;
+      let candidateTheme = currentTheme;
+
       for (const el of themeSections) {
         const r = el.getBoundingClientRect();
         const scene = el.closest<HTMLElement>("[data-stage] > *") ?? el;
         const op = scene.style.opacity === "" ? 1 : Number(scene.style.opacity);
-        if (op > 0.4 && r.top <= mid && r.bottom >= mid) {
-          activeTheme = el.dataset.themeSection || "light";
-          break;
+        if (op < 0.3) continue;
+
+        const overlap = Math.max(0, Math.min(r.bottom, bottomZone) - Math.max(r.top, topZone));
+        if (overlap > maxOverlap) {
+          maxOverlap = overlap;
+          candidateTheme = el.dataset.themeSection || "light";
         }
       }
-      if (document.body.getAttribute("data-theme") !== activeTheme) {
-        document.body.setAttribute("data-theme", activeTheme);
+
+      // Histéresis: Solo conmuta de tema si la nueva sección domina claramente (> 50% de la zona focal)
+      if (candidateTheme !== currentTheme && maxOverlap >= band * 0.5) {
+        document.body.setAttribute("data-theme", candidateTheme);
       }
     };
 

@@ -176,15 +176,15 @@ export function Bit({ clicks = CLICK }: { clicks?: string[] }) {
   return (
     <div
       data-dark={dark || undefined}
-      className={`bit-wrap fixed bottom-3 right-3 z-40 transition-all duration-700 sm:bottom-5 sm:right-5 ${
+      className={`bit-wrap fixed bottom-2 right-2 z-30 transition-all duration-700 sm:bottom-5 sm:right-5 ${
         shown ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
       }`}
     >
       <div
         role="status"
         aria-live="polite"
-        className={`bit-bubble absolute bottom-full right-2 mb-1 w-max max-w-[220px] rounded-2xl rounded-br-sm bg-white px-3.5 py-2 text-sm font-semibold text-ink shadow-lg shadow-black/15 ring-1 ring-black/5 transition-all duration-300 sm:max-w-[260px] ${
-          bubble ? "translate-y-0 scale-100 opacity-100" : "pointer-events-none translate-y-2 scale-95 opacity-0"
+        className={`bit-bubble pointer-events-none absolute bottom-full right-0 mb-1.5 w-max max-w-[190px] rounded-2xl rounded-br-sm bg-white px-3 py-1.5 text-xs font-semibold text-ink shadow-lg shadow-black/15 ring-1 ring-black/5 transition-all duration-300 sm:max-w-[260px] sm:text-sm ${
+          bubble ? "translate-y-0 scale-100 opacity-100" : "translate-y-2 scale-95 opacity-0"
         }`}
       >
         {bubble}
@@ -194,7 +194,7 @@ export function Bit({ clicks = CLICK }: { clicks?: string[] }) {
         type="button"
         onClick={onClick}
         aria-label="Bit, la mascota de ZainSoft"
-        className="block h-20 w-20 cursor-pointer outline-none sm:h-28 sm:w-28"
+        className="block h-16 w-16 scale-90 origin-bottom-right cursor-pointer outline-none sm:h-28 sm:w-28 sm:scale-100"
       >
         <svg viewBox="0 0 300 300" className="bit h-full w-full overflow-visible" data-pose={pose}>
           <ellipse className="bit-shadow" cx="150" cy="288" rx="92" ry="8" fill={INK} opacity=".12" />
