@@ -696,3 +696,51 @@ section[id],
 .hover\:bg-brand:hover {
   background-color: #c8431a;
 }
+
+/* Animaciones de proyectos suspendidos en el Hero */
+@keyframes hero-float-1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(3.2deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(4deg);
+  }
+}
+
+@keyframes hero-float-2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(-3.8deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-2.6deg);
+  }
+}
+
+@keyframes hero-float-3 {
+  0%, 100% {
+    transform: translateY(0px) rotate(1.2deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.3deg);
+  }
+}
+
+.animate-hero-float-1 {
+  animation: hero-float-1 7s ease-in-out infinite;
+}
+
+.animate-hero-float-2 {
+  animation: hero-float-2 8s ease-in-out infinite 0.7s;
+}
+
+.animate-hero-float-3 {
+  animation: hero-float-3 6.5s ease-in-out infinite 1.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-float-1,
+  .animate-hero-float-2,
+  .animate-hero-float-3 {
+    animation: none !important;
+  }
+}

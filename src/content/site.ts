@@ -568,8 +568,8 @@ export const pageTexts: PageTexts = {
     buttonProjects: "Ver proyectos",
     buttonWhatsapp: "Escribirnos por WhatsApp",
     whatsappMessage: "Hola, quiero consultar por un proyecto.",
-    cardLabel: "En desarrollo",
-    cardTitle: "AKROS Café · punto de venta",
+    cardLabel: "Proyectos destacados",
+    cardTitle: "Plataformas web y tiendas online",
   },
   projects: {
     eyebrow: "Proyectos",

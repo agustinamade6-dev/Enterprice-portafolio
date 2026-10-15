@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { BudgetBuilder } from "@/components/BudgetBuilder";
 import { ArrowIcon, CheckIcon, WhatsAppIcon } from "@/components/icons";
-import { PosMockup } from "@/components/PosMockup";
+import { HeroProjectsShowcase } from "@/components/HeroProjectsShowcase";
 import { Carousel3D } from "@/components/Carousel3D";
 import { TeamShowcase } from "@/components/TeamShowcase";
 import { Bit } from "@/components/Bit";
@@ -74,11 +74,10 @@ export default async function Home() {
               </div>
             </div>
             <div className="relative hidden lg:block" data-hero-art>
-              <PosMockup className="mx-auto max-w-lg rotate-1" />
-              <div className="absolute -bottom-6 left-2 rounded-2xl bg-white px-4 py-3 shadow-xl shadow-black/10 sm:left-0">
-                <p className="text-xs text-ink/60">{t.hero.cardLabel}</p>
-                <p className="font-bold">{t.hero.cardTitle}</p>
-              </div>
+              <HeroProjectsShowcase
+                cardLabel={t.hero.cardLabel}
+                cardTitle={t.hero.cardTitle}
+              />
             </div>
           </div>
         </section>
