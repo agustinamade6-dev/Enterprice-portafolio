@@ -210,6 +210,29 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
     box.addEventListener("touchstart", onTouchStart, { passive: true });
     box.addEventListener("touchend", onTouchEnd, { passive: true });
 
+    // Sincronización con el scroll en móvil cuando la sección está en modo track sticky (sin stage-on)
+    const track = box.closest<HTMLElement>(".seccion-nosotros-track");
+    let trackFrame = 0;
+    const onScrollTrack = () => {
+      if (document.documentElement.classList.contains("stage-on")) return;
+      if (!track) return;
+      if (trackFrame) return;
+      trackFrame = requestAnimationFrame(() => {
+        trackFrame = 0;
+        const rect = track.getBoundingClientRect();
+        const scrollDistance = track.offsetHeight - window.innerHeight;
+        if (scrollDistance <= 0) return;
+        const p = clamp(-rect.top / scrollDistance);
+        apply(p);
+      });
+    };
+
+    if (track) {
+      window.addEventListener("scroll", onScrollTrack, { passive: true });
+      window.addEventListener("resize", onScrollTrack);
+      onScrollTrack();
+    }
+
     const resize = new ResizeObserver(() => {
       lastHold = NaN;
       apply(progress);
@@ -222,9 +245,14 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       resize.disconnect();
       window.removeEventListener("stage", onStage);
       cancelAnimationFrame(tween);
+      cancelAnimationFrame(trackFrame);
       dots.forEach((d, k) => d.removeEventListener("click", handlers[k]));
       box.removeEventListener("touchstart", onTouchStart);
       box.removeEventListener("touchend", onTouchEnd);
+      if (track) {
+        window.removeEventListener("scroll", onScrollTrack);
+        window.removeEventListener("resize", onScrollTrack);
+      }
     };
   }, [total]);
 

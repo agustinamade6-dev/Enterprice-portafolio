@@ -14,14 +14,20 @@ export function ScrollStage() {
     const stage = document.querySelector<HTMLElement>("[data-stage]");
     if (!stage || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const mouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const isMobile =
+      window.innerWidth <= 1024 ||
+      window.matchMedia("(max-width: 1024px)").matches ||
+      window.matchMedia("(hover: none) and (pointer: coarse)").matches ||
+      window.matchMedia("(pointer: coarse)").matches ||
+      /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
     const root = document.documentElement;
 
     // =========================================================================
-    // MÓVIL (PANTALLA TÁCTIL / SIN MOUSE):
+    // MÓVIL (PANTALLA TÁCTIL / <= 1024px / CELULAR):
     // Scroll 100% nativo, continuo y sin bloqueo ni fijación de pantalla
     // =========================================================================
-    if (!mouse) {
+    if (isMobile) {
       root.classList.remove("stage-on", "stage-touch");
 
       const bar = document.createElement("div");

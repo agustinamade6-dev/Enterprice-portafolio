@@ -167,8 +167,12 @@ export default async function Home() {
 
         {/* Nosotros */}
         <div id="nosotros" className="scroll-anchor" />
-        <section data-hold={Math.max(0, team.length - 1)} data-bit={bit(t.bit.team)} className="fondo-nosotros overflow-x-clip px-4 pb-20 pt-20 sm:px-6">
-          <div className="mx-auto max-w-6xl">
+        <section
+          data-hold={Math.max(0, team.length - 1)}
+          data-bit={bit(t.bit.team)}
+          className="fondo-nosotros seccion-nosotros-track overflow-x-clip px-4 pb-20 pt-20 sm:px-6"
+        >
+          <div className="seccion-nosotros-sticky mx-auto max-w-6xl">
             <SectionTitle wide eyebrow={t.team.eyebrow} title={fill(t.team.title)} text={fill(t.team.text)} />
             <TeamShowcase
               team={team.map(({ slug, name, fullName, role, photo, href, network, bio, skills }) => ({

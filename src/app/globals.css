@@ -166,8 +166,8 @@ section[id],
   }
 }
 
-/* Celular (sin mouse / sin stage-on): scroll continuo nativo y revelado suave progresivo */
-@media not ((hover: hover) and (pointer: fine)) {
+/* Celular (sin mouse / pantalla angosta / sin stage-on): scroll continuo nativo y fijación de Nosotros */
+@media not ((hover: hover) and (pointer: fine)), (max-width: 1024px) {
   html:not(.stage-on) [data-reveal] {
     opacity: 0;
     transform: translateY(22px);
@@ -182,6 +182,26 @@ section[id],
     opacity: 1;
     transform: translateY(0);
     will-change: auto;
+  }
+
+  /* Sección Nosotros en móvil: track con altura para scroll continuo y contenedor sticky */
+  html:not(.stage-on) .seccion-nosotros-track {
+    position: relative;
+    height: 220vh;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  html:not(.stage-on) .seccion-nosotros-sticky {
+    position: sticky;
+    top: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 }
 

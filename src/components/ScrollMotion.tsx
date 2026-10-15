@@ -13,7 +13,12 @@ export function ScrollMotion() {
 
   useEffect(() => {
     const root = document.documentElement;
-    const mouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const isMobile =
+      window.innerWidth <= 1024 ||
+      window.matchMedia("(max-width: 1024px)").matches ||
+      window.matchMedia("(hover: none) and (pointer: coarse)").matches ||
+      window.matchMedia("(pointer: coarse)").matches ||
+      /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       root.classList.remove("reveal-on");
@@ -26,7 +31,7 @@ export function ScrollMotion() {
     // =========================================================================
     // MÓVIL: Revelado suave orgánico con IntersectionObserver
     // =========================================================================
-    if (!mouse) {
+    if (isMobile) {
       root.classList.remove("reveal-on");
       const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
       if (!items.length) return;
