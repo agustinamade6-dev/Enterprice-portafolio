@@ -75,31 +75,18 @@ export const projects: Project[] = [
     by: ["Nicolás"],
   },
   {
-    slug: "akros-cafe",
-    title: "AKROS Café",
-    sector: "Cafetería",
+    slug: "registro-reparaciones",
+    title: "Sistema de Registro de Reparaciones",
+    sector: "Distribución y talleres de motos",
     kind: "real",
     summary:
-      "Sistema de punto de venta para escritorio: pedidos por mesa, cobro y cierre de caja.",
-    result: "En uso todos los días en el local.",
-    tags: ["Next.js", "Electron", "Prisma", "SQLite"],
-    href: "/proyectos/akros-cafe/",
-    by: ["Agustin", "José"],
-    accent: "from-amber-500 to-orange-600",
-  },
-  // TODO: sumar el nombre y capturas reales de la casa de pastas cuando estén.
-  {
-    slug: "casa-de-pastas",
-    title: "Sistema de gestión para casa de pastas",
-    sector: "Casa de pastas",
-    kind: "real",
-    summary:
-      "Ventas, stock, insumos, proveedores y gastos de una fábrica de pastas en un solo programa.",
-    result: "Control de lo que se produce, se compra y se vende.",
-    tags: ["Python", "Gestión", "Stock"],
-    by: ["Agustin"],
-    accent: "from-yellow-400 to-orange-500",
-    modules: ["Ventas", "Stock", "Insumos", "Proveedores", "Gastos"],
+      "Aplicación web completa para el registro y seguimiento de motos en reparación en el depósito de distribución de una empresa de motocicletas. Permite cargar fichas por moto, filtrar por fecha e imprimir reportes individuales o en bloque.",
+    result: "Trazabilidad completa por chasis y motor, reportes en PDF y sincronización en tiempo real vía Supabase.",
+    tags: ["JavaScript vanilla", "HTML5 / CSS3", "Supabase", "Netlify", "PostgreSQL"],
+    href: "/proyectos/registro-reparaciones/",
+    by: ["Fabrizio"],
+    accent: "from-blue-600 to-indigo-900",
+    image: "/images/projects/registro-reparaciones.jpg",
   },
   {
     slug: "pierina-glow",
@@ -131,21 +118,18 @@ export const projects: Project[] = [
     accent: "from-[#f3e3da] to-[#c96f5d]",
     image: "/images/projects/pierina-glow-tienda.jpg",
   },
-  // Antes figuraba como "Yuhmak" (proyecto real), pero fue un programa de práctica que nunca se presentó a esa
-  // empresa (Agustin, 2026-10-12): queda como concepto, sin el nombre ni las capturas con su marca.
   {
-    slug: "registro-reparaciones",
-    title: "Sistema de Registro de Reparaciones",
-    sector: "Distribución y talleres de motos",
-    kind: "real",
+    slug: "akros-cafe",
+    title: "AKROS Café",
+    sector: "Cafetería",
+    kind: "desarrollo",
     summary:
-      "Aplicación web completa para el registro y seguimiento de motos en reparación en el depósito de distribución de una empresa de motocicletas. Permite cargar fichas por moto, filtrar por fecha e imprimir reportes individuales o en bloque.",
-    result: "Trazabilidad completa por chasis y motor, reportes en PDF y sincronización en tiempo real vía Supabase.",
-    tags: ["JavaScript vanilla", "HTML5 / CSS3", "Supabase", "Netlify", "PostgreSQL"],
-    href: "/proyectos/registro-reparaciones/",
-    by: ["Fabrizio"],
-    accent: "from-blue-600 to-indigo-900",
-    image: "/images/projects/registro-reparaciones.jpg",
+      "Sistema de punto de venta para escritorio: pedidos por mesa, cobro y cierre de caja.",
+    result: "En uso todos los días en el local.",
+    tags: ["Next.js", "Electron", "Prisma", "SQLite"],
+    href: "/proyectos/akros-cafe/",
+    by: ["Agustin", "José"],
+    accent: "from-amber-500 to-orange-600",
   },
   // TODO: confirmar si se puede nombrar al cliente y quién hizo cada parte.
   {
@@ -584,7 +568,7 @@ export const pageTexts: PageTexts = {
     buttonProjects: "Ver proyectos",
     buttonWhatsapp: "Escribirnos por WhatsApp",
     whatsappMessage: "Hola, quiero consultar por un proyecto.",
-    cardLabel: "Proyecto real",
+    cardLabel: "En desarrollo",
     cardTitle: "AKROS Café · punto de venta",
   },
   projects: {
