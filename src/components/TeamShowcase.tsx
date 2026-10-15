@@ -58,46 +58,68 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       const H = box.clientHeight;
       const wide = C >= 768;
       // Foto de retrato, más chica que el texto: el protagonista es el nombre
-      const W = wide ? Math.min(C * 0.3, 340) : Math.min(C * 0.42, 160);
-      const PH = wide ? Math.min(H * 0.9, W * 1.25) : Math.min(H * 0.34, 175);
+      const W = wide ? Math.min(C * 0.3, 340) : Math.min(C * 0.36, 136);
+      const PH = wide ? Math.min(H * 0.9, W * 1.25) : Math.min(W * 1.08, 144);
       const PT = wide ? (H - PH) / 2 : 0;
-      const gap = 14;
       const t = p * Math.max(0, total - 1);
       const i = Math.min(Math.floor(t), Math.max(0, total - 2));
       const e = total > 1 ? ease(clamp((t - i - 0.15) / 0.7)) : 0;
       const current = e < 0.5 ? i : i + 1;
 
-      photos.forEach((el, k) => {
-        let left = 0;
-        let width = 0;
-        const fromLeft = i % 2 === 0;
-        if (k === i || k === i + 1) {
-          // Recorrido pensado de izquierda a derecha; si la actual está a la derecha, se espeja
-          const oldLeft = lerp(0, C - W, e);
-          const oldW = W * (1 - e);
-          const newLeft = oldLeft + oldW + gap * Math.sin(Math.PI * e);
-          const newW = W * e;
-          left = k === i ? oldLeft : newLeft;
-          width = k === i ? oldW : newW;
-          if (!fromLeft) left = C - left - width;
-        } else if (total === 1 && k === 0) {
-          width = W;
-        }
-        const visible = width > 0.5;
-        // "inherit" y no "visible": si la sección entera está oculta (otra escena en pantalla), esto también
-        el.style.visibility = visible ? "inherit" : "hidden";
-        if (!visible) return;
-        // La foto mantiene su tamaño y se recorta: se ve una franja de la imagen, no la imagen aplastada
-        const x = left + width / 2 - W / 2;
-        const cut = (W - width) / 2;
-        el.style.width = `${W}px`;
-        el.style.height = `${PH}px`;
-        el.style.transform = `translate3d(${x.toFixed(1)}px,${PT.toFixed(1)}px,0)`;
-        el.style.clipPath = `inset(0 ${cut.toFixed(1)}px round 1.75rem)`;
-        // Leve movimiento de la imagen dentro del marco mientras se hace scroll (paralaje)
-        const img = imgs[k];
-        if (img) img.style.transform = `translate3d(${((k === i ? -e : 1 - e) * 24).toFixed(1)}px,${((t - k) * -14).toFixed(1)}px,0) scale(1.15)`;
-      });
+      if (wide) {
+        const gap = 14;
+        photos.forEach((el, k) => {
+          let left = 0;
+          let width = 0;
+          const fromLeft = i % 2 === 0;
+          if (k === i || k === i + 1) {
+            // Recorrido pensado de izquierda a derecha; si la actual está a la derecha, se espeja
+            const oldLeft = lerp(0, C - W, e);
+            const oldW = W * (1 - e);
+            const newLeft = oldLeft + oldW + gap * Math.sin(Math.PI * e);
+            const newW = W * e;
+            left = k === i ? oldLeft : newLeft;
+            width = k === i ? oldW : newW;
+            if (!fromLeft) left = C - left - width;
+          } else if (total === 1 && k === 0) {
+            width = W;
+          }
+          const visible = width > 0.5;
+          el.style.visibility = visible ? "inherit" : "hidden";
+          if (!visible) return;
+          const x = left + width / 2 - W / 2;
+          const cut = (W - width) / 2;
+          el.style.width = `${W}px`;
+          el.style.height = `${PH}px`;
+          el.style.transform = `translate3d(${x.toFixed(1)}px,${PT.toFixed(1)}px,0)`;
+          el.style.clipPath = `inset(0 ${cut.toFixed(1)}px round 1.75rem)`;
+          const img = imgs[k];
+          if (img) img.style.transform = `translate3d(${((k === i ? -e : 1 - e) * 24).toFixed(1)}px,${((t - k) * -14).toFixed(1)}px,0) scale(1.15)`;
+        });
+      } else {
+        // En móvil: Foto centrada horizontalmente, rotación suave tipo cortina sin desfasar a los márgenes
+        const centerX = (C - W) / 2;
+        photos.forEach((el, k) => {
+          let width = 0;
+          if (k === i) {
+            width = W * (1 - e);
+          } else if (k === i + 1) {
+            width = W * e;
+          } else if (total === 1 && k === 0) {
+            width = W;
+          }
+          const visible = width > 0.5;
+          el.style.visibility = visible ? "inherit" : "hidden";
+          if (!visible) return;
+          const cut = (W - width) / 2;
+          el.style.width = `${W}px`;
+          el.style.height = `${PH}px`;
+          el.style.transform = `translate3d(${centerX.toFixed(1)}px,0px,0)`;
+          el.style.clipPath = `inset(0 ${cut.toFixed(1)}px round 1.25rem)`;
+          const img = imgs[k];
+          if (img) img.style.transform = `translate3d(${((k === i ? -e : 1 - e) * 14).toFixed(1)}px,${((t - k) * -8).toFixed(1)}px,0) scale(1.1)`;
+        });
+      }
 
       texts.forEach((el, k) => {
         // El texto que se va termina de desaparecer antes de que entre el siguiente: no se pisan
@@ -118,7 +140,7 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
           el.style.width = `${C}px`;
           el.style.left = "0px";
           el.style.top = `${PH + 8}px`;
-          el.style.height = `${H - PH - 8}px`;
+          el.style.height = `${H - PH - 8 - 36}px`;
         }
         const list = words[k];
         list.forEach((w, j) => {
@@ -262,7 +284,7 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
   return (
     <div
       ref={root}
-      className="relative mt-2 h-[min(54vh,440px)] sm:mt-6 sm:h-[min(74vh,600px)] md:h-[min(52vh,500px)] [@media(max-height:820px)]:mt-3"
+      className="relative mt-0 h-[min(56vh,400px)] sm:mt-6 sm:h-[min(74vh,600px)] md:h-[min(52vh,500px)] [@media(max-height:820px)]:mt-2"
       style={{ contain: "layout" }}
     >
       {/* Nombres gigantes de fondo que se deslizan con el scroll */}
@@ -280,7 +302,7 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
           data-photo
           className="invisible absolute left-0 top-0 z-10 overflow-hidden bg-ink shadow-2xl shadow-black/20 will-change-transform"
         >
-          <span className="absolute left-3 top-3 z-10 rounded-full bg-white/85 px-2.5 py-1 font-mono text-[11px] font-bold text-ink backdrop-blur">
+          <span className="absolute left-2.5 top-2.5 z-10 rounded-full bg-white/85 px-2 py-0.5 font-mono text-[10px] font-bold text-ink backdrop-blur sm:left-3 sm:top-3 sm:px-2.5 sm:py-1 sm:text-[11px]">
             {String(k + 1).padStart(2, "0")}
           </span>
           {m.photo ? (
@@ -298,7 +320,7 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       {team.map((m) => {
         const [title, sentence] = splitRole(m.role);
         return (
-          <div key={m.slug} data-text className="invisible absolute flex flex-col justify-start sm:justify-center">
+          <div key={m.slug} data-text className="invisible absolute flex flex-col items-center text-center sm:items-start sm:text-left justify-start sm:justify-center">
             {title && (
               <p data-group className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-dark sm:text-xs">
                 {title}
@@ -321,7 +343,7 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
             <p data-group className="mt-0.5 text-[10px] font-medium uppercase tracking-wider text-ink/40 sm:text-xs">
               {m.fullName}
             </p>
-            <p data-group className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-ink/70 sm:mt-3 sm:line-clamp-none sm:text-sm md:mt-4 md:text-base">
+            <p data-group className="mt-1 max-w-sm line-clamp-2 text-xs leading-relaxed text-ink/70 sm:mt-3 sm:max-w-md sm:line-clamp-none sm:text-sm md:mt-4 md:text-base">
               {m.bio}
             </p>
             <div data-group className="mt-3 hidden flex-wrap gap-1.5 sm:flex md:mt-4">
@@ -331,13 +353,13 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
                 </span>
               ))}
             </div>
-            <div data-group className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs font-bold sm:mt-4 sm:gap-x-5 sm:text-sm md:mt-6">
-              <Link href={`/equipo/${m.slug}/`} className="rounded-full bg-ink px-3 py-1.5 text-xs text-paper transition hover:bg-brand sm:px-4 sm:py-2 sm:text-sm">
+            <div data-group className="mt-2.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-xs font-bold sm:mt-4 sm:justify-start sm:gap-x-5 sm:text-sm md:mt-6">
+              <Link href={`/equipo/${m.slug}/`} className="rounded-full bg-ink px-3.5 py-1.5 text-xs text-paper transition hover:bg-brand sm:px-4 sm:py-2 sm:text-sm">
                 Leer su historia
               </Link>
               {m.href && (
-                <a href={m.href} target="_blank" rel="noopener noreferrer" referrerPolicy="strict-origin-when-cross-origin" className="hover:text-brand">
-                  Ver {m.network ?? "Instagram"} →
+                <a href={m.href} target="_blank" rel="noopener noreferrer" referrerPolicy="strict-origin-when-cross-origin" className="text-xs text-ink/70 underline underline-offset-4 transition hover:text-brand sm:text-sm sm:no-underline">
+                  Ver {m.network ?? "LinkedIn"} →
                 </a>
               )}
             </div>
@@ -346,7 +368,7 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       })}
 
       {total > 1 && (
-        <div className="absolute -bottom-9 left-0 right-0 sm:-bottom-12 md:-bottom-12">
+        <div className="absolute bottom-0 left-0 right-0 sm:-bottom-12 md:-bottom-12">
           <div className="flex items-end justify-between gap-3">
             <div className="flex gap-3 overflow-hidden sm:gap-6 md:gap-8">
               {team.map((m, k) => (
