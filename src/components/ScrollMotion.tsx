@@ -84,6 +84,11 @@ export function ScrollMotion() {
     // =========================================================================
     if (isMobile) {
       root.classList.remove("reveal-on");
+      // Cualquier elemento del Hero se revela de inmediato sin esperar
+      document.querySelectorAll<HTMLElement>(".fondo-inicio [data-reveal]").forEach((el) => {
+        el.classList.add("m-revealed");
+      });
+
       const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
       if (!items.length) {
         return cleanupTheme;
@@ -92,7 +97,7 @@ export function ScrollMotion() {
       const vh = window.innerHeight;
       items.forEach((el) => {
         const rect = el.getBoundingClientRect();
-        if (rect.top < vh * 0.95 && rect.bottom > 0) {
+        if (rect.top < vh * 1.1) {
           el.classList.add("m-revealed");
         }
       });
@@ -109,8 +114,8 @@ export function ScrollMotion() {
           });
         },
         {
-          rootMargin: "0px 0px -30px 0px",
-          threshold: 0.05,
+          rootMargin: "60px 0px 60px 0px",
+          threshold: 0.01,
         }
       );
 

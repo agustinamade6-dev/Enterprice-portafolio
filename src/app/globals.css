@@ -226,6 +226,16 @@ section[id],
   min-height: 100vh;
   align-content: center;
   transform-origin: 50% 35vh;
+  z-index: 1 !important;
+}
+
+/* Hero: visible inmediatamente desde el primer milisegundo (SSR y primer render) */
+[data-hero-text],
+[data-hero-art],
+.fondo-inicio [data-hero-text],
+.fondo-inicio [data-hero-art] {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* Escena que se queda quieta mientras sus tarjetas aparecen una por una (Cómo trabajamos).
@@ -273,6 +283,15 @@ section[id],
     opacity: 1;
     transform: translateY(0);
     will-change: auto;
+  }
+
+  html:not(.stage-on) [data-hero-text],
+  html:not(.stage-on) [data-hero-art],
+  html:not(.stage-on) .fondo-inicio [data-hero-text],
+  html:not(.stage-on) .fondo-inicio [data-hero-art] {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
   }
 
   /* Sección Nosotros en móvil: track con altura proporcional a los 4 integrantes (360vh) */

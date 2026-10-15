@@ -40,9 +40,13 @@ export default async function Home() {
       <Header siteName={site.name} />
       <main data-stage>
         {/* Inicio */}
-        <section data-bit={bit(t.bit.hero)} data-theme-section="light" className="fondo-inicio relative z-[1] overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
-          <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
-            <div data-reveal data-hero-text>
+        <section
+          data-bit={bit(t.bit.hero)}
+          data-theme-section="light"
+          className="fondo-inicio relative z-[1] min-h-[calc(100dvh-72px)] flex flex-col justify-center overflow-hidden px-4 pb-12 pt-28 sm:px-6 md:pt-36 lg:pb-20"
+        >
+          <div className="relative mx-auto grid max-w-6xl w-full items-center gap-12 lg:grid-cols-2">
+            <div data-hero-text>
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-sm font-medium">
                 <span className="h-2 w-2 rounded-full bg-green-500" />
                 {t.hero.badge}
@@ -69,7 +73,7 @@ export default async function Home() {
                 </a>
               </div>
             </div>
-            <div className="relative hidden lg:block" data-reveal data-hero-art style={{ "--reveal-delay": "150ms" } as React.CSSProperties}>
+            <div className="relative hidden lg:block" data-hero-art>
               <PosMockup className="mx-auto max-w-lg rotate-1" />
               <div className="absolute -bottom-6 left-2 rounded-2xl bg-white px-4 py-3 shadow-xl shadow-black/10 sm:left-0">
                 <p className="text-xs text-ink/60">{t.hero.cardLabel}</p>

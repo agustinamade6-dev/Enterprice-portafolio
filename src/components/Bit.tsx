@@ -11,7 +11,9 @@ export type BitPose = "saludando" | "principal" | "programando" | "pensando" | "
 
 // Avisa a Bit desde cualquier componente, por ejemplo al enviar el formulario
 export function bitFestejar(frase = "¡Listo! Ya te respondemos 🎉") {
-  window.dispatchEvent(new CustomEvent("bit:festejar", { detail: frase }));
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("bit:festejar", { detail: frase }));
+  }
 }
 
 const INK = "#0f1115";

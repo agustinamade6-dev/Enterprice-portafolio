@@ -16,9 +16,13 @@ declare global {
 }
 
 export function Intro() {
-  const [done, setDone] = useState(() => typeof window !== "undefined" && window.__zsIntroVista === true);
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
+    if (typeof window !== "undefined" && window.__zsIntroVista) {
+      setDone(true);
+      return;
+    }
     if (done) return;
     window.__zsIntroVista = true;
     const root = document.documentElement;
