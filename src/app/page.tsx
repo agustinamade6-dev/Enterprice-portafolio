@@ -259,11 +259,17 @@ function SectionTitle({
 }) {
   return (
     <div className={align === "center" ? `mx-auto text-center ${wide ? "max-w-4xl" : "max-w-2xl"}` : ""} data-reveal>
-      <p className="text-sm font-bold uppercase tracking-widest text-brand">{eyebrow}</p>
-      <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{title}</h2>
-      {/* En pantallas bajas el texto largo (Nosotros) se achica para que el apartado entre entero */}
+      <p className="text-xs font-bold uppercase tracking-widest text-brand sm:text-sm">{eyebrow}</p>
+      <h2 className="mt-1 text-2xl font-extrabold tracking-tight sm:mt-3 sm:text-4xl">{title}</h2>
+      {/* En pantallas bajas o móvil el texto largo (Nosotros) se compacta para que el apartado entre entero */}
       {text && (
-        <p className={`mt-4 text-lg text-ink/70 ${wide ? "[@media(max-height:820px)]:mt-3 [@media(max-height:820px)]:text-base" : ""}`}>
+        <p
+          className={`mt-1.5 text-xs text-ink/70 sm:mt-4 sm:text-lg ${
+            wide
+              ? "line-clamp-2 leading-relaxed sm:line-clamp-none [@media(max-height:820px)]:mt-2 [@media(max-height:820px)]:text-sm"
+              : ""
+          }`}
+        >
           {text}
         </p>
       )}

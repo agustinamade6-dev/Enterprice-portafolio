@@ -58,8 +58,8 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       const H = box.clientHeight;
       const wide = C >= 768;
       // Foto de retrato, más chica que el texto: el protagonista es el nombre
-      const W = wide ? Math.min(C * 0.3, 340) : Math.min(C * 0.58, 240);
-      const PH = wide ? Math.min(H * 0.9, W * 1.25) : Math.min(H * 0.4, W * 1.2);
+      const W = wide ? Math.min(C * 0.3, 340) : Math.min(C * 0.42, 160);
+      const PH = wide ? Math.min(H * 0.9, W * 1.25) : Math.min(H * 0.34, 175);
       const PT = wide ? (H - PH) / 2 : 0;
       const gap = 14;
       const t = p * Math.max(0, total - 1);
@@ -117,8 +117,8 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
         } else {
           el.style.width = `${C}px`;
           el.style.left = "0px";
-          el.style.top = `${PH + 16}px`;
-          el.style.height = `${H - PH - 16}px`;
+          el.style.top = `${PH + 8}px`;
+          el.style.height = `${H - PH - 8}px`;
         }
         const list = words[k];
         list.forEach((w, j) => {
@@ -220,9 +220,12 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       trackFrame = requestAnimationFrame(() => {
         trackFrame = 0;
         const rect = track.getBoundingClientRect();
+        // Anclado en 68px (top del sticky bajo el header de 64px)
+        const topOffset = 68;
+        const scrolled = topOffset - rect.top;
         const scrollDistance = track.offsetHeight - window.innerHeight;
         if (scrollDistance <= 0) return;
-        const p = clamp(-rect.top / scrollDistance);
+        const p = clamp(scrolled / scrollDistance);
         apply(p);
       });
     };
@@ -257,7 +260,11 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
   }, [total]);
 
   return (
-    <div ref={root} className="relative mt-8 h-[min(74vh,600px)] md:h-[min(52vh,500px)] [@media(max-height:820px)]:mt-6" style={{ contain: "layout" }}>
+    <div
+      ref={root}
+      className="relative mt-2 h-[min(54vh,440px)] sm:mt-6 sm:h-[min(74vh,600px)] md:h-[min(52vh,500px)] [@media(max-height:820px)]:mt-3"
+      style={{ contain: "layout" }}
+    >
       {/* Nombres gigantes de fondo que se deslizan con el scroll */}
       <div
         aria-hidden
@@ -291,30 +298,30 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       {team.map((m) => {
         const [title, sentence] = splitRole(m.role);
         return (
-          <div key={m.slug} data-text className="invisible absolute flex flex-col justify-center">
+          <div key={m.slug} data-text className="invisible absolute flex flex-col justify-start sm:justify-center">
             {title && (
-              <p data-group className="text-xs font-bold uppercase tracking-[0.2em] text-brand-dark">
+              <p data-group className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-dark sm:text-xs">
                 {title}
               </p>
             )}
-            <h3 className="mt-2 text-4xl font-extrabold tracking-tight md:text-6xl">
+            <h3 className="mt-0.5 text-2xl font-extrabold tracking-tight sm:mt-2 sm:text-4xl md:text-6xl">
               {m.name.split(" ").map((w, j) => (
                 <span key={j} data-word className="inline-block whitespace-pre">
                   {w}{" "}
                 </span>
               ))}
             </h3>
-            <p className="mt-1 text-xl font-semibold leading-snug text-ink/60 md:mt-2 md:text-3xl">
+            <p className="mt-0.5 text-sm font-semibold leading-snug text-ink/60 sm:mt-1 sm:text-xl md:mt-2 md:text-3xl">
               {sentence.split(" ").map((w, j) => (
                 <span key={j} data-word className="inline-block whitespace-pre">
                   {w}{" "}
                 </span>
               ))}
             </p>
-            <p data-group className="mt-1 text-xs font-medium uppercase tracking-wider text-ink/40">
+            <p data-group className="mt-0.5 text-[10px] font-medium uppercase tracking-wider text-ink/40 sm:text-xs">
               {m.fullName}
             </p>
-            <p data-group className="mt-3 max-w-md text-sm text-ink/70 md:mt-4 md:text-base">
+            <p data-group className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-ink/70 sm:mt-3 sm:line-clamp-none sm:text-sm md:mt-4 md:text-base">
               {m.bio}
             </p>
             <div data-group className="mt-3 hidden flex-wrap gap-1.5 sm:flex md:mt-4">
@@ -324,8 +331,8 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
                 </span>
               ))}
             </div>
-            <div data-group className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-bold md:mt-6">
-              <Link href={`/equipo/${m.slug}/`} className="rounded-full bg-ink px-4 py-2 text-paper transition hover:bg-brand">
+            <div data-group className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs font-bold sm:mt-4 sm:gap-x-5 sm:text-sm md:mt-6">
+              <Link href={`/equipo/${m.slug}/`} className="rounded-full bg-ink px-3 py-1.5 text-xs text-paper transition hover:bg-brand sm:px-4 sm:py-2 sm:text-sm">
                 Leer su historia
               </Link>
               {m.href && (
@@ -339,27 +346,27 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       })}
 
       {total > 1 && (
-        <div className="absolute -bottom-14 left-0 right-0 md:-bottom-12">
+        <div className="absolute -bottom-9 left-0 right-0 sm:-bottom-12 md:-bottom-12">
           <div className="flex items-end justify-between gap-3">
-            <div className="flex gap-4 overflow-hidden md:gap-8">
+            <div className="flex gap-3 overflow-hidden sm:gap-6 md:gap-8">
               {team.map((m, k) => (
                 <button
                   key={m.slug}
                   type="button"
                   data-dot
                   aria-label={`Ver a ${m.name}`}
-                  className="group flex items-baseline gap-1.5 text-sm font-bold text-ink/30 transition-colors aria-[current=true]:text-ink"
+                  className="group flex items-baseline gap-1 text-xs font-bold text-ink/30 transition-colors aria-[current=true]:text-ink sm:gap-1.5 sm:text-sm"
                 >
-                  <span className="font-mono text-[10px]">{String(k + 1).padStart(2, "0")}</span>
+                  <span className="font-mono text-[9px] sm:text-[10px]">{String(k + 1).padStart(2, "0")}</span>
                   <span className="hidden sm:inline">{m.name}</span>
                 </button>
               ))}
             </div>
-            <span data-counter className="font-mono text-xs font-bold tabular-nums text-ink/50">
+            <span data-counter className="font-mono text-[11px] font-bold tabular-nums text-ink/50 sm:text-xs">
               01 / {String(total).padStart(2, "0")}
             </span>
           </div>
-          <div className="mt-3 h-[3px] overflow-hidden rounded-full bg-ink/10">
+          <div className="mt-2 h-[3px] overflow-hidden rounded-full bg-ink/10 sm:mt-3">
             <div data-fill className="h-full origin-left rounded-full bg-gradient-to-r from-brand to-amber-400" style={{ transform: "scaleX(0)" }} />
           </div>
         </div>

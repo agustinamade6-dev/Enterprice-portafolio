@@ -184,24 +184,27 @@ section[id],
     will-change: auto;
   }
 
-  /* Sección Nosotros en móvil: track con altura para scroll continuo y contenedor sticky */
+  /* Sección Nosotros en móvil: track con altura proporcional a los 4 integrantes (360vh) */
   html:not(.stage-on) .seccion-nosotros-track {
     position: relative;
-    height: 220vh;
+    height: 360vh;
+    min-height: 360vh;
     padding-top: 0;
     padding-bottom: 0;
   }
 
+  /* Contenedor sticky firmemente anclado bajo el header flotante, sin desborde vertical ni temblores */
   html:not(.stage-on) .seccion-nosotros-sticky {
     position: sticky;
-    top: 0;
-    min-height: 100vh;
-    min-height: 100dvh;
+    top: 68px;
+    height: calc(100dvh - 72px);
+    max-height: calc(100dvh - 72px);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    justify-content: space-between;
+    padding: 0.5rem 1rem 0.75rem;
+    box-sizing: border-box;
   }
 }
 
