@@ -135,15 +135,17 @@ export const projects: Project[] = [
   // empresa (Agustin, 2026-10-12): queda como concepto, sin el nombre ni las capturas con su marca.
   {
     slug: "registro-reparaciones",
-    title: "Registro de reparaciones para talleres",
-    sector: "Talleres de motos",
-    kind: "concepto",
+    title: "Sistema de Registro de Reparaciones",
+    sector: "Distribución y talleres de motos",
+    kind: "real",
     summary:
-      "Sistema web para registrar y seguir las motos arregladas en el taller: marca, modelo, chasis, motor y el trabajo realizado, con buscador e impresión.",
-    result: "Cada moto reparada, registrada y fácil de encontrar.",
-    tags: ["HTML", "Web", "Gestión"],
+      "Aplicación web completa para el registro y seguimiento de motos en reparación en el depósito de distribución de una empresa de motocicletas. Permite cargar fichas por moto, filtrar por fecha e imprimir reportes individuales o en bloque.",
+    result: "Trazabilidad completa por chasis y motor, reportes en PDF y sincronización en tiempo real vía Supabase.",
+    tags: ["JavaScript vanilla", "HTML5 / CSS3", "Supabase", "Netlify", "PostgreSQL"],
+    href: "/proyectos/registro-reparaciones/",
     by: ["Fabrizio"],
-    accent: "from-green-600 to-emerald-900",
+    accent: "from-blue-600 to-indigo-900",
+    image: "/images/projects/registro-reparaciones.jpg",
   },
   // TODO: confirmar si se puede nombrar al cliente y quién hizo cada parte.
   {
@@ -539,7 +541,7 @@ export const team: Member[] = [
   {
     slug: "fabrizio",
     name: "Fabrizio",
-    fullName: "Fabrizio Nicolás Andrada",
+    fullName: "Fabrizio Nicolás Andrada Simeon",
     role: "Programador: frontend, backend, diseño y desarrollo web",
     photo: "/equipo/fabrizio-andrada.jpg",
     href: "https://www.linkedin.com/in/fabrizio-andrada-0b70532a1",

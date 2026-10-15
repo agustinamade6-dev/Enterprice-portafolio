@@ -15,7 +15,7 @@ Todos con el mismo peso en el sitio. El apodo va grande y el nombre completo chi
 | Agustin | Leandro Agustin Amade | Programador: frontend, backend y diseño | LinkedIn |
 | José | José Augusto Matias | Programador: backend, pruebas y auditoría | LinkedIn |
 | Nicolás | Nicolás Raúl Bazán | Programador: frontend y backend | LinkedIn |
-| Fabrizio | Fabrizio Nicolás Andrada | Programador: frontend, backend, diseño y desarrollo web | LinkedIn |
+| Fabrizio | Fabrizio Nicolás Andrada Simeon | Programador: frontend, backend, diseño y desarrollo web | LinkedIn |
 
 Cada integrante tiene su página de historia en `/equipo/<slug>/`: cómo empezó, cómo aprendió y en qué está hoy.
 
