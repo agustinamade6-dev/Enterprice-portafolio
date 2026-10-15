@@ -18,7 +18,7 @@ export function Header({ siteName }: { siteName: string }) {
     <header className="fixed inset-x-0 top-0 z-40 border-b border-black/5 bg-paper/85 backdrop-blur">
       <div className="flex h-16 items-center justify-between px-4">
         {/* El logo va pegado al borde izquierdo de la pantalla y el menú al derecho */}
-        <Link href="/" className="flex items-center transition-opacity hover:opacity-90" aria-label={siteName}>
+        <Link href="/" className="logo-badge flex items-center transition-all hover:opacity-90" aria-label={siteName}>
           <Image
             src="/logo.png"
             alt={siteName}
@@ -65,7 +65,7 @@ export function Header({ siteName }: { siteName: string }) {
       </div>
 
       {open && (
-        <nav className="border-t border-black/5 bg-paper px-4 py-4 md:hidden">
+        <nav className="dark-aware-drawer border-t border-black/5 bg-paper px-4 py-4 md:hidden">
           {[...links, { href: "/#servicios", label: "Pedir presupuesto" }].map((l) => (
             <Link
               key={l.href}

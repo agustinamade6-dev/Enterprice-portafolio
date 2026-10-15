@@ -53,17 +53,19 @@ export function BudgetBuilder({
 
   const chip = (on: boolean) =>
     `inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-sm font-medium transition ${
-      on ? "border-ink bg-ink text-paper" : "border-black/10 bg-white hover:border-ink/40"
+      on
+        ? "border-brand bg-brand text-white shadow-md shadow-brand/20"
+        : "border-white/10 bg-white/[0.06] text-white/90 hover:border-white/25 hover:bg-white/[0.1]"
     }`;
-  const stepTitle = "text-lg font-extrabold";
-  const stepNum = "mr-2 inline-grid h-7 w-7 place-items-center rounded-full bg-brand/10 text-sm font-extrabold text-brand";
+  const stepTitle = "text-lg font-extrabold text-white";
+  const stepNum = "mr-2 inline-grid h-7 w-7 place-items-center rounded-full bg-brand/20 text-sm font-extrabold text-brand";
 
   return (
     <div className="grid items-start gap-8 lg:grid-cols-[1fr_22rem]">
       <div className="space-y-10">
         <fieldset>
           <legend className={stepTitle}>
-            <span className={stepNum}>1</span>¿Qué necesitas? <span className="font-medium text-ink/50">Puedes elegir más de uno</span>
+            <span className={stepNum}>1</span>¿Qué necesitas? <span className="font-medium text-white/50">Puedes elegir más de uno</span>
           </legend>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             {budgetTypes.map((t) => {
@@ -75,17 +77,21 @@ export function BudgetBuilder({
                   aria-pressed={on}
                   onClick={() => toggle(types, setTypes, t.id)}
                   className={`flex items-start gap-3 rounded-2xl border p-4 text-left transition ${
-                    on ? "border-ink bg-ink text-paper" : "border-black/10 bg-white hover:border-ink/40"
+                    on
+                      ? "border-brand bg-brand/20 text-white ring-1 ring-brand shadow-lg shadow-brand/10"
+                      : "border-white/10 bg-white/[0.05] text-white/90 hover:border-white/25 hover:bg-white/[0.08]"
                   }`}
                 >
                   <span
-                    className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md border ${on ? "border-brand bg-brand" : "border-black/20"}`}
+                    className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md border ${
+                      on ? "border-brand bg-brand text-white" : "border-white/25 bg-white/5"
+                    }`}
                   >
                     {on && <CheckIcon className="h-3.5 w-3.5 text-white" />}
                   </span>
                   <span>
-                    <span className="block font-bold">{t.name}</span>
-                    <span className={`block text-sm ${on ? "text-paper/70" : "text-ink/60"}`}>{t.forWho}</span>
+                    <span className="block font-bold text-white">{t.name}</span>
+                    <span className={`block text-sm ${on ? "text-white/80" : "text-white/60"}`}>{t.forWho}</span>
                   </span>
                 </button>
               );
@@ -101,7 +107,7 @@ export function BudgetBuilder({
             <div className="mt-4 space-y-5">
               {chosen.map((t) => (
                 <div key={t.id}>
-                  <p className="mb-2 text-sm font-semibold text-ink/60">{t.name}</p>
+                  <p className="mb-2 text-sm font-semibold text-white/70">{t.name}</p>
                   <div className="flex flex-wrap gap-2">
                     {t.options.map((o) => (
                       <button key={o} type="button" aria-pressed={options.includes(o)} onClick={() => toggle(options, setOptions, o)} className={chip(options.includes(o))}>
@@ -112,7 +118,7 @@ export function BudgetBuilder({
                 </div>
               ))}
               <div>
-                <p className="mb-2 text-sm font-semibold text-ink/60">Extras</p>
+                <p className="mb-2 text-sm font-semibold text-white/70">Extras</p>
                 <div className="flex flex-wrap gap-2">
                   {budgetExtras.map((o) => (
                     <button key={o} type="button" aria-pressed={options.includes(o)} onClick={() => toggle(options, setOptions, o)} className={chip(options.includes(o))}>
@@ -131,7 +137,7 @@ export function BudgetBuilder({
               <span className={stepNum}>3</span>Cuéntanos un poco más
             </legend>
             <div>
-              <p className="mb-2 text-sm font-semibold text-ink/60">Rubro</p>
+              <p className="mb-2 text-sm font-semibold text-white/70">Rubro</p>
               <div className="flex flex-wrap gap-2">
                 {budgetSectors.map((o) => (
                   <button key={o} type="button" aria-pressed={sector === o} onClick={() => setSector(sector === o ? "" : o)} className={chip(sector === o)}>
@@ -141,7 +147,7 @@ export function BudgetBuilder({
               </div>
             </div>
             <div>
-              <p className="mb-2 text-sm font-semibold text-ink/60">¿Para cuándo lo necesitas?</p>
+              <p className="mb-2 text-sm font-semibold text-white/70">¿Para cuándo lo necesitas?</p>
               <div className="flex flex-wrap gap-2">
                 {budgetTimes.map((o) => (
                   <button key={o} type="button" aria-pressed={time === o} onClick={() => setTime(time === o ? "" : o)} className={chip(time === o)}>
@@ -151,41 +157,41 @@ export function BudgetBuilder({
               </div>
             </div>
             <label className="block">
-              <span className="mb-2 block text-sm font-semibold text-ink/60">Tu nombre</span>
+              <span className="mb-2 block text-sm font-semibold text-white/70">Tu nombre</span>
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Ana"
-                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 outline-none transition focus:border-brand"
+                className="w-full rounded-xl border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-white/40 outline-none transition focus:border-brand"
               />
             </label>
             <label className="block sm:col-span-2">
-              <span className="mb-2 block text-sm font-semibold text-ink/60">¿Algo más que debamos saber? (opcional)</span>
+              <span className="mb-2 block text-sm font-semibold text-white/70">¿Algo más que debamos saber? (opcional)</span>
               <textarea
                 rows={3}
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Por ejemplo: tengo una panadería con dos sucursales y quiero controlar el stock de ambas."
-                className="w-full rounded-xl border border-black/10 bg-white px-4 py-3 outline-none transition focus:border-brand"
+                className="w-full rounded-xl border border-white/15 bg-white/[0.06] px-4 py-3 text-white placeholder:text-white/40 outline-none transition focus:border-brand"
               />
             </label>
           </fieldset>
         )}
       </div>
 
-      <aside className="rounded-3xl bg-ink p-6 text-paper lg:sticky lg:top-24">
-        <h3 className="text-xl font-extrabold">Tu presupuesto</h3>
+      <aside className="rounded-3xl border border-white/10 bg-[#161922] p-6 text-paper shadow-2xl lg:sticky lg:top-24">
+        <h3 className="text-xl font-extrabold text-white">Tu presupuesto</h3>
         {ready ? (
           <ul className="mt-4 space-y-3 text-sm">
             {chosen.map((t) => (
               <li key={t.id}>
-                <span className="font-bold">{t.name}</span>
+                <span className="font-bold text-white">{t.name}</span>
                 {picked(t).length > 0 && <span className="block text-paper/70">{picked(t).join(", ")}</span>}
               </li>
             ))}
             {extras.length > 0 && (
               <li>
-                <span className="font-bold">Extras</span>
+                <span className="font-bold text-white">Extras</span>
                 <span className="block text-paper/70">{extras.join(", ")}</span>
               </li>
             )}
@@ -205,12 +211,12 @@ export function BudgetBuilder({
           rel="noopener noreferrer"
           referrerPolicy="no-referrer"
           className={`mt-5 flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-bold transition ${
-            ready ? "bg-[#15803d] text-white hover:brightness-95" : "pointer-events-none bg-white/10 text-paper/40"
+            ready ? "bg-[#16a34a] text-white hover:brightness-110 shadow-lg shadow-green-950/40" : "pointer-events-none bg-white/10 text-paper/40"
           }`}
         >
           <WhatsAppIcon className="h-5 w-5" /> Pedir mi presupuesto
         </a>
-        <p className="mt-3 text-xs text-paper/70">
+        <p className="mt-3 text-xs text-paper/60">
           Se abre WhatsApp con tu pedido: solo nos llega si lo envías desde ahí, y lo usamos para armar tu presupuesto. Más
           detalle en la{" "}
           <a href="/legal/privacidad/" className="underline underline-offset-2 hover:text-paper">

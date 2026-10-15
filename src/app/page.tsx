@@ -40,7 +40,7 @@ export default async function Home() {
       <Header siteName={site.name} />
       <main data-stage>
         {/* Inicio */}
-        <section data-bit={bit(t.bit.hero)} className="fondo-inicio relative overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
+        <section data-bit={bit(t.bit.hero)} data-theme-section="light" className="fondo-inicio relative z-[1] overflow-hidden px-4 pb-12 pt-32 sm:px-6 md:pt-40 lg:pb-20">
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
             <div data-reveal data-hero-text>
               <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1 text-sm font-medium">
@@ -81,7 +81,7 @@ export default async function Home() {
 
         {/* Proyectos */}
         <div id="proyectos" className="scroll-anchor" />
-        <section data-bit={bit(t.bit.projects)} className="fondo-proyectos overflow-x-clip py-20">
+        <section data-bit={bit(t.bit.projects)} data-theme-section="light" className="fondo-proyectos relative z-[2] overflow-x-clip py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <SectionTitle eyebrow={t.projects.eyebrow} title={fill(t.projects.title)} text={fill(t.projects.text)} />
           </div>
@@ -94,9 +94,9 @@ export default async function Home() {
 
         {/* Servicios */}
         <div id="servicios" className="scroll-anchor" />
-        <section data-bit={bit(t.bit.services)} className="fondo-servicios px-4 py-20 sm:px-6">
+        <section data-bit={bit(t.bit.services)} data-theme-section="services" className="fondo-servicios stack-card relative z-[10] px-4 py-20 sm:px-6 text-paper">
           <div className="mx-auto max-w-6xl">
-            <SectionTitle eyebrow={t.services.eyebrow} title={fill(t.services.title)} text={fill(t.services.text)} />
+            <SectionTitle eyebrow={t.services.eyebrow} title={fill(t.services.title)} text={fill(t.services.text)} dark />
             <div className="mt-12" data-reveal>
               <BudgetBuilder
                 budgetTypes={budgetTypes}
@@ -107,7 +107,7 @@ export default async function Home() {
               />
             </div>
             {t.services.note && (
-              <p className="mt-8 text-center text-sm text-ink/60" data-reveal>
+              <p className="mt-8 text-center text-sm text-white/60" data-reveal>
                 {fill(t.services.note)}
               </p>
             )}
@@ -116,7 +116,7 @@ export default async function Home() {
 
         {/* Proceso */}
         <div id="proceso" className="scroll-anchor" />
-        <section data-bit={bit(t.bit.process)} data-hold={4} data-hold-fit className="fondo-proceso px-4 py-20 sm:px-6">
+        <section data-bit={bit(t.bit.process)} data-theme-section="warm" data-hold={4} data-hold-fit className="fondo-proceso stack-card relative z-[20] px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-6xl">
             <SectionTitle eyebrow={t.process.eyebrow} title={fill(t.process.title)} text={fill(t.process.text)} />
             <ol className="mt-12 grid gap-6 md:grid-cols-3">
@@ -170,7 +170,8 @@ export default async function Home() {
         <section
           data-hold={Math.max(0, team.length - 1)}
           data-bit={bit(t.bit.team)}
-          className="fondo-nosotros seccion-nosotros-track overflow-x-clip px-4 pb-20 pt-20 sm:px-6"
+          data-theme-section="warm"
+          className="fondo-nosotros seccion-nosotros-track relative z-[25] overflow-x-clip px-4 pb-20 pt-20 sm:px-6"
         >
           <div className="seccion-nosotros-sticky mx-auto max-w-6xl">
             <SectionTitle wide eyebrow={t.team.eyebrow} title={fill(t.team.title)} text={fill(t.team.text)} />
@@ -184,7 +185,7 @@ export default async function Home() {
 
         {/* Preguntas frecuentes */}
         <div id="preguntas" className="scroll-anchor" />
-        <section data-bit={bit(t.bit.faqs)} className="fondo-preguntas px-4 py-20 sm:px-6">
+        <section data-bit={bit(t.bit.faqs)} data-theme-section="warm" className="fondo-preguntas relative z-[30] px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-3xl">
             <SectionTitle eyebrow={t.faqs.eyebrow} title={fill(t.faqs.title)} text={fill(t.faqs.text)} />
             <div className="mt-10 space-y-3">
@@ -207,7 +208,7 @@ export default async function Home() {
 
         {/* Contacto */}
         <div id="contacto" className="scroll-anchor" />
-        <div data-bit={bit(t.bit.contact)} className="scene-end fondo-contacto">
+        <div data-bit={bit(t.bit.contact)} data-theme-section="dark" className="scene-end fondo-contacto stack-card-dark relative z-[40]">
           <section className="grid content-center px-4 py-20 text-paper sm:px-6">
             <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
               <div data-reveal>
@@ -250,21 +251,23 @@ function SectionTitle({
   text,
   align = "center",
   wide = false,
+  dark = false,
 }: {
   eyebrow: string;
   title: string;
   text?: string;
   align?: "center" | "left";
   wide?: boolean;
+  dark?: boolean;
 }) {
   return (
     <div className={align === "center" ? `mx-auto text-center ${wide ? "max-w-4xl" : "max-w-2xl"}` : ""} data-reveal>
       <p className="text-xs font-bold uppercase tracking-widest text-brand sm:text-sm">{eyebrow}</p>
-      <h2 className="mt-1 text-2xl font-extrabold tracking-tight sm:mt-3 sm:text-4xl">{title}</h2>
+      <h2 className={`mt-1 text-2xl font-extrabold tracking-tight sm:mt-3 sm:text-4xl ${dark ? "text-white" : ""}`}>{title}</h2>
       {/* En pantallas bajas o móvil el texto largo (Nosotros) se compacta para que el apartado entre entero */}
       {text && (
         <p
-          className={`mt-1.5 text-xs text-ink/70 sm:mt-4 sm:text-lg ${
+          className={`mt-1.5 text-xs sm:mt-4 sm:text-lg ${dark ? "text-white/70" : "text-ink/70"} ${
             wide
               ? "line-clamp-2 leading-relaxed sm:line-clamp-none [@media(max-height:820px)]:mt-2 [@media(max-height:820px)]:text-sm"
               : ""

@@ -121,7 +121,7 @@ export function Bit({ clicks = CLICK }: { clicks?: string[] }) {
       if (!best || best === last || bestScore < 0.5) return;
       const first = last === null;
       last = best;
-      setDark(!!(best as HTMLElement).closest(".fondo-contacto"));
+      setDark(!!(best as HTMLElement).closest(".fondo-contacto, .fondo-servicios"));
       const [p, frase] = ((best as HTMLElement).dataset.bit ?? "").split("|");
       sectionPose.current = (p as BitPose) || "principal";
       if (!party.current || first) setPose(sectionPose.current);

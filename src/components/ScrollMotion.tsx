@@ -29,12 +29,53 @@ export function ScrollMotion() {
     }
 
     // =========================================================================
+    // THEME SHIFT: Detección ambiental según la sección protagónica
+    // =========================================================================
+    const themeSections = Array.from(document.querySelectorAll<HTMLElement>("[data-theme-section]"));
+    let themeFrame = 0;
+    const updateTheme = () => {
+      themeFrame = 0;
+      const mid = window.innerHeight * 0.45;
+      let activeTheme = "light";
+      for (const el of themeSections) {
+        const r = el.getBoundingClientRect();
+        const scene = el.closest<HTMLElement>("[data-stage] > *") ?? el;
+        const op = scene.style.opacity === "" ? 1 : Number(scene.style.opacity);
+        if (op > 0.4 && r.top <= mid && r.bottom >= mid) {
+          activeTheme = el.dataset.themeSection || "light";
+          break;
+        }
+      }
+      if (document.body.getAttribute("data-theme") !== activeTheme) {
+        document.body.setAttribute("data-theme", activeTheme);
+      }
+    };
+
+    const onScrollTheme = () => {
+      if (!themeFrame) themeFrame = requestAnimationFrame(updateTheme);
+    };
+
+    window.addEventListener("scroll", onScrollTheme, { passive: true });
+    window.addEventListener("stage", onScrollTheme);
+    window.addEventListener("resize", onScrollTheme);
+    updateTheme();
+
+    const cleanupTheme = () => {
+      cancelAnimationFrame(themeFrame);
+      window.removeEventListener("scroll", onScrollTheme);
+      window.removeEventListener("stage", onScrollTheme);
+      window.removeEventListener("resize", onScrollTheme);
+    };
+
+    // =========================================================================
     // MÓVIL: Revelado suave orgánico con IntersectionObserver
     // =========================================================================
     if (isMobile) {
       root.classList.remove("reveal-on");
       const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
-      if (!items.length) return;
+      if (!items.length) {
+        return cleanupTheme;
+      }
 
       const vh = window.innerHeight;
       items.forEach((el) => {
@@ -69,6 +110,7 @@ export function ScrollMotion() {
 
       return () => {
         observer.disconnect();
+        cleanupTheme();
       };
     }
 
@@ -130,6 +172,7 @@ export function ScrollMotion() {
       window.removeEventListener("resize", onScroll);
       window.removeEventListener("stage", onScroll);
       cancelAnimationFrame(frame);
+      cleanupTheme();
     };
   }, [pathname]);
 
