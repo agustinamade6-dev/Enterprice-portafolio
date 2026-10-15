@@ -189,6 +189,27 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       return h;
     });
 
+    // Soporte táctil de swipe horizontal para celulares
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        if (dx < 0 && shown < total - 1) {
+          onDot(shown + 1);
+        } else if (dx > 0 && shown > 0) {
+          onDot(shown - 1);
+        }
+      }
+    };
+    box.addEventListener("touchstart", onTouchStart, { passive: true });
+    box.addEventListener("touchend", onTouchEnd, { passive: true });
+
     const resize = new ResizeObserver(() => {
       lastHold = NaN;
       apply(progress);
@@ -202,6 +223,8 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       window.removeEventListener("stage", onStage);
       cancelAnimationFrame(tween);
       dots.forEach((d, k) => d.removeEventListener("click", handlers[k]));
+      box.removeEventListener("touchstart", onTouchStart);
+      box.removeEventListener("touchend", onTouchEnd);
     };
   }, [total]);
 

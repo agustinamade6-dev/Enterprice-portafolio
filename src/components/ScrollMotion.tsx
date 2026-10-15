@@ -5,27 +5,76 @@ import { useEffect } from "react";
 
 const clamp = (n: number) => Math.min(1, Math.max(0, n));
 
-// Mueve los bloques marcados con data-reveal según dónde estén en la pantalla:
-// "--enter" (0 a 1) mientras suben desde abajo y "--exit" (0 a 1) mientras se van por arriba.
-// Los valores se acercan de a poco al objetivo para que el movimiento sea suave.
+// Mueve los bloques marcados con data-reveal:
+// - En PC (mouse): calcula --enter y --exit en cada cuadro según la posición respecto al escenario.
+// - En Móvil (!mouse): revelado progresivo suave con IntersectionObserver que permanece siempre visible.
 export function ScrollMotion() {
   const pathname = usePathname();
 
   useEffect(() => {
     const root = document.documentElement;
-    // Solo en la compu (mouse): en el celular los bloques quedan quietos, que es lo más liviano
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    const mouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       root.classList.remove("reveal-on");
+      document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => {
+        el.classList.add("m-revealed");
+      });
       return;
     }
+
+    // =========================================================================
+    // MÓVIL: Revelado suave orgánico con IntersectionObserver
+    // =========================================================================
+    if (!mouse) {
+      root.classList.remove("reveal-on");
+      const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+      if (!items.length) return;
+
+      const vh = window.innerHeight;
+      items.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < vh * 0.95 && rect.bottom > 0) {
+          el.classList.add("m-revealed");
+        }
+      });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const target = entry.target as HTMLElement;
+              target.classList.add("m-revealed");
+              // Una vez revelado, no se vuelve a apagar para no dejar huecos vacíos
+              observer.unobserve(target);
+            }
+          });
+        },
+        {
+          rootMargin: "0px 0px -30px 0px",
+          threshold: 0.05,
+        }
+      );
+
+      items.forEach((el) => {
+        if (!el.classList.contains("m-revealed")) {
+          observer.observe(el);
+        }
+      });
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+
+    // =========================================================================
+    // PC (MOUSE): Lógica original intacta con el escenario
+    // =========================================================================
     root.classList.add("reveal-on");
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]")).map((el) => ({
       el,
-      // La escena del escenario (ScrollStage) donde vive: si está oculta, el bloque no se mide ni se toca
       scene: el.closest<HTMLElement>("[data-stage] > *"),
-      // El retraso de cada tarjeta hace que llegue un poco después que las anteriores
       delay: (parseFloat(el.style.getPropertyValue("--reveal-delay")) || 0) / 1000,
       enter: 0,
       exit: 0,
@@ -37,16 +86,12 @@ export function ScrollMotion() {
       frame = 0;
       const vh = window.innerHeight;
       let moving = false;
-      // Primero se miden todos y después se escriben todos: mezclar medir y escribir obliga al
-      // navegador a recalcular la página una vez por bloque en cada cuadro (en el celular se notaba)
-      // Los bloques de escenas ocultas se saltean: medirlos obligaba a recalcular toda la página en cada cuadro
       const awake = items.map((it) => !it.scene || it.scene.style.visibility !== "hidden");
       const rects = items.map((it, i) => (awake[i] ? it.el.getBoundingClientRect() : null));
       items.forEach((it, i) => {
         const r = rects[i];
         if (!r) return;
         const enter = clamp((vh * 0.98 - r.top) / (vh * 0.25));
-        // Se va recién cuando su borde de arriba pasa por debajo del menú, así los títulos quietos se ven enteros
         const exit = clamp((vh * 0.1 - r.top) / Math.max(vh * 0.35, r.height * 0.8));
         it.enter += (enter - it.enter) * (0.18 / (1 + it.delay * 6));
         it.exit += (exit - it.exit) * 0.18;

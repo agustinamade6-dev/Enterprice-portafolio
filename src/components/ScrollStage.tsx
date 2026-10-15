@@ -4,12 +4,9 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 const clamp = (n: number, min = 0, max = 1) => Math.min(max, Math.max(min, n));
-// Curva más suave que la anterior: arranca y frena sin tirones (la misma idea que usa scroll-world)
+// Curva suave para PC: arranca y frena sin tirones
 const ease = (t: number) => t * t * t * (t * (6 * t - 15) + 10);
 
-// Escenario fijo: la pantalla no se desplaza. El scroll solo marca el avance y cada sección
-// cambia en el lugar: la que se va se aleja y se desvanece, la siguiente aparece acercándose.
-// Si una sección es más alta que la pantalla, se recorre por dentro antes de cambiar.
 export function ScrollStage() {
   const pathname = usePathname();
 
@@ -17,22 +14,81 @@ export function ScrollStage() {
     const stage = document.querySelector<HTMLElement>("[data-stage]");
     if (!stage || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    const mouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const root = document.documentElement;
+
+    // =========================================================================
+    // MÓVIL (PANTALLA TÁCTIL / SIN MOUSE):
+    // Scroll 100% nativo, continuo y sin bloqueo ni fijación de pantalla
+    // =========================================================================
+    if (!mouse) {
+      root.classList.remove("stage-on", "stage-touch");
+
+      const bar = document.createElement("div");
+      bar.className = "stage-progress";
+      const hint = document.createElement("div");
+      hint.className = "stage-hint";
+      hint.innerHTML = '<i aria-hidden="true"></i><span>Desliza para ver más</span>';
+      document.body.append(bar, hint);
+
+      let frame = 0;
+      const onScrollMobile = () => {
+        if (frame) return;
+        frame = requestAnimationFrame(() => {
+          frame = 0;
+          const scrollY = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight;
+          const winHeight = window.innerHeight;
+          const maxScroll = Math.max(1, docHeight - winHeight);
+          const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
+          bar.style.transform = `scaleX(${progress.toFixed(4)})`;
+
+          const hintOpacity = Math.max(0, 1 - scrollY / 120);
+          hint.style.opacity = hintOpacity.toFixed(3);
+          hint.style.visibility = hintOpacity <= 0.005 ? "hidden" : "visible";
+        });
+      };
+
+      const onClickMobile = (e: MouseEvent) => {
+        const a = (e.target as Element).closest?.("a[href*='#']") as HTMLAnchorElement | null;
+        if (!a || a.pathname !== window.location.pathname) return;
+        const hash = a.hash.slice(1);
+        if (!hash) return;
+        const target = document.getElementById(hash);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth" });
+          history.replaceState(null, "", a.hash);
+        }
+      };
+
+      window.addEventListener("scroll", onScrollMobile, { passive: true });
+      window.addEventListener("resize", onScrollMobile);
+      document.addEventListener("click", onClickMobile, true);
+      onScrollMobile();
+
+      return () => {
+        cancelAnimationFrame(frame);
+        window.removeEventListener("scroll", onScrollMobile);
+        window.removeEventListener("resize", onScrollMobile);
+        document.removeEventListener("click", onClickMobile, true);
+        bar.remove();
+        hint.remove();
+      };
+    }
+
+    // =========================================================================
+    // PC (COMPU CON MOUSE):
+    // Escenario virtual interactivo original intacto
+    // =========================================================================
     const scenes = Array.from(stage.children).filter(
       (el): el is HTMLElement => el instanceof HTMLElement && !el.classList.contains("scroll-anchor"),
     );
-    const root = document.documentElement;
     root.classList.add("stage-on");
+    root.classList.remove("stage-touch");
 
-    // Con mouse (compu) cada giro de la ruedita avanza poco, así que el cambio es más corto y más ágil;
-    // con el dedo (celular) se mantiene más largo porque un deslizamiento recorre mucho
-    const mouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    root.classList.toggle("stage-touch", !mouse);
-    // Cuánto se acerca el escenario al scroll real en cada cuadro (a 60 cuadros por segundo).
-    // Más bajo = se desliza más, como si flotara. Se corrige según los cuadros por segundo de la
-    // pantalla, así se siente igual en un monitor de 60 Hz, de 144 Hz o en un celular lento.
-    const smooth = mouse ? 0.13 : 0.16;
+    const smooth = 0.13;
 
-    // Barra de avance arriba y aviso de "desliza" en el inicio (ideas de scroll-world)
     const bar = document.createElement("div");
     bar.className = "stage-progress";
     const hint = document.createElement("div");
@@ -53,17 +109,11 @@ export function ScrollStage() {
 
     const layout = () => {
       vh = window.innerHeight;
-      gap = vh * (mouse ? 0.3 : 0.5); // cuánto scroll dura cada cambio de sección
+      gap = vh * 0.3;
       over = scenes.map((el) => Math.max(0, el.offsetHeight - vh));
-      // data-hold: la sección se queda quieta mientras el scroll avanza su animación interna
-      // (por ejemplo, el equipo pasando de un integrante al otro)
       hold = scenes.map((el, i) => {
-        // data-hold-fit: solo se queda quieta si la sección casi entra en la pantalla (en celular, donde
-        // las tarjetas van una debajo de otra, se recorre normal)
-        // En el celular Cómo trabajamos no se queda quieta: sus tarjetas se ven todas juntas
-        if (!mouse && el.dataset.holdFit !== undefined) return 0;
         if (el.dataset.holdFit !== undefined && over[i] > vh * 0.25) return 0;
-        return Number(el.dataset.hold ?? 0) * vh * (mouse ? 0.6 : 0.85);
+        return Number(el.dataset.hold ?? 0) * vh * 0.6;
       });
       scenes.forEach((el, i) => el.toggleAttribute("data-holding", hold[i] > 0));
       inner = scenes.map((_, i) => over[i] + hold[i]);
@@ -81,11 +131,7 @@ export function ScrollStage() {
       document.body.style.height = `${total + vh}px`;
     };
 
-    // Escenas que quedaron ocultas en el cuadro anterior: no se vuelven a tocar hasta que reaparezcan
     const asleep = scenes.map(() => false);
-    // Último valor escrito de cada estilo: solo se escribe lo que cambió. Reescribir lo mismo en cada
-    // cuadro (sobre todo las variables --leave y --hold, que heredan los hijos) obligaba al navegador
-    // a recalcular los estilos de toda la sección
     const written = scenes.map(() => new Map<string, string>());
     const put = (i: number, prop: string, value: string) => {
       if (written[i].get(prop) === value) return;
@@ -102,7 +148,6 @@ export function ScrollStage() {
       if (hintNow !== hintShown) {
         hintShown = hintNow;
         hint.style.opacity = hintNow;
-        // Oculto del todo cuando no se ve, así su animación deja de correr
         hint.style.visibility = hintNow === "0.000" ? "hidden" : "visible";
       }
       scenes.forEach((el, i) => {
@@ -114,42 +159,21 @@ export function ScrollStage() {
         let leave = 0;
 
         if (local < 0) {
-          // Entrando: aparece en el lugar, acercándose un poco
-          // Empieza a aparecer antes de que la anterior termine de irse: nunca queda la pantalla vacía
           const p = ease(clamp(((local + gap) / gap - 0.1) / 0.7));
-          if (mouse) {
-            opacity = p;
-            scale = 1.06 - 0.06 * p;
-            shift = (1 - p) * vh * 0.04;
-          } else {
-            // Celular: aparece de golpe en el lugar (sin fundido, que es lo que más pesa)
-            opacity = p > 0.5 ? 1 : 0;
-          }
+          opacity = p;
+          scale = 1.06 - 0.06 * p;
+          shift = (1 - p) * vh * 0.04;
         } else if (local > end) {
-          // Saliendo: se aleja y se desvanece sin moverse de lugar
-          // Misma curva que la que entra, invertida: entre las dos siempre suman la pantalla completa
           const q = ease(clamp(((local - end) / gap - 0.1) / 0.7));
-          if (mouse) {
-            leave = q;
-            opacity = 1 - q;
-            scale = 1 - 0.12 * q;
-            shift = -over[i] - q * vh * 0.05;
-          } else {
-            // Celular: desaparece de golpe sin moverse de lugar
-            opacity = q < 0.5 ? 1 : 0;
-            shift = -over[i];
-          }
+          leave = q;
+          opacity = 1 - q;
+          scale = 1 - 0.12 * q;
+          shift = -over[i] - q * vh * 0.05;
         }
 
         const hidden = opacity <= 0.001;
         if (hidden && asleep[i]) return;
         asleep[i] = hidden;
-        // Celular: cuando la escena aparece se marca con data-in y el CSS hace una animación corta de
-        // entrada (la escena y sus bloques). Corre una sola vez y la maneja la placa de video, sin
-        // escribir estilos en cada cuadro como en la compu
-        if (!mouse) el.toggleAttribute("data-in", !hidden);
-        // Solo las escenas que se ven tienen su propia capa en la placa de video: tener todas a la vez
-        // (algunas miden varias pantallas de alto) llenaba la memoria del celular y lo hacía ir lento
         put(i, "will-change", hidden ? "auto" : "transform, opacity");
         put(i, "opacity", opacity.toFixed(3));
         put(i, "transform", `translate3d(0, ${shift.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`);
@@ -168,7 +192,6 @@ export function ScrollStage() {
       current += (target - current) * (1 - Math.pow(1 - smooth, dt / 16.7));
       if (Math.abs(target - current) < 0.4) current = target;
       render(current);
-      // Avisa a ScrollMotion para que las tarjetas se muevan con el escenario
       window.dispatchEvent(new Event("stage"));
       if (current !== target) frame = requestAnimationFrame(tick);
       else last = 0;
@@ -177,7 +200,6 @@ export function ScrollStage() {
       if (!frame) frame = requestAnimationFrame(tick);
     };
 
-    // Los enlaces a secciones (#proyectos, /#servicios...) saltan al momento de esa sección
     const goTo = (id: string) => {
       const marker = document.getElementById(id);
       const scene = marker?.classList.contains("scroll-anchor") ? marker.nextElementSibling : null;
