@@ -673,6 +673,15 @@ section[id],
   backdrop-filter: none;
   background-color: rgb(250 248 245 / 0.96);
 }
+/* Con el tema oscuro (Servicios y Contacto) el menú también va oscuro: si no, quedaba fondo claro con letras blancas */
+.stage-on body:is([data-theme="services"], [data-theme="dark"]) header.fixed {
+  background-color: rgb(17 19 24 / 0.96);
+}
+/* y el botón "Pedir presupuesto" (negro) pasa a blanco para que no se pierda contra el menú oscuro */
+body:is([data-theme="services"], [data-theme="dark"]) header a.bg-ink:not(:hover) {
+  background-color: #faf8f5;
+  color: #0f1115;
+}
 /* Lo mismo para los demás desenfoques chicos (botones del carrusel, etiquetas del equipo) */
 .stage-on [data-stage] * {
   backdrop-filter: none;

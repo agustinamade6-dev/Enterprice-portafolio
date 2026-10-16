@@ -13,6 +13,9 @@ export function ScrollMotion() {
 
   useEffect(() => {
     const root = document.documentElement;
+    // El tema de color (claro u oscuro) es de cada página: al entrar a otra página (por ejemplo, las legales
+    // desde el pie) se vuelve al claro. Si no, quedaba oscuro y los textos grises no se veían.
+    document.body.removeAttribute("data-theme");
     const isMobile =
       window.innerWidth <= 1024 ||
       window.matchMedia("(max-width: 1024px)").matches ||
@@ -73,6 +76,7 @@ export function ScrollMotion() {
     updateTheme();
 
     const cleanupTheme = () => {
+      document.body.removeAttribute("data-theme");
       cancelAnimationFrame(themeFrame);
       window.removeEventListener("scroll", onScrollTheme);
       window.removeEventListener("stage", onScrollTheme);
