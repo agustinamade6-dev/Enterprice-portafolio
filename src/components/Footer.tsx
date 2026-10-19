@@ -44,20 +44,14 @@ export async function Footer() {
           ))}
         </div>
       </div>
-      {/* Enlaces legales. El botón de arrepentimiento tiene que estar a la vista en todas las páginas (Res. 424/2020) */}
+      {/* Enlaces legales. El botón de arrepentimiento se sacó del pie a pedido de Agustin (2026-10-19);
+          la página /arrepentimiento/ sigue enlazada desde Términos. La Res. 424/2020 pide tenerlo a la vista. */}
       <nav aria-label="Legal" className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-5 gap-y-3 px-4 pb-8 text-xs sm:px-6">
         {legal.map((l) => (
           <Link key={l.href} href={l.href} className="underline-offset-2 hover:text-paper hover:underline">
             {l.label}
           </Link>
         ))}
-        {/* Tiene que verse destacado (visibilidad y tamaño), por eso va como botón y no como un enlace más */}
-        <Link
-          href="/arrepentimiento/"
-          className="rounded-full border border-white/30 px-3 py-1 text-sm font-semibold text-paper transition hover:bg-white/10"
-        >
-          Botón de arrepentimiento
-        </Link>
         <span className="text-paper/60">
           {name} · Tucumán, Argentina · {email}
         </span>
