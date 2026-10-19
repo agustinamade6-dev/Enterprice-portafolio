@@ -97,8 +97,9 @@ export default async function TarjetasDigitales() {
                     />
                   </span>
                   <span className="mt-5 text-xl font-extrabold text-ink">{s.title}</span>
-                  <span className="mt-2 text-sm text-ink/75">{s.text}</span>
-                  <span className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-paper transition group-hover:bg-brand">
+                  <span className="mb-4 mt-2 text-sm text-ink/75">{s.text}</span>
+                  {/* mt-auto: el botón queda abajo, a la misma altura en las tres columnas */}
+                  <span className="mt-auto inline-flex items-center gap-1.5 rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-paper transition group-hover:bg-brand">
                     Abrir la tarjeta <ArrowIcon className="h-3.5 w-3.5" />
                   </span>
                 </a>
