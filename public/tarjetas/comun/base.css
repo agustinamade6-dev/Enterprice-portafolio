@@ -1,0 +1,114 @@
+/* ZainSoft · Tarjetas digitales — estructura común.
+   Cada tarjeta define sus colores y fuentes en :root y agrega su propio estilo encima. */
+:root{
+  --fondo:#fff;--fondo2:#f6f3ee;--texto:#2a2a2a;--suave:#6b6b6b;--acento:#b08d57;--sobre-acento:#fff;--linea:rgba(0,0,0,.1);
+  --titulo:Georgia,serif;--cuerpo:system-ui,sans-serif;--script:cursive;--radio:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
+html.con-sobre{overflow:hidden}
+body{background:var(--fondo);color:var(--texto);font-family:var(--cuerpo);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+.contenedor{width:100%;max-width:560px;margin:0 auto;padding:0 20px}
+section,header{padding:72px 0;text-align:center;position:relative}
+.titulo{font-family:var(--titulo);font-weight:400;font-size:clamp(2rem,8vw,2.6rem);line-height:1.1;margin-bottom:14px}
+.script{font-family:var(--script);font-weight:400}
+.etiqueta{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--acento);margin-bottom:12px}
+.texto{color:var(--suave);max-width:420px;margin:0 auto}
+.icono{width:46px;height:46px;margin:0 auto 14px;color:var(--acento)}
+.icono svg{width:100%;height:100%}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 26px;border-radius:999px;border:1.5px solid var(--acento);background:var(--acento);color:var(--sobre-acento);font:600 .95rem var(--cuerpo);text-decoration:none;cursor:pointer;transition:transform .2s,background .2s,color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid color-mix(in srgb,var(--acento) 45%,transparent);outline-offset:3px}
+.btn.linea{background:transparent;color:var(--acento)}
+.btn.ok{background:#2e9d5b;border-color:#2e9d5b;color:#fff}
+.botones{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px}
+
+/* Sobre de apertura */
+.sobre{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:var(--fondo2);cursor:pointer;transition:opacity .8s .4s,visibility .8s .4s}
+.sobre .tapa-sup,.sobre .tapa-inf{position:absolute;left:0;right:0;height:50%;background:var(--fondo2);transition:transform 1s cubic-bezier(.7,0,.3,1)}
+.sobre .tapa-sup{top:0;border-bottom:1px solid var(--linea)}
+.sobre .tapa-inf{bottom:0}
+.sobre .sello{position:relative;z-index:2;display:grid;place-items:center;gap:6px;text-align:center;transition:transform .6s,opacity .6s}
+.sobre .sello .lacre{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:var(--acento);color:var(--sobre-acento);font-family:var(--script);font-size:2.2rem;box-shadow:0 8px 24px rgba(0,0,0,.18),inset 0 0 0 6px rgba(255,255,255,.18);animation:latido 2.2s ease-in-out infinite}
+.sobre .sello small{margin-top:14px;font-size:.75rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--suave)}
+.sobre.abierto{opacity:0;visibility:hidden}
+.sobre.abierto .tapa-sup{transform:translateY(-100%)}
+.sobre.abierto .tapa-inf{transform:translateY(100%)}
+.sobre.abierto .sello{transform:scale(.6);opacity:0}
+@keyframes latido{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+
+/* Música */
+.musica{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:40;width:52px;height:52px;border-radius:50%;border:0;background:var(--acento);color:var(--sobre-acento);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.musica svg{width:22px;height:22px}
+.musica .pausa{display:none}
+.musica.sonando .play{display:none}
+.musica.sonando .pausa{display:block}
+.musica.sonando::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--acento);opacity:.5;animation:onda 1.6s ease-out infinite}
+@keyframes onda{to{transform:scale(1.35);opacity:0}}
+
+/* Cuenta regresiva */
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:400px;margin:26px auto 0}
+.countdown div{padding:14px 4px;border-radius:var(--radio);background:var(--fondo);border:1px solid var(--linea)}
+.countdown b{display:block;font-family:var(--titulo);font-weight:400;font-size:clamp(1.6rem,7vw,2.1rem);line-height:1;font-variant-numeric:tabular-nums}
+.countdown small{display:block;margin-top:6px;font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--suave)}
+.countdown.llego::after{content:"¡Llegó el gran día!";grid-column:1/-1;font-family:var(--script);font-size:1.8rem;color:var(--acento)}
+
+/* Tarjetas de información (ceremonia, fiesta, etc.) */
+.datos{display:grid;gap:16px;margin-top:28px}
+.dato{padding:28px 22px;border-radius:var(--radio);background:var(--fondo);border:1px solid var(--linea)}
+.dato h3{font-family:var(--titulo);font-weight:400;font-size:1.5rem;margin-bottom:6px}
+.dato p{color:var(--suave)}
+.dato .hora{display:block;font-weight:700;color:var(--texto);margin-bottom:4px}
+.mapa{width:100%;height:240px;border:0;border-radius:var(--radio);margin-top:22px;background:var(--fondo2)}
+
+/* Galería */
+.galeria{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:26px}
+.galeria figure{position:relative;aspect-ratio:1;border-radius:14px;overflow:hidden;cursor:zoom-in;background:var(--fondo2)}
+.galeria figure:first-child{grid-column:1/-1;aspect-ratio:16/10}
+.galeria img,.galeria .foto{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.galeria figure:hover img,.galeria figure:hover .foto{transform:scale(1.04)}
+.visor{position:fixed;inset:0;z-index:60;background:rgba(10,10,10,.92);display:grid;grid-template-columns:48px 1fr 48px;align-items:center;padding:16px 4px}
+.visor[hidden]{display:none}
+.visor-cont{max-height:86vh;display:grid;place-items:center;overflow:hidden;border-radius:12px}
+.visor-cont img,.visor-cont .foto{max-height:86vh;width:auto;max-width:100%;border-radius:12px}
+.visor-cont .foto{width:min(88vw,520px);aspect-ratio:4/5;height:auto}
+.visor button{background:none;border:0;color:#fff;font-size:2.4rem;line-height:1;cursor:pointer;height:64px}
+.visor-x{position:absolute;top:10px;right:14px;font-size:2rem!important}
+
+/* Regalos */
+.regalo{margin-top:24px;padding:26px 20px;border-radius:var(--radio);background:var(--fondo);border:1px dashed var(--acento)}
+.regalo dl{display:grid;gap:10px;text-align:left;max-width:340px;margin:0 auto 18px}
+.regalo dt{font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--suave)}
+.regalo dd{font-weight:700;word-break:break-all}
+.ejemplo{display:block;margin-top:14px;font-size:.75rem;color:var(--suave);font-style:italic}
+
+/* Formulario de asistencia */
+.rsvp{display:grid;gap:14px;text-align:left;margin-top:26px;padding:26px 20px;border-radius:var(--radio);background:var(--fondo);border:1px solid var(--linea)}
+.rsvp label{display:grid;gap:6px;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--suave)}
+.rsvp input[type=text],.rsvp select,.rsvp textarea{width:100%;min-height:48px;padding:12px 14px;border-radius:12px;border:1px solid var(--linea);background:var(--fondo2);color:var(--texto);font:400 1rem var(--cuerpo);text-transform:none;letter-spacing:0}
+.rsvp textarea{min-height:90px;resize:vertical}
+.rsvp input:focus,.rsvp select:focus,.rsvp textarea:focus{outline:2px solid var(--acento);outline-offset:1px}
+.opciones{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opciones label{position:relative;display:block}
+.opciones input{position:absolute;opacity:0}
+.opciones span{display:grid;place-items:center;min-height:48px;border-radius:12px;border:1.5px solid var(--linea);background:var(--fondo2);color:var(--texto);font-size:.9rem;letter-spacing:0;text-transform:none;cursor:pointer;transition:.2s}
+.opciones input:checked+span{border-color:var(--acento);background:var(--acento);color:var(--sobre-acento)}
+.opciones input:focus-visible+span{outline:2px solid var(--acento);outline-offset:2px}
+.rsvp.no-asiste .si-asiste{display:none}
+.rsvp .btn{width:100%;margin-top:4px}
+.rsvp .gracias{display:none;text-align:center;font-size:.9rem;color:var(--suave)}
+.rsvp.enviado .gracias{display:block}
+
+/* Aparición */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s,transform .9s}
+.reveal.visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.sobre .sello .lacre,.musica.sonando::after{animation:none}}
+
+/* Pie con firma de ZainSoft */
+.firma{padding:36px 20px calc(90px + env(safe-area-inset-bottom));text-align:center;font-size:.8rem;color:var(--suave)}
+.firma a{font-weight:700;text-decoration:none;color:var(--texto)}
+.firma a span{color:#f05a28}

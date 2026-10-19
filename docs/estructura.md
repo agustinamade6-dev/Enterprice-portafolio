@@ -22,7 +22,7 @@ src/
     layout.tsx           ← estructura común, metadatos y vista previa al compartir
     globals.css          ← colores, fuente y animaciones
     equipo/[slug]/       ← página de historia de cada integrante
-    proyectos/<nombre>/  ← páginas de caso (akros-cafe, pierina-glow, pierina-glow-tienda, lv-racing, todo-suela)
+    proyectos/<nombre>/  ← páginas de caso (akros-cafe, pierina-glow, pierina-glow-tienda, lv-racing, todo-suela, tarjetas-digitales)
     demos/menu-digital/  ← demo navegable de un menú digital
     admin/               ← panel de admin (login, proyectos, equipo, servicios, proceso, preguntas, fotos)
     api/                 ← API del panel (contenido, fotos y sesión)
@@ -40,6 +40,8 @@ src/
 public/
   equipo/                ← fotos del equipo (cuadradas, 600x600)
   pierina/      ← capturas de proyectos
+  tarjetas/              ← tarjetas digitales de muestra (HTML estático: casamiento, quince, baby-shower)
+                           con su base común en comun/ y capturas en previews/. Con ?abierta arrancan sin el sobre.
   og.png                 ← imagen que se ve al compartir el link (1200x630)
 ```
 

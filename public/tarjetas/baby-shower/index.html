@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Baby shower de Emma</title>
+<meta name="description" content="Lucía y Juan te invitan al baby shower de Emma, el domingo 6 de diciembre de 2026.">
+<meta name="theme-color" content="#fdf6ee">
+<meta property="og:title" content="Baby shower de Emma">
+<meta property="og:description" content="Domingo 6 de diciembre · 16 h · Yerba Buena, Tucumán">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../comun/base.css">
+<style>
+  :root{
+    --fondo:#fffaf4;--fondo2:#f8ede1;--texto:#4a3f45;--suave:#857a80;--acento:#e59a7f;--cielo:#a8c8db;--salvia:#b7c9a8;--sobre-acento:#fff;--linea:rgba(74,63,69,.12);
+    --titulo:Fredoka,system-ui,sans-serif;--cuerpo:Nunito,system-ui,sans-serif;--script:Caveat,cursive;--radio:26px;
+  }
+  .etiqueta{color:var(--acento);letter-spacing:.18em}
+  .titulo{font-weight:500}
+  .titulo .script{color:var(--acento);font-size:1.15em}
+  .alt{background:var(--fondo2)}
+  .ola{display:block;width:100%;height:40px;color:var(--fondo2)}
+  .ola.arriba{margin-bottom:-1px}
+  .ola.abajo{margin-top:-1px;transform:rotate(180deg)}
+
+  /* Portada */
+  .portada{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;background:linear-gradient(180deg,#dcebf3 0%,#eef4f4 45%,var(--fondo) 100%)}
+  .nube{position:absolute;color:#fff;filter:drop-shadow(0 6px 10px rgba(120,150,170,.18))}
+  .nube.n1{width:150px;top:9%;left:-30px;animation:flota 9s ease-in-out infinite}
+  .nube.n2{width:110px;top:18%;right:-20px;animation:flota 11s ease-in-out infinite reverse}
+  .nube.n3{width:170px;bottom:12%;right:-50px;animation:flota 13s ease-in-out infinite}
+  .nube.n4{width:90px;bottom:22%;left:6%;animation:flota 10s ease-in-out infinite reverse}
+  @keyframes flota{0%,100%{transform:translateX(0)}50%{transform:translateX(18px)}}
+  .luna{width:86px;margin:0 auto 10px;color:#f4d58d}
+  .portada .invitan{font-size:.95rem;color:var(--suave)}
+  .portada h1{font-family:var(--titulo);font-weight:600;font-size:clamp(1.3rem,6vw,1.6rem);letter-spacing:.18em;text-transform:uppercase;color:#5f8ba6;margin-top:14px}
+  .portada .bebe{font-family:var(--script);font-weight:700;font-size:clamp(5rem,26vw,7rem);line-height:.9;color:var(--acento)}
+  .portada .cuando{display:inline-grid;grid-template-columns:auto auto auto;align-items:center;gap:14px;margin-top:20px;font-family:var(--titulo)}
+  .portada .cuando span{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--suave);padding:6px 0;border-top:1.5px solid var(--cielo);border-bottom:1.5px solid var(--cielo)}
+  .portada .cuando b{font-size:2.6rem;font-weight:500;line-height:1;color:var(--texto)}
+
+  .huellas{display:flex;justify-content:center;gap:10px;margin-bottom:14px;color:var(--salvia)}
+  .huellas svg{width:22px}
+  .countdown div,.dato,.rsvp,.regalo{border:0;box-shadow:0 10px 30px rgba(133,122,128,.12)}
+  .countdown b{font-family:var(--titulo);font-weight:500;color:var(--acento)}
+  .dato .icono{color:var(--cielo)}
+  .dato .hora{color:var(--acento);font-size:1.1rem}
+  .btn{background:var(--acento);border-color:var(--acento)}
+  .btn.linea{background:transparent}
+  .regalo{border:2px dashed var(--salvia)}
+  .lista{list-style:none;display:grid;gap:10px;text-align:left;max-width:360px;margin:22px auto 0}
+  .lista li{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:16px;background:var(--fondo);box-shadow:0 6px 18px rgba(133,122,128,.1)}
+  .lista li::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;background:var(--cielo)}
+  .lista li:nth-child(3n+2)::before{background:var(--acento)}
+  .lista li:nth-child(3n)::before{background:var(--salvia)}
+  .sobre{background:#e6f0f5}
+  .sobre .tapa-sup,.sobre .tapa-inf{background:#e6f0f5}
+  .sobre .sello .lacre{font-family:var(--script);font-weight:700;background:var(--acento)}
+
+  .foto{display:grid;place-items:center;color:rgba(255,255,255,.95)}
+  .foto svg{width:32%;max-width:110px}
+  .f1{background:radial-gradient(circle at 25% 25%,#fff7,transparent 50%),linear-gradient(140deg,#a8c8db,#cfe0c3)}
+  .f2{background:linear-gradient(160deg,#f6c9b5,#e59a7f)}
+  .f3{background:linear-gradient(200deg,#d9e6cd,#a9bf98)}
+  .f4{background:linear-gradient(120deg,#f8e2c4,#e9bf8f)}
+  .f5{background:linear-gradient(180deg,#cfe3ee,#93b6cc)}
+  .cierre .script{font-size:clamp(3.2rem,14vw,4rem);line-height:1;color:var(--acento)}
+</style>
+<script>
+  window.TARJETA = {
+    evento: 'Baby shower de Emma',
+    fecha: '2026-12-06T16:00:00-03:00',
+    fin: '2026-12-06T20:00:00-03:00',
+    lugar: 'Casa de Lucía y Juan, Yerba Buena, Tucumán',
+    mapa: 'Yerba Buena, Tucumán, Argentina',
+    whatsapp: '5493815100710',
+    musica: 'cuna'
+  };
+</script>
+</head>
+<body>
+
+<div class="sobre" data-sobre role="button" tabindex="0" aria-label="Abrir la invitación">
+  <div class="tapa-sup"></div><div class="tapa-inf"></div>
+  <div class="sello"><span class="lacre">E</span><small>Tocá para abrir</small></div>
+</div>
+
+<button class="musica" data-musica type="button">
+  <svg class="play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3" fill="currentColor"/><circle cx="18" cy="16" r="3" fill="currentColor"/></svg>
+  <svg class="pausa" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+</button>
+
+<!-- Portada -->
+<header class="portada">
+  <svg class="nube n1" viewBox="0 0 120 60" fill="currentColor"><path d="M30 58a20 20 0 0 1-2-40 26 26 0 0 1 49-6 18 18 0 0 1 27 14 16 16 0 0 1-4 32z"/></svg>
+  <svg class="nube n2" viewBox="0 0 120 60" fill="currentColor"><path d="M30 58a20 20 0 0 1-2-40 26 26 0 0 1 49-6 18 18 0 0 1 27 14 16 16 0 0 1-4 32z"/></svg>
+  <svg class="nube n3" viewBox="0 0 120 60" fill="currentColor"><path d="M30 58a20 20 0 0 1-2-40 26 26 0 0 1 49-6 18 18 0 0 1 27 14 16 16 0 0 1-4 32z"/></svg>
+  <svg class="nube n4" viewBox="0 0 120 60" fill="currentColor"><path d="M30 58a20 20 0 0 1-2-40 26 26 0 0 1 49-6 18 18 0 0 1 27 14 16 16 0 0 1-4 32z"/></svg>
+  <div class="contenedor">
+    <svg class="luna" viewBox="0 0 100 100"><path d="M62 10a42 42 0 1 0 28 64A36 36 0 0 1 62 10z" fill="currentColor"/><g fill="#fff" opacity=".9"><circle cx="78" cy="22" r="2.5"/><circle cx="88" cy="40" r="1.8"/><circle cx="70" cy="8" r="1.5"/></g></svg>
+    <p class="invitan">Lucía y Juan te invitan al</p>
+    <h1>Baby shower de</h1>
+    <p class="bebe">Emma</p>
+    <div class="cuando"><span>Domingo</span><b>06</b><span>Diciembre</span></div>
+  </div>
+</header>
+
+<!-- Intro -->
+<section>
+  <div class="contenedor reveal">
+    <div class="huellas"><svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="16" rx="5" ry="6"/><circle cx="6" cy="7" r="2"/><circle cx="10" cy="4" r="2"/><circle cx="15" cy="4.5" r="2"/><circle cx="19" cy="8" r="2"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="16" rx="5" ry="6"/><circle cx="6" cy="7" r="2"/><circle cx="10" cy="4" r="2"/><circle cx="15" cy="4.5" r="2"/><circle cx="19" cy="8" r="2"/></svg></div>
+    <h2 class="titulo">Una personita <span class="script">muy esperada</span></h2>
+    <p class="texto">Emma llega en enero y no queremos esperar para celebrarlo. Te esperamos para una tarde de mimos, juegos y torta.</p>
+  </div>
+</section>
+
+<!-- Cuenta regresiva -->
+<svg class="ola arriba" viewBox="0 0 400 40" preserveAspectRatio="none" fill="currentColor"><path d="M0 40V20Q50 0 100 20T200 20T300 20T400 20V40z"/></svg>
+<section class="alt">
+  <div class="contenedor reveal">
+    <span class="etiqueta">Domingo 6 de diciembre</span>
+    <h2 class="titulo">Faltan <span class="script">poquitos días</span></h2>
+    <div class="countdown" data-countdown>
+      <div><b data-d>0</b><small>Días</small></div>
+      <div><b data-h>00</b><small>Horas</small></div>
+      <div><b data-m>00</b><small>Min</small></div>
+      <div><b data-s>00</b><small>Seg</small></div>
+    </div>
+    <div class="botones">
+      <a class="btn" data-agendar-google href="#">Agendar en Google</a>
+      <a class="btn linea" data-agendar-ics href="#">Agendar en el celular</a>
+    </div>
+  </div>
+</section>
+<svg class="ola abajo" viewBox="0 0 400 40" preserveAspectRatio="none" fill="currentColor"><path d="M0 40V20Q50 0 100 20T200 20T300 20T400 20V40z"/></svg>
+
+<!-- Lugar -->
+<section>
+  <div class="contenedor">
+    <span class="etiqueta reveal">Dónde</span>
+    <h2 class="titulo reveal">Merienda <span class="script">en casa</span></h2>
+    <div class="datos">
+      <div class="dato reveal">
+        <div class="icono"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 22 24 8l18 14"/><path d="M11 18v22h26V18"/><path d="M20 40V28h8v12"/></svg></div>
+        <h3>Casa de Lucía y Juan</h3>
+        <span class="hora">16:00 a 20:00 h</span>
+        <p>Calle de Ejemplo 456<br>Yerba Buena, Tucumán</p>
+      </div>
+    </div>
+    <iframe class="mapa reveal" data-mapa title="Mapa de la casa" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="botones reveal"><a class="btn" data-como-llegar href="#">Cómo llegar</a></div>
+  </div>
+</section>
+
+<!-- Galería -->
+<svg class="ola arriba" viewBox="0 0 400 40" preserveAspectRatio="none" fill="currentColor"><path d="M0 40V20Q50 0 100 20T200 20T300 20T400 20V40z"/></svg>
+<section class="alt">
+  <div class="contenedor">
+    <span class="etiqueta reveal">La dulce espera</span>
+    <h2 class="titulo reveal">Nuestras <span class="script">fotos</span></h2>
+    <div class="galeria reveal" data-galeria>
+      <figure><div class="foto f1"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 40S8 30 8 18a8 8 0 0 1 16-2 8 8 0 0 1 16 2c0 12-16 22-16 22z"/></svg></div></figure>
+      <figure><div class="foto f2"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="12" width="36" height="26" rx="3"/><circle cx="24" cy="25" r="7"/><path d="M17 12l3-5h8l3 5"/></svg></div></figure>
+      <figure><div class="foto f3"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 20a10 10 0 0 1 20 0v4H14zM12 24h24l-3 14H15z"/><path d="M34 22c4 0 6 3 6 6"/></svg></div></figure>
+      <figure><div class="foto f4"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="18" r="8"/><path d="M18 30h12l4 12H14z"/></svg></div></figure>
+      <figure><div class="foto f5"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M30 6a18 18 0 1 0 12 26A16 16 0 0 1 30 6z"/></svg></div></figure>
+    </div>
+    <p class="ejemplo reveal">Acá van las fotos de la panza y la familia.</p>
+  </div>
+</section>
+<svg class="ola abajo" viewBox="0 0 400 40" preserveAspectRatio="none" fill="currentColor"><path d="M0 40V20Q50 0 100 20T200 20T300 20T400 20V40z"/></svg>
+
+<!-- Regalos -->
+<section>
+  <div class="contenedor reveal">
+    <div class="icono" style="color:var(--acento)"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="18" width="32" height="22" rx="3"/><path d="M6 12h36v6H6zM24 12v28M24 12c-4-8-14-8-12-2 1 3 12 2 12 2zM24 12c4-8 14-8 12-2-1 3-12 2-12 2z"/></svg></div>
+    <span class="etiqueta">Regalos</span>
+    <h2 class="titulo">Ideas para <span class="script">Emma</span></h2>
+    <p class="texto">Lo más lindo es que vengas. Si querés traer algo, esto nos ayuda un montón:</p>
+    <ul class="lista">
+      <li>Pañales talle RN y P</li>
+      <li>Bodys de algodón (0 a 3 meses)</li>
+      <li>Toallitas húmedas</li>
+      <li>Mantitas y muselinas</li>
+      <li>Cremas para cola</li>
+    </ul>
+    <div class="regalo">
+      <dl>
+        <div><dt>O si preferís transferir · Alias</dt><dd>ALIAS.DE.EJEMPLO</dd></div>
+        <div><dt>Titular</dt><dd>Lucía Ejemplo</dd></div>
+      </dl>
+      <button class="btn" type="button" data-copiar="ALIAS.DE.EJEMPLO">Copiar alias</button>
+      <span class="ejemplo">Datos de ejemplo: en tu tarjeta van los reales.</span>
+    </div>
+  </div>
+</section>
+
+<!-- Confirmar asistencia -->
+<svg class="ola arriba" viewBox="0 0 400 40" preserveAspectRatio="none" fill="currentColor"><path d="M0 40V20Q50 0 100 20T200 20T300 20T400 20V40z"/></svg>
+<section class="alt" id="confirmar">
+  <div class="contenedor">
+    <span class="etiqueta reveal">Antes del 30 de noviembre</span>
+    <h2 class="titulo reveal">¿Nos <span class="script">acompañás</span>?</h2>
+    <form class="rsvp reveal" data-rsvp novalidate>
+      <label>Nombre y apellido<input type="text" name="nombre" autocomplete="name" required placeholder="Ej.: Carla Díaz"></label>
+      <div class="opciones">
+        <label><input type="radio" name="asiste" value="si" checked><span>¡Ahí estaré!</span></label>
+        <label><input type="radio" name="asiste" value="no"><span>No puedo</span></label>
+      </div>
+      <label class="si-asiste">¿Cuántos van?
+        <select name="cantidad"><option>1 persona</option><option>2 personas</option><option>3 personas</option><option>4 personas</option></select>
+      </label>
+      <label>Un mensaje para Emma (opcional)<textarea name="mensaje" placeholder="Bienvenida al mundo…"></textarea></label>
+      <button class="btn" type="submit">Confirmar por WhatsApp</button>
+      <p class="gracias">¡Gracias! Se abrió WhatsApp con tu respuesta: solo tenés que enviarla.</p>
+    </form>
+  </div>
+</section>
+<svg class="ola abajo" viewBox="0 0 400 40" preserveAspectRatio="none" fill="currentColor"><path d="M0 40V20Q50 0 100 20T200 20T300 20T400 20V40z"/></svg>
+
+<section class="cierre">
+  <div class="contenedor reveal">
+    <p class="script">¡Te esperamos!</p>
+    <p class="texto" style="margin-top:10px">Lucía, Juan y Emma</p>
+  </div>
+</section>
+
+<footer class="firma">Invitación digital hecha por <a href="/proyectos/tarjetas-digitales/">Zain<span>Soft</span></a> · Tarjeta de muestra</footer>
+
+<script src="../comun/tarjeta.js"></script>
+</body>
+</html>
