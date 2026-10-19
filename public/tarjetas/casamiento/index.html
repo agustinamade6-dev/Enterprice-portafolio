@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sofía &amp; Tomás · Nos casamos</title>
+<meta name="description" content="Te invitamos a celebrar nuestro casamiento el sábado 20 de marzo de 2027.">
+<meta name="theme-color" content="#f7f3ec">
+<meta property="og:title" content="Sofía & Tomás · Nos casamos">
+<meta property="og:description" content="Sábado 20 de marzo de 2027 · Yerba Buena, Tucumán">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Great+Vibes&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../comun/base.css">
+<style>
+  :root{
+    --fondo:#fbf8f3;--fondo2:#f3eee4;--texto:#2f3a32;--suave:#6d756c;--acento:#8a9a7b;--oro:#b39457;--sobre-acento:#fff;--linea:rgba(47,58,50,.12);
+    --titulo:"Cormorant Garamond",Georgia,serif;--cuerpo:Jost,system-ui,sans-serif;--script:"Great Vibes",cursive;--radio:4px;
+  }
+  .etiqueta{color:var(--oro)}
+  .titulo{font-size:clamp(2.2rem,9vw,2.9rem)}
+  .alt{background:var(--fondo2)}
+
+  /* Portada */
+  .portada{position:relative;min-height:100svh;display:grid;place-items:center;padding:60px 0;overflow:hidden}
+  .portada .rama{position:absolute;width:240px;color:var(--acento);opacity:.85}
+  .portada .rama.a{top:-20px;left:-60px;transform:rotate(18deg)}
+  .portada .rama.b{bottom:-20px;right:-60px;transform:rotate(198deg)}
+  .portada .marco{position:relative;padding:54px 26px;border:1px solid var(--oro);outline:1px solid var(--oro);outline-offset:6px;max-width:360px;margin:0 auto;background:rgba(251,248,243,.7)}
+  .portada .nos{font-size:.72rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--suave)}
+  .portada h1{font-family:var(--script);font-weight:400;font-size:clamp(3.6rem,17vw,4.8rem);line-height:.95;margin:18px 0 6px;color:var(--texto)}
+  .portada h1 .y{display:block;font-family:var(--titulo);font-style:italic;font-size:.42em;color:var(--oro);margin:6px 0}
+  .portada .fecha{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:22px;font-family:var(--titulo);font-size:1.25rem;letter-spacing:.1em}
+  .portada .fecha::before,.portada .fecha::after{content:"";width:34px;height:1px;background:var(--oro)}
+  .portada .bajar{position:absolute;left:50%;bottom:26px;translate:-50% 0;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--suave);text-decoration:none}
+  .portada .bajar::after{content:"";display:block;width:1px;height:34px;margin:8px auto 0;background:var(--oro);animation:baja 1.8s ease-in-out infinite}
+  @keyframes baja{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+  .frase{font-family:var(--titulo);font-style:italic;font-size:1.45rem;line-height:1.45;max-width:440px;margin:0 auto}
+  .frase + small{display:block;margin-top:14px;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro)}
+  .separador{width:120px;margin:26px auto 0;color:var(--oro)}
+
+  .countdown div{background:transparent;border-color:var(--oro)}
+  .dato{border-color:var(--oro)}
+  .dato .icono{color:var(--oro)}
+  .dress{display:flex;justify-content:center;gap:10px;margin-top:18px}
+  .dress i{width:30px;height:30px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+
+  .foto{display:grid;place-items:center;color:rgba(255,255,255,.9)}
+  .foto svg{width:34%;max-width:120px}
+  .f1{background:radial-gradient(circle at 30% 20%,#e9dfcc,transparent 60%),linear-gradient(135deg,#a9b79a,#6f8064)}
+  .f2{background:linear-gradient(160deg,#d9c7a6,#b39457)}
+  .f3{background:linear-gradient(200deg,#c9d3bf,#8a9a7b)}
+  .f4{background:linear-gradient(120deg,#efe6d6,#cbb48a)}
+  .f5{background:linear-gradient(180deg,#9aa98c,#55644d)}
+  .regalo{border-color:var(--oro)}
+  .btn{border-radius:2px;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
+  .opciones span,.rsvp input[type=text],.rsvp select,.rsvp textarea{border-radius:2px}
+  .cierre .script{font-size:clamp(3rem,13vw,3.8rem);line-height:1;color:var(--texto)}
+</style>
+<script>
+  window.TARJETA = {
+    evento: 'Casamiento de Sofía y Tomás',
+    fecha: '2027-03-20T19:30:00-03:00',
+    fin: '2027-03-21T05:00:00-03:00',
+    lugar: 'Estancia Los Aromos, Yerba Buena, Tucumán',
+    mapa: 'Yerba Buena, Tucumán, Argentina',
+    whatsapp: '5493815100710',
+    musica: 'vals'
+  };
+</script>
+</head>
+<body>
+
+<div class="sobre" data-sobre role="button" tabindex="0" aria-label="Abrir la invitación">
+  <div class="tapa-sup"></div><div class="tapa-inf"></div>
+  <div class="sello"><span class="lacre">S&amp;T</span><small>Tocá para abrir</small></div>
+</div>
+
+<button class="musica" data-musica type="button">
+  <svg class="play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3" fill="currentColor"/><circle cx="18" cy="16" r="3" fill="currentColor"/></svg>
+  <svg class="pausa" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+</button>
+
+<!-- Portada -->
+<header class="portada">
+  <svg class="rama a" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 190C60 140 100 90 190 10"/><path d="M60 140c-20-4-34-16-38-34 18 2 32 14 38 34zM60 140c4-20 16-34 34-38-2 18-14 32-34 38zM100 96c-20-4-34-16-38-34 18 2 32 14 38 34zM100 96c4-20 16-34 34-38-2 18-14 32-34 38zM140 56c-18-4-30-14-34-30 16 2 28 12 34 30zM140 56c4-18 14-30 30-34-2 16-12 28-30 34z" fill="currentColor" fill-opacity=".18"/></svg>
+  <svg class="rama b" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 190C60 140 100 90 190 10"/><path d="M60 140c-20-4-34-16-38-34 18 2 32 14 38 34zM60 140c4-20 16-34 34-38-2 18-14 32-34 38zM100 96c-20-4-34-16-38-34 18 2 32 14 38 34zM100 96c4-20 16-34 34-38-2 18-14 32-34 38zM140 56c-18-4-30-14-34-30 16 2 28 12 34 30zM140 56c4-18 14-30 30-34-2 16-12 28-30 34z" fill="currentColor" fill-opacity=".18"/></svg>
+  <div class="contenedor">
+    <div class="marco">
+      <p class="nos">¡Nos casamos!</p>
+      <h1>Sofía<span class="y">&amp;</span>Tomás</h1>
+      <p class="fecha">20 · 03 · 2027</p>
+    </div>
+  </div>
+  <a class="bajar" href="#frase">Deslizá</a>
+</header>
+
+<!-- Frase -->
+<section id="frase" class="alt">
+  <div class="contenedor reveal">
+    <p class="frase">“Elegimos compartir la vida, y queremos que seas parte del día en que lo celebramos.”</p>
+    <small>Con la bendición de nuestras familias</small>
+    <svg class="separador" viewBox="0 0 120 20" fill="none" stroke="currentColor"><path d="M0 10h48M72 10h48"/><path d="M60 3c-4 4-4 10 0 14 4-4 4-10 0-14z" fill="currentColor"/></svg>
+  </div>
+</section>
+
+<!-- Cuenta regresiva -->
+<section>
+  <div class="contenedor reveal">
+    <span class="etiqueta">Sábado 20 de marzo</span>
+    <h2 class="titulo">Falta poco</h2>
+    <div class="countdown" data-countdown>
+      <div><b data-d>0</b><small>Días</small></div>
+      <div><b data-h>00</b><small>Horas</small></div>
+      <div><b data-m>00</b><small>Min</small></div>
+      <div><b data-s>00</b><small>Seg</small></div>
+    </div>
+    <div class="botones">
+      <a class="btn" data-agendar-google href="#">Agendar en Google</a>
+      <a class="btn linea" data-agendar-ics href="#">Agendar en el celular</a>
+    </div>
+  </div>
+</section>
+
+<!-- Ceremonia y fiesta -->
+<section class="alt">
+  <div class="contenedor">
+    <span class="etiqueta reveal">Dónde y cuándo</span>
+    <h2 class="titulo reveal">La celebración</h2>
+    <div class="datos">
+      <div class="dato reveal">
+        <div class="icono"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="18" cy="28" r="10"/><circle cx="30" cy="28" r="10"/><path d="m24 8 3 4h-6z" fill="currentColor"/></svg></div>
+        <h3>Ceremonia</h3>
+        <span class="hora">19:30 h</span>
+        <p>Capilla de la Estancia Los Aromos<br>Yerba Buena, Tucumán</p>
+      </div>
+      <div class="dato reveal">
+        <div class="icono"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 6h10l-1 14a4 4 0 0 1-8 0zM19 24v14M14 38h10M26 10h10l-1 14a4 4 0 0 1-8 0zM31 28v12M26 40h10"/></svg></div>
+        <h3>Fiesta</h3>
+        <span class="hora">21:00 h</span>
+        <p>Salón principal de la Estancia<br>Te esperamos para brindar y bailar</p>
+      </div>
+    </div>
+    <iframe class="mapa reveal" data-mapa title="Mapa del lugar" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="botones reveal"><a class="btn" data-como-llegar href="#">Cómo llegar</a></div>
+  </div>
+</section>
+
+<!-- Dress code -->
+<section>
+  <div class="contenedor reveal">
+    <span class="etiqueta">Dress code</span>
+    <h2 class="titulo">Elegante</h2>
+    <p class="texto">Te sugerimos tonos tierra, verdes y neutros. El blanco se lo dejamos a la novia.</p>
+    <div class="dress"><i style="background:#8a9a7b"></i><i style="background:#c9b48c"></i><i style="background:#a26b4f"></i><i style="background:#ece4d6"></i><i style="background:#3f4b41"></i></div>
+  </div>
+</section>
+
+<!-- Galería -->
+<section class="alt">
+  <div class="contenedor">
+    <span class="etiqueta reveal">Nuestra historia</span>
+    <h2 class="titulo reveal">Momentos</h2>
+    <div class="galeria reveal" data-galeria>
+      <figure><div class="foto f1"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="18" cy="28" r="10"/><circle cx="30" cy="28" r="10"/></svg></div></figure>
+      <figure><div class="foto f2"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 40S8 30 8 18a8 8 0 0 1 16-2 8 8 0 0 1 16 2c0 12-16 22-16 22z"/></svg></div></figure>
+      <figure><div class="foto f3"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="12" width="36" height="26" rx="3"/><circle cx="24" cy="25" r="7"/><path d="M17 12l3-5h8l3 5"/></svg></div></figure>
+      <figure><div class="foto f4"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 6v36M24 14c-6-6-14-4-14 4 8 0 12-2 14-4zM24 24c6-6 14-4 14 4-8 0-12-2-14-4z"/></svg></div></figure>
+      <figure><div class="foto f5"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 6h10l-1 14a4 4 0 0 1-8 0zM19 24v14M14 38h10M26 10h10l-1 14a4 4 0 0 1-8 0zM31 28v12M26 40h10"/></svg></div></figure>
+    </div>
+    <p class="ejemplo reveal">Acá van las fotos de la pareja.</p>
+  </div>
+</section>
+
+<!-- Regalos -->
+<section>
+  <div class="contenedor reveal">
+    <div class="icono"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="8" y="18" width="32" height="22" rx="2"/><path d="M6 12h36v6H6zM24 12v28M24 12c-4-8-14-8-12-2 1 3 12 2 12 2zM24 12c4-8 14-8 12-2-1 3-12 2-12 2z"/></svg></div>
+    <span class="etiqueta">Regalos</span>
+    <h2 class="titulo">Tu presencia es lo más importante</h2>
+    <p class="texto">Si además querés hacernos un regalo, te dejamos nuestros datos para la luna de miel.</p>
+    <div class="regalo">
+      <dl>
+        <div><dt>Alias</dt><dd>ALIAS.DE.EJEMPLO</dd></div>
+        <div><dt>CBU</dt><dd>0000000000000000000000</dd></div>
+        <div><dt>Titular</dt><dd>Sofía Ejemplo</dd></div>
+      </dl>
+      <button class="btn" type="button" data-copiar="ALIAS.DE.EJEMPLO">Copiar alias</button>
+      <span class="ejemplo">Datos de ejemplo: en tu tarjeta van los reales.</span>
+    </div>
+  </div>
+</section>
+
+<!-- Confirmar asistencia -->
+<section class="alt" id="confirmar">
+  <div class="contenedor">
+    <span class="etiqueta reveal">Antes del 20 de febrero</span>
+    <h2 class="titulo reveal">Confirmá tu asistencia</h2>
+    <form class="rsvp reveal" data-rsvp novalidate>
+      <label>Nombre y apellido<input type="text" name="nombre" autocomplete="name" required placeholder="Ej.: Laura Gómez"></label>
+      <div class="opciones">
+        <label><input type="radio" name="asiste" value="si" checked><span>¡Voy!</span></label>
+        <label><input type="radio" name="asiste" value="no"><span>No puedo ir</span></label>
+      </div>
+      <label class="si-asiste">¿Cuántos van?
+        <select name="cantidad"><option>1 persona</option><option>2 personas</option><option>3 personas</option><option>4 personas</option></select>
+      </label>
+      <label class="si-asiste">Menú especial (opcional)<input type="text" name="menu" placeholder="Vegetariano, celíaco…"></label>
+      <label>Mensaje para los novios (opcional)<textarea name="mensaje" placeholder="Unas palabras lindas…"></textarea></label>
+      <button class="btn" type="submit">Confirmar por WhatsApp</button>
+      <p class="gracias">¡Gracias! Se abrió WhatsApp con tu respuesta: solo tenés que enviarla.</p>
+    </form>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="contenedor reveal">
+    <p class="script">¡Te esperamos!</p>
+    <p class="texto" style="margin-top:10px">Sofía &amp; Tomás</p>
+  </div>
+</section>
+
+<footer class="firma">Invitación digital hecha por <a href="/proyectos/tarjetas-digitales/">Zain<span>Soft</span></a> · Tarjeta de muestra</footer>
+
+<script src="../comun/tarjeta.js"></script>
+</body>
+</html>

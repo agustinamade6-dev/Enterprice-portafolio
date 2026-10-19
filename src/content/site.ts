@@ -186,6 +186,20 @@ export const projects: Project[] = [
     href: "/demos/menu-digital/",
     accent: "from-rose-500 to-red-600",
   },
+  // Servicio nuevo (2026-10-19): tres tarjetas de muestra funcionando en public/tarjetas/
+  {
+    slug: "tarjetas-digitales",
+    title: "Tarjetas digitales",
+    sector: "Eventos y celebraciones",
+    kind: "concepto",
+    summary:
+      "Invitaciones web para casamientos, cumpleaños y baby showers: confirmación por WhatsApp, cuenta regresiva, mapa, música, fotos y regalos.",
+    result: "Los invitados confirman desde el celular.",
+    tags: ["Web", "Celular", "WhatsApp"],
+    href: "/proyectos/tarjetas-digitales/",
+    accent: "from-[#ffe9dc] to-[#e98d6b]",
+    image: "/images/projects/tarjetas-digitales.jpg",
+  },
   {
     slug: "tienda-online",
     title: "Tienda online",
@@ -292,11 +306,28 @@ export const budgetTypes: BudgetType[] = [
       "Guardar los contactos",
     ],
   },
+  {
+    id: "tarjeta",
+    name: "Tarjeta digital",
+    forWho: "Para invitar a tu casamiento, cumpleaños o baby shower",
+    options: [
+      "Casamiento",
+      "Cumpleaños o 15 años",
+      "Baby shower o nacimiento",
+      "Otro evento",
+      "Confirmación por WhatsApp",
+      "Cuenta regresiva",
+      "Mapa y cómo llegar",
+      "Música",
+      "Galería de fotos",
+      "Datos para regalos",
+    ],
+  },
 ];
 
 export const budgetExtras = ["Capacitación para usarlo", "Mantenimiento mensual", "Diseño de logo o marca"];
 
-export const budgetSectors = ["Restaurante o cafetería", "Comercio", "Profesional", "Emprendimiento", "Empresa", "Otro"];
+export const budgetSectors = ["Restaurante o cafetería", "Comercio", "Profesional", "Emprendimiento", "Empresa", "Evento particular", "Otro"];
 
 export const budgetTimes = ["Lo antes posible", "En el próximo mes", "Sin apuro"];
 
