@@ -767,3 +767,9 @@ body:is([data-theme="services"], [data-theme="dark"]) header a.bg-ink:not(:hover
     animation: none !important;
   }
 }
+
+/* Optimización de rendimiento: renderizado diferido para secciones bajo el pliegue */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}

@@ -91,7 +91,7 @@ export default async function Home() {
           {/* Sacamos el carrusel del max-w-6xl para que use el ancho completo de la ventana sin cortarse */}
           {/* Sin data-reveal: animar la opacidad de un padre aplana el 3D y obliga a redibujar el cilindro entero */}
           <div className="mt-6 w-full">
-            <Carousel3D projects={deck as any} />
+            <Carousel3D projects={deck} />
           </div>
         </section>
 
@@ -188,7 +188,7 @@ export default async function Home() {
 
         {/* Preguntas frecuentes */}
         <div id="preguntas" className="scroll-anchor" />
-        <section data-bit={bit(t.bit.faqs)} data-theme-section="warm" className="fondo-preguntas relative z-[30] px-4 py-20 sm:px-6">
+        <section data-bit={bit(t.bit.faqs)} data-theme-section="warm" className="fondo-preguntas content-auto relative z-[30] px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-3xl">
             <SectionTitle eyebrow={t.faqs.eyebrow} title={fill(t.faqs.title)} text={fill(t.faqs.text)} />
             <div className="mt-10 space-y-3">

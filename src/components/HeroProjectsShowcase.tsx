@@ -40,9 +40,10 @@ export function HeroProjectsShowcase({
           <div className="relative aspect-[2.13/1] w-full overflow-hidden bg-neutral-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/projects/todo-suela.png"
+              src="/images/projects/todo-suela.webp"
               alt="Plataforma Todo Suela"
               loading="eager"
+              decoding="async"
               className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
             />
           </div>
@@ -73,9 +74,10 @@ export function HeroProjectsShowcase({
           <div className="relative aspect-[2.13/1] w-full overflow-hidden bg-neutral-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/projects/pierina-glow-tienda.jpg"
+              src="/images/projects/pierina-glow-tienda.webp"
               alt="Tienda online Pierina Glow"
               loading="eager"
+              decoding="async"
               className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
             />
           </div>
@@ -106,9 +108,10 @@ export function HeroProjectsShowcase({
           <div className="relative aspect-[2.13/1] w-full overflow-hidden bg-neutral-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/projects/jp-edits.png"
+              src="/images/projects/jp-edits.webp"
               alt="Plataforma web JP Edits"
               loading="eager"
+              decoding="async"
               className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
             />
           </div>
@@ -139,9 +142,10 @@ export function HeroProjectsShowcase({
           <div className="relative aspect-[2.14/1] w-full overflow-hidden bg-neutral-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/projects/lv-racing.png"
+              src="/images/projects/lv-racing.webp"
               alt="Plataforma LV Racing"
               loading="eager"
+              decoding="async"
               className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
             />
           </div>
