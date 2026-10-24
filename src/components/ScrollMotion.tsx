@@ -66,8 +66,21 @@ export function ScrollMotion() {
       }
     };
 
+    // El tema cambia pocas veces: alcanza con revisarlo cada 120 ms y no en cada cuadro del scroll
+    let lastTheme = 0;
+    let themeWait = 0;
     const onScrollTheme = () => {
-      if (!themeFrame) themeFrame = requestAnimationFrame(updateTheme);
+      if (themeFrame || themeWait) return;
+      const due = lastTheme + 120 - performance.now();
+      const run = () => {
+        themeWait = 0;
+        themeFrame = requestAnimationFrame((now) => {
+          lastTheme = now;
+          updateTheme();
+        });
+      };
+      if (due > 0) themeWait = window.setTimeout(run, due);
+      else run();
     };
 
     window.addEventListener("scroll", onScrollTheme, { passive: true });
@@ -78,6 +91,7 @@ export function ScrollMotion() {
     const cleanupTheme = () => {
       document.body.removeAttribute("data-theme");
       cancelAnimationFrame(themeFrame);
+      window.clearTimeout(themeWait);
       window.removeEventListener("scroll", onScrollTheme);
       window.removeEventListener("stage", onScrollTheme);
       window.removeEventListener("resize", onScrollTheme);

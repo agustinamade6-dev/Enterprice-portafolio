@@ -148,7 +148,6 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
           const wp = clamp((v - (s * j) / Math.max(1, list.length)) / (1 - s));
           w.style.opacity = wp.toFixed(3);
           w.style.transform = `translate3d(0,${((1 - wp) * 0.35).toFixed(3)}em,0)`;
-          w.style.filter = wp > 0.99 ? "none" : `blur(${((1 - wp) * 6).toFixed(1)}px)`;
         });
         groups[k].forEach((g) => {
           const gp = clamp((v - 0.45) / 0.55);
@@ -326,20 +325,20 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
       {team.map((m) => {
         const [title, sentence] = splitRole(m.role);
         return (
-          <div key={m.slug} data-text className="invisible absolute flex flex-col items-center text-center sm:items-start sm:text-left justify-start sm:justify-center">
+          <div key={m.slug} data-text className="team-text invisible absolute flex flex-col items-center text-center sm:items-start sm:text-left justify-start sm:justify-center">
             {title && (
               <p data-group className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-dark sm:text-xs">
                 {title}
               </p>
             )}
-            <h3 className="mt-0.5 text-2xl font-extrabold tracking-tight sm:mt-2 sm:text-4xl md:text-6xl">
+            <h3 className="team-name mt-0.5 text-2xl font-extrabold tracking-tight sm:mt-2 sm:text-4xl md:text-6xl">
               {m.name.split(" ").map((w, j) => (
                 <span key={j} data-word className="inline-block whitespace-pre">
                   {w}{" "}
                 </span>
               ))}
             </h3>
-            <p className="mt-0.5 text-sm font-semibold leading-snug text-ink/60 sm:mt-1 sm:text-xl md:mt-2 md:text-3xl">
+            <p className="team-role mt-0.5 text-sm font-semibold leading-snug text-ink/60 sm:mt-1 sm:text-xl md:mt-2 md:text-3xl">
               {sentence.split(" ").map((w, j) => (
                 <span key={j} data-word className="inline-block whitespace-pre">
                   {w}{" "}
@@ -349,10 +348,10 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
             <p data-group className="mt-0.5 text-[10px] font-medium uppercase tracking-wider text-ink/40 sm:text-xs">
               {m.fullName}
             </p>
-            <p data-group className="mt-1 max-w-sm line-clamp-2 text-xs leading-relaxed text-ink/70 sm:mt-3 sm:max-w-md sm:line-clamp-none sm:text-sm md:mt-4 md:text-base">
+            <p data-group className="team-bio mt-1 max-w-sm line-clamp-2 text-xs leading-relaxed text-ink/70 sm:mt-3 sm:max-w-md sm:line-clamp-none sm:text-sm md:mt-4 md:text-base">
               {m.bio}
             </p>
-            <div data-group className="mt-3 hidden flex-wrap gap-1.5 sm:flex md:mt-4">
+            <div data-group className="team-skills mt-3 hidden flex-wrap gap-1.5 sm:flex md:mt-4">
               {m.skills.map((t) => (
                 <span key={t} className="rounded-full border border-black/10 bg-paper px-2.5 py-0.5 text-xs font-medium">
                   {t}

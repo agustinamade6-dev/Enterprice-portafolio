@@ -19,7 +19,8 @@ export function HeroProjectsShowcase({
       {/* 1. Todo Suela (Fondo / Superior derecha) */}
       <div className="absolute right-0 top-0 z-10 w-[74%] max-w-[370px] animate-hero-float-1 transition-all duration-300 ease-out hover:!animate-none hover:z-50 hover:scale-[1.04] hover:!rotate-0">
         {/* Resplandor ambiental de color verde */}
-        <div className="absolute -inset-2 -z-10 rounded-3xl bg-emerald-500/20 blur-2xl transition-opacity group-hover:opacity-100" />
+        <div style={{ background: "radial-gradient(closest-side, rgb(16 185 129 / .2), transparent)" }}
+          className="absolute -inset-6 -z-10 rounded-3xl transition-opacity group-hover:opacity-100" />
         <Link
           href="/proyectos/todo-suela/"
           prefetch={false}
@@ -54,7 +55,8 @@ export function HeroProjectsShowcase({
       {/* 2. Pierina Glow · Tienda online (Medio-Alto / Izquierda) */}
       <div className="absolute left-0 top-[75px] z-20 w-[72%] max-w-[360px] animate-hero-float-2 transition-all duration-300 ease-out hover:!animate-none hover:z-50 hover:scale-[1.04] hover:!rotate-0">
         {/* Resplandor ambiental rosado cálido */}
-        <div className="absolute -inset-2 -z-10 rounded-3xl bg-[#c96f5d]/20 blur-2xl transition-opacity" />
+        <div style={{ background: "radial-gradient(closest-side, rgb(201 111 93 / .2), transparent)" }}
+          className="absolute -inset-6 -z-10 rounded-3xl transition-opacity" />
         <Link
           href="/proyectos/pierina-glow-tienda/"
           prefetch={false}
@@ -89,7 +91,8 @@ export function HeroProjectsShowcase({
       {/* 3. JP Edits (Medio-Bajo / Derecha) */}
       <div className="absolute right-2 top-[175px] z-30 w-[76%] max-w-[380px] animate-hero-float-4 transition-all duration-300 ease-out hover:!animate-none hover:z-50 hover:scale-[1.04] hover:!rotate-0">
         {/* Resplandor ambiental azul / índigo característico de JP Edits */}
-        <div className="absolute -inset-2 -z-10 rounded-3xl bg-[#4c6fff]/25 blur-2xl transition-opacity group-hover:opacity-100" />
+        <div style={{ background: "radial-gradient(closest-side, rgb(76 111 255 / .25), transparent)" }}
+          className="absolute -inset-6 -z-10 rounded-3xl transition-opacity group-hover:opacity-100" />
         <Link
           href="/proyectos/jp-edits/"
           prefetch={false}
@@ -124,7 +127,8 @@ export function HeroProjectsShowcase({
       {/* 4. LV Racing (Primer plano / Centro-Izquierda) */}
       <div className="absolute bottom-2 left-3 z-40 w-[80%] max-w-[400px] animate-hero-float-3 transition-all duration-300 ease-out hover:!animate-none hover:z-50 hover:scale-[1.04] hover:!rotate-0">
         {/* Resplandor ambiental rojo/negro */}
-        <div className="absolute -inset-2 -z-10 rounded-3xl bg-red-600/20 blur-2xl transition-opacity" />
+        <div style={{ background: "radial-gradient(closest-side, rgb(220 38 38 / .2), transparent)" }}
+          className="absolute -inset-6 -z-10 rounded-3xl transition-opacity" />
         <Link
           href="/proyectos/lv-racing/"
           prefetch={false}

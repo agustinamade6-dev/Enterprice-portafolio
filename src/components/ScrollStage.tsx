@@ -232,12 +232,24 @@ export function ScrollStage() {
     window.addEventListener("resize", onScroll);
     document.addEventListener("click", onClick, true);
     layout();
+    // Las imágenes de las escenas siguientes (carrusel, equipo) se bajaban y decodificaban recién
+    // al aparecer, justo en medio de la transición, y la trababan. Con la página ya cargada y el
+    // navegador libre, se piden todas y se dejan decodificadas para que el cambio de escena sea liso.
+    const warm = () => {
+      document.querySelectorAll<HTMLImageElement>("[data-stage] img").forEach((img) => {
+        img.loading = "eager";
+        img.decode?.().catch(() => {});
+      });
+    };
+    const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 1200));
+    const warmId = idle(warm);
     if (window.location.hash) goTo(window.location.hash.slice(1));
     current = window.scrollY;
     render(current);
     window.dispatchEvent(new Event("stage"));
 
     return () => {
+      (window.cancelIdleCallback ?? window.clearTimeout)(warmId);
       resize.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);

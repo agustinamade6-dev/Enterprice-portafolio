@@ -206,7 +206,9 @@ section[id],
   translate: 0 calc((var(--exit) + var(--leave, 0)) * -8vh);
 }
 
+/* Capa propia: al girar se mueve en la placa de video sin volver a pintar las capturas y sus sombras */
 .reveal-on [data-hero-art] {
+  will-change: transform;
   translate: 0 calc((var(--exit) + var(--leave, 0)) * 14vh);
   rotate: calc((var(--exit) + var(--leave, 0)) * -6deg);
 }
@@ -243,8 +245,8 @@ section[id],
 .stage-on [data-holding] [data-step] {
   --p: clamp(0, calc(var(--hold, 1) * var(--n) * 1.25 - var(--i)), 1);
   opacity: var(--p);
+  /* Sin desenfoque animado: un blur que cambia en cada cuadro del scroll es carísimo y lo trababa */
   transform: translateY(calc((1 - var(--p)) * 60px)) scale(calc(0.92 + var(--p) * 0.08));
-  filter: blur(calc((1 - var(--p)) * 8px));
   transform-origin: 50% 100%;
 }
 
@@ -772,4 +774,39 @@ body:is([data-theme="services"], [data-theme="dark"]) header a.bg-ink:not(:hover
 .content-auto {
   content-visibility: auto;
   contain-intrinsic-size: auto 600px;
+}
+
+/* Nosotros en pantallas de compu bajas (notebooks): el texto de cada integrante no entraba en su caja
+   y se encimaba con la presentación de arriba y con los nombres de abajo. Se achica un poco la
+   tipografía y se ocultan las etiquetas, sin cambiar el diseño. */
+@media (min-width: 768px) and (max-height: 820px) {
+  .team-text { justify-content: center; }
+  .team-text .team-name { margin-top: .25rem; font-size: 2.75rem; line-height: 1; }
+  .team-text .team-role { margin-top: .375rem; font-size: 1.375rem; }
+  .team-text .team-bio { margin-top: .5rem; font-size: .875rem; -webkit-line-clamp: 3; line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+  .team-text .team-skills { display: none; }
+  .team-text > :last-child { margin-top: .875rem; }
+}
+@media (min-width: 768px) and (max-height: 680px) {
+  .team-text .team-name { font-size: 2.25rem; }
+  .team-text .team-role { font-size: 1.125rem; }
+  .team-text .team-bio { -webkit-line-clamp: 2; line-clamp: 2; }
+}
+
+/* Cómo trabajamos en pantallas de compu bajas: las tarjetas no entraban, el título quedaba bajo el menú
+   y las de abajo se cortaban. Se ajustan márgenes y tamaños para que el apartado entre entero.  */
+@media (min-width: 768px) and (max-height: 820px) {
+  .fondo-proceso { padding-top: 4.5rem; padding-bottom: 1rem; }
+  .fondo-proceso h2 { margin-top: .25rem; font-size: 1.875rem; }
+  .fondo-proceso [data-reveal] > h2 + p { margin-top: .375rem; font-size: .9375rem; }
+  .fondo-proceso ol.grid { margin-top: 1rem; gap: .75rem; }
+  .fondo-proceso [data-step] { padding: .875rem 1.25rem; }
+  .fondo-proceso [data-step] > span:first-child { width: 1.75rem; height: 1.75rem; font-size: .8125rem; }
+  .fondo-proceso [data-step] h3 { margin-top: .375rem; font-size: 1rem; }
+  .fondo-proceso [data-step] > p { margin-top: .125rem; font-size: .8125rem; line-height: 1.35; }
+  .fondo-proceso [data-step] > ul { margin-top: .375rem; font-size: .8125rem; }
+  .fondo-proceso [data-step] li { margin-block-end: .125rem; }
+  .fondo-proceso [data-step] > div { margin-top: .625rem; padding: .625rem .875rem; }
+  .fondo-proceso [data-step] > div ol { margin-top: .375rem; }
+  .fondo-proceso [data-step] > div ol > li { margin-block-end: .25rem; font-size: .8125rem; }
 }
