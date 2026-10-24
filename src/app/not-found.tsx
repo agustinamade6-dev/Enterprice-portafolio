@@ -20,6 +20,7 @@ export default async function NotFound() {
           </p>
           <Link
             href="/"
+            prefetch={false}
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-bold text-paper transition hover:bg-brand"
           >
             Volver al inicio <ArrowIcon className="h-4 w-4" />

@@ -22,6 +22,7 @@ export function HeroProjectsShowcase({
         <div className="absolute -inset-2 -z-10 rounded-3xl bg-emerald-500/20 blur-2xl transition-opacity group-hover:opacity-100" />
         <Link
           href="/proyectos/todo-suela/"
+          prefetch={false}
           className="group block overflow-hidden rounded-2xl border border-black/10 bg-white/95 shadow-2xl shadow-emerald-950/15 backdrop-blur-md transition-all hover:border-emerald-500/50 hover:shadow-emerald-500/20"
         >
           {/* Barra superior de navegador */}
@@ -56,6 +57,7 @@ export function HeroProjectsShowcase({
         <div className="absolute -inset-2 -z-10 rounded-3xl bg-[#c96f5d]/20 blur-2xl transition-opacity" />
         <Link
           href="/proyectos/pierina-glow-tienda/"
+          prefetch={false}
           className="group block overflow-hidden rounded-2xl border border-black/10 bg-white/95 shadow-2xl shadow-rose-950/15 backdrop-blur-md transition-all hover:border-[#c96f5d]/50 hover:shadow-[#c96f5d]/20"
         >
           {/* Barra superior de navegador */}
@@ -90,6 +92,7 @@ export function HeroProjectsShowcase({
         <div className="absolute -inset-2 -z-10 rounded-3xl bg-[#4c6fff]/25 blur-2xl transition-opacity group-hover:opacity-100" />
         <Link
           href="/proyectos/jp-edits/"
+          prefetch={false}
           className="group block overflow-hidden rounded-2xl border border-black/10 bg-white/95 shadow-2xl shadow-indigo-950/20 backdrop-blur-md transition-all hover:border-[#4c6fff]/50 hover:shadow-[#4c6fff]/25"
         >
           {/* Barra superior de navegador */}
@@ -124,6 +127,7 @@ export function HeroProjectsShowcase({
         <div className="absolute -inset-2 -z-10 rounded-3xl bg-red-600/20 blur-2xl transition-opacity" />
         <Link
           href="/proyectos/lv-racing/"
+          prefetch={false}
           className="group block overflow-hidden rounded-2xl border border-black/10 bg-white/95 shadow-2xl shadow-black/20 backdrop-blur-md transition-all hover:border-red-500/50 hover:shadow-red-500/20"
         >
           {/* Barra superior de navegador */}

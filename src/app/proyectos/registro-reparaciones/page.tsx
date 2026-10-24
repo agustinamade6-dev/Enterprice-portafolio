@@ -122,7 +122,7 @@ export default async function RegistroReparacionesCase() {
       <Header siteName={site.name} />
       <main className="px-4 pb-20 pt-28 sm:px-6 md:pt-36">
         <article className="mx-auto max-w-5xl">
-          <Link href="/#proyectos" className="text-sm font-semibold text-ink/60 hover:text-ink">
+          <Link href="/#proyectos" prefetch={false} className="text-sm font-semibold text-ink/60 hover:text-ink">
             ← Volver a proyectos
           </Link>
           <div className="mt-6 flex flex-wrap items-center gap-2 text-xs font-semibold">

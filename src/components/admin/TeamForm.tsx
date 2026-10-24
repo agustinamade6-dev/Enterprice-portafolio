@@ -146,7 +146,7 @@ export function TeamForm({ member, isNew = false }: { member?: Member; isNew?: b
     <form onSubmit={handleSubmit} className="space-y-8 pb-12">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link href="/admin/team" className="rounded-full p-2 hover:bg-black/5">
+          <Link href="/admin/team" prefetch={false} className="rounded-full p-2 hover:bg-black/5">
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <h1 className="text-2xl font-bold">{isNew ? "Nuevo Miembro" : `Editar Miembro`}</h1>

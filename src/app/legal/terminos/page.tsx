@@ -75,7 +75,7 @@ export default async function Terminos() {
               Como el acuerdo se hace a distancia (por WhatsApp, correo o esta página), puedes arrepentirte dentro de los 10
               días corridos desde que aceptas el presupuesto, sin dar motivos y sin costo, como indica el artículo 34 de la
               Ley 24.240 de Defensa del Consumidor. Te devolvemos todo lo que hayas pagado. Puedes pedirlo desde el{" "}
-              <Link className={a} href="/arrepentimiento/">
+              <Link className={a} href="/arrepentimiento/" prefetch={false}>
                 botón de arrepentimiento
               </Link>
               .

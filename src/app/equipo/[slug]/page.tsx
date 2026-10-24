@@ -56,7 +56,7 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
       <Header siteName={site.name} />
       <main className="px-4 pb-20 pt-28 sm:px-6 md:pt-36">
         <article className="mx-auto max-w-3xl">
-          <Link href="/#nosotros" className="text-sm font-semibold text-ink/60 hover:text-ink">
+          <Link href="/#nosotros" prefetch={false} className="text-sm font-semibold text-ink/60 hover:text-ink">
             ← Volver al equipo
           </Link>
 
@@ -85,7 +85,7 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
                 <h2 className="mt-1 text-2xl font-extrabold">{c.title}</h2>
                 <p className="mt-2 text-ink/70">{c.text}</p>
                 {c.href && (
-                  <Link href={c.href} className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold hover:text-brand">
+                  <Link href={c.href} prefetch={false} className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold hover:text-brand">
                     Ver el proyecto <ArrowIcon className="h-4 w-4" />
                   </Link>
                 )}
@@ -128,6 +128,7 @@ export default async function MemberPage({ params }: { params: Promise<{ slug: s
                 <Link
                   key={o.slug}
                   href={`/equipo/${o.slug}/`}
+                  prefetch={false}
                   className="flex items-center gap-4 rounded-2xl border border-black/5 bg-white p-4 transition hover:shadow-md"
                 >
                   <Avatar m={o} size="h-16 w-16 text-xl" />

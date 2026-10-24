@@ -70,6 +70,7 @@ export default async function AdminDashboard() {
                 <div className="text-sm">
                   <Link
                     href={stat.href}
+                    prefetch={false}
                     className="flex items-center font-medium text-brand hover:text-brand-dark"
                   >
                     Gestionar {stat.name.toLowerCase()}

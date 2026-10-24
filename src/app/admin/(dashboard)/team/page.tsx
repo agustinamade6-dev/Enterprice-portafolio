@@ -56,6 +56,7 @@ export default function TeamPage() {
         <h1 className="text-2xl font-bold text-white">Equipo</h1>
         <Link
           href="/admin/team/new"
+          prefetch={false}
           className="flex items-center gap-2 rounded-xl bg-brand px-4 py-2 font-bold text-white hover:bg-brand-dark"
         >
           <Plus className="h-4 w-4" /> Nuevo Miembro
@@ -91,6 +92,7 @@ export default function TeamPage() {
               </button>
               <Link
                 href={`/admin/team/${member.slug}`}
+                prefetch={false}
                 className="flex flex-1 items-center justify-center gap-2 p-3 text-sm font-medium text-brand hover:bg-white/5 hover:text-brand-dark"
               >
                 <Pencil className="h-4 w-4" /> Editar

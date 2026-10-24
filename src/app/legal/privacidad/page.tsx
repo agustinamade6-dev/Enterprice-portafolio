@@ -145,7 +145,7 @@ export default async function Privacidad() {
           body: (
             <p>
               Esta página no usa cookies de seguimiento ni de publicidad. Más detalle en la{" "}
-              <Link className={a} href="/legal/cookies/">
+              <Link className={a} href="/legal/cookies/" prefetch={false}>
                 política de cookies
               </Link>
               .

@@ -18,7 +18,7 @@ export function Header({ siteName }: { siteName: string }) {
     <header className="fixed inset-x-0 top-0 z-40 border-b border-black/5 bg-paper/85 backdrop-blur">
       <div className="flex h-16 items-center justify-between px-4">
         {/* El logo va pegado al borde izquierdo de la pantalla y el menú al derecho */}
-        <Link href="/" className="logo-badge flex items-center transition-all hover:opacity-90" aria-label={siteName}>
+        <Link href="/" prefetch={false} className="logo-badge flex items-center transition-all hover:opacity-90" aria-label={siteName}>
           <Image
             src="/logo.png"
             alt={siteName}
@@ -31,12 +31,13 @@ export function Header({ siteName }: { siteName: string }) {
 
         <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="text-ink/70 transition hover:text-ink">
+            <Link key={l.href} href={l.href} prefetch={false} className="text-ink/70 transition hover:text-ink">
               {l.label}
             </Link>
           ))}
           <Link
             href="/#servicios"
+            prefetch={false}
             className="rounded-full bg-ink px-4 py-2 text-paper transition hover:bg-brand"
           >
             Pedir presupuesto
@@ -70,6 +71,7 @@ export function Header({ siteName }: { siteName: string }) {
             <Link
               key={l.href}
               href={l.href}
+              prefetch={false}
               onClick={() => setOpen(false)}
               className="block rounded-lg px-3 py-3 font-medium hover:bg-black/5"
             >

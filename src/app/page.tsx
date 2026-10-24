@@ -58,6 +58,7 @@ export default async function Home() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="#proyectos"
+                  prefetch={false}
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 font-bold text-paper transition hover:bg-brand"
                 >
                   {t.hero.buttonProjects} <ArrowIcon className="h-4 w-4" />

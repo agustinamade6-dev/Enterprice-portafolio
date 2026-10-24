@@ -67,7 +67,7 @@ export default async function Cookies() {
             <p>
               Si tienes dudas, escríbenos a <a className={a} href={`mailto:${site.email}`}>{site.email}</a>. También puedes
               leer nuestra{" "}
-              <Link className={a} href="/legal/privacidad/">
+              <Link className={a} href="/legal/privacidad/" prefetch={false}>
                 política de privacidad
               </Link>
               .

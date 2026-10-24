@@ -151,7 +151,7 @@ export function ProjectForm({ project, isNew = false }: { project?: Project; isN
     <form onSubmit={handleSubmit} className="space-y-8 pb-12">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link href="/admin/projects" className="rounded-full p-2 hover:bg-black/5">
+          <Link href="/admin/projects" prefetch={false} className="rounded-full p-2 hover:bg-black/5">
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <h1 className="text-2xl font-bold">{isNew ? "Nuevo Proyecto" : `Editar Proyecto`}</h1>

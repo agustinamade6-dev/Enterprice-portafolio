@@ -59,6 +59,7 @@ export default function ProjectsPage() {
         </div>
         <Link
           href="/admin/projects/new"
+          prefetch={false}
           className="flex items-center gap-2 rounded-xl bg-brand px-4 py-2 font-bold text-white hover:bg-brand-dark"
         >
           <Plus className="h-4 w-4" /> Nuevo Proyecto
@@ -106,6 +107,7 @@ export default function ProjectsPage() {
                     </button>
                     <Link
                       href={`/admin/projects/${project.slug}`}
+                      prefetch={false}
                       className="text-brand hover:text-brand-dark"
                     >
                       <Pencil className="h-5 w-5" />

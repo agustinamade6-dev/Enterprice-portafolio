@@ -183,7 +183,7 @@ export function ProjectCard({
       {body}
     </a>
   ) : (
-    <Link href={project.href} className="block h-full cursor-pointer">
+    <Link href={project.href} prefetch={false} className="block h-full cursor-pointer">
       {body}
     </Link>
   );

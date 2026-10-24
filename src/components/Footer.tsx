@@ -22,7 +22,7 @@ export async function Footer() {
     <footer className="bg-ink text-paper/60">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 border-t border-white/10 px-4 py-8 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <div className="flex flex-wrap items-center gap-3">
-          <Link href="/" className="inline-block transition-opacity hover:opacity-90" aria-label={name}>
+          <Link href="/" prefetch={false} className="inline-block transition-opacity hover:opacity-90" aria-label={name}>
             <Image
               src="/logo-dark.png"
               alt={name}
@@ -48,7 +48,7 @@ export async function Footer() {
           la página /arrepentimiento/ sigue enlazada desde Términos. La Res. 424/2020 pide tenerlo a la vista. */}
       <nav aria-label="Legal" className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-5 gap-y-3 px-4 pb-8 text-xs sm:px-6">
         {legal.map((l) => (
-          <Link key={l.href} href={l.href} className="underline-offset-2 hover:text-paper hover:underline">
+          <Link key={l.href} href={l.href} prefetch={false} className="underline-offset-2 hover:text-paper hover:underline">
             {l.label}
           </Link>
         ))}

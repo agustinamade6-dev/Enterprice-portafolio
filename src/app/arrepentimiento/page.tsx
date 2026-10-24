@@ -50,7 +50,7 @@ export default async function Arrepentimiento() {
           <p className="mt-6 text-sm text-ink/70">
             Dentro de las 24 horas te respondemos, por el mismo medio, con un código de tu pedido de arrepentimiento, y
             después coordinamos la devolución. Más detalle en los{" "}
-            <Link className="font-semibold text-ink underline underline-offset-2" href="/legal/terminos/">
+            <Link className="font-semibold text-ink underline underline-offset-2" href="/legal/terminos/" prefetch={false}>
               términos y condiciones
             </Link>
             .

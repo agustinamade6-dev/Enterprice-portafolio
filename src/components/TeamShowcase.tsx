@@ -360,7 +360,7 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
               ))}
             </div>
             <div data-group className="mt-2.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-xs font-bold sm:mt-4 sm:justify-start sm:gap-x-5 sm:text-sm md:mt-6">
-              <Link href={`/equipo/${m.slug}/`} className="rounded-full bg-ink px-3.5 py-1.5 text-xs text-paper transition hover:bg-brand sm:px-4 sm:py-2 sm:text-sm">
+              <Link href={`/equipo/${m.slug}/`} prefetch={false} className="rounded-full bg-ink px-3.5 py-1.5 text-xs text-paper transition hover:bg-brand sm:px-4 sm:py-2 sm:text-sm">
                 Leer su historia
               </Link>
               {m.href && (

@@ -72,7 +72,7 @@ export default function AdminLayout({
         }`}
       >
         <div className="flex h-16 items-center justify-between px-6 border-b border-white/10">
-          <Link href="/admin" className="flex items-center gap-2.5">
+          <Link href="/admin" prefetch={false} className="flex items-center gap-2.5">
             <Image
               src="/logo-dark.png"
               alt="ZainSoft"
@@ -97,6 +97,7 @@ export default function AdminLayout({
               <Link
                 key={item.name}
                 href={item.href}
+                prefetch={false}
                 onClick={() => setSidebarOpen(false)}
                 className={`group flex items-center rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                   isActive
