@@ -734,6 +734,15 @@ body:is([data-theme="services"], [data-theme="dark"]) header a.bg-ink:not(:hover
   }
 }
 
+@keyframes hero-float-4 {
+  0%, 100% {
+    transform: translateY(0px) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(-0.5deg);
+  }
+}
+
 .animate-hero-float-1 {
   animation: hero-float-1 7s ease-in-out infinite;
 }
@@ -746,10 +755,15 @@ body:is([data-theme="services"], [data-theme="dark"]) header a.bg-ink:not(:hover
   animation: hero-float-3 6.5s ease-in-out infinite 1.4s;
 }
 
+.animate-hero-float-4 {
+  animation: hero-float-4 7.5s ease-in-out infinite 1s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-hero-float-1,
   .animate-hero-float-2,
-  .animate-hero-float-3 {
+  .animate-hero-float-3,
+  .animate-hero-float-4 {
     animation: none !important;
   }
 }

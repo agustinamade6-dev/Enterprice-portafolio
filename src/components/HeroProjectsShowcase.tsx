@@ -13,11 +13,11 @@ export function HeroProjectsShowcase({
 }: HeroProjectsShowcaseProps) {
   return (
     <div
-      className={`relative h-[480px] w-full max-w-[560px] mx-auto select-none [perspective:1200px] ${className}`}
-      aria-label="Proyectos destacados: LV Racing, Todo Suela y Pierina Glow"
+      className={`relative h-[530px] w-full max-w-[580px] mx-auto select-none [perspective:1200px] ${className}`}
+      aria-label="Proyectos destacados: Todo Suela, Pierina Glow, JP Edits y LV Racing"
     >
       {/* 1. Todo Suela (Fondo / Superior derecha) */}
-      <div className="absolute right-0 top-0 z-10 w-[78%] max-w-[380px] animate-hero-float-1 transition-all duration-300 ease-out hover:!animate-none hover:z-40 hover:scale-[1.04] hover:!rotate-0">
+      <div className="absolute right-0 top-0 z-10 w-[74%] max-w-[370px] animate-hero-float-1 transition-all duration-300 ease-out hover:!animate-none hover:z-50 hover:scale-[1.04] hover:!rotate-0">
         {/* Resplandor ambiental de color verde */}
         <div className="absolute -inset-2 -z-10 rounded-3xl bg-emerald-500/20 blur-2xl transition-opacity group-hover:opacity-100" />
         <Link
@@ -30,7 +30,7 @@ export function HeroProjectsShowcase({
               <span className="h-2 w-2 rounded-full bg-red-400" />
               <span className="h-2 w-2 rounded-full bg-amber-400" />
               <span className="h-2 w-2 rounded-full bg-green-400" />
-              <span className="ml-1.5 font-mono text-[10px] text-neutral-500">todosuela.app</span>
+              <span className="ml-1.5 font-mono text-[10px] text-neutral-500">todo-suela.vercel.app</span>
             </div>
             <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[9px] font-bold text-emerald-700">
               Gestión deportiva
@@ -49,8 +49,8 @@ export function HeroProjectsShowcase({
         </Link>
       </div>
 
-      {/* 2. Pierina Glow · Tienda online (Medio / Izquierda) */}
-      <div className="absolute left-0 top-[105px] z-20 w-[76%] max-w-[370px] animate-hero-float-2 transition-all duration-300 ease-out hover:!animate-none hover:z-40 hover:scale-[1.04] hover:!rotate-0">
+      {/* 2. Pierina Glow · Tienda online (Medio-Alto / Izquierda) */}
+      <div className="absolute left-0 top-[75px] z-20 w-[72%] max-w-[360px] animate-hero-float-2 transition-all duration-300 ease-out hover:!animate-none hover:z-50 hover:scale-[1.04] hover:!rotate-0">
         {/* Resplandor ambiental rosado cálido */}
         <div className="absolute -inset-2 -z-10 rounded-3xl bg-[#c96f5d]/20 blur-2xl transition-opacity" />
         <Link
@@ -82,8 +82,41 @@ export function HeroProjectsShowcase({
         </Link>
       </div>
 
-      {/* 3. LV Racing (Primer plano / Centro-Abajo) */}
-      <div className="absolute bottom-2 right-4 z-30 w-[84%] max-w-[410px] animate-hero-float-3 transition-all duration-300 ease-out hover:!animate-none hover:z-40 hover:scale-[1.04] hover:!rotate-0">
+      {/* 3. JP Edits (Medio-Bajo / Derecha) */}
+      <div className="absolute right-2 top-[175px] z-30 w-[76%] max-w-[380px] animate-hero-float-4 transition-all duration-300 ease-out hover:!animate-none hover:z-50 hover:scale-[1.04] hover:!rotate-0">
+        {/* Resplandor ambiental azul / índigo característico de JP Edits */}
+        <div className="absolute -inset-2 -z-10 rounded-3xl bg-[#4c6fff]/25 blur-2xl transition-opacity group-hover:opacity-100" />
+        <Link
+          href="/proyectos/jp-edits/"
+          className="group block overflow-hidden rounded-2xl border border-black/10 bg-white/95 shadow-2xl shadow-indigo-950/20 backdrop-blur-md transition-all hover:border-[#4c6fff]/50 hover:shadow-[#4c6fff]/25"
+        >
+          {/* Barra superior de navegador */}
+          <div className="flex items-center justify-between border-b border-black/5 bg-neutral-100/90 px-3 py-1.5 text-[11px] text-neutral-600">
+            <div className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-red-400" />
+              <span className="h-2 w-2 rounded-full bg-amber-400" />
+              <span className="h-2 w-2 rounded-full bg-green-400" />
+              <span className="ml-1.5 font-mono text-[10px] text-neutral-500">jp-edits.vercel.app</span>
+            </div>
+            <span className="rounded-full bg-indigo-50 px-2 py-0.5 text-[9px] font-bold text-[#4c6fff]">
+              Edición de video
+            </span>
+          </div>
+          {/* Captura real */}
+          <div className="relative aspect-[2.13/1] w-full overflow-hidden bg-neutral-900">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/projects/jp-edits.png"
+              alt="Plataforma web JP Edits"
+              loading="eager"
+              className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          </div>
+        </Link>
+      </div>
+
+      {/* 4. LV Racing (Primer plano / Centro-Izquierda) */}
+      <div className="absolute bottom-2 left-3 z-40 w-[80%] max-w-[400px] animate-hero-float-3 transition-all duration-300 ease-out hover:!animate-none hover:z-50 hover:scale-[1.04] hover:!rotate-0">
         {/* Resplandor ambiental rojo/negro */}
         <div className="absolute -inset-2 -z-10 rounded-3xl bg-red-600/20 blur-2xl transition-opacity" />
         <Link
@@ -116,7 +149,7 @@ export function HeroProjectsShowcase({
       </div>
 
       {/* Tarjeta flotante de resumen en esquina inferior */}
-      <div className="absolute -bottom-5 left-1 z-40 rounded-2xl border border-black/10 bg-white/95 px-4 py-3 shadow-xl shadow-black/10 backdrop-blur-md">
+      <div className="absolute -bottom-5 right-2 z-50 rounded-2xl border border-black/10 bg-white/95 px-4 py-3 shadow-xl shadow-black/10 backdrop-blur-md">
         <p className="flex items-center gap-1.5 text-xs font-semibold text-brand">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
           {cardLabel}
