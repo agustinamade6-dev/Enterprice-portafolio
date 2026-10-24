@@ -22,7 +22,7 @@ src/
     layout.tsx           ← estructura común, metadatos y vista previa al compartir
     globals.css          ← colores, fuente y animaciones
     equipo/[slug]/       ← página de historia de cada integrante
-    proyectos/<nombre>/  ← páginas de caso (akros-cafe, pierina-glow, pierina-glow-tienda, lv-racing, todo-suela, tarjetas-digitales)
+    proyectos/<nombre>/  ← páginas de caso (akros-cafe, pierina-glow, pierina-glow-tienda, lv-racing, todo-suela, jp-edits, tarjetas-digitales)
     demos/menu-digital/  ← demo navegable de un menú digital
     admin/               ← panel de admin (login, proyectos, equipo, servicios, proceso, preguntas, fotos)
     api/                 ← API del panel (contenido, fotos y sesión)

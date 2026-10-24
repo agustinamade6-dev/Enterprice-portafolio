@@ -74,6 +74,23 @@ export const projects: Project[] = [
     accent: "from-emerald-600 to-zinc-950",
     by: ["Nicolás"],
   },
+  // Web real de un editor de videos cortos, publicada y en uso (2026-10-23)
+  {
+    slug: "jp-edits",
+    title: "JP Edits",
+    sector: "Edición de video",
+    kind: "real",
+    summary:
+      "Web profesional bilingüe para un editor de Reels, TikTok y Shorts: reels por nicho, motion graphics, resultados reales con gráfico de vistas, paquetes, formulario de contacto protegido y panel de administración propio.",
+    result: "Portfolio que convierte visitas en pedidos de muestra, editable sin tocar código.",
+    tags: ["Next.js 16", "TypeScript", "Neon PostgreSQL", "Drizzle", "GSAP"],
+    image: "/images/projects/jp-edits.png",
+    coverUrl: "/images/projects/jp-edits.png",
+    href: "/proyectos/jp-edits/",
+    liveUrl: "https://jp-edits.vercel.app/",
+    accent: "from-[#4c6fff] to-[#070b1f]",
+    by: ["Fabrizio"],
+  },
   {
     slug: "registro-reparaciones",
     title: "Sistema de Registro de Reparaciones",
