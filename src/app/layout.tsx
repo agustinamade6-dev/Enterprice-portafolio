@@ -10,6 +10,7 @@ const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
 });
 
 export async function generateMetadata(): Promise<Metadata> {

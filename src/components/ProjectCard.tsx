@@ -22,7 +22,6 @@ export function ProjectCard({
         fill
         sizes="(max-width: 768px) 100vw, 750px"
         className="object-cover object-top transition duration-700 ease-out group-hover:scale-105"
-        priority={project.slug === "lv-racing"}
       />
     </div>
   ) : project.slug === "akros-cafe" ? (

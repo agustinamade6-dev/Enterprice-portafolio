@@ -307,7 +307,13 @@ export function TeamShowcase({ team }: { team: ShowcaseMember[] }) {
           </span>
           {m.photo ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={m.photo} alt={`Foto de ${m.fullName}`} className="h-full w-full object-cover object-top will-change-transform" />
+            <img
+              src={m.photo}
+              alt={`Foto de ${m.fullName}`}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover object-top will-change-transform"
+            />
           ) : (
             <span className="grid h-full w-full place-items-center text-6xl font-extrabold text-paper">
               {m.fullName.charAt(0)}
